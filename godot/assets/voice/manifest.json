@@ -1,0 +1,5552 @@
+{
+  "version": 6,
+  "name": "德穆兰 · 考研复刻与原声语音包",
+  "method": "43 source recordings, 18 reference-synthesized kaoyan lines, and 10 new reference-synthesized learning guides.",
+  "cooldown_seconds": 2.5,
+  "clips": [
+    {
+      "id": "local_30",
+      "title": "回家吧孩子",
+      "caption": "回家吧，孩子。",
+      "events": [
+        "defeat"
+      ],
+      "group": "课堂原声",
+      "source": "https://www.bilibili.com/video/BV16iEFzYEm2/",
+      "source_start": 297.3,
+      "source_end": 298.65,
+      "file": "original_local_30.ogg",
+      "duration": 1.35,
+      "cues": [
+        {
+          "at": 0,
+          "visible": 1
+        },
+        {
+          "at": 0.26,
+          "visible": 2
+        },
+        {
+          "at": 0.5,
+          "visible": 3
+        },
+        {
+          "at": 0.5,
+          "visible": 4
+        },
+        {
+          "at": 1.0,
+          "visible": 5
+        },
+        {
+          "at": 1.0,
+          "visible": 6
+        },
+        {
+          "at": 1.0,
+          "visible": 7
+        }
+      ],
+      "alignment": "Whisper forced alignment on the original audio",
+      "audio_kind": "source_recording",
+      "image": "images/local_30.jpg"
+    },
+    {
+      "id": "delta_command",
+      "title": "从现在开始，四六级由我全权接管。",
+      "caption": "从现在开始，四六级由我全权接管。",
+      "events": [
+        "start",
+        "welcome"
+      ],
+      "group": "德穆兰原声",
+      "source": "https://www.bilibili.com/video/BV1hTnb6XEju/",
+      "source_start": 38.13,
+      "source_end": 40.66,
+      "file": "original_delta_command.ogg",
+      "duration": 2.53,
+      "cues": [
+        {
+          "at": 0,
+          "visible": 1
+        },
+        {
+          "at": 0.26,
+          "visible": 2
+        },
+        {
+          "at": 0.36,
+          "visible": 3
+        },
+        {
+          "at": 0.46,
+          "visible": 4
+        },
+        {
+          "at": 0.68,
+          "visible": 5
+        },
+        {
+          "at": 0.68,
+          "visible": 6
+        },
+        {
+          "at": 1.12,
+          "visible": 7
+        },
+        {
+          "at": 1.24,
+          "visible": 8
+        },
+        {
+          "at": 1.38,
+          "visible": 9
+        },
+        {
+          "at": 1.56,
+          "visible": 10
+        },
+        {
+          "at": 1.72,
+          "visible": 11
+        },
+        {
+          "at": 1.84,
+          "visible": 12
+        },
+        {
+          "at": 2.04,
+          "visible": 13
+        },
+        {
+          "at": 2.24,
+          "visible": 14
+        },
+        {
+          "at": 2.38,
+          "visible": 15
+        },
+        {
+          "at": 2.38,
+          "visible": 16
+        }
+      ],
+      "alignment": "Whisper forced alignment on the original audio",
+      "audio_kind": "source_recording"
+    },
+    {
+      "id": "delta_mouse",
+      "title": "臭老鼠，看着我的脸，说的就是你。",
+      "caption": "臭老鼠，看着我的脸，说的就是你。",
+      "events": [
+        "hurt",
+        "miss"
+      ],
+      "group": "德穆兰原声",
+      "source": "https://www.bilibili.com/video/BV1hTnb6XEju/",
+      "source_start": 2.94,
+      "source_end": 5.76,
+      "file": "original_delta_mouse.ogg",
+      "duration": 2.82,
+      "cues": [
+        {
+          "at": 0,
+          "visible": 1
+        },
+        {
+          "at": 0.44,
+          "visible": 2
+        },
+        {
+          "at": 0.64,
+          "visible": 3
+        },
+        {
+          "at": 0.64,
+          "visible": 4
+        },
+        {
+          "at": 1.04,
+          "visible": 5
+        },
+        {
+          "at": 1.2,
+          "visible": 6
+        },
+        {
+          "at": 1.32,
+          "visible": 7
+        },
+        {
+          "at": 1.37,
+          "visible": 8
+        },
+        {
+          "at": 1.42,
+          "visible": 9
+        },
+        {
+          "at": 1.42,
+          "visible": 10
+        },
+        {
+          "at": 1.98,
+          "visible": 11
+        },
+        {
+          "at": 2.1,
+          "visible": 12
+        },
+        {
+          "at": 2.26,
+          "visible": 13
+        },
+        {
+          "at": 2.38,
+          "visible": 14
+        },
+        {
+          "at": 2.5,
+          "visible": 15
+        },
+        {
+          "at": 2.5,
+          "visible": 16
+        }
+      ],
+      "alignment": "Whisper forced alignment on the original audio",
+      "audio_kind": "source_recording"
+    },
+    {
+      "id": "delta_dare",
+      "title": "你怎么敢的？",
+      "caption": "你怎么敢的？",
+      "events": [
+        "miss"
+      ],
+      "group": "德穆兰原声",
+      "source": "https://www.bilibili.com/video/BV1hTnb6XEju/",
+      "source_start": 56.08,
+      "source_end": 57.07,
+      "file": "original_delta_dare.ogg",
+      "duration": 0.99,
+      "cues": [
+        {
+          "at": 0,
+          "visible": 1
+        },
+        {
+          "at": 0.24,
+          "visible": 2
+        },
+        {
+          "at": 0.36,
+          "visible": 3
+        },
+        {
+          "at": 0.48,
+          "visible": 4
+        },
+        {
+          "at": 0.76,
+          "visible": 5
+        },
+        {
+          "at": 0.76,
+          "visible": 6
+        }
+      ],
+      "alignment": "Whisper forced alignment on the original audio",
+      "audio_kind": "source_recording"
+    },
+    {
+      "id": "delta_practice",
+      "title": "回去再练练吧。",
+      "caption": "回去再练练吧。",
+      "events": [],
+      "group": "德穆兰原声",
+      "source": "https://www.bilibili.com/video/BV1hTnb6XEju/",
+      "source_start": 59.96,
+      "source_end": 61.055,
+      "file": "original_delta_practice.ogg",
+      "duration": 1.095,
+      "cues": [
+        {
+          "at": 0,
+          "visible": 1
+        },
+        {
+          "at": 0.15,
+          "visible": 2
+        },
+        {
+          "at": 0.3,
+          "visible": 3
+        },
+        {
+          "at": 0.5,
+          "visible": 4
+        },
+        {
+          "at": 0.7,
+          "visible": 5
+        },
+        {
+          "at": 0.88,
+          "visible": 6
+        },
+        {
+          "at": 0.88,
+          "visible": 7
+        }
+      ],
+      "alignment": "Whisper forced alignment on the original audio",
+      "audio_kind": "source_recording"
+    },
+    {
+      "id": "delta_home",
+      "title": "回家吧。",
+      "caption": "回家吧。",
+      "events": [],
+      "group": "德穆兰原声",
+      "source": "https://www.bilibili.com/video/BV1hTnb6XEju/",
+      "source_start": 74.52,
+      "source_end": 75.275,
+      "file": "original_delta_home.ogg",
+      "duration": 0.755,
+      "cues": [
+        {
+          "at": 0,
+          "visible": 1
+        },
+        {
+          "at": 0.24,
+          "visible": 2
+        },
+        {
+          "at": 0.48,
+          "visible": 3
+        },
+        {
+          "at": 0.48,
+          "visible": 4
+        }
+      ],
+      "alignment": "Whisper forced alignment on the original audio",
+      "audio_kind": "source_recording"
+    },
+    {
+      "id": "delta_cet",
+      "title": "还有，你这四六级过了吗？",
+      "caption": "还有，你这四六级过了吗？",
+      "events": [
+        "books",
+        "welcome"
+      ],
+      "group": "德穆兰原声",
+      "source": "https://www.bilibili.com/video/BV1hTnb6XEju/",
+      "source_start": 24.58,
+      "source_end": 26.66,
+      "file": "original_delta_cet.ogg",
+      "duration": 2.08,
+      "cues": [
+        {
+          "at": 0,
+          "visible": 1
+        },
+        {
+          "at": 0.18,
+          "visible": 2
+        },
+        {
+          "at": 0.18,
+          "visible": 3
+        },
+        {
+          "at": 0.8,
+          "visible": 4
+        },
+        {
+          "at": 0.96,
+          "visible": 5
+        },
+        {
+          "at": 1.06,
+          "visible": 6
+        },
+        {
+          "at": 1.26,
+          "visible": 7
+        },
+        {
+          "at": 1.38,
+          "visible": 8
+        },
+        {
+          "at": 1.6,
+          "visible": 9
+        },
+        {
+          "at": 1.78,
+          "visible": 10
+        },
+        {
+          "at": 1.88,
+          "visible": 11
+        },
+        {
+          "at": 1.88,
+          "visible": 12
+        }
+      ],
+      "alignment": "Whisper forced alignment on the original audio",
+      "audio_kind": "source_recording"
+    },
+    {
+      "id": "delta_dam",
+      "title": "回大坝去吧。",
+      "caption": "回大坝去吧。",
+      "events": [
+        "map"
+      ],
+      "group": "德穆兰原声",
+      "source": "https://www.bilibili.com/video/BV1hTnb6XEju/",
+      "source_start": 62.78,
+      "source_end": 63.76,
+      "file": "original_delta_dam.ogg",
+      "duration": 0.98,
+      "cues": [
+        {
+          "at": 0,
+          "visible": 1
+        },
+        {
+          "at": 0.32,
+          "visible": 2
+        },
+        {
+          "at": 0.48,
+          "visible": 3
+        },
+        {
+          "at": 0.68,
+          "visible": 4
+        },
+        {
+          "at": 0.82,
+          "visible": 5
+        },
+        {
+          "at": 0.82,
+          "visible": 6
+        }
+      ],
+      "alignment": "Whisper forced alignment on the original audio",
+      "audio_kind": "source_recording"
+    },
+    {
+      "id": "delta_squad",
+      "title": "小盾兵，小喷火兵，起来操练了。",
+      "caption": "小盾兵，小喷火兵，起来操练了。",
+      "events": [
+        "operators",
+        "ultimate"
+      ],
+      "group": "德穆兰原声",
+      "source": "https://www.bilibili.com/video/BV1hTnb6XEju/",
+      "source_start": 46.54,
+      "source_end": 48.9,
+      "file": "original_delta_squad.ogg",
+      "duration": 2.36,
+      "cues": [
+        {
+          "at": 0,
+          "visible": 1
+        },
+        {
+          "at": 0.3,
+          "visible": 2
+        },
+        {
+          "at": 0.5,
+          "visible": 3
+        },
+        {
+          "at": 0.5,
+          "visible": 4
+        },
+        {
+          "at": 0.84,
+          "visible": 5
+        },
+        {
+          "at": 0.98,
+          "visible": 6
+        },
+        {
+          "at": 1.2,
+          "visible": 7
+        },
+        {
+          "at": 1.34,
+          "visible": 8
+        },
+        {
+          "at": 1.34,
+          "visible": 9
+        },
+        {
+          "at": 1.6,
+          "visible": 10
+        },
+        {
+          "at": 1.7,
+          "visible": 11
+        },
+        {
+          "at": 1.82,
+          "visible": 12
+        },
+        {
+          "at": 2.02,
+          "visible": 13
+        },
+        {
+          "at": 2.18,
+          "visible": 14
+        },
+        {
+          "at": 2.18,
+          "visible": 15
+        }
+      ],
+      "alignment": "Whisper forced alignment on the original audio",
+      "audio_kind": "source_recording"
+    },
+    {
+      "id": "delta_guard",
+      "title": "不准放进来一只老鼠。",
+      "caption": "不准放进来一只老鼠。",
+      "events": [
+        "warded",
+        "combo"
+      ],
+      "group": "德穆兰原声",
+      "source": "https://www.bilibili.com/video/BV1hTnb6XEju/",
+      "source_start": 50.58,
+      "source_end": 52.2,
+      "file": "original_delta_guard.ogg",
+      "duration": 1.62,
+      "cues": [
+        {
+          "at": 0,
+          "visible": 1
+        },
+        {
+          "at": 0.34,
+          "visible": 2
+        },
+        {
+          "at": 0.48,
+          "visible": 3
+        },
+        {
+          "at": 0.7,
+          "visible": 4
+        },
+        {
+          "at": 0.84,
+          "visible": 5
+        },
+        {
+          "at": 0.94,
+          "visible": 6
+        },
+        {
+          "at": 1.14,
+          "visible": 7
+        },
+        {
+          "at": 1.26,
+          "visible": 8
+        },
+        {
+          "at": 1.42,
+          "visible": 9
+        },
+        {
+          "at": 1.42,
+          "visible": 10
+        }
+      ],
+      "alignment": "Whisper forced alignment on the original audio",
+      "audio_kind": "source_recording"
+    },
+    {
+      "id": "delta_exam",
+      "title": "十二月的四六级还考不考了？",
+      "caption": "十二月的四六级还考不考了？",
+      "events": [
+        "books"
+      ],
+      "group": "德穆兰原声",
+      "source": "https://www.bilibili.com/video/BV1hTnb6XEju/",
+      "source_start": 28.56,
+      "source_end": 30.22,
+      "file": "original_delta_exam.ogg",
+      "duration": 1.66,
+      "cues": [
+        {
+          "at": 0,
+          "visible": 1
+        },
+        {
+          "at": 0.26,
+          "visible": 2
+        },
+        {
+          "at": 0.38,
+          "visible": 3
+        },
+        {
+          "at": 0.5,
+          "visible": 4
+        },
+        {
+          "at": 0.58,
+          "visible": 5
+        },
+        {
+          "at": 0.74,
+          "visible": 6
+        },
+        {
+          "at": 0.86,
+          "visible": 7
+        },
+        {
+          "at": 0.98,
+          "visible": 8
+        },
+        {
+          "at": 1.06,
+          "visible": 9
+        },
+        {
+          "at": 1.24,
+          "visible": 10
+        },
+        {
+          "at": 1.34,
+          "visible": 11
+        },
+        {
+          "at": 1.5,
+          "visible": 12
+        },
+        {
+          "at": 1.5,
+          "visible": 13
+        }
+      ],
+      "alignment": "Whisper forced alignment on the original audio",
+      "audio_kind": "source_recording"
+    },
+    {
+      "id": "delta_dream",
+      "title": "又梦见什么了？",
+      "caption": "又梦见什么了？",
+      "events": [
+        "return"
+      ],
+      "group": "德穆兰原声",
+      "source": "https://www.bilibili.com/video/BV1hTnb6XEju/",
+      "source_start": 10.84,
+      "source_end": 11.84,
+      "file": "original_delta_dream.ogg",
+      "duration": 1.0,
+      "cues": [
+        {
+          "at": 0,
+          "visible": 1
+        },
+        {
+          "at": 0.24,
+          "visible": 2
+        },
+        {
+          "at": 0.42,
+          "visible": 3
+        },
+        {
+          "at": 0.56,
+          "visible": 4
+        },
+        {
+          "at": 0.66,
+          "visible": 5
+        },
+        {
+          "at": 0.76,
+          "visible": 6
+        },
+        {
+          "at": 0.76,
+          "visible": 7
+        }
+      ],
+      "alignment": "Whisper forced alignment on the original audio",
+      "audio_kind": "source_recording"
+    },
+    {
+      "id": "delta_score",
+      "title": "让我来看看你上次考了多少。",
+      "caption": "让我来看看你上次考了多少。",
+      "events": [
+        "collection"
+      ],
+      "group": "德穆兰原声",
+      "source": "https://www.bilibili.com/video/BV1hTnb6XEju/",
+      "source_start": 52.2,
+      "source_end": 54.22,
+      "file": "original_delta_score.ogg",
+      "duration": 2.02,
+      "cues": [
+        {
+          "at": 0,
+          "visible": 1
+        },
+        {
+          "at": 0.3,
+          "visible": 2
+        },
+        {
+          "at": 0.48,
+          "visible": 3
+        },
+        {
+          "at": 0.62,
+          "visible": 4
+        },
+        {
+          "at": 0.76,
+          "visible": 5
+        },
+        {
+          "at": 0.9,
+          "visible": 6
+        },
+        {
+          "at": 1.16,
+          "visible": 7
+        },
+        {
+          "at": 1.34,
+          "visible": 8
+        },
+        {
+          "at": 1.52,
+          "visible": 9
+        },
+        {
+          "at": 1.7,
+          "visible": 10
+        },
+        {
+          "at": 1.8,
+          "visible": 11
+        },
+        {
+          "at": 1.88,
+          "visible": 12
+        },
+        {
+          "at": 1.88,
+          "visible": 13
+        }
+      ],
+      "alignment": "Whisper forced alignment on the original audio",
+      "audio_kind": "source_recording"
+    },
+    {
+      "id": "local_01",
+      "title": "Easy哈哈哈",
+      "caption": "Easy！哈哈哈！",
+      "events": [
+        "combo",
+        "victory",
+        "ultimate"
+      ],
+      "group": "课堂原声",
+      "source": "https://www.bilibili.com/video/BV16iEFzYEm2/",
+      "source_start": 6.18,
+      "source_end": 8.95,
+      "file": "original_local_01.ogg",
+      "duration": 2.77,
+      "cues": [
+        {
+          "at": 0,
+          "visible": 1
+        },
+        {
+          "at": 0.64,
+          "visible": 2
+        },
+        {
+          "at": 0.707,
+          "visible": 3
+        },
+        {
+          "at": 0.773,
+          "visible": 4
+        },
+        {
+          "at": 0.773,
+          "visible": 5
+        },
+        {
+          "at": 1.36,
+          "visible": 6
+        },
+        {
+          "at": 1.36,
+          "visible": 7
+        },
+        {
+          "at": 1.36,
+          "visible": 8
+        },
+        {
+          "at": 1.36,
+          "visible": 9
+        }
+      ],
+      "alignment": "Whisper forced alignment on the original audio",
+      "audio_kind": "source_recording",
+      "image": "images/local_01.jpg"
+    },
+    {
+      "id": "local_02",
+      "title": "你放心绝对不收卷",
+      "caption": "你放心，绝对不收卷。",
+      "events": [
+        "start"
+      ],
+      "group": "课堂原声",
+      "source": "https://www.bilibili.com/video/BV16iEFzYEm2/",
+      "source_start": 206.74,
+      "source_end": 209.01,
+      "file": "original_local_02.ogg",
+      "duration": 2.27,
+      "cues": [
+        {
+          "at": 0,
+          "visible": 1
+        },
+        {
+          "at": 0.32,
+          "visible": 2
+        },
+        {
+          "at": 0.45,
+          "visible": 3
+        },
+        {
+          "at": 0.45,
+          "visible": 4
+        },
+        {
+          "at": 1.2,
+          "visible": 5
+        },
+        {
+          "at": 1.44,
+          "visible": 6
+        },
+        {
+          "at": 1.58,
+          "visible": 7
+        },
+        {
+          "at": 1.74,
+          "visible": 8
+        },
+        {
+          "at": 1.86,
+          "visible": 9
+        },
+        {
+          "at": 1.86,
+          "visible": 10
+        }
+      ],
+      "alignment": "Whisper forced alignment on the original audio",
+      "audio_kind": "source_recording",
+      "image": "images/local_02.jpg"
+    },
+    {
+      "id": "local_03",
+      "title": "你行动过一次吗",
+      "caption": "你行动过一次吗？",
+      "events": [
+        "map",
+        "welcome"
+      ],
+      "group": "课堂原声",
+      "source": "https://www.bilibili.com/video/BV16iEFzYEm2/",
+      "source_start": 28.9,
+      "source_end": 30.4,
+      "file": "original_local_03.ogg",
+      "duration": 1.5,
+      "cues": [
+        {
+          "at": 0,
+          "visible": 1
+        },
+        {
+          "at": 0.5,
+          "visible": 2
+        },
+        {
+          "at": 0.68,
+          "visible": 3
+        },
+        {
+          "at": 0.82,
+          "visible": 4
+        },
+        {
+          "at": 0.96,
+          "visible": 5
+        },
+        {
+          "at": 1.03,
+          "visible": 6
+        },
+        {
+          "at": 1.1,
+          "visible": 7
+        },
+        {
+          "at": 1.1,
+          "visible": 8
+        }
+      ],
+      "alignment": "Whisper forced alignment on the original audio",
+      "audio_kind": "source_recording",
+      "image": "images/local_03.jpg"
+    },
+    {
+      "id": "local_04",
+      "title": "每天睡得跟猪头一样",
+      "caption": "每天睡得跟猪头一样。",
+      "events": [
+        "return"
+      ],
+      "group": "课堂原声",
+      "source": "https://www.bilibili.com/video/BV16iEFzYEm2/",
+      "source_start": 35.06,
+      "source_end": 36.6,
+      "file": "original_local_04.ogg",
+      "duration": 1.54,
+      "cues": [
+        {
+          "at": 0,
+          "visible": 1
+        },
+        {
+          "at": 0.36,
+          "visible": 2
+        },
+        {
+          "at": 0.48,
+          "visible": 3
+        },
+        {
+          "at": 0.6,
+          "visible": 4
+        },
+        {
+          "at": 0.66,
+          "visible": 5
+        },
+        {
+          "at": 0.74,
+          "visible": 6
+        },
+        {
+          "at": 0.94,
+          "visible": 7
+        },
+        {
+          "at": 1.08,
+          "visible": 8
+        },
+        {
+          "at": 1.28,
+          "visible": 9
+        },
+        {
+          "at": 1.28,
+          "visible": 10
+        }
+      ],
+      "alignment": "Whisper forced alignment on the original audio",
+      "audio_kind": "source_recording",
+      "image": "images/local_04.jpg"
+    },
+    {
+      "id": "local_05",
+      "title": "每天看手机",
+      "caption": "每天看手机，眼睛都刷出流血了吧。",
+      "events": [
+        "return"
+      ],
+      "group": "课堂原声",
+      "source": "https://www.bilibili.com/video/BV16iEFzYEm2/",
+      "source_start": 36.56,
+      "source_end": 38.72,
+      "file": "original_local_05.ogg",
+      "duration": 2.16,
+      "cues": [
+        {
+          "at": 0,
+          "visible": 1
+        },
+        {
+          "at": 0.42,
+          "visible": 2
+        },
+        {
+          "at": 0.52,
+          "visible": 3
+        },
+        {
+          "at": 0.62,
+          "visible": 4
+        },
+        {
+          "at": 0.76,
+          "visible": 5
+        },
+        {
+          "at": 0.76,
+          "visible": 6
+        },
+        {
+          "at": 1.1,
+          "visible": 7
+        },
+        {
+          "at": 1.22,
+          "visible": 8
+        },
+        {
+          "at": 1.34,
+          "visible": 9
+        },
+        {
+          "at": 1.42,
+          "visible": 10
+        },
+        {
+          "at": 1.56,
+          "visible": 11
+        },
+        {
+          "at": 1.68,
+          "visible": 12
+        },
+        {
+          "at": 1.78,
+          "visible": 13
+        },
+        {
+          "at": 1.96,
+          "visible": 14
+        },
+        {
+          "at": 2.03,
+          "visible": 15
+        },
+        {
+          "at": 2.03,
+          "visible": 16
+        }
+      ],
+      "alignment": "Whisper forced alignment on the original audio",
+      "audio_kind": "source_recording",
+      "image": "images/local_05.jpg"
+    },
+    {
+      "id": "local_06",
+      "title": "核心词汇背过吗",
+      "caption": "那核心词汇背过吗？",
+      "events": [
+        "books",
+        "welcome"
+      ],
+      "group": "课堂原声",
+      "source": "https://www.bilibili.com/video/BV16iEFzYEm2/",
+      "source_start": 33.22,
+      "source_end": 34.8,
+      "file": "original_local_06.ogg",
+      "duration": 1.58,
+      "cues": [
+        {
+          "at": 0,
+          "visible": 1
+        },
+        {
+          "at": 0.36,
+          "visible": 2
+        },
+        {
+          "at": 0.52,
+          "visible": 3
+        },
+        {
+          "at": 0.64,
+          "visible": 4
+        },
+        {
+          "at": 0.74,
+          "visible": 5
+        },
+        {
+          "at": 0.94,
+          "visible": 6
+        },
+        {
+          "at": 0.98,
+          "visible": 7
+        },
+        {
+          "at": 1.1,
+          "visible": 8
+        },
+        {
+          "at": 1.1,
+          "visible": 9
+        }
+      ],
+      "alignment": "Whisper forced alignment on the original audio",
+      "audio_kind": "source_recording",
+      "image": "images/local_06.jpg"
+    },
+    {
+      "id": "local_07",
+      "title": "自己过得一地鸡毛",
+      "caption": "自己过得一地鸡毛。",
+      "events": [
+        "hurt"
+      ],
+      "group": "课堂原声",
+      "source": "https://www.bilibili.com/video/BV16iEFzYEm2/",
+      "source_start": 42.56,
+      "source_end": 43.84,
+      "file": "original_local_07.ogg",
+      "duration": 1.28,
+      "cues": [
+        {
+          "at": 0,
+          "visible": 1
+        },
+        {
+          "at": 0.2,
+          "visible": 2
+        },
+        {
+          "at": 0.4,
+          "visible": 3
+        },
+        {
+          "at": 0.56,
+          "visible": 4
+        },
+        {
+          "at": 0.66,
+          "visible": 5
+        },
+        {
+          "at": 0.8,
+          "visible": 6
+        },
+        {
+          "at": 0.88,
+          "visible": 7
+        },
+        {
+          "at": 1.04,
+          "visible": 8
+        },
+        {
+          "at": 1.04,
+          "visible": 9
+        }
+      ],
+      "alignment": "Whisper forced alignment on the original audio",
+      "audio_kind": "source_recording",
+      "image": "images/local_07.jpg"
+    },
+    {
+      "id": "local_08",
+      "title": "你准备过吗",
+      "caption": "你准备过吗？",
+      "events": [
+        "start",
+        "operators"
+      ],
+      "group": "课堂原声",
+      "source": "https://www.bilibili.com/video/BV16iEFzYEm2/",
+      "source_start": 53.26,
+      "source_end": 54.53,
+      "file": "original_local_08.ogg",
+      "duration": 1.27,
+      "cues": [
+        {
+          "at": 0,
+          "visible": 1
+        },
+        {
+          "at": 0.38,
+          "visible": 2
+        },
+        {
+          "at": 0.54,
+          "visible": 3
+        },
+        {
+          "at": 0.68,
+          "visible": 4
+        },
+        {
+          "at": 0.84,
+          "visible": 5
+        },
+        {
+          "at": 0.84,
+          "visible": 6
+        }
+      ],
+      "alignment": "Whisper forced alignment on the original audio",
+      "audio_kind": "source_recording",
+      "image": "images/local_08.jpg"
+    },
+    {
+      "id": "local_09",
+      "title": "看谁呢",
+      "caption": "看谁呢？",
+      "events": [
+        "return",
+        "hint"
+      ],
+      "group": "课堂原声",
+      "source": "https://www.bilibili.com/video/BV16iEFzYEm2/",
+      "source_start": 59.76,
+      "source_end": 60.62,
+      "file": "original_local_09.ogg",
+      "duration": 0.86,
+      "cues": [
+        {
+          "at": 0,
+          "visible": 1
+        },
+        {
+          "at": 0.38,
+          "visible": 2
+        },
+        {
+          "at": 0.52,
+          "visible": 3
+        },
+        {
+          "at": 0.52,
+          "visible": 4
+        }
+      ],
+      "alignment": "Whisper forced alignment on the original audio",
+      "audio_kind": "source_recording",
+      "image": "images/local_09.jpg"
+    },
+    {
+      "id": "local_10",
+      "title": "说的就是你",
+      "caption": "说的就是你！",
+      "events": [
+        "miss"
+      ],
+      "group": "课堂原声",
+      "source": "https://www.bilibili.com/video/BV16iEFzYEm2/",
+      "source_start": 60.58,
+      "source_end": 61.62,
+      "file": "original_local_10.ogg",
+      "duration": 1.04,
+      "cues": [
+        {
+          "at": 0,
+          "visible": 1
+        },
+        {
+          "at": 0.5,
+          "visible": 2
+        },
+        {
+          "at": 0.58,
+          "visible": 3
+        },
+        {
+          "at": 0.68,
+          "visible": 4
+        },
+        {
+          "at": 0.78,
+          "visible": 5
+        },
+        {
+          "at": 0.78,
+          "visible": 6
+        }
+      ],
+      "alignment": "Whisper forced alignment on the original audio",
+      "audio_kind": "source_recording",
+      "image": "images/local_10.jpg"
+    },
+    {
+      "id": "local_11",
+      "title": "是不是今天又没起来",
+      "caption": "是不是今天又没起来？",
+      "events": [
+        "return"
+      ],
+      "group": "课堂原声",
+      "source": "https://www.bilibili.com/video/BV16iEFzYEm2/",
+      "source_start": 62.04,
+      "source_end": 63.4,
+      "file": "original_local_11.ogg",
+      "duration": 1.36,
+      "cues": [
+        {
+          "at": 0,
+          "visible": 1
+        },
+        {
+          "at": 0.12,
+          "visible": 2
+        },
+        {
+          "at": 0.24,
+          "visible": 3
+        },
+        {
+          "at": 0.36,
+          "visible": 4
+        },
+        {
+          "at": 0.48,
+          "visible": 5
+        },
+        {
+          "at": 0.6,
+          "visible": 6
+        },
+        {
+          "at": 0.74,
+          "visible": 7
+        },
+        {
+          "at": 0.88,
+          "visible": 8
+        },
+        {
+          "at": 1.04,
+          "visible": 9
+        },
+        {
+          "at": 1.04,
+          "visible": 10
+        }
+      ],
+      "alignment": "Whisper forced alignment on the original audio",
+      "audio_kind": "source_recording",
+      "image": "images/local_11.jpg"
+    },
+    {
+      "id": "local_12",
+      "title": "梦见什么了",
+      "caption": "梦见什么了？",
+      "events": [
+        "return"
+      ],
+      "group": "课堂原声",
+      "source": "https://www.bilibili.com/video/BV16iEFzYEm2/",
+      "source_start": 67.04,
+      "source_end": 68.11,
+      "file": "original_local_12.ogg",
+      "duration": 1.07,
+      "cues": [
+        {
+          "at": 0,
+          "visible": 1
+        },
+        {
+          "at": 0.44,
+          "visible": 2
+        },
+        {
+          "at": 0.58,
+          "visible": 3
+        },
+        {
+          "at": 0.68,
+          "visible": 4
+        },
+        {
+          "at": 0.78,
+          "visible": 5
+        },
+        {
+          "at": 0.78,
+          "visible": 6
+        }
+      ],
+      "alignment": "Whisper forced alignment on the original audio",
+      "audio_kind": "source_recording",
+      "image": "images/local_12.jpg"
+    },
+    {
+      "id": "local_13",
+      "title": "梦见自己变成一头猪",
+      "caption": "梦见自己变成一头猪。",
+      "events": [
+        "return"
+      ],
+      "group": "课堂原声",
+      "source": "https://www.bilibili.com/video/BV16iEFzYEm2/",
+      "source_start": 68.04,
+      "source_end": 69.42,
+      "file": "original_local_13.ogg",
+      "duration": 1.38,
+      "cues": [
+        {
+          "at": 0,
+          "visible": 1
+        },
+        {
+          "at": 0.34,
+          "visible": 2
+        },
+        {
+          "at": 0.48,
+          "visible": 3
+        },
+        {
+          "at": 0.56,
+          "visible": 4
+        },
+        {
+          "at": 0.64,
+          "visible": 5
+        },
+        {
+          "at": 0.84,
+          "visible": 6
+        },
+        {
+          "at": 0.92,
+          "visible": 7
+        },
+        {
+          "at": 0.98,
+          "visible": 8
+        },
+        {
+          "at": 1.1,
+          "visible": 9
+        },
+        {
+          "at": 1.1,
+          "visible": 10
+        }
+      ],
+      "alignment": "Whisper forced alignment on the original audio",
+      "audio_kind": "source_recording",
+      "image": "images/local_13.jpg"
+    },
+    {
+      "id": "local_14",
+      "title": "看到了也不是你的",
+      "caption": "刘老师，看到了也不是你的。",
+      "events": [
+        "collection"
+      ],
+      "group": "课堂原声",
+      "source": "https://www.bilibili.com/video/BV16iEFzYEm2/",
+      "source_start": 77.62,
+      "source_end": 79.33,
+      "file": "original_local_14.ogg",
+      "duration": 1.71,
+      "cues": [
+        {
+          "at": 0,
+          "visible": 1
+        },
+        {
+          "at": 0.12,
+          "visible": 2
+        },
+        {
+          "at": 0.22,
+          "visible": 3
+        },
+        {
+          "at": 0.22,
+          "visible": 4
+        },
+        {
+          "at": 0.66,
+          "visible": 5
+        },
+        {
+          "at": 0.78,
+          "visible": 6
+        },
+        {
+          "at": 0.9,
+          "visible": 7
+        },
+        {
+          "at": 1.12,
+          "visible": 8
+        },
+        {
+          "at": 1.2,
+          "visible": 9
+        },
+        {
+          "at": 1.29,
+          "visible": 10
+        },
+        {
+          "at": 1.38,
+          "visible": 11
+        },
+        {
+          "at": 1.49,
+          "visible": 12
+        },
+        {
+          "at": 1.49,
+          "visible": 13
+        }
+      ],
+      "alignment": "Whisper forced alignment on the original audio",
+      "audio_kind": "source_recording",
+      "image": "images/local_14.jpg"
+    },
+    {
+      "id": "local_15",
+      "title": "上厕所也躺着",
+      "caption": "你就差一条，上厕所也躺着了。",
+      "events": [
+        "return"
+      ],
+      "group": "课堂原声",
+      "source": "https://www.bilibili.com/video/BV16iEFzYEm2/",
+      "source_start": 91.34,
+      "source_end": 93.42,
+      "file": "original_local_15.ogg",
+      "duration": 2.08,
+      "cues": [
+        {
+          "at": 0,
+          "visible": 1
+        },
+        {
+          "at": 0.2,
+          "visible": 2
+        },
+        {
+          "at": 0.4,
+          "visible": 3
+        },
+        {
+          "at": 0.72,
+          "visible": 4
+        },
+        {
+          "at": 0.9,
+          "visible": 5
+        },
+        {
+          "at": 0.9,
+          "visible": 6
+        },
+        {
+          "at": 1.2,
+          "visible": 7
+        },
+        {
+          "at": 1.24,
+          "visible": 8
+        },
+        {
+          "at": 1.4,
+          "visible": 9
+        },
+        {
+          "at": 1.52,
+          "visible": 10
+        },
+        {
+          "at": 1.62,
+          "visible": 11
+        },
+        {
+          "at": 1.84,
+          "visible": 12
+        },
+        {
+          "at": 1.94,
+          "visible": 13
+        },
+        {
+          "at": 1.94,
+          "visible": 14
+        }
+      ],
+      "alignment": "Whisper forced alignment on the original audio",
+      "audio_kind": "source_recording",
+      "image": "images/local_15.jpg"
+    },
+    {
+      "id": "local_16",
+      "title": "那都是别人的生活呀",
+      "caption": "那都是别人的生活呀。",
+      "events": [
+        "collection"
+      ],
+      "group": "课堂原声",
+      "source": "https://www.bilibili.com/video/BV16iEFzYEm2/",
+      "source_start": 104.96,
+      "source_end": 106.18,
+      "file": "original_local_16.ogg",
+      "duration": 1.22,
+      "cues": [
+        {
+          "at": 0,
+          "visible": 1
+        },
+        {
+          "at": 0.26,
+          "visible": 2
+        },
+        {
+          "at": 0.32,
+          "visible": 3
+        },
+        {
+          "at": 0.38,
+          "visible": 4
+        },
+        {
+          "at": 0.52,
+          "visible": 5
+        },
+        {
+          "at": 0.64,
+          "visible": 6
+        },
+        {
+          "at": 0.72,
+          "visible": 7
+        },
+        {
+          "at": 0.84,
+          "visible": 8
+        },
+        {
+          "at": 0.96,
+          "visible": 9
+        },
+        {
+          "at": 0.96,
+          "visible": 10
+        }
+      ],
+      "alignment": "Whisper forced alignment on the original audio",
+      "audio_kind": "source_recording",
+      "image": "images/local_16.jpg"
+    },
+    {
+      "id": "local_17",
+      "title": "关你个狗屁事",
+      "caption": "关你个狗屁事。",
+      "events": [
+        "hurt"
+      ],
+      "group": "课堂原声",
+      "source": "https://www.bilibili.com/video/BV16iEFzYEm2/",
+      "source_start": 106.13,
+      "source_end": 107.22,
+      "file": "original_local_17.ogg",
+      "duration": 1.09,
+      "cues": [
+        {
+          "at": 0,
+          "visible": 1
+        },
+        {
+          "at": 0.32,
+          "visible": 2
+        },
+        {
+          "at": 0.46,
+          "visible": 3
+        },
+        {
+          "at": 0.54,
+          "visible": 4
+        },
+        {
+          "at": 0.68,
+          "visible": 5
+        },
+        {
+          "at": 0.86,
+          "visible": 6
+        },
+        {
+          "at": 0.86,
+          "visible": 7
+        }
+      ],
+      "alignment": "Whisper forced alignment on the original audio",
+      "audio_kind": "source_recording",
+      "image": "images/local_17.jpg"
+    },
+    {
+      "id": "local_18",
+      "title": "回家吧好不好",
+      "caption": "回家吧，好不好？回家吧。",
+      "events": [],
+      "group": "课堂原声",
+      "source": "https://www.bilibili.com/video/BV16iEFzYEm2/",
+      "source_start": 113.68,
+      "source_end": 115.58,
+      "file": "original_local_18.ogg",
+      "duration": 1.9,
+      "cues": [
+        {
+          "at": 0,
+          "visible": 1
+        },
+        {
+          "at": 0.36,
+          "visible": 2
+        },
+        {
+          "at": 0.56,
+          "visible": 3
+        },
+        {
+          "at": 0.56,
+          "visible": 4
+        },
+        {
+          "at": 1.06,
+          "visible": 5
+        },
+        {
+          "at": 1.06,
+          "visible": 6
+        },
+        {
+          "at": 1.06,
+          "visible": 7
+        },
+        {
+          "at": 1.06,
+          "visible": 8
+        },
+        {
+          "at": 1.4,
+          "visible": 9
+        },
+        {
+          "at": 1.54,
+          "visible": 10
+        },
+        {
+          "at": 1.74,
+          "visible": 11
+        },
+        {
+          "at": 1.74,
+          "visible": 12
+        }
+      ],
+      "alignment": "Whisper forced alignment on the original audio",
+      "audio_kind": "source_recording",
+      "image": "images/local_18.jpg"
+    },
+    {
+      "id": "local_19",
+      "title": "你比较适合做一摊狗屎",
+      "caption": "你比较适合做一摊狗屎。",
+      "events": [],
+      "group": "课堂原声",
+      "source": "https://www.bilibili.com/video/BV16iEFzYEm2/",
+      "source_start": 115.52,
+      "source_end": 117.3,
+      "file": "original_local_19.ogg",
+      "duration": 1.78,
+      "cues": [
+        {
+          "at": 0,
+          "visible": 1
+        },
+        {
+          "at": 0.16,
+          "visible": 2
+        },
+        {
+          "at": 0.24,
+          "visible": 3
+        },
+        {
+          "at": 0.4,
+          "visible": 4
+        },
+        {
+          "at": 0.58,
+          "visible": 5
+        },
+        {
+          "at": 0.7,
+          "visible": 6
+        },
+        {
+          "at": 0.86,
+          "visible": 7
+        },
+        {
+          "at": 1.18,
+          "visible": 8
+        },
+        {
+          "at": 1.36,
+          "visible": 9
+        },
+        {
+          "at": 1.56,
+          "visible": 10
+        },
+        {
+          "at": 1.56,
+          "visible": 11
+        }
+      ],
+      "alignment": "Whisper forced alignment on the original audio",
+      "audio_kind": "source_recording",
+      "image": "images/local_19.jpg"
+    },
+    {
+      "id": "local_20",
+      "title": "比较适合做一头猪",
+      "caption": "比较适合做一头猪。",
+      "events": [],
+      "group": "课堂原声",
+      "source": "https://www.bilibili.com/video/BV16iEFzYEm2/",
+      "source_start": 117.76,
+      "source_end": 119.14,
+      "file": "original_local_20.ogg",
+      "duration": 1.38,
+      "cues": [
+        {
+          "at": 0,
+          "visible": 1
+        },
+        {
+          "at": 0.36,
+          "visible": 2
+        },
+        {
+          "at": 0.5,
+          "visible": 3
+        },
+        {
+          "at": 0.64,
+          "visible": 4
+        },
+        {
+          "at": 0.74,
+          "visible": 5
+        },
+        {
+          "at": 0.86,
+          "visible": 6
+        },
+        {
+          "at": 0.96,
+          "visible": 7
+        },
+        {
+          "at": 1.1,
+          "visible": 8
+        },
+        {
+          "at": 1.1,
+          "visible": 9
+        }
+      ],
+      "alignment": "Whisper forced alignment on the original audio",
+      "audio_kind": "source_recording",
+      "image": "images/local_20.jpg"
+    },
+    {
+      "id": "local_21",
+      "title": "你会什么呀",
+      "caption": "就你会什么呀？",
+      "events": [
+        "miss"
+      ],
+      "group": "课堂原声",
+      "source": "https://www.bilibili.com/video/BV16iEFzYEm2/",
+      "source_start": 122.54,
+      "source_end": 123.97,
+      "file": "original_local_21.ogg",
+      "duration": 1.43,
+      "cues": [
+        {
+          "at": 0,
+          "visible": 1
+        },
+        {
+          "at": 0.36,
+          "visible": 2
+        },
+        {
+          "at": 0.58,
+          "visible": 3
+        },
+        {
+          "at": 0.82,
+          "visible": 4
+        },
+        {
+          "at": 1.01,
+          "visible": 5
+        },
+        {
+          "at": 1.2,
+          "visible": 6
+        },
+        {
+          "at": 1.2,
+          "visible": 7
+        }
+      ],
+      "alignment": "Whisper forced alignment on the original audio",
+      "audio_kind": "source_recording",
+      "image": "images/local_21.jpg"
+    },
+    {
+      "id": "local_22",
+      "title": "不要再假装学习了",
+      "caption": "你不要再假装学习了。",
+      "events": [
+        "books",
+        "hint"
+      ],
+      "group": "课堂原声",
+      "source": "https://www.bilibili.com/video/BV16iEFzYEm2/",
+      "source_start": 132.26,
+      "source_end": 133.9,
+      "file": "original_local_22.ogg",
+      "duration": 1.64,
+      "cues": [
+        {
+          "at": 0,
+          "visible": 1
+        },
+        {
+          "at": 0.38,
+          "visible": 2
+        },
+        {
+          "at": 0.48,
+          "visible": 3
+        },
+        {
+          "at": 0.58,
+          "visible": 4
+        },
+        {
+          "at": 0.74,
+          "visible": 5
+        },
+        {
+          "at": 0.96,
+          "visible": 6
+        },
+        {
+          "at": 1.14,
+          "visible": 7
+        },
+        {
+          "at": 1.3,
+          "visible": 8
+        },
+        {
+          "at": 1.5,
+          "visible": 9
+        },
+        {
+          "at": 1.5,
+          "visible": 10
+        }
+      ],
+      "alignment": "Whisper forced alignment on the original audio",
+      "audio_kind": "source_recording",
+      "image": "images/local_22.jpg"
+    },
+    {
+      "id": "local_23",
+      "title": "还骗自己有意思吗",
+      "caption": "还骗自己有意思吗？",
+      "events": [
+        "miss",
+        "hint"
+      ],
+      "group": "课堂原声",
+      "source": "https://www.bilibili.com/video/BV16iEFzYEm2/",
+      "source_start": 139.44,
+      "source_end": 140.62,
+      "file": "original_local_23.ogg",
+      "duration": 1.18,
+      "cues": [
+        {
+          "at": 0,
+          "visible": 1
+        },
+        {
+          "at": 0.1,
+          "visible": 2
+        },
+        {
+          "at": 0.32,
+          "visible": 3
+        },
+        {
+          "at": 0.42,
+          "visible": 4
+        },
+        {
+          "at": 0.52,
+          "visible": 5
+        },
+        {
+          "at": 0.7,
+          "visible": 6
+        },
+        {
+          "at": 0.8,
+          "visible": 7
+        },
+        {
+          "at": 0.9,
+          "visible": 8
+        },
+        {
+          "at": 0.9,
+          "visible": 9
+        }
+      ],
+      "alignment": "Whisper forced alignment on the original audio",
+      "audio_kind": "source_recording",
+      "image": "images/local_23.jpg"
+    },
+    {
+      "id": "local_24",
+      "title": "你恶不恶心",
+      "caption": "你恶不恶心？",
+      "events": [
+        "miss"
+      ],
+      "group": "课堂原声",
+      "source": "https://www.bilibili.com/video/BV16iEFzYEm2/",
+      "source_start": 141.12,
+      "source_end": 142.12,
+      "file": "original_local_24.ogg",
+      "duration": 1.0,
+      "cues": [
+        {
+          "at": 0,
+          "visible": 1
+        },
+        {
+          "at": 0.26,
+          "visible": 2
+        },
+        {
+          "at": 0.62,
+          "visible": 3
+        },
+        {
+          "at": 0.74,
+          "visible": 4
+        },
+        {
+          "at": 0.86,
+          "visible": 5
+        },
+        {
+          "at": 0.86,
+          "visible": 6
+        }
+      ],
+      "alignment": "Whisper forced alignment on the original audio",
+      "audio_kind": "source_recording",
+      "image": "images/local_24.jpg"
+    },
+    {
+      "id": "local_25",
+      "title": "你自己写呀",
+      "caption": "你自己写呀！",
+      "events": [
+        "hint",
+        "warded"
+      ],
+      "group": "课堂原声",
+      "source": "https://www.bilibili.com/video/BV16iEFzYEm2/",
+      "source_start": 155.8,
+      "source_end": 156.78,
+      "file": "original_local_25.ogg",
+      "duration": 0.98,
+      "cues": [
+        {
+          "at": 0,
+          "visible": 1
+        },
+        {
+          "at": 0.18,
+          "visible": 2
+        },
+        {
+          "at": 0.25,
+          "visible": 3
+        },
+        {
+          "at": 0.32,
+          "visible": 4
+        },
+        {
+          "at": 0.58,
+          "visible": 5
+        },
+        {
+          "at": 0.58,
+          "visible": 6
+        }
+      ],
+      "alignment": "Whisper forced alignment on the original audio",
+      "audio_kind": "source_recording",
+      "image": "images/local_25.jpg"
+    },
+    {
+      "id": "local_26",
+      "title": "不要狡辩",
+      "caption": "不要狡辩，一定不要狡辩！",
+      "events": [
+        "miss"
+      ],
+      "group": "课堂原声",
+      "source": "https://www.bilibili.com/video/BV16iEFzYEm2/",
+      "source_start": 192.96,
+      "source_end": 195.4,
+      "file": "original_local_26.ogg",
+      "duration": 2.44,
+      "cues": [
+        {
+          "at": 0,
+          "visible": 1
+        },
+        {
+          "at": 0.13,
+          "visible": 2
+        },
+        {
+          "at": 0.26,
+          "visible": 3
+        },
+        {
+          "at": 0.54,
+          "visible": 4
+        },
+        {
+          "at": 0.54,
+          "visible": 5
+        },
+        {
+          "at": 1.52,
+          "visible": 6
+        },
+        {
+          "at": 1.61,
+          "visible": 7
+        },
+        {
+          "at": 1.7,
+          "visible": 8
+        },
+        {
+          "at": 1.79,
+          "visible": 9
+        },
+        {
+          "at": 1.88,
+          "visible": 10
+        },
+        {
+          "at": 2.04,
+          "visible": 11
+        },
+        {
+          "at": 2.04,
+          "visible": 12
+        }
+      ],
+      "alignment": "Whisper forced alignment on the original audio",
+      "audio_kind": "source_recording",
+      "image": "images/local_26.jpg"
+    },
+    {
+      "id": "local_27",
+      "title": "看着我的脸",
+      "caption": "看着我的脸！",
+      "events": [
+        "hint"
+      ],
+      "group": "课堂原声",
+      "source": "https://www.bilibili.com/video/BV16iEFzYEm2/",
+      "source_start": 230.38,
+      "source_end": 231.04,
+      "file": "original_local_27.ogg",
+      "duration": 0.66,
+      "cues": [
+        {
+          "at": 0,
+          "visible": 1
+        },
+        {
+          "at": 0.4,
+          "visible": 2
+        },
+        {
+          "at": 0.48,
+          "visible": 3
+        },
+        {
+          "at": 0.52,
+          "visible": 4
+        },
+        {
+          "at": 0.56,
+          "visible": 5
+        },
+        {
+          "at": 0.56,
+          "visible": 6
+        }
+      ],
+      "alignment": "Whisper forced alignment on the original audio",
+      "audio_kind": "source_recording",
+      "image": "images/local_27.jpg"
+    },
+    {
+      "id": "local_28",
+      "title": "很尴尬的笑",
+      "caption": "很尴尬的笑。",
+      "events": [
+        "combo",
+        "victory"
+      ],
+      "group": "课堂原声",
+      "source": "https://www.bilibili.com/video/BV16iEFzYEm2/",
+      "source_start": 237.8,
+      "source_end": 240.5,
+      "file": "original_local_28.ogg",
+      "duration": 2.7,
+      "cues": [
+        {
+          "at": 0,
+          "visible": 1
+        },
+        {
+          "at": 0.34,
+          "visible": 2
+        },
+        {
+          "at": 0.64,
+          "visible": 3
+        },
+        {
+          "at": 0.84,
+          "visible": 4
+        },
+        {
+          "at": 1.04,
+          "visible": 5
+        },
+        {
+          "at": 1.04,
+          "visible": 6
+        }
+      ],
+      "alignment": "Whisper forced alignment on the original audio",
+      "audio_kind": "source_recording",
+      "image": "images/local_28.jpg"
+    },
+    {
+      "id": "local_29",
+      "title": "老师我真不看了",
+      "caption": "老师，我真不看了。",
+      "events": [
+        "return"
+      ],
+      "group": "课堂原声",
+      "source": "https://www.bilibili.com/video/BV16iEFzYEm2/",
+      "source_start": 267.9,
+      "source_end": 269.48,
+      "file": "original_local_29.ogg",
+      "duration": 1.58,
+      "cues": [
+        {
+          "at": 0,
+          "visible": 1
+        },
+        {
+          "at": 0.62,
+          "visible": 2
+        },
+        {
+          "at": 0.62,
+          "visible": 3
+        },
+        {
+          "at": 0.86,
+          "visible": 4
+        },
+        {
+          "at": 0.88,
+          "visible": 5
+        },
+        {
+          "at": 1.0,
+          "visible": 6
+        },
+        {
+          "at": 1.1,
+          "visible": 7
+        },
+        {
+          "at": 1.2,
+          "visible": 8
+        },
+        {
+          "at": 1.2,
+          "visible": 9
+        }
+      ],
+      "alignment": "Whisper forced alignment on the original audio",
+      "audio_kind": "source_recording",
+      "image": "images/local_29.jpg"
+    },
+    {
+      "id": "ky_welcome",
+      "events": [
+        "welcome"
+      ],
+      "caption": "臭老鼠们，考研英语由我全权接管。",
+      "title": "臭老鼠们，考研英语由我全权接管。",
+      "file": "ky_welcome.ogg",
+      "duration": 2.64,
+      "cues": [
+        {
+          "at": 0.08,
+          "visible": 1
+        },
+        {
+          "at": 0.24,
+          "visible": 2
+        },
+        {
+          "at": 0.4,
+          "visible": 3
+        },
+        {
+          "at": 0.48,
+          "visible": 4
+        },
+        {
+          "at": 0.88,
+          "visible": 5
+        },
+        {
+          "at": 0.88,
+          "visible": 6
+        },
+        {
+          "at": 1.04,
+          "visible": 7
+        },
+        {
+          "at": 1.2,
+          "visible": 8
+        },
+        {
+          "at": 1.36,
+          "visible": 9
+        },
+        {
+          "at": 1.52,
+          "visible": 10
+        },
+        {
+          "at": 1.6,
+          "visible": 11
+        },
+        {
+          "at": 1.76,
+          "visible": 12
+        },
+        {
+          "at": 1.92,
+          "visible": 13
+        },
+        {
+          "at": 2.16,
+          "visible": 14
+        },
+        {
+          "at": 2.24,
+          "visible": 15
+        },
+        {
+          "at": 2.24,
+          "visible": 16
+        }
+      ],
+      "group": "考研复刻",
+      "scope": "ky",
+      "audio_kind": "reference_synthesis",
+      "source": "https://www.bilibili.com/video/BV1hTnb6XEju/",
+      "source_start": 38.13,
+      "source_end": 54.22,
+      "model": "qwen-audio-3.1-tts-plus",
+      "alignment": "provider character timestamps",
+      "method": "Original game dialogue synthesized with the user-requested reference voice; not a source quote."
+    },
+    {
+      "id": "ky_books",
+      "events": [
+        "books"
+      ],
+      "caption": "考研词书选好了？核心词汇背过吗？",
+      "title": "考研词书选好了？核心词汇背过吗？",
+      "file": "ky_books.ogg",
+      "duration": 2.72,
+      "cues": [
+        {
+          "at": 0.08,
+          "visible": 1
+        },
+        {
+          "at": 0.16,
+          "visible": 2
+        },
+        {
+          "at": 0.4,
+          "visible": 3
+        },
+        {
+          "at": 0.56,
+          "visible": 4
+        },
+        {
+          "at": 0.72,
+          "visible": 5
+        },
+        {
+          "at": 0.88,
+          "visible": 6
+        },
+        {
+          "at": 1.04,
+          "visible": 7
+        },
+        {
+          "at": 1.44,
+          "visible": 8
+        },
+        {
+          "at": 1.44,
+          "visible": 9
+        },
+        {
+          "at": 1.6,
+          "visible": 10
+        },
+        {
+          "at": 1.76,
+          "visible": 11
+        },
+        {
+          "at": 1.92,
+          "visible": 12
+        },
+        {
+          "at": 2.08,
+          "visible": 13
+        },
+        {
+          "at": 2.24,
+          "visible": 14
+        },
+        {
+          "at": 2.4,
+          "visible": 15
+        },
+        {
+          "at": 2.4,
+          "visible": 16
+        }
+      ],
+      "group": "考研复刻",
+      "scope": "ky",
+      "audio_kind": "reference_synthesis",
+      "source": "https://www.bilibili.com/video/BV1hTnb6XEju/",
+      "source_start": 38.13,
+      "source_end": 54.22,
+      "model": "qwen-audio-3.1-tts-plus",
+      "alignment": "provider character timestamps",
+      "method": "Original game dialogue synthesized with the user-requested reference voice; not a source quote."
+    },
+    {
+      "id": "ky_start",
+      "events": [
+        "start"
+      ],
+      "caption": "从现在开始，考研英语，一词一词给我拿下。",
+      "title": "从现在开始，考研英语，一词一词给我拿下。",
+      "file": "ky_start.ogg",
+      "duration": 2.96,
+      "cues": [
+        {
+          "at": 0.08,
+          "visible": 1
+        },
+        {
+          "at": 0.16,
+          "visible": 2
+        },
+        {
+          "at": 0.32,
+          "visible": 3
+        },
+        {
+          "at": 0.48,
+          "visible": 4
+        },
+        {
+          "at": 0.64,
+          "visible": 5
+        },
+        {
+          "at": 0.88,
+          "visible": 6
+        },
+        {
+          "at": 0.88,
+          "visible": 7
+        },
+        {
+          "at": 1.04,
+          "visible": 8
+        },
+        {
+          "at": 1.2,
+          "visible": 9
+        },
+        {
+          "at": 1.36,
+          "visible": 10
+        },
+        {
+          "at": 1.52,
+          "visible": 11
+        },
+        {
+          "at": 1.52,
+          "visible": 12
+        },
+        {
+          "at": 1.72,
+          "visible": 13
+        },
+        {
+          "at": 1.92,
+          "visible": 14
+        },
+        {
+          "at": 2.0,
+          "visible": 15
+        },
+        {
+          "at": 2.16,
+          "visible": 16
+        },
+        {
+          "at": 2.32,
+          "visible": 17
+        },
+        {
+          "at": 2.4,
+          "visible": 18
+        },
+        {
+          "at": 2.48,
+          "visible": 19
+        },
+        {
+          "at": 2.48,
+          "visible": 20
+        }
+      ],
+      "group": "考研复刻",
+      "scope": "ky",
+      "audio_kind": "reference_synthesis",
+      "source": "https://www.bilibili.com/video/BV1hTnb6XEju/",
+      "source_start": 38.13,
+      "source_end": 54.22,
+      "model": "qwen-audio-3.1-tts-plus",
+      "alignment": "provider character timestamps",
+      "method": "Original game dialogue synthesized with the user-requested reference voice; not a source quote."
+    },
+    {
+      "id": "ky_start_two",
+      "events": [
+        "start"
+      ],
+      "caption": "英语一也好，英语二也好，先把眼前这个词拼对。",
+      "title": "英语一也好，英语二也好，先把眼前这个词拼对。",
+      "file": "ky_start_two.ogg",
+      "duration": 3.2,
+      "cues": [
+        {
+          "at": 0.08,
+          "visible": 1
+        },
+        {
+          "at": 0.16,
+          "visible": 2
+        },
+        {
+          "at": 0.32,
+          "visible": 3
+        },
+        {
+          "at": 0.48,
+          "visible": 4
+        },
+        {
+          "at": 0.64,
+          "visible": 5
+        },
+        {
+          "at": 0.8,
+          "visible": 6
+        },
+        {
+          "at": 0.8,
+          "visible": 7
+        },
+        {
+          "at": 0.96,
+          "visible": 8
+        },
+        {
+          "at": 1.12,
+          "visible": 9
+        },
+        {
+          "at": 1.28,
+          "visible": 10
+        },
+        {
+          "at": 1.44,
+          "visible": 11
+        },
+        {
+          "at": 1.6,
+          "visible": 12
+        },
+        {
+          "at": 1.6,
+          "visible": 13
+        },
+        {
+          "at": 1.68,
+          "visible": 14
+        },
+        {
+          "at": 1.84,
+          "visible": 15
+        },
+        {
+          "at": 2.0,
+          "visible": 16
+        },
+        {
+          "at": 2.24,
+          "visible": 17
+        },
+        {
+          "at": 2.4,
+          "visible": 18
+        },
+        {
+          "at": 2.48,
+          "visible": 19
+        },
+        {
+          "at": 2.56,
+          "visible": 20
+        },
+        {
+          "at": 2.72,
+          "visible": 21
+        },
+        {
+          "at": 2.72,
+          "visible": 22
+        }
+      ],
+      "group": "考研复刻",
+      "scope": "ky",
+      "audio_kind": "reference_synthesis",
+      "source": "https://www.bilibili.com/video/BV1hTnb6XEju/",
+      "source_start": 38.13,
+      "source_end": 54.22,
+      "model": "qwen-audio-3.1-tts-plus",
+      "alignment": "provider character timestamps",
+      "method": "Original game dialogue synthesized with the user-requested reference voice; not a source quote."
+    },
+    {
+      "id": "ky_miss",
+      "events": [
+        "miss"
+      ],
+      "caption": "你怎么敢的？考研单词也敢少写字母？",
+      "title": "你怎么敢的？考研单词也敢少写字母？",
+      "file": "ky_miss.ogg",
+      "duration": 2.48,
+      "cues": [
+        {
+          "at": 0.08,
+          "visible": 1
+        },
+        {
+          "at": 0.16,
+          "visible": 2
+        },
+        {
+          "at": 0.24,
+          "visible": 3
+        },
+        {
+          "at": 0.4,
+          "visible": 4
+        },
+        {
+          "at": 0.56,
+          "visible": 5
+        },
+        {
+          "at": 0.72,
+          "visible": 6
+        },
+        {
+          "at": 0.72,
+          "visible": 7
+        },
+        {
+          "at": 0.96,
+          "visible": 8
+        },
+        {
+          "at": 1.12,
+          "visible": 9
+        },
+        {
+          "at": 1.28,
+          "visible": 10
+        },
+        {
+          "at": 1.44,
+          "visible": 11
+        },
+        {
+          "at": 1.6,
+          "visible": 12
+        },
+        {
+          "at": 1.76,
+          "visible": 13
+        },
+        {
+          "at": 1.84,
+          "visible": 14
+        },
+        {
+          "at": 2.0,
+          "visible": 15
+        },
+        {
+          "at": 2.16,
+          "visible": 16
+        },
+        {
+          "at": 2.16,
+          "visible": 17
+        }
+      ],
+      "group": "考研复刻",
+      "scope": "ky",
+      "audio_kind": "reference_synthesis",
+      "source": "https://www.bilibili.com/video/BV1hTnb6XEju/",
+      "source_start": 38.13,
+      "source_end": 54.22,
+      "model": "qwen-audio-3.1-tts-plus",
+      "alignment": "provider character timestamps",
+      "method": "Original game dialogue synthesized with the user-requested reference voice; not a source quote."
+    },
+    {
+      "id": "ky_miss_again",
+      "events": [
+        "miss"
+      ],
+      "caption": "这个词真题里见过多少次了？重新拼。",
+      "title": "这个词真题里见过多少次了？重新拼。",
+      "file": "ky_miss_again.ogg",
+      "duration": 2.96,
+      "cues": [
+        {
+          "at": 0.08,
+          "visible": 1
+        },
+        {
+          "at": 0.16,
+          "visible": 2
+        },
+        {
+          "at": 0.32,
+          "visible": 3
+        },
+        {
+          "at": 0.56,
+          "visible": 4
+        },
+        {
+          "at": 0.64,
+          "visible": 5
+        },
+        {
+          "at": 0.8,
+          "visible": 6
+        },
+        {
+          "at": 0.88,
+          "visible": 7
+        },
+        {
+          "at": 1.04,
+          "visible": 8
+        },
+        {
+          "at": 1.2,
+          "visible": 9
+        },
+        {
+          "at": 1.36,
+          "visible": 10
+        },
+        {
+          "at": 1.52,
+          "visible": 11
+        },
+        {
+          "at": 1.68,
+          "visible": 12
+        },
+        {
+          "at": 1.92,
+          "visible": 13
+        },
+        {
+          "at": 1.92,
+          "visible": 14
+        },
+        {
+          "at": 2.08,
+          "visible": 15
+        },
+        {
+          "at": 2.24,
+          "visible": 16
+        },
+        {
+          "at": 2.24,
+          "visible": 17
+        }
+      ],
+      "group": "考研复刻",
+      "scope": "ky",
+      "audio_kind": "reference_synthesis",
+      "source": "https://www.bilibili.com/video/BV1hTnb6XEju/",
+      "source_start": 38.13,
+      "source_end": 54.22,
+      "model": "qwen-audio-3.1-tts-plus",
+      "alignment": "provider character timestamps",
+      "method": "Original game dialogue synthesized with the user-requested reference voice; not a source quote."
+    },
+    {
+      "id": "ky_hint",
+      "events": [
+        "hint"
+      ],
+      "caption": "看清词义，别一看到提示就以为自己会了。",
+      "title": "看清词义，别一看到提示就以为自己会了。",
+      "file": "ky_hint.ogg",
+      "duration": 3.12,
+      "cues": [
+        {
+          "at": 0.08,
+          "visible": 1
+        },
+        {
+          "at": 0.24,
+          "visible": 2
+        },
+        {
+          "at": 0.4,
+          "visible": 3
+        },
+        {
+          "at": 0.64,
+          "visible": 4
+        },
+        {
+          "at": 0.88,
+          "visible": 5
+        },
+        {
+          "at": 0.88,
+          "visible": 6
+        },
+        {
+          "at": 1.04,
+          "visible": 7
+        },
+        {
+          "at": 1.2,
+          "visible": 8
+        },
+        {
+          "at": 1.36,
+          "visible": 9
+        },
+        {
+          "at": 1.52,
+          "visible": 10
+        },
+        {
+          "at": 1.68,
+          "visible": 11
+        },
+        {
+          "at": 1.84,
+          "visible": 12
+        },
+        {
+          "at": 1.92,
+          "visible": 13
+        },
+        {
+          "at": 2.08,
+          "visible": 14
+        },
+        {
+          "at": 2.24,
+          "visible": 15
+        },
+        {
+          "at": 2.4,
+          "visible": 16
+        },
+        {
+          "at": 2.56,
+          "visible": 17
+        },
+        {
+          "at": 2.72,
+          "visible": 18
+        },
+        {
+          "at": 2.72,
+          "visible": 19
+        }
+      ],
+      "group": "考研复刻",
+      "scope": "ky",
+      "audio_kind": "reference_synthesis",
+      "source": "https://www.bilibili.com/video/BV1hTnb6XEju/",
+      "source_start": 38.13,
+      "source_end": 54.22,
+      "model": "qwen-audio-3.1-tts-plus",
+      "alignment": "provider character timestamps",
+      "method": "Original game dialogue synthesized with the user-requested reference voice; not a source quote."
+    },
+    {
+      "id": "ky_hurt",
+      "events": [
+        "hurt"
+      ],
+      "caption": "敌人都打上来了，你的单词还没想起来？",
+      "title": "敌人都打上来了，你的单词还没想起来？",
+      "file": "ky_hurt.ogg",
+      "duration": 2.96,
+      "cues": [
+        {
+          "at": 0.08,
+          "visible": 1
+        },
+        {
+          "at": 0.16,
+          "visible": 2
+        },
+        {
+          "at": 0.4,
+          "visible": 3
+        },
+        {
+          "at": 0.48,
+          "visible": 4
+        },
+        {
+          "at": 0.64,
+          "visible": 5
+        },
+        {
+          "at": 0.8,
+          "visible": 6
+        },
+        {
+          "at": 0.96,
+          "visible": 7
+        },
+        {
+          "at": 1.2,
+          "visible": 8
+        },
+        {
+          "at": 1.2,
+          "visible": 9
+        },
+        {
+          "at": 1.28,
+          "visible": 10
+        },
+        {
+          "at": 1.44,
+          "visible": 11
+        },
+        {
+          "at": 1.6,
+          "visible": 12
+        },
+        {
+          "at": 1.76,
+          "visible": 13
+        },
+        {
+          "at": 1.92,
+          "visible": 14
+        },
+        {
+          "at": 2.08,
+          "visible": 15
+        },
+        {
+          "at": 2.24,
+          "visible": 16
+        },
+        {
+          "at": 2.4,
+          "visible": 17
+        },
+        {
+          "at": 2.4,
+          "visible": 18
+        }
+      ],
+      "group": "考研复刻",
+      "scope": "ky",
+      "audio_kind": "reference_synthesis",
+      "source": "https://www.bilibili.com/video/BV1hTnb6XEju/",
+      "source_start": 38.13,
+      "source_end": 54.22,
+      "model": "qwen-audio-3.1-tts-plus",
+      "alignment": "provider character timestamps",
+      "method": "Original game dialogue synthesized with the user-requested reference voice; not a source quote."
+    },
+    {
+      "id": "ky_combo",
+      "events": [
+        "combo"
+      ],
+      "caption": "四连击！考研词汇，就得这么拿下。",
+      "title": "四连击！考研词汇，就得这么拿下。",
+      "file": "ky_combo.ogg",
+      "duration": 2.64,
+      "cues": [
+        {
+          "at": 0.16,
+          "visible": 1
+        },
+        {
+          "at": 0.32,
+          "visible": 2
+        },
+        {
+          "at": 0.48,
+          "visible": 3
+        },
+        {
+          "at": 0.8,
+          "visible": 4
+        },
+        {
+          "at": 0.8,
+          "visible": 5
+        },
+        {
+          "at": 0.96,
+          "visible": 6
+        },
+        {
+          "at": 1.12,
+          "visible": 7
+        },
+        {
+          "at": 1.36,
+          "visible": 8
+        },
+        {
+          "at": 1.52,
+          "visible": 9
+        },
+        {
+          "at": 1.52,
+          "visible": 10
+        },
+        {
+          "at": 1.68,
+          "visible": 11
+        },
+        {
+          "at": 1.84,
+          "visible": 12
+        },
+        {
+          "at": 2.0,
+          "visible": 13
+        },
+        {
+          "at": 2.08,
+          "visible": 14
+        },
+        {
+          "at": 2.24,
+          "visible": 15
+        },
+        {
+          "at": 2.24,
+          "visible": 16
+        }
+      ],
+      "group": "考研复刻",
+      "scope": "ky",
+      "audio_kind": "reference_synthesis",
+      "source": "https://www.bilibili.com/video/BV1hTnb6XEju/",
+      "source_start": 38.13,
+      "source_end": 54.22,
+      "model": "qwen-audio-3.1-tts-plus",
+      "alignment": "provider character timestamps",
+      "method": "Original game dialogue synthesized with the user-requested reference voice; not a source quote."
+    },
+    {
+      "id": "ky_combo_two",
+      "events": [
+        "combo"
+      ],
+      "caption": "可以啊，孩子。这个状态，上考场也别丢。",
+      "title": "可以啊，孩子。这个状态，上考场也别丢。",
+      "file": "ky_combo_two.ogg",
+      "duration": 2.64,
+      "cues": [
+        {
+          "at": 0.08,
+          "visible": 1
+        },
+        {
+          "at": 0.24,
+          "visible": 2
+        },
+        {
+          "at": 0.32,
+          "visible": 3
+        },
+        {
+          "at": 0.48,
+          "visible": 4
+        },
+        {
+          "at": 0.48,
+          "visible": 5
+        },
+        {
+          "at": 0.56,
+          "visible": 6
+        },
+        {
+          "at": 0.8,
+          "visible": 7
+        },
+        {
+          "at": 0.8,
+          "visible": 8
+        },
+        {
+          "at": 0.96,
+          "visible": 9
+        },
+        {
+          "at": 1.12,
+          "visible": 10
+        },
+        {
+          "at": 1.28,
+          "visible": 11
+        },
+        {
+          "at": 1.44,
+          "visible": 12
+        },
+        {
+          "at": 1.44,
+          "visible": 13
+        },
+        {
+          "at": 1.68,
+          "visible": 14
+        },
+        {
+          "at": 1.84,
+          "visible": 15
+        },
+        {
+          "at": 2.0,
+          "visible": 16
+        },
+        {
+          "at": 2.16,
+          "visible": 17
+        },
+        {
+          "at": 2.24,
+          "visible": 18
+        },
+        {
+          "at": 2.24,
+          "visible": 19
+        }
+      ],
+      "group": "考研复刻",
+      "scope": "ky",
+      "audio_kind": "reference_synthesis",
+      "source": "https://www.bilibili.com/video/BV1hTnb6XEju/",
+      "source_start": 38.13,
+      "source_end": 54.22,
+      "model": "qwen-audio-3.1-tts-plus",
+      "alignment": "provider character timestamps",
+      "method": "Original game dialogue synthesized with the user-requested reference voice; not a source quote."
+    },
+    {
+      "id": "ky_ultimate",
+      "events": [
+        "ultimate"
+      ],
+      "caption": "整句写对了！长难句也给我拿下。",
+      "title": "整句写对了！长难句也给我拿下。",
+      "file": "ky_ultimate.ogg",
+      "duration": 2.32,
+      "cues": [
+        {
+          "at": 0.08,
+          "visible": 1
+        },
+        {
+          "at": 0.32,
+          "visible": 2
+        },
+        {
+          "at": 0.48,
+          "visible": 3
+        },
+        {
+          "at": 0.64,
+          "visible": 4
+        },
+        {
+          "at": 0.8,
+          "visible": 5
+        },
+        {
+          "at": 0.96,
+          "visible": 6
+        },
+        {
+          "at": 0.96,
+          "visible": 7
+        },
+        {
+          "at": 1.12,
+          "visible": 8
+        },
+        {
+          "at": 1.2,
+          "visible": 9
+        },
+        {
+          "at": 1.36,
+          "visible": 10
+        },
+        {
+          "at": 1.52,
+          "visible": 11
+        },
+        {
+          "at": 1.6,
+          "visible": 12
+        },
+        {
+          "at": 1.76,
+          "visible": 13
+        },
+        {
+          "at": 1.84,
+          "visible": 14
+        },
+        {
+          "at": 1.84,
+          "visible": 15
+        }
+      ],
+      "group": "考研复刻",
+      "scope": "ky",
+      "audio_kind": "reference_synthesis",
+      "source": "https://www.bilibili.com/video/BV1hTnb6XEju/",
+      "source_start": 38.13,
+      "source_end": 54.22,
+      "model": "qwen-audio-3.1-tts-plus",
+      "alignment": "provider character timestamps",
+      "method": "Original game dialogue synthesized with the user-requested reference voice; not a source quote."
+    },
+    {
+      "id": "ky_warded",
+      "events": [
+        "warded"
+      ],
+      "caption": "最后一道防线了。攒满能量，把整句写出来。",
+      "title": "最后一道防线了。攒满能量，把整句写出来。",
+      "file": "ky_warded.ogg",
+      "duration": 2.88,
+      "cues": [
+        {
+          "at": 0.08,
+          "visible": 1
+        },
+        {
+          "at": 0.16,
+          "visible": 2
+        },
+        {
+          "at": 0.32,
+          "visible": 3
+        },
+        {
+          "at": 0.48,
+          "visible": 4
+        },
+        {
+          "at": 0.56,
+          "visible": 5
+        },
+        {
+          "at": 0.72,
+          "visible": 6
+        },
+        {
+          "at": 0.96,
+          "visible": 7
+        },
+        {
+          "at": 1.2,
+          "visible": 8
+        },
+        {
+          "at": 1.2,
+          "visible": 9
+        },
+        {
+          "at": 1.36,
+          "visible": 10
+        },
+        {
+          "at": 1.52,
+          "visible": 11
+        },
+        {
+          "at": 1.6,
+          "visible": 12
+        },
+        {
+          "at": 1.84,
+          "visible": 13
+        },
+        {
+          "at": 1.84,
+          "visible": 14
+        },
+        {
+          "at": 2.0,
+          "visible": 15
+        },
+        {
+          "at": 2.16,
+          "visible": 16
+        },
+        {
+          "at": 2.32,
+          "visible": 17
+        },
+        {
+          "at": 2.48,
+          "visible": 18
+        },
+        {
+          "at": 2.64,
+          "visible": 19
+        },
+        {
+          "at": 2.64,
+          "visible": 20
+        }
+      ],
+      "group": "考研复刻",
+      "scope": "ky",
+      "audio_kind": "reference_synthesis",
+      "source": "https://www.bilibili.com/video/BV1hTnb6XEju/",
+      "source_start": 38.13,
+      "source_end": 54.22,
+      "model": "qwen-audio-3.1-tts-plus",
+      "alignment": "provider character timestamps",
+      "method": "Original game dialogue synthesized with the user-requested reference voice; not a source quote."
+    },
+    {
+      "id": "ky_victory",
+      "events": [
+        "victory"
+      ],
+      "caption": "这轮拿下了。明天还能默写，才算真会。",
+      "title": "这轮拿下了。明天还能默写，才算真会。",
+      "file": "ky_victory.ogg",
+      "duration": 2.88,
+      "cues": [
+        {
+          "at": 0.08,
+          "visible": 1
+        },
+        {
+          "at": 0.16,
+          "visible": 2
+        },
+        {
+          "at": 0.32,
+          "visible": 3
+        },
+        {
+          "at": 0.48,
+          "visible": 4
+        },
+        {
+          "at": 0.72,
+          "visible": 5
+        },
+        {
+          "at": 0.96,
+          "visible": 6
+        },
+        {
+          "at": 0.96,
+          "visible": 7
+        },
+        {
+          "at": 1.12,
+          "visible": 8
+        },
+        {
+          "at": 1.36,
+          "visible": 9
+        },
+        {
+          "at": 1.52,
+          "visible": 10
+        },
+        {
+          "at": 1.68,
+          "visible": 11
+        },
+        {
+          "at": 1.84,
+          "visible": 12
+        },
+        {
+          "at": 2.08,
+          "visible": 13
+        },
+        {
+          "at": 2.08,
+          "visible": 14
+        },
+        {
+          "at": 2.16,
+          "visible": 15
+        },
+        {
+          "at": 2.32,
+          "visible": 16
+        },
+        {
+          "at": 2.56,
+          "visible": 17
+        },
+        {
+          "at": 2.56,
+          "visible": 18
+        }
+      ],
+      "group": "考研复刻",
+      "scope": "ky",
+      "audio_kind": "reference_synthesis",
+      "source": "https://www.bilibili.com/video/BV1hTnb6XEju/",
+      "source_start": 38.13,
+      "source_end": 54.22,
+      "model": "qwen-audio-3.1-tts-plus",
+      "alignment": "provider character timestamps",
+      "method": "Original game dialogue synthesized with the user-requested reference voice; not a source quote."
+    },
+    {
+      "id": "ky_defeat",
+      "events": [
+        "defeat"
+      ],
+      "caption": "回家吧，孩子。把考研错词练熟，再回来。",
+      "title": "回家吧，孩子。把考研错词练熟，再回来。",
+      "file": "ky_defeat.ogg",
+      "duration": 2.56,
+      "cues": [
+        {
+          "at": 0.08,
+          "visible": 1
+        },
+        {
+          "at": 0.16,
+          "visible": 2
+        },
+        {
+          "at": 0.32,
+          "visible": 3
+        },
+        {
+          "at": 0.48,
+          "visible": 4
+        },
+        {
+          "at": 0.48,
+          "visible": 5
+        },
+        {
+          "at": 0.64,
+          "visible": 6
+        },
+        {
+          "at": 0.8,
+          "visible": 7
+        },
+        {
+          "at": 0.8,
+          "visible": 8
+        },
+        {
+          "at": 0.96,
+          "visible": 9
+        },
+        {
+          "at": 1.12,
+          "visible": 10
+        },
+        {
+          "at": 1.28,
+          "visible": 11
+        },
+        {
+          "at": 1.44,
+          "visible": 12
+        },
+        {
+          "at": 1.6,
+          "visible": 13
+        },
+        {
+          "at": 1.76,
+          "visible": 14
+        },
+        {
+          "at": 2.0,
+          "visible": 15
+        },
+        {
+          "at": 2.0,
+          "visible": 16
+        },
+        {
+          "at": 2.08,
+          "visible": 17
+        },
+        {
+          "at": 2.24,
+          "visible": 18
+        },
+        {
+          "at": 2.24,
+          "visible": 19
+        }
+      ],
+      "group": "考研复刻",
+      "scope": "ky",
+      "audio_kind": "reference_synthesis",
+      "source": "https://www.bilibili.com/video/BV1hTnb6XEju/",
+      "source_start": 38.13,
+      "source_end": 54.22,
+      "model": "qwen-audio-3.1-tts-plus",
+      "alignment": "provider character timestamps",
+      "method": "Original game dialogue synthesized with the user-requested reference voice; not a source quote."
+    },
+    {
+      "id": "ky_collection",
+      "events": [
+        "collection"
+      ],
+      "caption": "这都是你的考研错词。收藏了不等于会了。",
+      "title": "这都是你的考研错词。收藏了不等于会了。",
+      "file": "ky_collection.ogg",
+      "duration": 2.88,
+      "cues": [
+        {
+          "at": 0.08,
+          "visible": 1
+        },
+        {
+          "at": 0.16,
+          "visible": 2
+        },
+        {
+          "at": 0.32,
+          "visible": 3
+        },
+        {
+          "at": 0.4,
+          "visible": 4
+        },
+        {
+          "at": 0.56,
+          "visible": 5
+        },
+        {
+          "at": 0.64,
+          "visible": 6
+        },
+        {
+          "at": 0.8,
+          "visible": 7
+        },
+        {
+          "at": 0.96,
+          "visible": 8
+        },
+        {
+          "at": 1.2,
+          "visible": 9
+        },
+        {
+          "at": 1.52,
+          "visible": 10
+        },
+        {
+          "at": 1.52,
+          "visible": 11
+        },
+        {
+          "at": 1.68,
+          "visible": 12
+        },
+        {
+          "at": 1.92,
+          "visible": 13
+        },
+        {
+          "at": 2.0,
+          "visible": 14
+        },
+        {
+          "at": 2.16,
+          "visible": 15
+        },
+        {
+          "at": 2.24,
+          "visible": 16
+        },
+        {
+          "at": 2.4,
+          "visible": 17
+        },
+        {
+          "at": 2.64,
+          "visible": 18
+        },
+        {
+          "at": 2.64,
+          "visible": 19
+        }
+      ],
+      "group": "考研复刻",
+      "scope": "ky",
+      "audio_kind": "reference_synthesis",
+      "source": "https://www.bilibili.com/video/BV1hTnb6XEju/",
+      "source_start": 38.13,
+      "source_end": 54.22,
+      "model": "qwen-audio-3.1-tts-plus",
+      "alignment": "provider character timestamps",
+      "method": "Original game dialogue synthesized with the user-requested reference voice; not a source quote."
+    },
+    {
+      "id": "ky_return",
+      "events": [
+        "return"
+      ],
+      "caption": "又梦见上岸了？先把这场考研训练打完。",
+      "title": "又梦见上岸了？先把这场考研训练打完。",
+      "file": "ky_return.ogg",
+      "duration": 3.04,
+      "cues": [
+        {
+          "at": 0.08,
+          "visible": 1
+        },
+        {
+          "at": 0.16,
+          "visible": 2
+        },
+        {
+          "at": 0.32,
+          "visible": 3
+        },
+        {
+          "at": 0.48,
+          "visible": 4
+        },
+        {
+          "at": 0.64,
+          "visible": 5
+        },
+        {
+          "at": 0.8,
+          "visible": 6
+        },
+        {
+          "at": 1.12,
+          "visible": 7
+        },
+        {
+          "at": 1.12,
+          "visible": 8
+        },
+        {
+          "at": 1.2,
+          "visible": 9
+        },
+        {
+          "at": 1.36,
+          "visible": 10
+        },
+        {
+          "at": 1.52,
+          "visible": 11
+        },
+        {
+          "at": 1.68,
+          "visible": 12
+        },
+        {
+          "at": 1.92,
+          "visible": 13
+        },
+        {
+          "at": 2.08,
+          "visible": 14
+        },
+        {
+          "at": 2.24,
+          "visible": 15
+        },
+        {
+          "at": 2.4,
+          "visible": 16
+        },
+        {
+          "at": 2.48,
+          "visible": 17
+        },
+        {
+          "at": 2.48,
+          "visible": 18
+        }
+      ],
+      "group": "考研复刻",
+      "scope": "ky",
+      "audio_kind": "reference_synthesis",
+      "source": "https://www.bilibili.com/video/BV1hTnb6XEju/",
+      "source_start": 38.13,
+      "source_end": 54.22,
+      "model": "qwen-audio-3.1-tts-plus",
+      "alignment": "provider character timestamps",
+      "method": "Original game dialogue synthesized with the user-requested reference voice; not a source quote."
+    },
+    {
+      "id": "ky_map",
+      "events": [
+        "map"
+      ],
+      "caption": "考研这条路，一关一关过。别想着跳过去。",
+      "title": "考研这条路，一关一关过。别想着跳过去。",
+      "file": "ky_map.ogg",
+      "duration": 2.8,
+      "cues": [
+        {
+          "at": 0.08,
+          "visible": 1
+        },
+        {
+          "at": 0.16,
+          "visible": 2
+        },
+        {
+          "at": 0.32,
+          "visible": 3
+        },
+        {
+          "at": 0.48,
+          "visible": 4
+        },
+        {
+          "at": 0.64,
+          "visible": 5
+        },
+        {
+          "at": 0.88,
+          "visible": 6
+        },
+        {
+          "at": 0.88,
+          "visible": 7
+        },
+        {
+          "at": 1.12,
+          "visible": 8
+        },
+        {
+          "at": 1.28,
+          "visible": 9
+        },
+        {
+          "at": 1.36,
+          "visible": 10
+        },
+        {
+          "at": 1.52,
+          "visible": 11
+        },
+        {
+          "at": 1.76,
+          "visible": 12
+        },
+        {
+          "at": 1.76,
+          "visible": 13
+        },
+        {
+          "at": 1.92,
+          "visible": 14
+        },
+        {
+          "at": 2.08,
+          "visible": 15
+        },
+        {
+          "at": 2.24,
+          "visible": 16
+        },
+        {
+          "at": 2.4,
+          "visible": 17
+        },
+        {
+          "at": 2.48,
+          "visible": 18
+        },
+        {
+          "at": 2.48,
+          "visible": 19
+        }
+      ],
+      "group": "考研复刻",
+      "scope": "ky",
+      "audio_kind": "reference_synthesis",
+      "source": "https://www.bilibili.com/video/BV1hTnb6XEju/",
+      "source_start": 38.13,
+      "source_end": 54.22,
+      "model": "qwen-audio-3.1-tts-plus",
+      "alignment": "provider character timestamps",
+      "method": "Original game dialogue synthesized with the user-requested reference voice; not a source quote."
+    },
+    {
+      "id": "ky_operators",
+      "events": [
+        "operators"
+      ],
+      "caption": "干员挑好了？考研单词不会，可别怪装备。",
+      "title": "干员挑好了？考研单词不会，可别怪装备。",
+      "file": "ky_operators.ogg",
+      "duration": 3.04,
+      "cues": [
+        {
+          "at": 0.08,
+          "visible": 1
+        },
+        {
+          "at": 0.16,
+          "visible": 2
+        },
+        {
+          "at": 0.32,
+          "visible": 3
+        },
+        {
+          "at": 0.48,
+          "visible": 4
+        },
+        {
+          "at": 0.64,
+          "visible": 5
+        },
+        {
+          "at": 0.88,
+          "visible": 6
+        },
+        {
+          "at": 0.88,
+          "visible": 7
+        },
+        {
+          "at": 1.04,
+          "visible": 8
+        },
+        {
+          "at": 1.28,
+          "visible": 9
+        },
+        {
+          "at": 1.44,
+          "visible": 10
+        },
+        {
+          "at": 1.6,
+          "visible": 11
+        },
+        {
+          "at": 1.68,
+          "visible": 12
+        },
+        {
+          "at": 1.92,
+          "visible": 13
+        },
+        {
+          "at": 1.92,
+          "visible": 14
+        },
+        {
+          "at": 2.08,
+          "visible": 15
+        },
+        {
+          "at": 2.24,
+          "visible": 16
+        },
+        {
+          "at": 2.48,
+          "visible": 17
+        },
+        {
+          "at": 2.64,
+          "visible": 18
+        },
+        {
+          "at": 2.64,
+          "visible": 19
+        }
+      ],
+      "group": "考研复刻",
+      "scope": "ky",
+      "audio_kind": "reference_synthesis",
+      "source": "https://www.bilibili.com/video/BV1hTnb6XEju/",
+      "source_start": 38.13,
+      "source_end": 54.22,
+      "model": "qwen-audio-3.1-tts-plus",
+      "alignment": "provider character timestamps",
+      "method": "Original game dialogue synthesized with the user-requested reference voice; not a source quote."
+    },
+    {
+      "id": "uploaded_english",
+      "title": "天空属于哈夫克，英语属于刘晓艳。",
+      "caption": "天空属于哈夫克，英语属于刘晓艳。",
+      "events": [
+        "welcome"
+      ],
+      "scope": "all",
+      "group": "用户原声",
+      "file": "original_uploaded_english.ogg",
+      "duration": 3.894917,
+      "cues": [
+        {
+          "at": 0.0,
+          "visible": 1
+        },
+        {
+          "at": 0.46,
+          "visible": 2
+        },
+        {
+          "at": 0.74,
+          "visible": 3
+        },
+        {
+          "at": 0.98,
+          "visible": 4
+        },
+        {
+          "at": 1.08,
+          "visible": 5
+        },
+        {
+          "at": 1.3,
+          "visible": 6
+        },
+        {
+          "at": 1.5,
+          "visible": 7
+        },
+        {
+          "at": 1.5,
+          "visible": 8
+        },
+        {
+          "at": 2.06,
+          "visible": 9
+        },
+        {
+          "at": 2.32,
+          "visible": 10
+        },
+        {
+          "at": 2.5,
+          "visible": 11
+        },
+        {
+          "at": 2.74,
+          "visible": 12
+        },
+        {
+          "at": 2.88,
+          "visible": 13
+        },
+        {
+          "at": 3.1,
+          "visible": 14
+        },
+        {
+          "at": 3.3,
+          "visible": 15
+        },
+        {
+          "at": 3.5,
+          "visible": 16
+        }
+      ],
+      "audio_kind": "source_recording",
+      "source": "User supplied: 英语属于刘晓艳.mp3",
+      "source_sha256": "7268ff7edb045bb2b52fb2501ee84bf319d80da83aaea39550cd0f1b146e755d",
+      "alignment": "Whisper word timestamps; Chinese names corrected to the provided title and game terminology"
+    },
+    {
+      "id": "guide_plan",
+      "title": "选择学习计划，开始今日行动。",
+      "caption": "选择学习计划，开始今日行动。",
+      "events": [
+        "plan_select"
+      ],
+      "scope": "all",
+      "group": "学习引导",
+      "file": "guide_plan.ogg",
+      "duration": 2.32,
+      "cues": [
+        {
+          "at": 0.08,
+          "visible": 1
+        },
+        {
+          "at": 0.24,
+          "visible": 2
+        },
+        {
+          "at": 0.4,
+          "visible": 3
+        },
+        {
+          "at": 0.56,
+          "visible": 4
+        },
+        {
+          "at": 0.72,
+          "visible": 5
+        },
+        {
+          "at": 0.88,
+          "visible": 6
+        },
+        {
+          "at": 1.12,
+          "visible": 7
+        },
+        {
+          "at": 1.12,
+          "visible": 8
+        },
+        {
+          "at": 1.28,
+          "visible": 9
+        },
+        {
+          "at": 1.44,
+          "visible": 10
+        },
+        {
+          "at": 1.6,
+          "visible": 11
+        },
+        {
+          "at": 1.76,
+          "visible": 12
+        },
+        {
+          "at": 1.92,
+          "visible": 13
+        },
+        {
+          "at": 1.92,
+          "visible": 14
+        }
+      ],
+      "audio_kind": "reference_synthesis",
+      "model": "qwen-audio-3.1-tts-plus",
+      "alignment": "provider character timestamps",
+      "source": "https://www.bilibili.com/video/BV1hTnb6XEju/",
+      "method": "New game guidance synthesized using the previously configured user-requested reference voice; not a source quote."
+    },
+    {
+      "id": "guide_plan_alt",
+      "title": "先选词书，再看今天的计划。别光看，动手记。",
+      "caption": "先选词书，再看今天的计划。别光看，动手记。",
+      "events": [
+        "plan_select"
+      ],
+      "scope": "all",
+      "group": "学习引导",
+      "file": "guide_plan_alt.ogg",
+      "duration": 3.282667,
+      "cues": [
+        {
+          "at": 0.08,
+          "visible": 1
+        },
+        {
+          "at": 0.24,
+          "visible": 2
+        },
+        {
+          "at": 0.4,
+          "visible": 3
+        },
+        {
+          "at": 0.56,
+          "visible": 4
+        },
+        {
+          "at": 0.88,
+          "visible": 5
+        },
+        {
+          "at": 0.88,
+          "visible": 6
+        },
+        {
+          "at": 1.04,
+          "visible": 7
+        },
+        {
+          "at": 1.2,
+          "visible": 8
+        },
+        {
+          "at": 1.36,
+          "visible": 9
+        },
+        {
+          "at": 1.52,
+          "visible": 10
+        },
+        {
+          "at": 1.6,
+          "visible": 11
+        },
+        {
+          "at": 1.76,
+          "visible": 12
+        },
+        {
+          "at": 2.0,
+          "visible": 13
+        },
+        {
+          "at": 2.0,
+          "visible": 14
+        },
+        {
+          "at": 2.16,
+          "visible": 15
+        },
+        {
+          "at": 2.32,
+          "visible": 16
+        },
+        {
+          "at": 2.56,
+          "visible": 17
+        },
+        {
+          "at": 2.56,
+          "visible": 18
+        },
+        {
+          "at": 2.72,
+          "visible": 19
+        },
+        {
+          "at": 2.88,
+          "visible": 20
+        },
+        {
+          "at": 2.88,
+          "visible": 21
+        }
+      ],
+      "audio_kind": "reference_synthesis",
+      "model": "qwen-audio-3.1-tts-plus",
+      "alignment": "provider character timestamps",
+      "source": "https://www.bilibili.com/video/BV1hTnb6XEju/",
+      "method": "New game guidance synthesized using the previously configured user-requested reference voice; not a source quote."
+    },
+    {
+      "id": "guide_new",
+      "title": "今天先学这组新词。看清词义，听完读音，等会儿遮住英文再写一遍。",
+      "caption": "今天先学这组新词。看清词义，听完读音，等会儿遮住英文再写一遍。",
+      "events": [
+        "daily_new"
+      ],
+      "scope": "all",
+      "group": "学习引导",
+      "file": "guide_new.ogg",
+      "duration": 6.1,
+      "cues": [
+        {
+          "at": 0.16,
+          "visible": 1
+        },
+        {
+          "at": 0.32,
+          "visible": 2
+        },
+        {
+          "at": 0.48,
+          "visible": 3
+        },
+        {
+          "at": 0.72,
+          "visible": 4
+        },
+        {
+          "at": 0.88,
+          "visible": 5
+        },
+        {
+          "at": 1.12,
+          "visible": 6
+        },
+        {
+          "at": 1.28,
+          "visible": 7
+        },
+        {
+          "at": 1.44,
+          "visible": 8
+        },
+        {
+          "at": 2.0,
+          "visible": 9
+        },
+        {
+          "at": 2.0,
+          "visible": 10
+        },
+        {
+          "at": 2.24,
+          "visible": 11
+        },
+        {
+          "at": 2.48,
+          "visible": 12
+        },
+        {
+          "at": 2.64,
+          "visible": 13
+        },
+        {
+          "at": 2.88,
+          "visible": 14
+        },
+        {
+          "at": 2.88,
+          "visible": 15
+        },
+        {
+          "at": 3.12,
+          "visible": 16
+        },
+        {
+          "at": 3.28,
+          "visible": 17
+        },
+        {
+          "at": 3.44,
+          "visible": 18
+        },
+        {
+          "at": 3.84,
+          "visible": 19
+        },
+        {
+          "at": 3.84,
+          "visible": 20
+        },
+        {
+          "at": 4.08,
+          "visible": 21
+        },
+        {
+          "at": 4.16,
+          "visible": 22
+        },
+        {
+          "at": 4.32,
+          "visible": 23
+        },
+        {
+          "at": 4.48,
+          "visible": 24
+        },
+        {
+          "at": 4.64,
+          "visible": 25
+        },
+        {
+          "at": 4.8,
+          "visible": 26
+        },
+        {
+          "at": 5.04,
+          "visible": 27
+        },
+        {
+          "at": 5.28,
+          "visible": 28
+        },
+        {
+          "at": 5.52,
+          "visible": 29
+        },
+        {
+          "at": 5.68,
+          "visible": 30
+        },
+        {
+          "at": 5.68,
+          "visible": 31
+        }
+      ],
+      "audio_kind": "reference_synthesis",
+      "model": "qwen-audio-3.1-tts-plus",
+      "alignment": "provider character timestamps",
+      "source": "https://www.bilibili.com/video/BV1hTnb6XEju/",
+      "method": "New game guidance synthesized using the previously configured user-requested reference voice; not a source quote."
+    },
+    {
+      "id": "guide_new_alt",
+      "title": "新词别一口气贪多。先记住这一组，再检验自己是不是真的会了。",
+      "caption": "新词别一口气贪多。先记住这一组，再检验自己是不是真的会了。",
+      "events": [
+        "daily_new"
+      ],
+      "scope": "all",
+      "group": "学习引导",
+      "file": "guide_new_alt.ogg",
+      "duration": 4.7,
+      "cues": [
+        {
+          "at": 0.16,
+          "visible": 1
+        },
+        {
+          "at": 0.32,
+          "visible": 2
+        },
+        {
+          "at": 0.48,
+          "visible": 3
+        },
+        {
+          "at": 0.72,
+          "visible": 4
+        },
+        {
+          "at": 0.8,
+          "visible": 5
+        },
+        {
+          "at": 0.96,
+          "visible": 6
+        },
+        {
+          "at": 1.12,
+          "visible": 7
+        },
+        {
+          "at": 1.28,
+          "visible": 8
+        },
+        {
+          "at": 1.76,
+          "visible": 9
+        },
+        {
+          "at": 1.76,
+          "visible": 10
+        },
+        {
+          "at": 1.92,
+          "visible": 11
+        },
+        {
+          "at": 2.08,
+          "visible": 12
+        },
+        {
+          "at": 2.24,
+          "visible": 13
+        },
+        {
+          "at": 2.4,
+          "visible": 14
+        },
+        {
+          "at": 2.48,
+          "visible": 15
+        },
+        {
+          "at": 2.8,
+          "visible": 16
+        },
+        {
+          "at": 2.8,
+          "visible": 17
+        },
+        {
+          "at": 2.96,
+          "visible": 18
+        },
+        {
+          "at": 3.12,
+          "visible": 19
+        },
+        {
+          "at": 3.28,
+          "visible": 20
+        },
+        {
+          "at": 3.44,
+          "visible": 21
+        },
+        {
+          "at": 3.6,
+          "visible": 22
+        },
+        {
+          "at": 3.68,
+          "visible": 23
+        },
+        {
+          "at": 3.76,
+          "visible": 24
+        },
+        {
+          "at": 3.84,
+          "visible": 25
+        },
+        {
+          "at": 4.08,
+          "visible": 26
+        },
+        {
+          "at": 4.16,
+          "visible": 27
+        },
+        {
+          "at": 4.32,
+          "visible": 28
+        },
+        {
+          "at": 4.32,
+          "visible": 29
+        }
+      ],
+      "audio_kind": "reference_synthesis",
+      "model": "qwen-audio-3.1-tts-plus",
+      "alignment": "provider character timestamps",
+      "source": "https://www.bilibili.com/video/BV1hTnb6XEju/",
+      "method": "New game guidance synthesized using the previously configured user-requested reference voice; not a source quote."
+    },
+    {
+      "id": "guide_due",
+      "title": "先把到期的词复习了。遮住英文，想起来再写，别急着翻答案。",
+      "caption": "先把到期的词复习了。遮住英文，想起来再写，别急着翻答案。",
+      "events": [
+        "daily_due"
+      ],
+      "scope": "all",
+      "group": "学习引导",
+      "file": "guide_due.ogg",
+      "duration": 4.2,
+      "cues": [
+        {
+          "at": 0.08,
+          "visible": 1
+        },
+        {
+          "at": 0.16,
+          "visible": 2
+        },
+        {
+          "at": 0.32,
+          "visible": 3
+        },
+        {
+          "at": 0.56,
+          "visible": 4
+        },
+        {
+          "at": 0.72,
+          "visible": 5
+        },
+        {
+          "at": 0.8,
+          "visible": 6
+        },
+        {
+          "at": 0.96,
+          "visible": 7
+        },
+        {
+          "at": 1.2,
+          "visible": 8
+        },
+        {
+          "at": 1.36,
+          "visible": 9
+        },
+        {
+          "at": 1.6,
+          "visible": 10
+        },
+        {
+          "at": 1.6,
+          "visible": 11
+        },
+        {
+          "at": 1.84,
+          "visible": 12
+        },
+        {
+          "at": 1.92,
+          "visible": 13
+        },
+        {
+          "at": 2.08,
+          "visible": 14
+        },
+        {
+          "at": 2.24,
+          "visible": 15
+        },
+        {
+          "at": 2.24,
+          "visible": 16
+        },
+        {
+          "at": 2.4,
+          "visible": 17
+        },
+        {
+          "at": 2.56,
+          "visible": 18
+        },
+        {
+          "at": 2.72,
+          "visible": 19
+        },
+        {
+          "at": 2.8,
+          "visible": 20
+        },
+        {
+          "at": 3.04,
+          "visible": 21
+        },
+        {
+          "at": 3.04,
+          "visible": 22
+        },
+        {
+          "at": 3.2,
+          "visible": 23
+        },
+        {
+          "at": 3.36,
+          "visible": 24
+        },
+        {
+          "at": 3.52,
+          "visible": 25
+        },
+        {
+          "at": 3.6,
+          "visible": 26
+        },
+        {
+          "at": 3.76,
+          "visible": 27
+        },
+        {
+          "at": 3.76,
+          "visible": 28
+        }
+      ],
+      "audio_kind": "reference_synthesis",
+      "model": "qwen-audio-3.1-tts-plus",
+      "alignment": "provider character timestamps",
+      "source": "https://www.bilibili.com/video/BV1hTnb6XEju/",
+      "method": "New game guidance synthesized using the previously configured user-requested reference voice; not a source quote."
+    },
+    {
+      "id": "guide_due_alt",
+      "title": "旧词该回来报到了。先回忆，实在想不起来再看提示。",
+      "caption": "旧词该回来报到了。先回忆，实在想不起来再看提示。",
+      "events": [
+        "daily_due"
+      ],
+      "scope": "all",
+      "group": "学习引导",
+      "file": "guide_due_alt.ogg",
+      "duration": 3.282667,
+      "cues": [
+        {
+          "at": 0.08,
+          "visible": 1
+        },
+        {
+          "at": 0.16,
+          "visible": 2
+        },
+        {
+          "at": 0.32,
+          "visible": 3
+        },
+        {
+          "at": 0.48,
+          "visible": 4
+        },
+        {
+          "at": 0.64,
+          "visible": 5
+        },
+        {
+          "at": 0.72,
+          "visible": 6
+        },
+        {
+          "at": 0.88,
+          "visible": 7
+        },
+        {
+          "at": 1.04,
+          "visible": 8
+        },
+        {
+          "at": 1.28,
+          "visible": 9
+        },
+        {
+          "at": 1.28,
+          "visible": 10
+        },
+        {
+          "at": 1.44,
+          "visible": 11
+        },
+        {
+          "at": 1.6,
+          "visible": 12
+        },
+        {
+          "at": 1.76,
+          "visible": 13
+        },
+        {
+          "at": 1.76,
+          "visible": 14
+        },
+        {
+          "at": 1.92,
+          "visible": 15
+        },
+        {
+          "at": 2.08,
+          "visible": 16
+        },
+        {
+          "at": 2.24,
+          "visible": 17
+        },
+        {
+          "at": 2.32,
+          "visible": 18
+        },
+        {
+          "at": 2.4,
+          "visible": 19
+        },
+        {
+          "at": 2.56,
+          "visible": 20
+        },
+        {
+          "at": 2.64,
+          "visible": 21
+        },
+        {
+          "at": 2.8,
+          "visible": 22
+        },
+        {
+          "at": 2.96,
+          "visible": 23
+        },
+        {
+          "at": 2.96,
+          "visible": 24
+        }
+      ],
+      "audio_kind": "reference_synthesis",
+      "model": "qwen-audio-3.1-tts-plus",
+      "alignment": "provider character timestamps",
+      "source": "https://www.bilibili.com/video/BV1hTnb6XEju/",
+      "method": "New game guidance synthesized using the previously configured user-requested reference voice; not a source quote."
+    },
+    {
+      "id": "guide_checkin",
+      "title": "今天的目标完成了，记得打卡。明天还要回来复习。",
+      "caption": "今天的目标完成了，记得打卡。明天还要回来复习。",
+      "events": [
+        "daily_checkin"
+      ],
+      "scope": "all",
+      "group": "学习引导",
+      "file": "guide_checkin.ogg",
+      "duration": 3.282667,
+      "cues": [
+        {
+          "at": 0.08,
+          "visible": 1
+        },
+        {
+          "at": 0.16,
+          "visible": 2
+        },
+        {
+          "at": 0.32,
+          "visible": 3
+        },
+        {
+          "at": 0.4,
+          "visible": 4
+        },
+        {
+          "at": 0.48,
+          "visible": 5
+        },
+        {
+          "at": 0.64,
+          "visible": 6
+        },
+        {
+          "at": 0.8,
+          "visible": 7
+        },
+        {
+          "at": 0.96,
+          "visible": 8
+        },
+        {
+          "at": 1.2,
+          "visible": 9
+        },
+        {
+          "at": 1.2,
+          "visible": 10
+        },
+        {
+          "at": 1.28,
+          "visible": 11
+        },
+        {
+          "at": 1.44,
+          "visible": 12
+        },
+        {
+          "at": 1.6,
+          "visible": 13
+        },
+        {
+          "at": 1.84,
+          "visible": 14
+        },
+        {
+          "at": 1.84,
+          "visible": 15
+        },
+        {
+          "at": 1.92,
+          "visible": 16
+        },
+        {
+          "at": 2.08,
+          "visible": 17
+        },
+        {
+          "at": 2.24,
+          "visible": 18
+        },
+        {
+          "at": 2.32,
+          "visible": 19
+        },
+        {
+          "at": 2.48,
+          "visible": 20
+        },
+        {
+          "at": 2.64,
+          "visible": 21
+        },
+        {
+          "at": 2.8,
+          "visible": 22
+        },
+        {
+          "at": 2.8,
+          "visible": 23
+        }
+      ],
+      "audio_kind": "reference_synthesis",
+      "model": "qwen-audio-3.1-tts-plus",
+      "alignment": "provider character timestamps",
+      "source": "https://www.bilibili.com/video/BV1hTnb6XEju/",
+      "method": "New game guidance synthesized using the previously configured user-requested reference voice; not a source quote."
+    },
+    {
+      "id": "guide_done",
+      "title": "今日计划完成。歇一歇吧，下一次到期再来检验记忆。",
+      "caption": "今日计划完成。歇一歇吧，下一次到期再来检验记忆。",
+      "events": [
+        "daily_done"
+      ],
+      "scope": "all",
+      "group": "学习引导",
+      "file": "guide_done.ogg",
+      "duration": 4.0,
+      "cues": [
+        {
+          "at": 0.08,
+          "visible": 1
+        },
+        {
+          "at": 0.16,
+          "visible": 2
+        },
+        {
+          "at": 0.32,
+          "visible": 3
+        },
+        {
+          "at": 0.48,
+          "visible": 4
+        },
+        {
+          "at": 0.64,
+          "visible": 5
+        },
+        {
+          "at": 0.8,
+          "visible": 6
+        },
+        {
+          "at": 1.2,
+          "visible": 7
+        },
+        {
+          "at": 1.2,
+          "visible": 8
+        },
+        {
+          "at": 1.44,
+          "visible": 9
+        },
+        {
+          "at": 1.52,
+          "visible": 10
+        },
+        {
+          "at": 1.68,
+          "visible": 11
+        },
+        {
+          "at": 1.92,
+          "visible": 12
+        },
+        {
+          "at": 1.92,
+          "visible": 13
+        },
+        {
+          "at": 2.08,
+          "visible": 14
+        },
+        {
+          "at": 2.24,
+          "visible": 15
+        },
+        {
+          "at": 2.4,
+          "visible": 16
+        },
+        {
+          "at": 2.56,
+          "visible": 17
+        },
+        {
+          "at": 2.8,
+          "visible": 18
+        },
+        {
+          "at": 2.88,
+          "visible": 19
+        },
+        {
+          "at": 3.04,
+          "visible": 20
+        },
+        {
+          "at": 3.2,
+          "visible": 21
+        },
+        {
+          "at": 3.44,
+          "visible": 22
+        },
+        {
+          "at": 3.6,
+          "visible": 23
+        },
+        {
+          "at": 3.6,
+          "visible": 24
+        }
+      ],
+      "audio_kind": "reference_synthesis",
+      "model": "qwen-audio-3.1-tts-plus",
+      "alignment": "provider character timestamps",
+      "source": "https://www.bilibili.com/video/BV1hTnb6XEju/",
+      "method": "New game guidance synthesized using the previously configured user-requested reference voice; not a source quote."
+    },
+    {
+      "id": "guide_custom",
+      "title": "自主练习，按你的需要选词。到期词和错词，还是要遮住英文默写。",
+      "caption": "自主练习，按你的需要选词。到期词和错词，还是要遮住英文默写。",
+      "events": [
+        "daily_custom"
+      ],
+      "scope": "all",
+      "group": "学习引导",
+      "file": "guide_custom.ogg",
+      "duration": 6.4,
+      "cues": [
+        {
+          "at": 0.08,
+          "visible": 1
+        },
+        {
+          "at": 0.16,
+          "visible": 2
+        },
+        {
+          "at": 0.32,
+          "visible": 3
+        },
+        {
+          "at": 0.48,
+          "visible": 4
+        },
+        {
+          "at": 0.96,
+          "visible": 5
+        },
+        {
+          "at": 0.96,
+          "visible": 6
+        },
+        {
+          "at": 1.52,
+          "visible": 7
+        },
+        {
+          "at": 1.68,
+          "visible": 8
+        },
+        {
+          "at": 1.76,
+          "visible": 9
+        },
+        {
+          "at": 1.92,
+          "visible": 10
+        },
+        {
+          "at": 2.08,
+          "visible": 11
+        },
+        {
+          "at": 2.32,
+          "visible": 12
+        },
+        {
+          "at": 3.2,
+          "visible": 13
+        },
+        {
+          "at": 3.2,
+          "visible": 14
+        },
+        {
+          "at": 3.44,
+          "visible": 15
+        },
+        {
+          "at": 3.76,
+          "visible": 16
+        },
+        {
+          "at": 3.84,
+          "visible": 17
+        },
+        {
+          "at": 3.92,
+          "visible": 18
+        },
+        {
+          "at": 4.16,
+          "visible": 19
+        },
+        {
+          "at": 4.56,
+          "visible": 20
+        },
+        {
+          "at": 4.56,
+          "visible": 21
+        },
+        {
+          "at": 4.8,
+          "visible": 22
+        },
+        {
+          "at": 4.88,
+          "visible": 23
+        },
+        {
+          "at": 5.12,
+          "visible": 24
+        },
+        {
+          "at": 5.28,
+          "visible": 25
+        },
+        {
+          "at": 5.44,
+          "visible": 26
+        },
+        {
+          "at": 5.52,
+          "visible": 27
+        },
+        {
+          "at": 5.68,
+          "visible": 28
+        },
+        {
+          "at": 5.84,
+          "visible": 29
+        },
+        {
+          "at": 5.84,
+          "visible": 30
+        }
+      ],
+      "audio_kind": "reference_synthesis",
+      "model": "qwen-audio-3.1-tts-plus",
+      "alignment": "provider character timestamps",
+      "source": "https://www.bilibili.com/video/BV1hTnb6XEju/",
+      "method": "New game guidance synthesized using the previously configured user-requested reference voice; not a source quote."
+    },
+    {
+      "id": "guide_continue",
+      "title": "这轮还没结束，先把剩下的单词完成，再来打卡。",
+      "caption": "这轮还没结束，先把剩下的单词完成，再来打卡。",
+      "events": [
+        "daily_continue"
+      ],
+      "scope": "all",
+      "group": "学习引导",
+      "file": "guide_continue.ogg",
+      "duration": 3.6,
+      "cues": [
+        {
+          "at": 0.08,
+          "visible": 1
+        },
+        {
+          "at": 0.24,
+          "visible": 2
+        },
+        {
+          "at": 0.4,
+          "visible": 3
+        },
+        {
+          "at": 0.56,
+          "visible": 4
+        },
+        {
+          "at": 0.72,
+          "visible": 5
+        },
+        {
+          "at": 0.88,
+          "visible": 6
+        },
+        {
+          "at": 1.28,
+          "visible": 7
+        },
+        {
+          "at": 1.28,
+          "visible": 8
+        },
+        {
+          "at": 1.44,
+          "visible": 9
+        },
+        {
+          "at": 1.6,
+          "visible": 10
+        },
+        {
+          "at": 1.76,
+          "visible": 11
+        },
+        {
+          "at": 1.92,
+          "visible": 12
+        },
+        {
+          "at": 2.0,
+          "visible": 13
+        },
+        {
+          "at": 2.16,
+          "visible": 14
+        },
+        {
+          "at": 2.32,
+          "visible": 15
+        },
+        {
+          "at": 2.4,
+          "visible": 16
+        },
+        {
+          "at": 2.72,
+          "visible": 17
+        },
+        {
+          "at": 2.72,
+          "visible": 18
+        },
+        {
+          "at": 2.88,
+          "visible": 19
+        },
+        {
+          "at": 3.04,
+          "visible": 20
+        },
+        {
+          "at": 3.2,
+          "visible": 21
+        },
+        {
+          "at": 3.2,
+          "visible": 22
+        }
+      ],
+      "audio_kind": "reference_synthesis",
+      "model": "qwen-audio-3.1-tts-plus",
+      "alignment": "provider character timestamps",
+      "source": "https://www.bilibili.com/video/BV1hTnb6XEju/",
+      "method": "New game guidance synthesized using the previously configured user-requested reference voice; not a source quote."
+    }
+  ],
+  "groups": [
+    "考研复刻",
+    "德穆兰原声",
+    "课堂原声",
+    "用户原声",
+    "学习引导"
+  ],
+  "counts": {
+    "reference_video": 12,
+    "local_recordings": 30,
+    "kaoyan_synthesized": 18,
+    "paired_images": 30,
+    "user_upload": 1,
+    "learning_guides": 10
+  },
+  "preferred_first": {
+    "welcome": "uploaded_english",
+    "start": "delta_command",
+    "miss": "delta_dare",
+    "defeat": "local_30",
+    "victory": "local_01",
+    "combo": "local_01",
+    "books": "delta_cet"
+  },
+  "page_cues": {
+    "home": {
+      "general": [
+        "delta_command",
+        "local_03",
+        "local_06",
+        "local_08"
+      ],
+      "ky": [
+        "ky_welcome",
+        "ky_books",
+        "ky_start_two",
+        "local_08"
+      ]
+    },
+    "books": {
+      "general": [
+        "delta_cet",
+        "local_06",
+        "delta_exam",
+        "local_08"
+      ],
+      "ky": [
+        "ky_books",
+        "ky_start_two",
+        "ky_welcome",
+        "local_08"
+      ]
+    },
+    "map": {
+      "general": [
+        "delta_dam",
+        "local_03",
+        "delta_command",
+        "local_08"
+      ],
+      "ky": [
+        "ky_map",
+        "ky_start",
+        "local_03",
+        "local_08"
+      ]
+    },
+    "warehouse": {
+      "general": [
+        "delta_score",
+        "local_14",
+        "local_16",
+        "local_06"
+      ],
+      "ky": [
+        "delta_score",
+        "local_14",
+        "local_16",
+        "ky_books"
+      ]
+    },
+    "review": {
+      "general": [
+        "delta_practice",
+        "local_22",
+        "local_25",
+        "local_06"
+      ],
+      "ky": [
+        "ky_collection",
+        "ky_hint",
+        "ky_miss_again",
+        "delta_practice"
+      ]
+    },
+    "saved": {
+      "general": [
+        "local_25",
+        "local_06",
+        "local_22"
+      ],
+      "ky": [
+        "ky_hint",
+        "local_25",
+        "local_06"
+      ]
+    },
+    "operators": {
+      "general": [
+        "delta_squad",
+        "local_08",
+        "delta_command"
+      ],
+      "ky": [
+        "ky_operators",
+        "delta_squad",
+        "local_08"
+      ]
+    },
+    "arsenal": {
+      "general": [
+        "local_08",
+        "delta_squad",
+        "delta_command"
+      ],
+      "ky": [
+        "ky_operators",
+        "local_08",
+        "delta_squad"
+      ]
+    },
+    "voices": {
+      "general": [
+        "local_27",
+        "local_01",
+        "local_28"
+      ],
+      "ky": [
+        "local_27",
+        "local_01",
+        "local_28"
+      ]
+    },
+    "study_due": {
+      "general": [
+        "local_25",
+        "delta_practice",
+        "local_06",
+        "local_22"
+      ],
+      "ky": [
+        "ky_miss_again",
+        "ky_hint",
+        "ky_start_two",
+        "delta_practice"
+      ]
+    },
+    "study_all": {
+      "general": [
+        "local_06",
+        "local_08",
+        "delta_command"
+      ],
+      "ky": [
+        "ky_start_two",
+        "ky_books",
+        "ky_start"
+      ]
+    },
+    "checkin": {
+      "general": [
+        "local_01",
+        "local_28"
+      ],
+      "ky": [
+        "ky_combo_two",
+        "ky_combo",
+        "local_01"
+      ]
+    },
+    "daily_due": {
+      "general": [
+        "guide_due",
+        "guide_due_alt"
+      ],
+      "ky": [
+        "guide_due",
+        "guide_due_alt"
+      ]
+    },
+    "daily_done": {
+      "general": [
+        "guide_done"
+      ],
+      "ky": [
+        "guide_done"
+      ]
+    },
+    "daily_custom": {
+      "general": [
+        "guide_custom"
+      ],
+      "ky": [
+        "guide_custom"
+      ]
+    },
+    "daily_new": {
+      "general": [
+        "guide_new",
+        "guide_new_alt"
+      ],
+      "ky": [
+        "guide_new",
+        "guide_new_alt"
+      ]
+    },
+    "daily_checkin": {
+      "general": [
+        "guide_checkin"
+      ],
+      "ky": [
+        "guide_checkin"
+      ]
+    },
+    "plan_select": {
+      "general": [
+        "guide_plan",
+        "guide_plan_alt"
+      ],
+      "ky": [
+        "guide_plan",
+        "guide_plan_alt"
+      ]
+    },
+    "daily_continue": {
+      "general": [
+        "guide_continue"
+      ],
+      "ky": [
+        "guide_continue"
+      ]
+    }
+  }
+}

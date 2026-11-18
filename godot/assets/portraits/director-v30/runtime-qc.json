@@ -1,0 +1,27 @@
+{
+  "idle": {
+    "edge_magenta_pixels_removed": 7265,
+    "gif_frames": 5,
+    "transparent_corner": true
+  },
+  "talk": {
+    "edge_magenta_pixels_removed": 7198,
+    "gif_frames": 4,
+    "transparent_corner": true
+  },
+  "praise": {
+    "edge_magenta_pixels_removed": 7433,
+    "gif_frames": 5,
+    "transparent_corner": true
+  },
+  "scold": {
+    "edge_magenta_pixels_removed": 7314,
+    "gif_frames": 5,
+    "transparent_corner": true
+  },
+  "glasses": {
+    "edge_magenta_pixels_removed": 6721,
+    "gif_frames": 5,
+    "transparent_corner": true
+  }
+}

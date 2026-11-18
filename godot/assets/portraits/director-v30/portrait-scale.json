@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "name": "director-portrait-v30",
+  "processing": {
+    "cell_size": 256,
+    "fit_scale": 0.94,
+    "trim_border": 4,
+    "edge_clean_depth": 3,
+    "align": "bottom",
+    "shared_scale": true,
+    "scale_strategy": "fit",
+    "component_mode": "largest",
+    "component_padding": 0,
+    "min_component_area": 1,
+    "edge_touch_margin": 0
+  },
+  "output_origin": [
+    128.0,
+    249
+  ],
+  "reference": {
+    "target": "npc",
+    "mode": "idle",
+    "rows": 2,
+    "cols": 2,
+    "body_scale_mean": 0.5150128197546164,
+    "body_scale_cv": 0.0017412818140964978,
+    "anchor_y_mean": 0.8467479674796747
+  },
+  "qc": {
+    "max_body_scale_drift": 0.1
+  }
+}

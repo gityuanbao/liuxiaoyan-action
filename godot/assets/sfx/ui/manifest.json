@@ -1,0 +1,138 @@
+{
+  "sounds": {
+    "level_up": {
+      "file": "level_up.ogg",
+      "duration": 1.05,
+      "layers": [
+        {
+          "file": "delta/delta_scan.ogg",
+          "delay": 0,
+          "length": 0.4,
+          "gain": 0.6,
+          "pitch": 1.12
+        },
+        {
+          "file": "delta/delta_confirm.ogg",
+          "delay": 0.3,
+          "length": 0.68,
+          "gain": 0.85,
+          "pitch": 1.0
+        }
+      ]
+    },
+    "reward": {
+      "file": "reward.ogg",
+      "duration": 0.64,
+      "layers": [
+        {
+          "file": "click.ogg",
+          "delay": 0,
+          "length": 0.1,
+          "gain": 0.7,
+          "pitch": 1.1
+        },
+        {
+          "file": "type.ogg",
+          "delay": 0.1,
+          "length": 0.05,
+          "gain": 0.5,
+          "pitch": 1.18
+        },
+        {
+          "file": "support.ogg",
+          "delay": 0.18,
+          "length": 0.46,
+          "gain": 0.75,
+          "pitch": 1.0
+        }
+      ]
+    },
+    "recruit": {
+      "file": "recruit.ogg",
+      "duration": 1.08,
+      "layers": [
+        {
+          "file": "reload.ogg",
+          "delay": 0,
+          "length": 0.42,
+          "gain": 0.8,
+          "pitch": 1.0
+        },
+        {
+          "file": "delta/delta_confirm.ogg",
+          "delay": 0.38,
+          "length": 0.68,
+          "gain": 0.8,
+          "pitch": 0.98
+        }
+      ]
+    },
+    "purchase": {
+      "file": "purchase.ogg",
+      "duration": 0.48,
+      "layers": [
+        {
+          "file": "click.ogg",
+          "delay": 0,
+          "length": 0.1,
+          "gain": 0.6,
+          "pitch": 1.0
+        },
+        {
+          "file": "reload.ogg",
+          "delay": 0.1,
+          "length": 0.37,
+          "gain": 0.65,
+          "pitch": 1.15
+        }
+      ]
+    },
+    "toggle_on": {
+      "file": "toggle_on.ogg",
+      "duration": 0.2,
+      "layers": [
+        {
+          "file": "click.ogg",
+          "delay": 0,
+          "length": 0.1,
+          "gain": 0.7,
+          "pitch": 1.05
+        },
+        {
+          "file": "type.ogg",
+          "delay": 0.08,
+          "length": 0.05,
+          "gain": 0.5,
+          "pitch": 1.25
+        }
+      ]
+    },
+    "toggle_off": {
+      "file": "toggle_off.ogg",
+      "duration": 0.2,
+      "layers": [
+        {
+          "file": "click.ogg",
+          "delay": 0,
+          "length": 0.12,
+          "gain": 0.65,
+          "pitch": 0.82
+        }
+      ]
+    },
+    "navigate": {
+      "file": "navigate.ogg",
+      "duration": 0.1,
+      "layers": [
+        {
+          "file": "click.ogg",
+          "delay": 0,
+          "length": 0.1,
+          "gain": 0.5,
+          "pitch": 1.1
+        }
+      ]
+    }
+  },
+  "sources": "Layers reuse ../manifest.json and ../delta-manifest.json with their original credits and rights."
+}

@@ -1,0 +1,139 @@
+{
+  "version": 30,
+  "facing": "right",
+  "generator": "built-in image_gen",
+  "cell_size": 256,
+  "actions": {
+    "idle": {
+      "gif": "idle/animation.gif",
+      "frames": [
+        {
+          "file": "idle/runtime-01.png",
+          "ms": 2300
+        },
+        {
+          "file": "idle/runtime-02.png",
+          "ms": 70
+        },
+        {
+          "file": "idle/runtime-03.png",
+          "ms": 100
+        },
+        {
+          "file": "idle/runtime-04.png",
+          "ms": 70
+        },
+        {
+          "file": "idle/runtime-05.png",
+          "ms": 850
+        }
+      ],
+      "loop": true,
+      "source_frames": 4
+    },
+    "talk": {
+      "gif": "talk/animation.gif",
+      "frames": [
+        {
+          "file": "talk/runtime-01.png",
+          "ms": 120
+        },
+        {
+          "file": "talk/runtime-02.png",
+          "ms": 140
+        },
+        {
+          "file": "talk/runtime-03.png",
+          "ms": 120
+        },
+        {
+          "file": "talk/runtime-04.png",
+          "ms": 150
+        }
+      ],
+      "loop": true,
+      "source_frames": 4
+    },
+    "praise": {
+      "gif": "praise/animation.gif",
+      "frames": [
+        {
+          "file": "praise/runtime-01.png",
+          "ms": 180
+        },
+        {
+          "file": "praise/runtime-02.png",
+          "ms": 280
+        },
+        {
+          "file": "praise/runtime-03.png",
+          "ms": 200
+        },
+        {
+          "file": "praise/runtime-04.png",
+          "ms": 420
+        },
+        {
+          "file": "praise/runtime-05.png",
+          "ms": 200
+        }
+      ],
+      "loop": true,
+      "source_frames": 4
+    },
+    "scold": {
+      "gif": "scold/animation.gif",
+      "frames": [
+        {
+          "file": "scold/runtime-01.png",
+          "ms": 250
+        },
+        {
+          "file": "scold/runtime-02.png",
+          "ms": 180
+        },
+        {
+          "file": "scold/runtime-03.png",
+          "ms": 250
+        },
+        {
+          "file": "scold/runtime-04.png",
+          "ms": 180
+        },
+        {
+          "file": "scold/runtime-05.png",
+          "ms": 500
+        }
+      ],
+      "loop": true,
+      "source_frames": 4
+    },
+    "glasses": {
+      "gif": "glasses/animation.gif",
+      "frames": [
+        {
+          "file": "glasses/runtime-01.png",
+          "ms": 180
+        },
+        {
+          "file": "glasses/runtime-02.png",
+          "ms": 180
+        },
+        {
+          "file": "glasses/runtime-03.png",
+          "ms": 320
+        },
+        {
+          "file": "glasses/runtime-04.png",
+          "ms": 160
+        },
+        {
+          "file": "glasses/runtime-05.png",
+          "ms": 400
+        }
+      ],
+      "loop": true,
+      "source_frames": 4
+    }
+  }
+}

@@ -1,0 +1,89 @@
+import { useState, useEffect } from 'react'
+import { AbilityId, ABILITY_CONFIGS, type PlayerState } from '@typeduel/shared'
+import { useGameStore } from '../store'
+import { ABILITY_LABELS, ABILITY_DESCRIPTIONS } from '../labels'
+import { Icon } from '../academy/Icon'
+
+const ABILITY_ORDER: AbilityId[] = [
+  AbilityId.SURGE,
+  AbilityId.BLACKOUT,
+  AbilityId.SCRAMBLE,
+  AbilityId.PHANTOM_KEYS,
+  AbilityId.FREEZE,
+  AbilityId.MIRROR,
+]
+
+const ABILITY_ICONS: Record<AbilityId, string> = {
+  [AbilityId.SURGE]: 'spark',
+  [AbilityId.BLACKOUT]: 'moon',
+  [AbilityId.SCRAMBLE]: 'shuffle',
+  [AbilityId.PHANTOM_KEYS]: 'ghost',
+  [AbilityId.FREEZE]: 'snow',
+  [AbilityId.MIRROR]: 'shield',
+}
+
+interface AbilityBarProps {
+  player: PlayerState
+}
+
+export function AbilityBar({ player }: AbilityBarProps) {
+  const abilityCooldowns = useGameStore(s => s.abilityCooldowns)
+  const [now, setNow] = useState(Date.now())
+
+  // Tick every 100ms to update cooldown timers
+  useEffect(() => {
+    const hasCooldowns = Object.values(abilityCooldowns).some(exp => exp && exp > Date.now())
+    if (!hasCooldowns) return
+    const interval = setInterval(() => setNow(Date.now()), 100)
+    return () => clearInterval(interval)
+  }, [abilityCooldowns])
+
+  return (
+    <div className="flex justify-center gap-2 mt-4" data-testid="ability-bar">
+      {ABILITY_ORDER.map((abilityId) => {
+        const config = ABILITY_CONFIGS[abilityId]
+        const hasEnergy = player.energy >= config.cost
+        const isActive = player.activeEffects.some(e => e.abilityId === abilityId)
+        const cooldownExpiry = abilityCooldowns[abilityId]
+        const cooldownRemaining = cooldownExpiry ? Math.max(0, Math.ceil((cooldownExpiry - now) / 1000)) : 0
+        const onCooldown = cooldownRemaining > 0
+
+        return (
+          <div
+            key={abilityId}
+            className={`
+              relative flex flex-col items-center px-3 py-2 rounded border text-xs font-mono
+              min-w-[90px]
+              ${isActive
+                ? 'border-accent bg-accent/10 text-accent'
+                : onCooldown
+                ? 'border-damage/30 text-text/20'
+                : hasEnergy
+                ? 'border-accent/30 text-text/60'
+                : 'border-border text-text/20'
+              }
+            `}
+            data-ability={abilityId}
+            title={ABILITY_DESCRIPTIONS[abilityId]}
+          >
+            <span className="ability-crest text-lg mb-0.5"><Icon name={ABILITY_ICONS[abilityId]} size={23}/></span>
+            <span className="font-bold text-[10px] uppercase tracking-wider">{ABILITY_LABELS[abilityId]}</span>
+            <span className={`text-[10px] ${hasEnergy ? 'text-energy' : 'text-text/20'}`}>
+              {config.cost} 能量
+            </span>
+            {isActive && (
+              <span className="absolute top-0.5 right-1 text-[9px] text-accent font-bold">
+                生效中
+              </span>
+            )}
+            {cooldownRemaining > 0 && (
+              <span className="absolute inset-0 flex items-center justify-center bg-bg/60 rounded text-damage font-bold text-sm" data-testid="cooldown-timer">
+                {cooldownRemaining}秒
+              </span>
+            )}
+          </div>
+        )
+      })}
+    </div>
+  )
+}

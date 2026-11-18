@@ -1,0 +1,5 @@
+.godot/
+node_modules/
+*.tmp
+.DS_Store
+.env

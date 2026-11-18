@@ -1,0 +1,20 @@
+{
+  "name": "starlanguage-islands",
+  "private": true,
+  "workspaces": [
+    "packages/shared",
+    "packages/server",
+    "packages/client"
+  ],
+  "scripts": {
+    "build": "npm run --workspace=packages/shared build && npm run --workspace=packages/client build && npm run --workspace=packages/server build",
+    "start": "node packages/server/dist/index.js",
+    "test": "npm run --workspace=packages/shared build && npm run test --workspaces --if-present",
+    "test:e2e": "npx playwright test",
+    "check:assets": "node tools/check-assets.mjs"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.58.2"
+  },
+  "license": "MIT"
+}

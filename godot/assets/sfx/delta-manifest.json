@@ -1,0 +1,49 @@
+{
+  "sounds": {
+    "delta_hit": {
+      "file": "delta/delta_hit.ogg",
+      "source": "https://github.com/m4a1deathDawn/Hit_Kill_Sounds/blob/c89187eab0ec3f6a0d6c80cb498f671b4a6be841/audio/HitSounds/DeltaForce/h_deltaforce.wav",
+      "original": "h_deltaforce.wav",
+      "duration": 0.134979,
+      "source_sha256": "4e7e0c1662d1b057908112a761488d5d157835da65d838ecc76956520c692798",
+      "processing": "Original speed, stereo 48 kHz, constant gain -6.00 dB, Vorbis conversion",
+      "rights": "Original Delta Force rightsholders; community repository audio is not covered by its code license."
+    },
+    "delta_confirm": {
+      "file": "delta/delta_confirm.ogg",
+      "source": "https://github.com/m4a1deathDawn/Hit_Kill_Sounds/blob/c89187eab0ec3f6a0d6c80cb498f671b4a6be841/audio/KillSounds/DeltaForce/k_deltaforce_normal.wav",
+      "original": "k_deltaforce_normal.wav",
+      "duration": 0.683396,
+      "source_sha256": "55750de8f0510c15451c565da8eac1fa4972ac7cca8961d4a2a1e611a70bd913",
+      "processing": "Original speed, stereo 48 kHz, constant gain -6.00 dB, Vorbis conversion",
+      "rights": "Original Delta Force rightsholders; community repository audio is not covered by its code license."
+    },
+    "delta_combo": {
+      "file": "delta/delta_combo.ogg",
+      "source": "https://github.com/m4a1deathDawn/Hit_Kill_Sounds/blob/c89187eab0ec3f6a0d6c80cb498f671b4a6be841/audio/KillSounds/DeltaForce/k_deltaforce_headshot.wav",
+      "original": "k_deltaforce_headshot.wav",
+      "duration": 0.8585,
+      "source_sha256": "31a7e5cc78a671e12af94c534916436e90961ec5bc89c565f38801551159a9cd",
+      "processing": "Original speed, stereo 48 kHz, constant gain -6.00 dB, Vorbis conversion",
+      "rights": "Original Delta Force rightsholders; community repository audio is not covered by its code license."
+    },
+    "delta_scan": {
+      "file": "delta/delta_scan.ogg",
+      "source": "https://github.com/TFR-Studios/DeltaForceAnimation/blob/main/animations/animation_2/UI_C201_Energy_Scout_Bow_Scout_02.wav",
+      "original": "UI_C201_Energy_Scout_Bow_Scout_02.wav",
+      "duration": 2.259,
+      "source_sha256": "cf78a8f2a6c45f4cc17f144c151be592762a13f85f5476f7f0f66d7aedaaa695",
+      "processing": "Original speed, stereo 48 kHz, constant gain -4.50 dB, Vorbis conversion",
+      "rights": "Original Delta Force rightsholders; community repository audio is not covered by its code license."
+    },
+    "delta_complete": {
+      "file": "delta/delta_complete.ogg",
+      "source": "https://github.com/TFR-Studios/DeltaForceAnimation/blob/main/animations/animation_1/gunmuchenggong.mp3",
+      "original": "gunmuchenggong.mp3",
+      "duration": 2.304,
+      "source_sha256": "0f44ad9419be80808dfd571d3daee30955d722e2c78bd6c901f5272d420e270e",
+      "processing": "Original speed, stereo 48 kHz, constant gain 17.20 dB, Vorbis conversion",
+      "rights": "Original Delta Force rightsholders; community repository audio is not covered by its code license."
+    }
+  }
+}

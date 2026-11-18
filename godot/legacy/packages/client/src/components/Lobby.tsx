@@ -1,0 +1,213 @@
+import { Icon, PageEmblem } from '../academy/Icon'
+import { useState } from 'react'
+import { MessageType, type Difficulty } from '@typeduel/shared'
+import { useGameStore } from '../store'
+import { useWebSocket } from '../hooks/useWebSocket'
+
+
+const DIFFICULTIES: { value: Difficulty; label: string }[] = [
+  { value: 'easy', label: '初阶' },
+  { value: 'medium', label: '中阶' },
+  { value: 'hard', label: '高阶' },
+]
+
+export function Lobby() {
+  const { displayName, setDisplayName, setScreen, matchHistory, setIsSpectating, defaultDifficulty, setSettingsOpen } = useGameStore()
+  const { connect, send } = useWebSocket()
+  const [joinCode, setJoinCode] = useState('')
+  const [spectateCode, setSpectateCode] = useState('')
+  const [difficulty, setDifficulty] = useState<Difficulty>(defaultDifficulty)
+  const [showHistory, setShowHistory] = useState(false)
+
+  const handleQuickMatch = () => {
+    if (!displayName.trim()) return
+    connect()
+    send({ type: MessageType.JOIN_QUEUE, displayName: displayName.trim(), difficulty })
+    setScreen('matchmaking')
+  }
+
+  const handleCreateRoom = () => {
+    if (!displayName.trim()) return
+    connect()
+    send({ type: MessageType.CREATE_ROOM, displayName: displayName.trim(), difficulty })
+    setScreen('waiting-room')
+  }
+
+  const handleJoinRoom = () => {
+    if (!displayName.trim() || !joinCode.trim()) return
+    connect()
+    send({
+      type: MessageType.JOIN_ROOM,
+      displayName: displayName.trim(),
+      roomCode: joinCode.trim().toUpperCase(),
+    })
+  }
+
+  const handleSpectate = () => {
+    if (!spectateCode.trim()) return
+    connect()
+    send({
+      type: MessageType.SPECTATE_ROOM,
+      roomCode: spectateCode.trim().toUpperCase(),
+    })
+    setIsSpectating(true)
+    setScreen('spectating')
+  }
+
+  return (
+    <div className="network-lobby min-h-screen flex items-center justify-center">
+      <div className="network-lobby-panel bg-surface border border-border rounded-lg p-8 w-full max-w-md">
+        <header className="network-heading"><PageEmblem name="lobby"/><div>
+        <h1 className="text-4xl font-bold text-accent text-center mb-2">联机竞技场</h1>
+        <p className="text-text/40 text-center text-sm mb-8">与朋友比拼英文输入与技能</p>
+
+        </div></header><div className="network-columns"><section className="network-identity">
+        {/* 冒险者昵称 */}
+        <div className="mb-6">
+          <label className="block text-sm text-text/60 mb-1"><Icon name="hero" size={21}/>冒险者昵称</label>
+          <input
+            type="text"
+            value={displayName}
+            onChange={(e) => setDisplayName(e.target.value)}
+            placeholder="输入你的昵称…"
+            maxLength={20}
+            className="w-full bg-bg border border-border rounded px-4 py-2 text-text font-mono focus:border-accent focus:outline-none"
+          />
+        </div>
+
+        {/* Difficulty */}
+        <div className="mb-4">
+          <label className="block text-sm text-text/60 mb-1"><Icon name="keyboard" size={21}/>文本难度</label>
+          <div className="flex gap-2">
+            {DIFFICULTIES.map(d => (
+              <button
+                key={d.value}
+                onClick={() => setDifficulty(d.value)}
+                className={`flex-1 py-2 rounded border text-sm font-bold transition-colors ${
+                  difficulty === d.value
+                    ? 'border-accent bg-accent/10 text-accent'
+                    : 'border-border text-text/40 hover:border-text/30'
+                }`}
+              >
+                {d.label}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* 快速匹配 */}
+        <button
+          onClick={handleQuickMatch}
+          disabled={!displayName.trim()}
+          className="w-full bg-accent text-bg font-bold py-3 rounded mb-3 hover:bg-accent/90 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+        >
+          <Icon name="compass" size={23}/>快速匹配
+        </button>
+
+        <div className="flex gap-3 mb-3">
+          <button
+            onClick={handleCreateRoom}
+            disabled={!displayName.trim()}
+            className="flex-1 border border-accent text-accent font-bold py-3 rounded hover:bg-accent/10 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+          >
+            <Icon name="lobby" size={23}/>创建房间
+          </button>
+        </div>
+
+        </section><section className="network-invites"><h2><Icon name="letter" size={26}/>邀请与观战</h2><p className="network-hint">分享房间码，或加入朋友的对战。</p>
+        {/* Join Room */}
+        <div className="flex gap-2 mb-6">
+          <input
+            type="text"
+            value={joinCode}
+            onChange={(e) => setJoinCode(e.target.value.toUpperCase())}
+            placeholder="六位房间码"
+            maxLength={6}
+            className="flex-1 bg-bg border border-border rounded px-4 py-2 text-text font-mono tracking-wider text-center focus:border-accent focus:outline-none uppercase"
+          />
+          <button
+            onClick={handleJoinRoom}
+            disabled={!displayName.trim() || joinCode.length < 6}
+            className="px-6 border border-accent text-accent font-bold py-2 rounded hover:bg-accent/10 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+          >
+            <Icon name="arrow" size={21}/>加入房间
+          </button>
+        </div>
+
+        {/* Practice */}
+        <button
+          onClick={() => setScreen('practice-setup')}
+          className="w-full border border-text/20 text-text/60 font-bold py-3 rounded mb-3 hover:border-accent/50 hover:text-accent transition-colors"
+          data-testid="practice-btn"
+        >
+          <Icon name="keyboard" size={23}/>打字试炼
+        </button>
+
+        {/* Spectate */}
+        <div className="flex gap-2 mb-6">
+          <input
+            type="text"
+            value={spectateCode}
+            onChange={(e) => setSpectateCode(e.target.value.toUpperCase())}
+            placeholder="六位观战码"
+            maxLength={6}
+            className="flex-1 bg-bg border border-border rounded px-4 py-2 text-text font-mono tracking-wider text-center focus:border-accent focus:outline-none uppercase"
+            data-testid="spectate-input"
+          />
+          <button
+            onClick={handleSpectate}
+            disabled={spectateCode.length < 6}
+            className="px-6 border border-text/20 text-text/40 font-bold py-2 rounded hover:bg-text/5 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+            data-testid="spectate-btn"
+          >
+            <Icon name="eye" size={22}/>开始观战
+          </button>
+        </div>
+
+        {/* Match History */}
+        {matchHistory.length > 0 && (
+          <div className="mb-4">
+            <button
+              onClick={() => setShowHistory(!showHistory)}
+              className="w-full text-xs text-text/30 hover:text-text/50 transition-colors text-left"
+              data-testid="history-toggle"
+            >
+              对战记录 ({matchHistory.length}) {showHistory ? '[-]' : '[+]'}
+            </button>
+            {showHistory && (
+              <div className="mt-2 max-h-40 overflow-y-auto space-y-1" data-testid="match-history">
+                {[...matchHistory].reverse().map((entry, i) => (
+                  <div
+                    key={i}
+                    className="flex items-center justify-between text-xs bg-bg border border-border rounded px-3 py-1.5"
+                  >
+                    <span className={entry.result === 'W' ? 'text-accent font-bold' : 'text-damage font-bold'}>
+                      {entry.result === 'W' ? '胜' : '负'}
+                    </span>
+                    <span className="text-text/60">对手：{entry.opponent}</span>
+                    <span className="text-text/40">{entry.wpm} 词/分</span>
+                    <span className="text-text/40">{entry.accuracy}%</span>
+                    <span className="text-text/20">{new Date(entry.date).toLocaleDateString()}</span>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
+
+        </section></div>
+        {/* Settings */}
+        <div className="flex items-center justify-center text-text/30">
+          <button
+            onClick={() => setSettingsOpen(true)}
+            className="hover:text-text/60 transition-colors"
+            aria-label="联机设置"
+            data-testid="settings-btn"
+          >
+            <Icon name="settings" size={23}/>
+          </button>
+        </div>
+      </div>
+    </div>
+  )
+}

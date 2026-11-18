@@ -1,0 +1,62 @@
+import { afterEach, beforeEach, expect, it, vi } from 'vitest'
+import { act, cleanup, fireEvent, render, screen } from '@testing-library/react'
+import { emptyProfile } from './learning-core'
+import { restoreLearning } from './learning-store'
+import { StoryPage } from './StoryPage'
+import { useGameStore } from '../store'
+vi.mock('./DuelArena', () => ({ DuelArena: ({ state }: any) => <div data-testid="hp">{state.botHp}</div> }))
+beforeEach(() => { Object.defineProperty(document, 'hidden', { configurable: true, value: false }); vi.spyOn(HTMLMediaElement.prototype, 'pause').mockImplementation(() => {}) })
+afterEach(() => { cleanup(); vi.useRealTimers(); vi.restoreAllMocks() })
+it('resumes the branch, fights an actual HP duel and returns to saved post-battle dialogue', async () => {
+  vi.useFakeTimers()
+  restoreLearning(JSON.stringify(emptyProfile()))
+  const view = render(<StoryPage/>)
+  expect(view.container.querySelector('.actor-left.is-listening')).toBeInTheDocument()
+  fireEvent.click(screen.getByRole('button', { name: '下一段对话 ◆' })); fireEvent.click(screen.getByRole('button', { name: '下一段对话 ◆' }))
+  expect(view.container.querySelector('.actor-left.is-speaking')).toBeInTheDocument()
+  fireEvent.click(screen.getByRole('button', { name: /边战斗边学习/ }))
+  expect(screen.getByText(/不用等到完美/)).toBeInTheDocument()
+  view.unmount(); const battle = render(<StoryPage/>); expect(screen.getByText(/不用等到完美/)).toBeInTheDocument()
+  fireEvent.click(screen.getByRole('button', { name: '下一段对话 ◆' }))
+  expect(screen.queryByRole('button', { name: '下一段对话 ◆' })).not.toBeInTheDocument()
+  fireEvent.click(screen.getByRole('button', { name: /雾蚀来袭/ }))
+  expect(screen.getByTestId('hp')).toHaveTextContent('140')
+  fireEvent.change(screen.getByLabelText('输入英文单词'), { target: { value: 'wrong-spelling' } })
+  fireEvent.click(screen.getByRole('button', { name: /释放攻击/ }))
+  expect(screen.getByTestId('hp')).toHaveTextContent('140')
+  for (let i = 0; i < 20 && !screen.queryByRole('dialog', { name: '对战结果' }); i++) {
+    fireEvent.change(screen.getByLabelText('输入英文单词'), { target: { value: battle.container.querySelector('.typed-word')!.textContent } })
+    fireEvent.click(screen.getByRole('button', { name: /释放攻击/ }))
+    await act(async () => { await vi.advanceTimersByTimeAsync(450) })
+  }
+  expect(screen.getByRole('dialog', { name: '对战结果' })).toHaveTextContent('决斗胜利')
+  fireEvent.click(screen.getByRole('button', { name: '战斗结束 · 继续对白' }))
+  expect(screen.getByText(/月光桥重新亮了/)).toBeInTheDocument()
+  fireEvent.click(screen.getByRole('button', { name: /记录本章/ }))
+  const saved = JSON.parse(localStorage.getItem('starlanguage_learning_v1')!)
+  expect(saved.story).toMatchObject({ completed: ['arrival'], choices: { arrival: 'courage' }, positions: { arrival: 5 } })
+  expect(saved.records).toHaveLength(1)
+  expect(saved.records[0]).toMatchObject({ kind: 'vocabulary', outcome: 'victory' })
+  expect(saved.records[0].id).toMatch(/^story:arrival:/)
+  expect(screen.getByText('第一章 · 森林的名字')).toBeInTheDocument()
+})
+it('preserves an already completed chapter from an old backup without forcing a replay', () => {
+  restoreLearning(JSON.stringify({ ...emptyProfile(), story: { completed: ['arrival'], positions: { arrival: 5 }, choices: { arrival: 'memory' } } }))
+  render(<StoryPage/>)
+  expect(screen.getByRole('button', { name: /重读本章/ })).toBeInTheDocument()
+  expect(screen.queryByRole('button', { name: /雾蚀来袭/ })).not.toBeInTheDocument()
+  fireEvent.click(screen.getByRole('button', { name: '继续旅途 ◆' }))
+  expect(screen.getByRole('status')).toHaveTextContent('第一章 · 森林的名字')
+  fireEvent.click(screen.getByRole('button', { name: '前往下章的线索 →' }))
+  expect(useGameStore.getState().screen).toBe('vocabulary')
+})
+it('skips the opening into a short-word battle and leaves completion behind the real victory', () => {
+  restoreLearning(JSON.stringify(emptyProfile()))
+  const view = render(<StoryPage/>)
+  fireEvent.click(screen.getByRole('button', { name: '跳过开场 · 从单词开始' }))
+  expect(screen.getByLabelText('输入英文单词')).toBeInTheDocument()
+  expect(view.container.querySelector('.typed-word')).toHaveTextContent('sun')
+  const saved = JSON.parse(localStorage.getItem('starlanguage_learning_v1')!)
+  expect(saved).toMatchObject({ xp: 0, records: [], story: { completed: [], positions: { arrival: 4 }, choices: { arrival: 'memory' } } })
+  expect(saved.growth).toBeUndefined()
+})

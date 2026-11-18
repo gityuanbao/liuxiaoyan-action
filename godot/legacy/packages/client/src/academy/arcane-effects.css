@@ -1,0 +1,53 @@
+/* Every layer lives for one real combat event. No ambient full-screen flash. */
+.game-polish .arcane-fx{position:absolute;inset:0;pointer-events:none;z-index:7;--fx-color:var(--skill-color);--fx-scale:1}
+.game-polish .fx-combo{--fx-scale:1.35}.game-polish .fx-ultimate{--fx-scale:1.9}
+.game-polish .fx-enemy{--fx-color:var(--monster-color);transform:scaleX(-1)}
+.game-polish .fx-cast-circle{position:absolute;left:24%;top:65%;width:100px;height:55px;transform:translate(-50%,-50%);color:var(--fx-color)}
+.game-polish .fx-cast-circle>i{position:absolute;inset:0;border:2px solid currentColor;border-radius:50%;box-shadow:0 0 15px currentColor;animation:fx-cast 600ms ease-out both}
+.game-polish .fx-cast-circle>i:nth-child(2){inset:-12px;border-style:dashed;animation-delay:60ms}
+.game-polish .fx-cast-circle>span{display:block;text-align:center;font-size:45px;line-height:55px;animation:fx-glyph 550ms ease-out both;text-shadow:0 0 16px currentColor}
+.game-polish .fx-spell-stream{position:absolute;left:27%;top:52%;width:46%;height:7px;transform-origin:left center;animation:fx-stream 420ms ease-in both}
+.game-polish .fx-spell-stream>i{position:absolute;left:0;top:calc((var(--ray) - 1)*15px);width:100%;height:3px;border-radius:80%;background:linear-gradient(90deg,transparent,var(--fx-color),#fff3d2);box-shadow:0 0 8px var(--fx-color);transform:rotate(calc((var(--ray) - 1)*2deg))}
+.game-polish .fx-strike{position:absolute;left:73%;top:55%;width:0;height:0;transform:scale(var(--fx-scale));color:var(--fx-color)}
+.game-polish .fx-shockwave{position:absolute;width:100px;height:100px;margin:-50px;border:3px solid currentColor;border-radius:50%;box-shadow:0 0 13px currentColor,inset 0 0 10px currentColor;animation:fx-impact 550ms 280ms ease-out both}
+.game-polish .fx-shockwave.second{width:76px;height:76px;margin:-38px;border-style:dashed;animation-delay:340ms}
+.game-polish .fx-impact-core{position:absolute;width:65px;height:65px;margin:-32px;background:radial-gradient(ellipse,#fff7dc 0,transparent 67%);animation:fx-impact 340ms 280ms ease-out both}
+.game-polish .fx-ember{position:absolute;left:-3px;top:-3px;width:6px;height:6px;background:#fff2c9;box-shadow:0 0 9px currentColor;animation:fx-particle 540ms var(--delay) ease-out both;border-radius:2px;transform:rotate(var(--angle))}
+.game-polish .fx-boon{position:absolute;left:24%;top:70%;width:140px;height:70px;margin:-35px -70px;color:#c0e8db}
+.game-polish .fx-boon>i{position:absolute;inset:0;border:2px solid currentColor;border-radius:50%;box-shadow:0 0 20px currentColor;animation:fx-boon 800ms ease-out both}
+.game-polish .fx-boon>i:nth-child(2){animation-delay:120ms}
+.game-polish .fx-boon>span{position:absolute;left:45%;top:0;font-size:35px;animation:fx-rise 850ms ease-out both;text-shadow:0 0 12px currentColor}
+.game-polish .fx-mage .fx-shockwave.second{border-radius:15%;transform:rotate(45deg)}
+.game-polish .fx-knight .fx-spell-stream>i{height:8px;clip-path:polygon(0 50%,85% 0,100% 50%,85% 100%);background:linear-gradient(90deg,transparent,#ffe7ad,#fff)}
+.game-polish .fx-knight .fx-shockwave{border-radius:0;border-width:0 0 5px 0;transform:rotate(-45deg);box-shadow:0 6px 10px currentColor}
+.game-polish .fx-ranger .fx-spell-stream>i{clip-path:polygon(0 40%,80% 40%,80% 0,100% 50%,80% 100%,80% 60%,0 60%);height:20px}
+.game-polish .fx-ranger .fx-shockwave{border-width:1px 5px;border-radius:50% 10%}
+.game-polish .fx-scholar .fx-shockwave{border-radius:10%;border-style:double;border-width:6px}
+.game-polish .fx-scholar .fx-shockwave.second{transform:rotate(45deg)}
+.game-polish .fx-scholar .fx-ember{height:10px;width:3px;background:#f2dfb4}
+.game-polish .fx-bard .fx-spell-stream>i{background:none;border:2px solid #b6e7f1;border-radius:50%;height:32px;transform:rotate(0deg);box-shadow:none}
+.game-polish .fx-bard .fx-shockwave{border-width:1px 4px;color:#b6e7f1}
+.game-polish .fx-bard .fx-ember{border-radius:50%;height:8px;width:8px;background:#c2e8f6}
+.game-polish .fx-alchemist .fx-spell-stream>i{height:20px;border-radius:70% 20%;background:linear-gradient(90deg,transparent,#ee8970,#ffe9a5);transform:rotate(calc((var(--ray) - 1)*5deg))}
+.game-polish .fx-alchemist .fx-shockwave{border-radius:15% 70% 20% 80%;color:#ffac72}
+.game-polish .fx-blocked .fx-strike{--fx-color:#a9dcf7;color:#a9dcf7}
+.game-polish .fx-blocked .fx-shockwave{border-radius:50% 50% 45% 45%;border-width:4px 7px}
+.game-polish .monster-stage[data-outcome="victory"] .monster-body-art{opacity:.22;filter:saturate(.15);transition:opacity 900ms,filter 900ms}
+.game-polish .monster-stage .combat-hit-layer .combat-ray{display:none}
+.game-polish .monster-stage .combat-impact{opacity:.65}
+.game-polish .monster-stage .damage-number{font-size:2.5rem;text-shadow:2px 3px #17223c,0 0 15px #ffc66b}
+.game-polish .monster-stage .damage-number small{font-size:.75rem}
+.game-polish .monster-stage.duel-paused .arcane-fx,.game-polish.reduced-motion .arcane-fx,.game-polish .motion-reduced .arcane-fx{display:none!important}
+@keyframes fx-cast{0%{opacity:0;transform:scale(.25)}25%{opacity:.9}100%{opacity:0;transform:scale(1.5)}}
+@keyframes fx-glyph{0%{opacity:0;transform:translateY(10px) scale(.4)}30%{opacity:1}100%{opacity:0;transform:translateY(-25px) scale(1.1)}}
+@keyframes fx-stream{0%,18%{opacity:0;transform:scaleX(.05)}45%{opacity:.8}85%{opacity:.9;transform:scaleX(1)}100%{opacity:0;transform:scaleX(1)}}
+@keyframes fx-impact{0%{opacity:0;scale:.15}12%{opacity:1}100%{opacity:0;scale:1.8}}
+@keyframes fx-particle{0%{opacity:0;transform:rotate(var(--angle)) translateX(0) scale(1.3)}12%{opacity:1}100%{opacity:0;transform:rotate(var(--angle)) translateX(var(--distance)) scale(.15)}}
+@keyframes fx-boon{0%{opacity:0;transform:translateY(0) scale(.4)}20%{opacity:.8}100%{opacity:0;transform:translateY(-60px) scale(1.3)}}
+@keyframes fx-rise{0%{opacity:0;transform:translateY(20px)}20%{opacity:1}100%{opacity:0;transform:translateY(-55px)}}
+@media(prefers-reduced-motion:reduce){.game-polish .arcane-fx{display:none!important}.game-polish .monster-body-art{transition:none!important}}
+
+.game-polish .fx-creature-crystal .fx-spell-stream>i{height:16px;clip-path:polygon(0 50%,60% 0,100% 50%,60% 100%);background:linear-gradient(90deg,transparent,#cfb3fc,#fff)}
+.game-polish .fx-creature-thorn .fx-spell-stream>i{height:15px;clip-path:polygon(0 45%,30% 45%,35% 0,40% 45%,60% 45%,65% 0,70% 45%,100% 50%,70% 60%,65% 100%,60% 60%,40% 60%,35% 100%,30% 60%,0 60%)}
+.game-polish .fx-creature-tide .fx-spell-stream>i{height:30px;background:none;border:2px solid #a8e0ef;border-radius:50%;box-shadow:none}
+.game-polish .fx-creature-gargoyle .fx-spell-stream>i{height:14px;clip-path:polygon(0 40%,65% 30%,75% 0,100% 45%,85% 100%,65% 70%,0 65%)}

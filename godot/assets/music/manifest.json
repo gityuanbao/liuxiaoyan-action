@@ -1,0 +1,35 @@
+{
+  "menu": {
+    "file": "menu.ogg",
+    "title": "Espionage",
+    "author": "brandon75689 (submitted by HaelDB)",
+    "source": "https://opengameart.org/content/espionage",
+    "download": "https://opengameart.org/sites/default/files/espionage.ogg",
+    "license": "CC0 1.0 (chosen from listed licenses)",
+    "source_sha256": "1b267502fd678b9e74c01947339797ce76d6270978422c641bd1a8b277ac9d4c",
+    "duration": 76.0,
+    "processing": "44.1kHz stereo Vorbis, loudness -22 LUFS, 0.4s fade-in; native crossfade loop"
+  },
+  "combat": {
+    "file": "combat.ogg",
+    "title": "Covert Operations",
+    "author": "artisticdude",
+    "source": "https://opengameart.org/content/covert-operations",
+    "download": "https://opengameart.org/sites/default/files/covert_operations.mp3",
+    "license": "CC0 1.0 (chosen from listed licenses)",
+    "source_sha256": "535c023b09f25fd32abcc7ec75d5e64f45d3c3f2393c295c8465ad686899e0c2",
+    "duration": 99.9,
+    "processing": "44.1kHz stereo Vorbis, loudness -22 LUFS, 0.4s fade-in; native crossfade loop"
+  },
+  "boss": {
+    "file": "boss.ogg",
+    "title": "Prepare to fight",
+    "author": "Basil",
+    "source": "https://opengameart.org/content/prepare-to-fight",
+    "download": "https://opengameart.org/sites/default/files/prepare_to_fight.mp3",
+    "license": "CC0 1.0 (chosen from listed licenses)",
+    "source_sha256": "a77128014c3226d64ea6788085ad6dbccd75291026734d6bb4defa6ccae860f1",
+    "duration": 123.0,
+    "processing": "44.1kHz stereo Vorbis, loudness -22 LUFS, 0.4s fade-in; native crossfade loop"
+  }
+}

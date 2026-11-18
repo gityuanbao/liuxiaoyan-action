@@ -1,0 +1,243 @@
+{
+  "version": 29,
+  "source_title": "⚡艳の音⚡",
+  "source_bvid": "BV1FtBkBUEYj",
+  "original_audio": true,
+  "clips": [
+    {
+      "id": "victory_great",
+      "outcome": "victory",
+      "segments": [
+        {
+          "start": 591.2,
+          "end": 596.32,
+          "crop": "560:315:208:60"
+        },
+        {
+          "start": 618.7,
+          "end": 620.55,
+          "crop": "512:288:192:64"
+        }
+      ],
+      "cues": [
+        {
+          "at": 0,
+          "text": "好，说完了，同学。"
+        },
+        {
+          "at": 1.42,
+          "text": "解决了！"
+        },
+        {
+          "at": 2.38,
+          "text": "所以写作的时候，"
+        },
+        {
+          "at": 3.46,
+          "text": "没有一个单词你不会写！"
+        },
+        {
+          "at": 5.07,
+          "text": "哈哈，真好啊！"
+        }
+      ],
+      "reaction_cues": [
+        {
+          "at": 5.070000000000005,
+          "duration": 1.85,
+          "image": "victory"
+        }
+      ],
+      "caption": "好，说完了，同学。 解决了！ 所以写作的时候， 没有一个单词你不会写！ 哈哈，真好啊！",
+      "end_caption": "哈哈，真好啊！",
+      "end_image": "victory",
+      "file": "victory_great.ogv",
+      "poster": "victory_great.jpg",
+      "crossfade_seconds": 0.05,
+      "tail_hold_seconds": 0,
+      "source_url": "https://www.bilibili.com/video/BV1FtBkBUEYj/",
+      "duration": 7.0
+    },
+    {
+      "id": "victory_words",
+      "outcome": "victory",
+      "segments": [
+        {
+          "start": 592.56,
+          "end": 596.32,
+          "crop": "560:315:208:60"
+        },
+        {
+          "start": 618.7,
+          "end": 620.55,
+          "crop": "512:288:192:64"
+        }
+      ],
+      "cues": [
+        {
+          "at": 0,
+          "text": "解决了！"
+        },
+        {
+          "at": 1.02,
+          "text": "所以写作的时候，"
+        },
+        {
+          "at": 2.1,
+          "text": "没有一个单词你不会写！"
+        },
+        {
+          "at": 3.71,
+          "text": "哈哈，真好啊！"
+        }
+      ],
+      "reaction_cues": [
+        {
+          "at": 3.7100000000001048,
+          "duration": 1.85,
+          "image": "victory"
+        }
+      ],
+      "caption": "解决了！ 所以写作的时候， 没有一个单词你不会写！ 哈哈，真好啊！",
+      "end_caption": "哈哈，真好啊！",
+      "end_image": "victory",
+      "file": "victory_words.ogv",
+      "poster": "victory_words.jpg",
+      "crossfade_seconds": 0.05,
+      "tail_hold_seconds": 0,
+      "source_url": "https://www.bilibili.com/video/BV1FtBkBUEYj/",
+      "duration": 5.6
+    },
+    {
+      "id": "defeat_home",
+      "outcome": "defeat",
+      "segments": [
+        {
+          "start": 5.6,
+          "end": 7.48,
+          "crop": "512:288:328:54"
+        },
+        {
+          "start": 584.64,
+          "end": 590.13,
+          "crop": "560:315:260:60"
+        }
+      ],
+      "cues": [
+        {
+          "at": 0,
+          "text": "回家吧，好不好？"
+        },
+        {
+          "at": 1.36,
+          "text": "回家吧！"
+        },
+        {
+          "at": 1.83,
+          "text": "Good 不会写，你能考研究生吗？"
+        },
+        {
+          "at": 3.67,
+          "text": "上天都哭了。"
+        },
+        {
+          "at": 4.63,
+          "text": "Good 不会写，回家睡觉去吧！"
+        },
+        {
+          "at": 6.69,
+          "text": "回家睡觉去吧！"
+        }
+      ],
+      "reaction_cues": [
+        {
+          "at": 0.08,
+          "duration": 1.5,
+          "image": "defeat"
+        },
+        {
+          "at": 1.8300000000000007,
+          "duration": 2.6,
+          "image": "question"
+        },
+        {
+          "at": 5.680000000000001,
+          "duration": 1.6,
+          "image": "defeat"
+        }
+      ],
+      "caption": "回家吧，好不好？ 回家吧！ Good 不会写，你能考研究生吗？ 上天都哭了。 Good 不会写，回家睡觉去吧！ 回家睡觉去吧！",
+      "end_caption": "回家睡觉去吧！",
+      "end_image": "defeat",
+      "file": "defeat_home.ogv",
+      "poster": "defeat_home.jpg",
+      "crossfade_seconds": 0.05,
+      "tail_hold_seconds": 0,
+      "source_url": "https://www.bilibili.com/video/BV1FtBkBUEYj/",
+      "duration": 7.4
+    },
+    {
+      "id": "defeat_rest",
+      "outcome": "defeat",
+      "segments": [
+        {
+          "start": 584.64,
+          "end": 590.13,
+          "crop": "560:315:260:60"
+        },
+        {
+          "start": 5.6,
+          "end": 7.48,
+          "crop": "512:288:328:54"
+        }
+      ],
+      "cues": [
+        {
+          "at": 0,
+          "text": "Good 不会写，你能考研究生吗？"
+        },
+        {
+          "at": 1.84,
+          "text": "上天都哭了。"
+        },
+        {
+          "at": 2.8,
+          "text": "Good 不会写，回家睡觉去吧！"
+        },
+        {
+          "at": 4.86,
+          "text": "回家睡觉去吧！"
+        },
+        {
+          "at": 5.44,
+          "text": "回家吧，好不好？"
+        },
+        {
+          "at": 6.8,
+          "text": "回家吧！"
+        }
+      ],
+      "reaction_cues": [
+        {
+          "at": 0.08,
+          "duration": 2.6,
+          "image": "question"
+        },
+        {
+          "at": 5.440000000000009,
+          "duration": 1.85,
+          "image": "defeat"
+        }
+      ],
+      "caption": "Good 不会写，你能考研究生吗？ 上天都哭了。 Good 不会写，回家睡觉去吧！ 回家睡觉去吧！ 回家吧，好不好？ 回家吧！",
+      "end_caption": "回家吧！",
+      "end_image": "defeat",
+      "file": "defeat_rest.ogv",
+      "poster": "defeat_rest.jpg",
+      "crossfade_seconds": 0.05,
+      "tail_hold_seconds": 0,
+      "source_url": "https://www.bilibili.com/video/BV1FtBkBUEYj/",
+      "duration": 7.4
+    }
+  ]
+}

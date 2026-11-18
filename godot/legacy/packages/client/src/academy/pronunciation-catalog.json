@@ -1,0 +1,1889 @@
+{
+  "voice": "Piper en_US-ljspeech-medium",
+  "culture": "en-US",
+  "synthetic": true,
+  "officialIeltsAudio": false,
+  "date": "2026-10-16",
+  "clips": [
+    {
+      "id": "word:sun",
+      "kind": "word",
+      "text": "sun",
+      "file": "/audio/pronunciation-v1/word-sun.wav",
+      "seconds": 0.557,
+      "peak": 32767,
+      "rms": 5616.2,
+      "sha256": "67d58c27c12189f17629d9988c50ed5d640e5a7f3acded3a8f849923d1f9c1dd"
+    },
+    {
+      "id": "sentence:sun",
+      "kind": "sentence",
+      "text": "The sun is warm.",
+      "file": "/audio/pronunciation-v1/sentence-sun.wav",
+      "seconds": 1.126,
+      "peak": 32767,
+      "rms": 5595.78,
+      "sha256": "7d4a601f364de78c8bb4201bcc7df2733e25defc67b63c6409aaa8bc943ed811"
+    },
+    {
+      "id": "word:moon",
+      "kind": "word",
+      "text": "moon",
+      "file": "/audio/pronunciation-v1/word-moon.wav",
+      "seconds": 0.557,
+      "peak": 32767,
+      "rms": 8098.3,
+      "sha256": "f39cb58ff0b94c6ab03c7df8d1d8db16d1aeab77eacba3bb6163d794a3a3ba93"
+    },
+    {
+      "id": "sentence:moon",
+      "kind": "sentence",
+      "text": "I see the moon.",
+      "file": "/audio/pronunciation-v1/sentence-moon.wav",
+      "seconds": 1.277,
+      "peak": 32767,
+      "rms": 4573.9,
+      "sha256": "481227a6a2c5eed18b086c35f4e6e031e089901ca802b7a033dcb80f0175fe51"
+    },
+    {
+      "id": "word:tree",
+      "kind": "word",
+      "text": "tree",
+      "file": "/audio/pronunciation-v1/word-tree.wav",
+      "seconds": 0.511,
+      "peak": 32767,
+      "rms": 6849.13,
+      "sha256": "ef967d267fc8ec6b74b53ebb3a0775045e7d08127c074748648a59161fef06f4"
+    },
+    {
+      "id": "sentence:tree",
+      "kind": "sentence",
+      "text": "This tree is green.",
+      "file": "/audio/pronunciation-v1/sentence-tree.wav",
+      "seconds": 1.416,
+      "peak": 32767,
+      "rms": 5602.56,
+      "sha256": "7f630462404a17a70837ba7ff57a356495e84de68205fb044b659c1f87d51033"
+    },
+    {
+      "id": "word:book",
+      "kind": "word",
+      "text": "book",
+      "file": "/audio/pronunciation-v1/word-book.wav",
+      "seconds": 0.383,
+      "peak": 32767,
+      "rms": 6223.74,
+      "sha256": "075681f17f4ea64b12ffeca263cda78d63290d57cf9e7fa8340154229f2794a1"
+    },
+    {
+      "id": "sentence:book",
+      "kind": "sentence",
+      "text": "I have a book.",
+      "file": "/audio/pronunciation-v1/sentence-book.wav",
+      "seconds": 1.068,
+      "peak": 32767,
+      "rms": 4639.58,
+      "sha256": "7ed98506df68cbf379a136285ad30c0e3940b4ed66afe3eb614c9600fbb15add"
+    },
+    {
+      "id": "word:water",
+      "kind": "word",
+      "text": "water",
+      "file": "/audio/pronunciation-v1/word-water.wav",
+      "seconds": 0.546,
+      "peak": 32767,
+      "rms": 5118.68,
+      "sha256": "2dcd62e1e9cabd742f0f9f50c00102bec236d5d2234247557921b500d8dfab04"
+    },
+    {
+      "id": "sentence:water",
+      "kind": "sentence",
+      "text": "I need some water.",
+      "file": "/audio/pronunciation-v1/sentence-water.wav",
+      "seconds": 1.405,
+      "peak": 32767,
+      "rms": 3804.84,
+      "sha256": "52e2dfa0f1a236d0512d099c8c79852f7b9b17a2fc37c2f41bc4c4c3a829cc23"
+    },
+    {
+      "id": "word:bird",
+      "kind": "word",
+      "text": "bird",
+      "file": "/audio/pronunciation-v1/word-bird.wav",
+      "seconds": 0.557,
+      "peak": 32767,
+      "rms": 6405.25,
+      "sha256": "3e5a1c909d6263ee87f28945caa930b89c06624c31597c098291c4e3d483acb8"
+    },
+    {
+      "id": "sentence:bird",
+      "kind": "sentence",
+      "text": "A bird can fly.",
+      "file": "/audio/pronunciation-v1/sentence-bird.wav",
+      "seconds": 1.347,
+      "peak": 32767,
+      "rms": 3576.15,
+      "sha256": "83e36e2c7eeb857799fdfdad5b3c86909c04f36648df4887665aa8092b86d1a0"
+    },
+    {
+      "id": "word:star",
+      "kind": "word",
+      "text": "star",
+      "file": "/audio/pronunciation-v1/word-star.wav",
+      "seconds": 0.592,
+      "peak": 32767,
+      "rms": 6626.44,
+      "sha256": "cd8ac13e22a6b80c8d9a3bb1db5e6a139493625d812e6067058736dfbc6f6cf9"
+    },
+    {
+      "id": "sentence:star",
+      "kind": "sentence",
+      "text": "That star is bright.",
+      "file": "/audio/pronunciation-v1/sentence-star.wav",
+      "seconds": 1.393,
+      "peak": 32767,
+      "rms": 4864.41,
+      "sha256": "e3d9349ad949ab3d45cff19f6b8d1e38e132544dd382bf10a356f4ddaca03ef8"
+    },
+    {
+      "id": "word:home",
+      "kind": "word",
+      "text": "home",
+      "file": "/audio/pronunciation-v1/word-home.wav",
+      "seconds": 0.534,
+      "peak": 32767,
+      "rms": 5369.16,
+      "sha256": "319cc961749e3c99acd49eb30d56640dc405db25a471675e00f9f137280b118b"
+    },
+    {
+      "id": "sentence:home",
+      "kind": "sentence",
+      "text": "We can go home.",
+      "file": "/audio/pronunciation-v1/sentence-home.wav",
+      "seconds": 1.231,
+      "peak": 32767,
+      "rms": 5960.07,
+      "sha256": "bbb98e553c9fc39c928b22a37d885e65e41c9ce64edd59f40b2afc81f15f50c7"
+    },
+    {
+      "id": "word:rain",
+      "kind": "word",
+      "text": "rain",
+      "file": "/audio/pronunciation-v1/word-rain.wav",
+      "seconds": 0.604,
+      "peak": 32767,
+      "rms": 6398.85,
+      "sha256": "e1f970bf8f61abd94f98ef0705fc9a477f05934cdc56e8d5d43970ec9dc2fdc0"
+    },
+    {
+      "id": "sentence:rain",
+      "kind": "sentence",
+      "text": "I like the rain.",
+      "file": "/audio/pronunciation-v1/sentence-rain.wav",
+      "seconds": 1.254,
+      "peak": 32767,
+      "rms": 5590.99,
+      "sha256": "01620f6f95e5d9a4d64d7a387d09fbefe0639f6d760427ea9095d22be5de53a8"
+    },
+    {
+      "id": "word:fish",
+      "kind": "word",
+      "text": "fish",
+      "file": "/audio/pronunciation-v1/word-fish.wav",
+      "seconds": 0.534,
+      "peak": 32767,
+      "rms": 7013.25,
+      "sha256": "d1c28e6c215be47f185139351ad445b2ad540ec92e6eab8a775ab25f1e675b69"
+    },
+    {
+      "id": "sentence:fish",
+      "kind": "sentence",
+      "text": "The fish is small.",
+      "file": "/audio/pronunciation-v1/sentence-fish.wav",
+      "seconds": 1.068,
+      "peak": 32767,
+      "rms": 5238.33,
+      "sha256": "ee3f589ff715b8eb0a56c9fb388ccba4e87385508f171e8362669af114ca2b9d"
+    },
+    {
+      "id": "word:light",
+      "kind": "word",
+      "text": "light",
+      "file": "/audio/pronunciation-v1/word-light.wav",
+      "seconds": 0.546,
+      "peak": 32767,
+      "rms": 5145.55,
+      "sha256": "e559bbc43447ce8e7003911021a4951a0fb3e55b42f407abd14686ba623db7e1"
+    },
+    {
+      "id": "sentence:light",
+      "kind": "sentence",
+      "text": "I see a light.",
+      "file": "/audio/pronunciation-v1/sentence-light.wav",
+      "seconds": 1.382,
+      "peak": 32767,
+      "rms": 5597.3,
+      "sha256": "1374d5de20b8c6b9ac46bb20b2abbe56885346e472de19eab74873273d89811a"
+    },
+    {
+      "id": "word:friend",
+      "kind": "word",
+      "text": "friend",
+      "file": "/audio/pronunciation-v1/word-friend.wav",
+      "seconds": 0.627,
+      "peak": 32767,
+      "rms": 4873.39,
+      "sha256": "19aced09f7ef83e11969d5ec9dcef1f2f71f75dbe910000ce84da5b8e5dc63fd"
+    },
+    {
+      "id": "sentence:friend",
+      "kind": "sentence",
+      "text": "You are my friend.",
+      "file": "/audio/pronunciation-v1/sentence-friend.wav",
+      "seconds": 1.277,
+      "peak": 32767,
+      "rms": 4793.59,
+      "sha256": "e037dc206f33a0421c07807dbf8a92ceae9d124d3e5ca154fc2afaa26d2095f2"
+    },
+    {
+      "id": "word:river",
+      "kind": "word",
+      "text": "river",
+      "file": "/audio/pronunciation-v1/word-river.wav",
+      "seconds": 0.557,
+      "peak": 32767,
+      "rms": 6212.49,
+      "sha256": "1c4f58ec7c12f42881a2025b1f677a06c7cea3186877d7152526d9727f289b6f"
+    },
+    {
+      "id": "sentence:river",
+      "kind": "sentence",
+      "text": "The river is long.",
+      "file": "/audio/pronunciation-v1/sentence-river.wav",
+      "seconds": 1.173,
+      "peak": 32767,
+      "rms": 4479.29,
+      "sha256": "9befcb37422aea09e97a4df8881a362c02fdcac72287dc7b1f741962d758cf82"
+    },
+    {
+      "id": "word:cloud",
+      "kind": "word",
+      "text": "cloud",
+      "file": "/audio/pronunciation-v1/word-cloud.wav",
+      "seconds": 0.673,
+      "peak": 32767,
+      "rms": 5303.51,
+      "sha256": "14bd9e7558ec9256e1c004fdb934001839afd3c9a4e9b627552c244ee1eef011"
+    },
+    {
+      "id": "sentence:cloud",
+      "kind": "sentence",
+      "text": "The cloud is white.",
+      "file": "/audio/pronunciation-v1/sentence-cloud.wav",
+      "seconds": 1.451,
+      "peak": 32767,
+      "rms": 4350.83,
+      "sha256": "81859d354681ad73ae36a8c1f141c1c0fc1c85b7a5f7276078a677769219e1f9"
+    },
+    {
+      "id": "word:flower",
+      "kind": "word",
+      "text": "flower",
+      "file": "/audio/pronunciation-v1/word-flower.wav",
+      "seconds": 0.708,
+      "peak": 32767,
+      "rms": 5091.09,
+      "sha256": "ea0c9dd670330099cc23836adffd54c8dfea44729525a931c634c8f2c61cbe2d"
+    },
+    {
+      "id": "sentence:flower",
+      "kind": "sentence",
+      "text": "This flower is red.",
+      "file": "/audio/pronunciation-v1/sentence-flower.wav",
+      "seconds": 1.463,
+      "peak": 32767,
+      "rms": 4720.54,
+      "sha256": "7a79357b1d46cbf6c789392690ee574d1cccd6928487e02787329dc6013038a3"
+    },
+    {
+      "id": "word:habitat",
+      "kind": "word",
+      "text": "habitat",
+      "file": "/audio/word-habitat.wav",
+      "seconds": 0.755,
+      "peak": 32767,
+      "rms": 3545.69,
+      "sha256": "5355469c2e4ffb8aebfc52e3b7c4bb53e5197223340f9cf95b4bd047b7df1fb5"
+    },
+    {
+      "id": "sentence:habitat",
+      "kind": "sentence",
+      "text": "The forest provides a habitat for many birds.",
+      "file": "/audio/sentence-habitat.wav",
+      "seconds": 3.204,
+      "peak": 32767,
+      "rms": 4633.11,
+      "sha256": "a17d8baf9c67cd2aa8e9c0ce4e205961054c951892ac9d926c93de1fd9865837"
+    },
+    {
+      "id": "word:biodiversity",
+      "kind": "word",
+      "text": "biodiversity",
+      "file": "/audio/word-biodiversity.wav",
+      "seconds": 1.219,
+      "peak": 32767,
+      "rms": 4881.92,
+      "sha256": "a5f9a998c00eca84622509e049ce78aabb6c13cca1cdb199500f037f1e36d7e0"
+    },
+    {
+      "id": "sentence:biodiversity",
+      "kind": "sentence",
+      "text": "Protecting biodiversity benefits the whole planet.",
+      "file": "/audio/sentence-biodiversity.wav",
+      "seconds": 3.274,
+      "peak": 32767,
+      "rms": 4701.51,
+      "sha256": "de12560d31e8b7612323e6d2ee6112d65bf633eeac1d04510d83711268123efa"
+    },
+    {
+      "id": "word:conservation",
+      "kind": "word",
+      "text": "conservation",
+      "file": "/audio/word-conservation.wav",
+      "seconds": 1.068,
+      "peak": 32767,
+      "rms": 4741.0,
+      "sha256": "e4d0754822f5930d806c9db5d539bce93c0abffcec15699efbb4045a6dd9e970"
+    },
+    {
+      "id": "sentence:conservation",
+      "kind": "sentence",
+      "text": "Wildlife conservation needs long-term support.",
+      "file": "/audio/sentence-conservation.wav",
+      "seconds": 3.483,
+      "peak": 32767,
+      "rms": 4165.89,
+      "sha256": "a3c1feebbe9bb6df142bed30555266af9ed4f8bf5c05dd5f19cf6bdcf19de42c"
+    },
+    {
+      "id": "word:pollution",
+      "kind": "word",
+      "text": "pollution",
+      "file": "/audio/word-pollution.wav",
+      "seconds": 0.778,
+      "peak": 32767,
+      "rms": 5837.18,
+      "sha256": "ed39b696e0f8d3b9b617c09a7d66bddd469c10ec3faf58958cc63d342a355f6a"
+    },
+    {
+      "id": "sentence:pollution",
+      "kind": "sentence",
+      "text": "Air pollution affects public health.",
+      "file": "/audio/sentence-pollution.wav",
+      "seconds": 2.322,
+      "peak": 32767,
+      "rms": 3647.11,
+      "sha256": "46af3530978ec2693f4c25ccae8bde42e70a07ddb6cff5093196cb3be986bd7a"
+    },
+    {
+      "id": "word:renewable",
+      "kind": "word",
+      "text": "renewable",
+      "file": "/audio/word-renewable.wav",
+      "seconds": 0.685,
+      "peak": 32767,
+      "rms": 7398.75,
+      "sha256": "ee586da35e5a89eedb00c4ae83962b76656731dbcf82852948f5de09b81bec1f"
+    },
+    {
+      "id": "sentence:renewable",
+      "kind": "sentence",
+      "text": "Wind is a renewable source of energy.",
+      "file": "/audio/sentence-renewable.wav",
+      "seconds": 2.38,
+      "peak": 32767,
+      "rms": 4779.18,
+      "sha256": "c571a3cc2b85cb88cc8845d31e5a167ee749cf1e8563aa0b4584f7c02214c5d5"
+    },
+    {
+      "id": "word:sustainable",
+      "kind": "word",
+      "text": "sustainable",
+      "file": "/audio/word-sustainable.wav",
+      "seconds": 0.975,
+      "peak": 32767,
+      "rms": 5756.95,
+      "sha256": "9681b653d6f074082b069f30a652b8bdae85039c894ad6f349368b193b428c52"
+    },
+    {
+      "id": "sentence:sustainable",
+      "kind": "sentence",
+      "text": "The city is developing sustainable transport.",
+      "file": "/audio/sentence-sustainable.wav",
+      "seconds": 2.972,
+      "peak": 32767,
+      "rms": 5305.42,
+      "sha256": "3d89c0cd56b675d6f3404c7ad7faee517fc8f07636fa85fb63b1e21bf0e925f4"
+    },
+    {
+      "id": "word:emission",
+      "kind": "word",
+      "text": "emission",
+      "file": "/audio/word-emission.wav",
+      "seconds": 0.697,
+      "peak": 32767,
+      "rms": 4900.88,
+      "sha256": "2e9367f38d6e47d9246f8851d3c02fc96b17512a8350d8af9cc5e8fa70dbb5cd"
+    },
+    {
+      "id": "sentence:emission",
+      "kind": "sentence",
+      "text": "The factory reduced its carbon emission.",
+      "file": "/audio/sentence-emission.wav",
+      "seconds": 2.496,
+      "peak": 32767,
+      "rms": 3964.71,
+      "sha256": "b8baa210ffc3f7880068c619b2d17de5a4d0d18488b5d9c990e63a992e45bfec"
+    },
+    {
+      "id": "word:ecosystem",
+      "kind": "word",
+      "text": "ecosystem",
+      "file": "/audio/word-ecosystem.wav",
+      "seconds": 0.987,
+      "peak": 32767,
+      "rms": 4908.04,
+      "sha256": "8f925d85ba5e617c966b8fdcba6ae9c9ac8c1b458db4d04bc057c3d695474d9e"
+    },
+    {
+      "id": "sentence:ecosystem",
+      "kind": "sentence",
+      "text": "Each species plays a role in the ecosystem.",
+      "file": "/audio/sentence-ecosystem.wav",
+      "seconds": 3.065,
+      "peak": 32767,
+      "rms": 5223.09,
+      "sha256": "e1446b4b709e73e0c68f06fe05c018165a780755e492cfc948562fc14a4275c6"
+    },
+    {
+      "id": "word:resource",
+      "kind": "word",
+      "text": "resource",
+      "file": "/audio/word-resource.wav",
+      "seconds": 0.952,
+      "peak": 32767,
+      "rms": 6041.62,
+      "sha256": "9473041c77110d0aa27bb99a57a83c1bef9754f0bc690ea560495af836ed5efb"
+    },
+    {
+      "id": "sentence:resource",
+      "kind": "sentence",
+      "text": "Fresh water is a valuable resource.",
+      "file": "/audio/sentence-resource.wav",
+      "seconds": 2.682,
+      "peak": 32767,
+      "rms": 4232.06,
+      "sha256": "6dfd2ad28ad707805580e15b406f9f294455a1ee4df271b77420c1f3cadfc8a4"
+    },
+    {
+      "id": "word:climate",
+      "kind": "word",
+      "text": "climate",
+      "file": "/audio/word-climate.wav",
+      "seconds": 0.72,
+      "peak": 32767,
+      "rms": 4654.43,
+      "sha256": "42d6eb2051d209ab2dd2fe958903c2f455378e21e8ce7a2b1f9ddfc189985db8"
+    },
+    {
+      "id": "sentence:climate",
+      "kind": "sentence",
+      "text": "The local climate is becoming warmer.",
+      "file": "/audio/sentence-climate.wav",
+      "seconds": 2.392,
+      "peak": 32767,
+      "rms": 3176.33,
+      "sha256": "2caa1c94b328fc102488773a86bb1a60e456cf9740291dba9440691830ce1515"
+    },
+    {
+      "id": "word:recycle",
+      "kind": "word",
+      "text": "recycle",
+      "file": "/audio/word-recycle.wav",
+      "seconds": 0.755,
+      "peak": 32767,
+      "rms": 4581.3,
+      "sha256": "4bc96957c21f297783ebaa3babd8a72fb9962e825196f70d7dc3ea0f95b61532"
+    },
+    {
+      "id": "sentence:recycle",
+      "kind": "sentence",
+      "text": "We recycle paper and glass at school.",
+      "file": "/audio/sentence-recycle.wav",
+      "seconds": 2.531,
+      "peak": 32767,
+      "rms": 4684.57,
+      "sha256": "43da590869ba914ce0bf6f4cd5e80cd16a6c081441a4ca52f1cf359923d9dff0"
+    },
+    {
+      "id": "word:species",
+      "kind": "word",
+      "text": "species",
+      "file": "/audio/word-species.wav",
+      "seconds": 1.033,
+      "peak": 32767,
+      "rms": 5231.73,
+      "sha256": "7605e0af1828637f1e8f61a548c94badb382b6c2eb2beb21fdbb70292c49d063"
+    },
+    {
+      "id": "sentence:species",
+      "kind": "sentence",
+      "text": "Several species live in this small lake.",
+      "file": "/audio/sentence-species.wav",
+      "seconds": 2.717,
+      "peak": 32767,
+      "rms": 5036.92,
+      "sha256": "26f03e0e2f99a98b03b31f48e54aaa1e1afd26f0941fd2019174d0ce37010cde"
+    },
+    {
+      "id": "word:drought",
+      "kind": "word",
+      "text": "drought",
+      "file": "/audio/word-drought.wav",
+      "seconds": 0.615,
+      "peak": 32767,
+      "rms": 3891.57,
+      "sha256": "44dec2ae0c2f301270a17bb9b6530a6db5058f9deb56ad706664a65571c0806b"
+    },
+    {
+      "id": "sentence:drought",
+      "kind": "sentence",
+      "text": "A long drought damaged the crops.",
+      "file": "/audio/sentence-drought.wav",
+      "seconds": 2.426,
+      "peak": 32767,
+      "rms": 4198.97,
+      "sha256": "7f005238c32ee1fd3c092edace91226a19a19b4dfdb3fd196a8bc12c731db1d9"
+    },
+    {
+      "id": "word:agriculture",
+      "kind": "word",
+      "text": "agriculture",
+      "file": "/audio/word-agriculture.wav",
+      "seconds": 0.987,
+      "peak": 32767,
+      "rms": 3282.93,
+      "sha256": "ccf55688795f9e5cfb8d498e3f44776ddbc66c01d0ae20e95f1302db0d5e08e6"
+    },
+    {
+      "id": "sentence:agriculture",
+      "kind": "sentence",
+      "text": "Modern agriculture relies on careful water use.",
+      "file": "/audio/sentence-agriculture.wav",
+      "seconds": 3.576,
+      "peak": 32767,
+      "rms": 4043.47,
+      "sha256": "0550b07831e6c1c6e1620920ce21bfc8b474a4a134c0360e24debb79327d2a6a"
+    },
+    {
+      "id": "word:vegetation",
+      "kind": "word",
+      "text": "vegetation",
+      "file": "/audio/word-vegetation.wav",
+      "seconds": 0.998,
+      "peak": 32767,
+      "rms": 3934.53,
+      "sha256": "1c8e1fc8c1852b3d7d258cee15cb99e09b2e0c044a45a0ccb5701eb593acf1ad"
+    },
+    {
+      "id": "sentence:vegetation",
+      "kind": "sentence",
+      "text": "The vegetation protects the soil from erosion.",
+      "file": "/audio/sentence-vegetation.wav",
+      "seconds": 2.972,
+      "peak": 32767,
+      "rms": 3817.87,
+      "sha256": "2efeade38723ac6f8b9b3afa076c1fed5ba8fe3bbdb514c07024139b6ddd70b0"
+    },
+    {
+      "id": "word:curriculum",
+      "kind": "word",
+      "text": "curriculum",
+      "file": "/audio/word-curriculum.wav",
+      "seconds": 0.778,
+      "peak": 32767,
+      "rms": 5173.54,
+      "sha256": "b177092458822312b117d446d90f6418fddea8612b5ab75d88d9c0ba5ec7106d"
+    },
+    {
+      "id": "sentence:curriculum",
+      "kind": "sentence",
+      "text": "The new curriculum includes practical skills.",
+      "file": "/audio/sentence-curriculum.wav",
+      "seconds": 3.17,
+      "peak": 32767,
+      "rms": 4561.15,
+      "sha256": "50ceca1c568dad8a795c988ea689f7054cf8c6c623b189a64078de58ce4a19e7"
+    },
+    {
+      "id": "word:scholarship",
+      "kind": "word",
+      "text": "scholarship",
+      "file": "/audio/word-scholarship.wav",
+      "seconds": 0.882,
+      "peak": 32767,
+      "rms": 4638.75,
+      "sha256": "449087c9b13f66243798d5853573e65affc4a4fbe65cebdbecbddfbac28cbe72"
+    },
+    {
+      "id": "sentence:scholarship",
+      "kind": "sentence",
+      "text": "She received a scholarship to study abroad.",
+      "file": "/audio/sentence-scholarship.wav",
+      "seconds": 2.833,
+      "peak": 32767,
+      "rms": 4106.76,
+      "sha256": "7a1bbeeac2078f25a511d847cd77362bf0ca4772bd95b9d71b841a2de3bfe44d"
+    },
+    {
+      "id": "word:qualification",
+      "kind": "word",
+      "text": "qualification",
+      "file": "/audio/word-qualification.wav",
+      "seconds": 1.126,
+      "peak": 32767,
+      "rms": 4750.48,
+      "sha256": "4e51c7f5f4035f66af436606ebce79ecf6439052874eef7ffa61d2bb5b6eb4a8"
+    },
+    {
+      "id": "sentence:qualification",
+      "kind": "sentence",
+      "text": "This qualification can improve your career options.",
+      "file": "/audio/sentence-qualification.wav",
+      "seconds": 3.413,
+      "peak": 32767,
+      "rms": 4545.79,
+      "sha256": "f0473020f4687d5fbca203c8112dcb370391cf4383c8c1b3a4ba469f69c98b8a"
+    },
+    {
+      "id": "word:research",
+      "kind": "word",
+      "text": "research",
+      "file": "/audio/word-research.wav",
+      "seconds": 0.859,
+      "peak": 32767,
+      "rms": 4928.25,
+      "sha256": "e86bd9a1f1912311a462155b2bd6f52252325af2297f9564058c9cff0ea97cd2"
+    },
+    {
+      "id": "sentence:research",
+      "kind": "sentence",
+      "text": "The team conducts research on memory.",
+      "file": "/audio/sentence-research.wav",
+      "seconds": 2.357,
+      "peak": 32767,
+      "rms": 4932.74,
+      "sha256": "a36d2a6b746cb926f23ad3939fbdb1e8b1941d57ba8475ef20c1d8cf84ac71a3"
+    },
+    {
+      "id": "word:assessment",
+      "kind": "word",
+      "text": "assessment",
+      "file": "/audio/word-assessment.wav",
+      "seconds": 0.917,
+      "peak": 32767,
+      "rms": 5277.0,
+      "sha256": "a30c4942bb8de7d8ebf940fa6b9903535fe4e0a419ed05b99b05890de219c9f3"
+    },
+    {
+      "id": "sentence:assessment",
+      "kind": "sentence",
+      "text": "Regular assessment helps teachers plan lessons.",
+      "file": "/audio/sentence-assessment.wav",
+      "seconds": 3.32,
+      "peak": 32767,
+      "rms": 3916.93,
+      "sha256": "427ddb8defc607ead38a91724049a7a07f5016db3824a8235e5a52643029a23b"
+    },
+    {
+      "id": "word:academic",
+      "kind": "word",
+      "text": "academic",
+      "file": "/audio/word-academic.wav",
+      "seconds": 0.824,
+      "peak": 32767,
+      "rms": 4371.58,
+      "sha256": "916b90016337d8b22e8609d1f2995cb5dcc76cf7c9ec38190c8867a2388e8f6c"
+    },
+    {
+      "id": "sentence:academic",
+      "kind": "sentence",
+      "text": "Academic writing requires clear evidence.",
+      "file": "/audio/sentence-academic.wav",
+      "seconds": 2.868,
+      "peak": 32767,
+      "rms": 2554.33,
+      "sha256": "7974af09e13d52599a5a62b14630ae1a60209877cf682210e7793a40112eaf3c"
+    },
+    {
+      "id": "word:literacy",
+      "kind": "word",
+      "text": "literacy",
+      "file": "/audio/word-literacy.wav",
+      "seconds": 0.917,
+      "peak": 32767,
+      "rms": 6071.49,
+      "sha256": "09737d0e65c50e18b290b9b260c3abaec7ab134144658e47869b05c311aed807"
+    },
+    {
+      "id": "sentence:literacy",
+      "kind": "sentence",
+      "text": "Early reading supports literacy development.",
+      "file": "/audio/sentence-literacy.wav",
+      "seconds": 2.821,
+      "peak": 32767,
+      "rms": 4415.87,
+      "sha256": "b672b7164a191d71d1dba15cd679b7d31c613b220c0e7063cf38f64df935e238"
+    },
+    {
+      "id": "word:tuition",
+      "kind": "word",
+      "text": "tuition",
+      "file": "/audio/word-tuition.wav",
+      "seconds": 0.72,
+      "peak": 32767,
+      "rms": 7972.33,
+      "sha256": "deaca2cbea14e32cca14675f223727e25b10228e2db5f72db68d659384a5c22e"
+    },
+    {
+      "id": "sentence:tuition",
+      "kind": "sentence",
+      "text": "Tuition fees vary between universities.",
+      "file": "/audio/sentence-tuition.wav",
+      "seconds": 2.984,
+      "peak": 32767,
+      "rms": 5365.48,
+      "sha256": "ed4269db1ec1dc31abe6a5ee695752349e368321159e35f571e6781278bbef69"
+    },
+    {
+      "id": "word:lecture",
+      "kind": "word",
+      "text": "lecture",
+      "file": "/audio/word-lecture.wav",
+      "seconds": 0.743,
+      "peak": 32767,
+      "rms": 3767.72,
+      "sha256": "58da459ee113e458b240febc31cfb8ef2d7c5405c33d1e71348d3972c9d78e3a"
+    },
+    {
+      "id": "sentence:lecture",
+      "kind": "sentence",
+      "text": "The lecture explained a complex theory.",
+      "file": "/audio/sentence-lecture.wav",
+      "seconds": 2.461,
+      "peak": 32767,
+      "rms": 4183.14,
+      "sha256": "7dbec02a488db12560212f070ea2c3c433f8181ddc8a085ab54a19670ab6b32f"
+    },
+    {
+      "id": "word:discipline",
+      "kind": "word",
+      "text": "discipline",
+      "file": "/audio/word-discipline.wav",
+      "seconds": 0.859,
+      "peak": 32767,
+      "rms": 4119.25,
+      "sha256": "b324ba43bfd852609147b8cd0a4c96c43f5ade5cfb4bf5dd03488fa916df6268"
+    },
+    {
+      "id": "sentence:discipline",
+      "kind": "sentence",
+      "text": "Biology is a scientific discipline.",
+      "file": "/audio/sentence-discipline.wav",
+      "seconds": 2.74,
+      "peak": 32767,
+      "rms": 4221.79,
+      "sha256": "db833d9349da76828f11d1a528ebc84884a9e22b35bda7cb9fd3047cc2f9e579"
+    },
+    {
+      "id": "word:evidence",
+      "kind": "word",
+      "text": "evidence",
+      "file": "/audio/word-evidence.wav",
+      "seconds": 0.766,
+      "peak": 32767,
+      "rms": 6149.61,
+      "sha256": "c6d8fbfb4d2601195d189d13d780b61fa46a644fbf874219510c09fdc6842f07"
+    },
+    {
+      "id": "sentence:evidence",
+      "kind": "sentence",
+      "text": "The report presents strong evidence.",
+      "file": "/audio/sentence-evidence.wav",
+      "seconds": 2.415,
+      "peak": 32767,
+      "rms": 5216.48,
+      "sha256": "90a742e1e1a44930e5293a3d2c7c52dd09dff4bfa1a0b1a24a1666767b22ef1a"
+    },
+    {
+      "id": "word:analysis",
+      "kind": "word",
+      "text": "analysis",
+      "file": "/audio/word-analysis.wav",
+      "seconds": 1.045,
+      "peak": 32767,
+      "rms": 4610.65,
+      "sha256": "c2c5cac67ce92f626a910227aadb2ed98b374f895bd539c5a479fc6288cf6b09"
+    },
+    {
+      "id": "sentence:analysis",
+      "kind": "sentence",
+      "text": "The analysis revealed an interesting pattern.",
+      "file": "/audio/sentence-analysis.wav",
+      "seconds": 3.019,
+      "peak": 32767,
+      "rms": 4163.9,
+      "sha256": "95ba57f86e2b8a2f2715d5480ee668ceb06dd097695d251832ae4cef9c25b139"
+    },
+    {
+      "id": "word:hypothesis",
+      "kind": "word",
+      "text": "hypothesis",
+      "file": "/audio/word-hypothesis.wav",
+      "seconds": 1.103,
+      "peak": 32767,
+      "rms": 5078.29,
+      "sha256": "1524f18d0eeb97cf9befc9d3f56e3b8c7f69e8bf0ffad5d7db18dbfa577ce51f"
+    },
+    {
+      "id": "sentence:hypothesis",
+      "kind": "sentence",
+      "text": "The experiment tested the hypothesis.",
+      "file": "/audio/sentence-hypothesis.wav",
+      "seconds": 3.042,
+      "peak": 32767,
+      "rms": 4085.75,
+      "sha256": "d8b36573e06e55345d46c0ca395f556710a5b33f1758a8db4e075f6e3c6665e4"
+    },
+    {
+      "id": "word:evaluate",
+      "kind": "word",
+      "text": "evaluate",
+      "file": "/audio/word-evaluate.wav",
+      "seconds": 1.057,
+      "peak": 32767,
+      "rms": 4160.06,
+      "sha256": "6988075d2078df4a02020129ed6aa6e1f33e704dedbce9fe9d49d74c27ef9904"
+    },
+    {
+      "id": "sentence:evaluate",
+      "kind": "sentence",
+      "text": "Students evaluate different sources of information.",
+      "file": "/audio/sentence-evaluate.wav",
+      "seconds": 3.228,
+      "peak": 32767,
+      "rms": 4257.27,
+      "sha256": "1eba93093a93e13177046f80bd0aaece7fe6dd732b52fb31954468706818006b"
+    },
+    {
+      "id": "word:comprehension",
+      "kind": "word",
+      "text": "comprehension",
+      "file": "/audio/word-comprehension.wav",
+      "seconds": 1.08,
+      "peak": 32767,
+      "rms": 4442.57,
+      "sha256": "1d578965afef3e3ae95a7c2da61db24030c57aad05f84954d04b0ff0ca9edab7"
+    },
+    {
+      "id": "sentence:comprehension",
+      "kind": "sentence",
+      "text": "Daily practice improves reading comprehension.",
+      "file": "/audio/sentence-comprehension.wav",
+      "seconds": 2.995,
+      "peak": 32767,
+      "rms": 4006.19,
+      "sha256": "6509d7f799ad41e26732c264640be75b6f4f2369b124979cee9802ae1899abd0"
+    },
+    {
+      "id": "word:innovation",
+      "kind": "word",
+      "text": "innovation",
+      "file": "/audio/word-innovation.wav",
+      "seconds": 0.848,
+      "peak": 32767,
+      "rms": 4639.79,
+      "sha256": "a5f7588c5db7cc4a5b14e1215a12c8c64caa1968f892031eb4bbb806aa7c62ab"
+    },
+    {
+      "id": "sentence:innovation",
+      "kind": "sentence",
+      "text": "Innovation can make public services more efficient.",
+      "file": "/audio/sentence-innovation.wav",
+      "seconds": 3.762,
+      "peak": 32767,
+      "rms": 3331.76,
+      "sha256": "b7e47a7ff74d12057a773c3bc56df95b1c9107384f6521ffc57f7b65bab6b1a7"
+    },
+    {
+      "id": "word:automation",
+      "kind": "word",
+      "text": "automation",
+      "file": "/audio/word-automation.wav",
+      "seconds": 0.894,
+      "peak": 32767,
+      "rms": 4500.99,
+      "sha256": "f9fa94ca5b1d8824956b518b066f94e8aa87b917d21ab58e3983379928ad8d1c"
+    },
+    {
+      "id": "sentence:automation",
+      "kind": "sentence",
+      "text": "Automation changes the way people work.",
+      "file": "/audio/sentence-automation.wav",
+      "seconds": 2.624,
+      "peak": 32767,
+      "rms": 4046.7,
+      "sha256": "52683fbec46625914ed7ffe818670a57ebd175179964c862d5ca3c517888d78e"
+    },
+    {
+      "id": "word:digital",
+      "kind": "word",
+      "text": "digital",
+      "file": "/audio/word-digital.wav",
+      "seconds": 0.731,
+      "peak": 32767,
+      "rms": 5158.32,
+      "sha256": "d4f1e2d679cd9ad7434d2a6b158e75aa5545352c5aa86d89681bcd5006048a47"
+    },
+    {
+      "id": "sentence:digital",
+      "kind": "sentence",
+      "text": "Digital tools help students share ideas.",
+      "file": "/audio/sentence-digital.wav",
+      "seconds": 2.926,
+      "peak": 32767,
+      "rms": 4790.36,
+      "sha256": "8ed3d39d63f93daf3579662ab5a55b7ff10ebdd502bc05dbea6f6112c730a21a"
+    },
+    {
+      "id": "word:infrastructure",
+      "kind": "word",
+      "text": "infrastructure",
+      "file": "/audio/word-infrastructure.wav",
+      "seconds": 1.115,
+      "peak": 32767,
+      "rms": 5583.28,
+      "sha256": "b87b84254dbd97f725f44d1c06f6bac712f865aa22f0f3865603bdafa42b71ed"
+    },
+    {
+      "id": "sentence:infrastructure",
+      "kind": "sentence",
+      "text": "Reliable infrastructure supports economic growth.",
+      "file": "/audio/sentence-infrastructure.wav",
+      "seconds": 3.762,
+      "peak": 32767,
+      "rms": 4236.9,
+      "sha256": "67d926562c7ee876d43ff49a8ef284130e77536faac6baa780bc9bf86d28d8db"
+    },
+    {
+      "id": "word:efficient",
+      "kind": "word",
+      "text": "efficient",
+      "file": "/audio/word-efficient.wav",
+      "seconds": 0.848,
+      "peak": 32767,
+      "rms": 4862.21,
+      "sha256": "f3e3aa782276c9b03d1a9d16e885ce0a0b863e4a72d1e94d84c6f5ae22498c7c"
+    },
+    {
+      "id": "sentence:efficient",
+      "kind": "sentence",
+      "text": "The new system is more efficient.",
+      "file": "/audio/sentence-efficient.wav",
+      "seconds": 1.997,
+      "peak": 32767,
+      "rms": 5752.41,
+      "sha256": "3973c400b52717ab4487714938f30df051e9c69b271004db51b6f16d317ef358"
+    },
+    {
+      "id": "word:privacy",
+      "kind": "word",
+      "text": "privacy",
+      "file": "/audio/word-privacy.wav",
+      "seconds": 0.859,
+      "peak": 32767,
+      "rms": 4557.28,
+      "sha256": "2c049d0e606c4376c63dc329edd170f71c0a0e2df85d253f3dfcc4a2a8a09b8a"
+    },
+    {
+      "id": "sentence:privacy",
+      "kind": "sentence",
+      "text": "Users should be able to protect their privacy.",
+      "file": "/audio/sentence-privacy.wav",
+      "seconds": 2.833,
+      "peak": 32767,
+      "rms": 5064.18,
+      "sha256": "2b33e0abc9c65c8765d8dbe8c62dc737cae9d6c19bd6d8e76e35c05af2301803"
+    },
+    {
+      "id": "word:device",
+      "kind": "word",
+      "text": "device",
+      "file": "/audio/word-device.wav",
+      "seconds": 0.848,
+      "peak": 32767,
+      "rms": 4881.42,
+      "sha256": "49cb62a5de1807d822f3aab913252a675613ba512404e5d67c233717882fce5b"
+    },
+    {
+      "id": "sentence:device",
+      "kind": "sentence",
+      "text": "This device measures air quality.",
+      "file": "/audio/sentence-device.wav",
+      "seconds": 2.299,
+      "peak": 32767,
+      "rms": 4821.27,
+      "sha256": "5cbedb0298500064ec13b8625673decaeebcf1dda7b6b713b1969def6e54042d"
+    },
+    {
+      "id": "word:network",
+      "kind": "word",
+      "text": "network",
+      "file": "/audio/word-network.wav",
+      "seconds": 0.708,
+      "peak": 32767,
+      "rms": 3730.46,
+      "sha256": "15ae12c22566b5be894a2e724384e55108efdcb75fe7dbabd5468bce8db2dc08"
+    },
+    {
+      "id": "sentence:network",
+      "kind": "sentence",
+      "text": "A strong network connects the research teams.",
+      "file": "/audio/sentence-network.wav",
+      "seconds": 3.065,
+      "peak": 32767,
+      "rms": 4009.26,
+      "sha256": "7eac567d83fc2e6dcd01a833c3acb7785dc1b8c72d9b8e7da12be2d68c79baf7"
+    },
+    {
+      "id": "word:algorithm",
+      "kind": "word",
+      "text": "algorithm",
+      "file": "/audio/word-algorithm.wav",
+      "seconds": 0.882,
+      "peak": 32767,
+      "rms": 5681.01,
+      "sha256": "63608b8bc0b622ccc3e6e7371fa00e0b5bd493a05067dab3e759b16ae1815f6b"
+    },
+    {
+      "id": "sentence:algorithm",
+      "kind": "sentence",
+      "text": "The algorithm sorts the information quickly.",
+      "file": "/audio/sentence-algorithm.wav",
+      "seconds": 2.879,
+      "peak": 32767,
+      "rms": 2755.77,
+      "sha256": "76b3cdb08421c60d4980154630549a0aa0e94fb8ffd1d8c093d1e107c204f677"
+    },
+    {
+      "id": "word:access",
+      "kind": "word",
+      "text": "access",
+      "file": "/audio/word-access.wav",
+      "seconds": 0.766,
+      "peak": 32767,
+      "rms": 4494.59,
+      "sha256": "db6392d7fc458c771c966c2633f3f5f2fee06024c15a51d6e02bda2e6da39861"
+    },
+    {
+      "id": "sentence:access",
+      "kind": "sentence",
+      "text": "Everyone needs access to reliable information.",
+      "file": "/audio/sentence-access.wav",
+      "seconds": 3.239,
+      "peak": 32767,
+      "rms": 2937.12,
+      "sha256": "faea3b6c2acdcf3259804a8bc4331bfa499893ebd548e3f809a81c5d6cac9822"
+    },
+    {
+      "id": "word:urban",
+      "kind": "word",
+      "text": "urban",
+      "file": "/audio/word-urban.wav",
+      "seconds": 0.627,
+      "peak": 32767,
+      "rms": 5467.36,
+      "sha256": "6fdc1c621ab29045811d57bf5d3018940c8361958b7ab6ce6e0716aa044b6e28"
+    },
+    {
+      "id": "sentence:urban",
+      "kind": "sentence",
+      "text": "Urban planning affects daily life.",
+      "file": "/audio/sentence-urban.wav",
+      "seconds": 2.334,
+      "peak": 32767,
+      "rms": 4988.74,
+      "sha256": "3fe9eac3cdb061c86b0dd7d088f671aa99936b361a8308874620db049af76dd6"
+    },
+    {
+      "id": "word:population",
+      "kind": "word",
+      "text": "population",
+      "file": "/audio/word-population.wav",
+      "seconds": 0.987,
+      "peak": 32767,
+      "rms": 4772.45,
+      "sha256": "75cd1d996b0cdd45ad50c3c00274bd17026883d7cec498f96eb4d18c39b1de25"
+    },
+    {
+      "id": "sentence:population",
+      "kind": "sentence",
+      "text": "The population has grown over the past decade.",
+      "file": "/audio/sentence-population.wav",
+      "seconds": 3.077,
+      "peak": 32767,
+      "rms": 3788.69,
+      "sha256": "b58e130543655bb6ddfad7d62d3504c6c1828726f03a499484e9f15d996d6b36"
+    },
+    {
+      "id": "word:employment",
+      "kind": "word",
+      "text": "employment",
+      "file": "/audio/word-employment.wav",
+      "seconds": 0.859,
+      "peak": 32767,
+      "rms": 6479.98,
+      "sha256": "8f862f307515c945bf62f754b968806c59dcdebb6bbc5f371274b846b5398a17"
+    },
+    {
+      "id": "sentence:employment",
+      "kind": "sentence",
+      "text": "New industries create employment opportunities.",
+      "file": "/audio/sentence-employment.wav",
+      "seconds": 3.553,
+      "peak": 32767,
+      "rms": 4303.9,
+      "sha256": "8143d152bd023fcda7f0145600e202cfe13c22efc4b81acfa5f051882320be87"
+    },
+    {
+      "id": "word:manufacture",
+      "kind": "word",
+      "text": "manufacture",
+      "file": "/audio/word-manufacture.wav",
+      "seconds": 1.022,
+      "peak": 32767,
+      "rms": 3982.17,
+      "sha256": "3938476d53701c2e20ad29ac2bf30d607eb98051f56027c92a78536c127df2f5"
+    },
+    {
+      "id": "sentence:manufacture",
+      "kind": "sentence",
+      "text": "The company will manufacture electric vehicles.",
+      "file": "/audio/sentence-manufacture.wav",
+      "seconds": 3.622,
+      "peak": 32767,
+      "rms": 3085.28,
+      "sha256": "9b0e8f693a534436f94e0bf6d30f6748326235a28c29d48e18fde132a9bfc2a1"
+    },
+    {
+      "id": "word:distribution",
+      "kind": "word",
+      "text": "distribution",
+      "file": "/audio/word-distribution.wav",
+      "seconds": 1.045,
+      "peak": 32767,
+      "rms": 4767.97,
+      "sha256": "65eb3a5384ac9add5c8577ba02cd9a4f86be5e112ed1ad4a48f14e9fe61bbfea"
+    },
+    {
+      "id": "sentence:distribution",
+      "kind": "sentence",
+      "text": "The distribution of resources should be fair.",
+      "file": "/audio/sentence-distribution.wav",
+      "seconds": 2.752,
+      "peak": 32767,
+      "rms": 5113.82,
+      "sha256": "22a1c2ce62d37cf663209bbd97eaf90ef384ce9553a6af2204ae83c517362405"
+    },
+    {
+      "id": "word:accommodation",
+      "kind": "word",
+      "text": "accommodation",
+      "file": "/audio/word-accommodation.wav",
+      "seconds": 1.068,
+      "peak": 32767,
+      "rms": 5410.37,
+      "sha256": "c13fa183c2a3f6e071c1ad2783e975c47687811490f3d4cc8cadc88ed49a3c3b"
+    },
+    {
+      "id": "sentence:accommodation",
+      "kind": "sentence",
+      "text": "We booked accommodation near the station.",
+      "file": "/audio/sentence-accommodation.wav",
+      "seconds": 2.194,
+      "peak": 32767,
+      "rms": 4684.52,
+      "sha256": "c44e14a36d5f7b6d0ff2e1acf1e47199365090b55e55ce7709d0b0419abf1a0e"
+    },
+    {
+      "id": "word:reservation",
+      "kind": "word",
+      "text": "reservation",
+      "file": "/audio/word-reservation.wav",
+      "seconds": 0.94,
+      "peak": 32767,
+      "rms": 5646.59,
+      "sha256": "f064602b4b9110cce42128371fd41b73722983465b5773c2f66d78ae82162583"
+    },
+    {
+      "id": "sentence:reservation",
+      "kind": "sentence",
+      "text": "Please confirm your reservation by email.",
+      "file": "/audio/sentence-reservation.wav",
+      "seconds": 2.647,
+      "peak": 32767,
+      "rms": 4854.87,
+      "sha256": "0a2a21d0234cdcea2f5ed2792151be141c6ebbd6fd144d970df74cb18b93b27d"
+    },
+    {
+      "id": "word:itinerary",
+      "kind": "word",
+      "text": "itinerary",
+      "file": "/audio/word-itinerary.wav",
+      "seconds": 0.975,
+      "peak": 32767,
+      "rms": 3767.66,
+      "sha256": "3ef98042a27f53d7bc0a2aaa94b7ce8f09665358652e391251f7b542151347f2"
+    },
+    {
+      "id": "sentence:itinerary",
+      "kind": "sentence",
+      "text": "Our itinerary includes a visit to the museum.",
+      "file": "/audio/sentence-itinerary.wav",
+      "seconds": 3.228,
+      "peak": 32767,
+      "rms": 3375.75,
+      "sha256": "362c9251135bce7601d822684ecacbfecbd5976975d18f599a67f63a30fee2f1"
+    },
+    {
+      "id": "word:departure",
+      "kind": "word",
+      "text": "departure",
+      "file": "/audio/word-departure.wav",
+      "seconds": 0.813,
+      "peak": 32767,
+      "rms": 4803.67,
+      "sha256": "54fdf129a5e9911d56bd76a9f9fe573b5202642413fec2a25b4a33270fc95bbd"
+    },
+    {
+      "id": "sentence:departure",
+      "kind": "sentence",
+      "text": "The departure time is printed on your ticket.",
+      "file": "/audio/sentence-departure.wav",
+      "seconds": 2.577,
+      "peak": 32767,
+      "rms": 3202.05,
+      "sha256": "3a038b08ab633d72f02159366cc00e2b73fe5125c09b5693ceda37bca158f1aa"
+    },
+    {
+      "id": "word:destination",
+      "kind": "word",
+      "text": "destination",
+      "file": "/audio/word-destination.wav",
+      "seconds": 1.033,
+      "peak": 32767,
+      "rms": 4687.9,
+      "sha256": "ae27c00148fa8a75f32c19a4335dd997c89db872c784c78b34daa3e13cb44933"
+    },
+    {
+      "id": "sentence:destination",
+      "kind": "sentence",
+      "text": "The island is a popular holiday destination.",
+      "file": "/audio/sentence-destination.wav",
+      "seconds": 3.1,
+      "peak": 32767,
+      "rms": 4626.97,
+      "sha256": "eb31d9f6146cf8895f52ae64141c4324e04f333de738a7c9bc804b25522bce65"
+    },
+    {
+      "id": "word:transport",
+      "kind": "word",
+      "text": "transport",
+      "file": "/audio/word-transport.wav",
+      "seconds": 1.033,
+      "peak": 32767,
+      "rms": 4086.56,
+      "sha256": "d93153fc84d23a73bd6a608f475a0d4e80756e2529ef8c1b2a78c113746704f1"
+    },
+    {
+      "id": "sentence:transport",
+      "kind": "sentence",
+      "text": "Public transport makes the city easier to explore.",
+      "file": "/audio/sentence-transport.wav",
+      "seconds": 3.425,
+      "peak": 32767,
+      "rms": 2839.24,
+      "sha256": "6cd6911c6d98d9e8d7013260992e614121e4b5534e92ec483ef0ab6808d8eb99"
+    },
+    {
+      "id": "word:insurance",
+      "kind": "word",
+      "text": "insurance",
+      "file": "/audio/word-insurance.wav",
+      "seconds": 0.917,
+      "peak": 32767,
+      "rms": 6546.69,
+      "sha256": "b72628e7bb24f9dea8d4e7007429cb458b4f1d497193975397cfcfb546401789"
+    },
+    {
+      "id": "sentence:insurance",
+      "kind": "sentence",
+      "text": "Travel insurance can cover unexpected costs.",
+      "file": "/audio/sentence-insurance.wav",
+      "seconds": 3.46,
+      "peak": 32767,
+      "rms": 3329.59,
+      "sha256": "47664581aa632336e31abc084cb541d532b4106d8a6db8b242ad55b99864661b"
+    },
+    {
+      "id": "word:currency",
+      "kind": "word",
+      "text": "currency",
+      "file": "/audio/word-currency.wav",
+      "seconds": 0.917,
+      "peak": 32767,
+      "rms": 5810.74,
+      "sha256": "148729e0c5cabb0e01cd94ec3166d105d46ed18afede4f367a73be312dfed9fc"
+    },
+    {
+      "id": "sentence:currency",
+      "kind": "sentence",
+      "text": "You can exchange currency at the airport.",
+      "file": "/audio/sentence-currency.wav",
+      "seconds": 2.833,
+      "peak": 32767,
+      "rms": 4405.74,
+      "sha256": "eb05f916276cde8c181af12aa51e557bed6ba813713d26d4236bf728b5dd387c"
+    },
+    {
+      "id": "word:facility",
+      "kind": "word",
+      "text": "facility",
+      "file": "/audio/word-facility.wav",
+      "seconds": 0.917,
+      "peak": 32767,
+      "rms": 6433.0,
+      "sha256": "5cb1f8f017ed35e1d481fb252dafb1ec7e40ecbcf962a73b55e5a4f63b71e864"
+    },
+    {
+      "id": "sentence:facility",
+      "kind": "sentence",
+      "text": "The sports facility opens early.",
+      "file": "/audio/sentence-facility.wav",
+      "seconds": 2.473,
+      "peak": 32767,
+      "rms": 4736.87,
+      "sha256": "60d0e5edc2c4136de375c55e1e43838e8c3903d3120f09271a29185bd5ac87af"
+    },
+    {
+      "id": "word:reception",
+      "kind": "word",
+      "text": "reception",
+      "file": "/audio/word-reception.wav",
+      "seconds": 0.801,
+      "peak": 32767,
+      "rms": 5101.71,
+      "sha256": "170a4c6871dc073a5662739806476294077909361fd149e97dde5f4fb2566a93"
+    },
+    {
+      "id": "sentence:reception",
+      "kind": "sentence",
+      "text": "Leave your key at reception.",
+      "file": "/audio/sentence-reception.wav",
+      "seconds": 1.869,
+      "peak": 32767,
+      "rms": 5264.68,
+      "sha256": "6ce674cc8e9a133a8901e97a28e25c95b7642f83d88b762c830ec2e8e7d017ea"
+    },
+    {
+      "id": "word:refund",
+      "kind": "word",
+      "text": "refund",
+      "file": "/audio/word-refund.wav",
+      "seconds": 0.743,
+      "peak": 32767,
+      "rms": 3560.55,
+      "sha256": "87859de1316a046cec644b8f75729f517f3bbc1c8be0c88f39478b09598d454a"
+    },
+    {
+      "id": "sentence:refund",
+      "kind": "sentence",
+      "text": "You may request a refund for the unused ticket.",
+      "file": "/audio/sentence-refund.wav",
+      "seconds": 3.1,
+      "peak": 32767,
+      "rms": 3912.14,
+      "sha256": "4ca109a5ebcb91beb033e9e622e0213640bfbd0e6b771565414d5279e1431c8e"
+    },
+    {
+      "id": "word:luggage",
+      "kind": "word",
+      "text": "luggage",
+      "file": "/audio/word-luggage.wav",
+      "seconds": 0.789,
+      "peak": 32767,
+      "rms": 4518.54,
+      "sha256": "2673c5e6e7f12a9d95348962a264c41553daac0d5cb72834d7bd68c947f3ec4c"
+    },
+    {
+      "id": "sentence:luggage",
+      "kind": "sentence",
+      "text": "Keep your luggage with you at all times.",
+      "file": "/audio/sentence-luggage.wav",
+      "seconds": 2.601,
+      "peak": 32767,
+      "rms": 4024.53,
+      "sha256": "e6cfb8818ae951ff53ae2c5bd58bbf05ba0ccfcd2347ed1470aa1b4490c305bc"
+    },
+    {
+      "id": "word:pedestrian",
+      "kind": "word",
+      "text": "pedestrian",
+      "file": "/audio/word-pedestrian.wav",
+      "seconds": 0.964,
+      "peak": 32767,
+      "rms": 4642.31,
+      "sha256": "d2562dcb09ce0c8c815378a66c9af3d03507f9bf96a39567f3aedab042bc72d6"
+    },
+    {
+      "id": "sentence:pedestrian",
+      "kind": "sentence",
+      "text": "The street is safe for pedestrians.",
+      "file": "/audio/sentence-pedestrian.wav",
+      "seconds": 2.461,
+      "peak": 32767,
+      "rms": 4002.13,
+      "sha256": "40489df5b7ebd6621ff3e249dd7ca04fef34502a25495f449ec4014e08cc4095"
+    },
+    {
+      "id": "word:commute",
+      "kind": "word",
+      "text": "commute",
+      "file": "/audio/word-commute.wav",
+      "seconds": 0.604,
+      "peak": 32767,
+      "rms": 6633.85,
+      "sha256": "356e50ee880b2c6e93d97c2228603ac1a83da1f9d03c7eee0ebeb03afd01da5b"
+    },
+    {
+      "id": "sentence:commute",
+      "kind": "sentence",
+      "text": "Many people commute by train.",
+      "file": "/audio/sentence-commute.wav",
+      "seconds": 2.043,
+      "peak": 32767,
+      "rms": 3799.27,
+      "sha256": "901d1b267c557832e0692a2318373d1946e0364d16c2acd7f700e0bd6bbbd2e3"
+    },
+    {
+      "id": "word:available",
+      "kind": "word",
+      "text": "available",
+      "file": "/audio/word-available.wav",
+      "seconds": 0.801,
+      "peak": 32767,
+      "rms": 6102.95,
+      "sha256": "20a730a87ccbb1d0263991b1e86e46687022a0419ebd239ce5419fc1c7961173"
+    },
+    {
+      "id": "sentence:available",
+      "kind": "sentence",
+      "text": "A single room is available tonight.",
+      "file": "/audio/sentence-available.wav",
+      "seconds": 2.415,
+      "peak": 32767,
+      "rms": 4511.46,
+      "sha256": "60e1518441bbef78c1da4d5e30b1c891aa1852988b1dd8839dcfa61d90143183"
+    },
+    {
+      "id": "word:academic-mitigate",
+      "kind": "word",
+      "text": "mitigate",
+      "file": "/audio/pronunciation-v1/word-academic-mitigate.wav",
+      "seconds": 0.766,
+      "peak": 32767,
+      "rms": 6090.09,
+      "sha256": "73f657386b2b30c79c040cc339ea011837f9cb566331aa5203161a45a768af23"
+    },
+    {
+      "id": "sentence:academic-mitigate",
+      "kind": "sentence",
+      "text": "Green spaces can mitigate the effects of urban heat.",
+      "file": "/audio/pronunciation-v1/sentence-academic-mitigate.wav",
+      "seconds": 3.947,
+      "peak": 32767,
+      "rms": 4313.51,
+      "sha256": "d1c56fe263e3139225ac7c9bb17a4edcac6ef67d90fa6a571d875b20f85cdffd"
+    },
+    {
+      "id": "word:academic-resilience",
+      "kind": "word",
+      "text": "resilience",
+      "file": "/audio/pronunciation-v1/word-academic-resilience.wav",
+      "seconds": 1.01,
+      "peak": 32767,
+      "rms": 5831.76,
+      "sha256": "981a152823781b450ca06bfb86bfdc30f50943d1cb29d63fac5d2eb45341b5ce"
+    },
+    {
+      "id": "sentence:academic-resilience",
+      "kind": "sentence",
+      "text": "A diverse ecosystem has greater resilience to change.",
+      "file": "/audio/pronunciation-v1/sentence-academic-resilience.wav",
+      "seconds": 3.913,
+      "peak": 32767,
+      "rms": 5276.83,
+      "sha256": "18aa394554e31d74302b5b9c44c7a7438ce66119dc65ad30a7e4bde3b35cfbe0"
+    },
+    {
+      "id": "word:academic-substantial",
+      "kind": "word",
+      "text": "substantial",
+      "file": "/audio/pronunciation-v1/word-academic-substantial.wav",
+      "seconds": 0.998,
+      "peak": 32767,
+      "rms": 5377.72,
+      "sha256": "8a74111d084d1cf3d4978b8ed36cdcff30c1c530d9035eb830dcba67528616a7"
+    },
+    {
+      "id": "sentence:academic-substantial",
+      "kind": "sentence",
+      "text": "The project requires substantial investment.",
+      "file": "/audio/pronunciation-v1/sentence-academic-substantial.wav",
+      "seconds": 3.088,
+      "peak": 32767,
+      "rms": 3722.51,
+      "sha256": "980392b90bce0e6f291b7fd6738854bd8e49b28d2c3eb5aec4909953d6ccd7fc"
+    },
+    {
+      "id": "word:academic-fluctuate",
+      "kind": "word",
+      "text": "fluctuate",
+      "file": "/audio/pronunciation-v1/word-academic-fluctuate.wav",
+      "seconds": 0.917,
+      "peak": 32767,
+      "rms": 4386.07,
+      "sha256": "7453035aae002587eed759eba5d5e8d9389b8c72b86cba3eeddcf3a8d1e7da78"
+    },
+    {
+      "id": "sentence:academic-fluctuate",
+      "kind": "sentence",
+      "text": "The number of visitors tends to fluctuate throughout the year.",
+      "file": "/audio/pronunciation-v1/sentence-academic-fluctuate.wav",
+      "seconds": 3.39,
+      "peak": 32767,
+      "rms": 4196.3,
+      "sha256": "c86331c1328a717d07c9ac5ea3627963a0be29f1178c8e02db9b193f50c1632d"
+    },
+    {
+      "id": "word:academic-predominantly",
+      "kind": "word",
+      "text": "predominantly",
+      "file": "/audio/pronunciation-v1/word-academic-predominantly.wav",
+      "seconds": 1.045,
+      "peak": 32767,
+      "rms": 4428.21,
+      "sha256": "5237ced05ee9ac38196ba6010b602a4ea7fe1ae7e210612dfbf2ec68ed5ea4c3"
+    },
+    {
+      "id": "sentence:academic-predominantly",
+      "kind": "sentence",
+      "text": "The programme is predominantly funded by public money.",
+      "file": "/audio/pronunciation-v1/sentence-academic-predominantly.wav",
+      "seconds": 3.587,
+      "peak": 32767,
+      "rms": 3671.0,
+      "sha256": "f892a05a53c53d478840e342eb83dcbaa8fba3c2ee41da49a80ace2b9d121039"
+    },
+    {
+      "id": "word:academic-implication",
+      "kind": "word",
+      "text": "implication",
+      "file": "/audio/pronunciation-v1/word-academic-implication.wav",
+      "seconds": 0.964,
+      "peak": 32767,
+      "rms": 4987.4,
+      "sha256": "4cf32c5a2346935ec5b061c0d81f1ec932b4b400fe12f17a59c6d937c54176ce"
+    },
+    {
+      "id": "sentence:academic-implication",
+      "kind": "sentence",
+      "text": "The findings have important implications for public policy.",
+      "file": "/audio/pronunciation-v1/sentence-academic-implication.wav",
+      "seconds": 4.249,
+      "peak": 32767,
+      "rms": 3986.27,
+      "sha256": "e31141c494fcf12e17f3f3ab98ecfbcca4c0475e340727515ff2aa6b4924e33a"
+    },
+    {
+      "id": "word:academic-assumption",
+      "kind": "word",
+      "text": "assumption",
+      "file": "/audio/pronunciation-v1/word-academic-assumption.wav",
+      "seconds": 0.836,
+      "peak": 32767,
+      "rms": 4750.97,
+      "sha256": "6b8fa6aee1c3f251f2be2bde5f5b63bf754b780aab290f259a9965a4b5339336"
+    },
+    {
+      "id": "sentence:academic-assumption",
+      "kind": "sentence",
+      "text": "The study challenges a common assumption about learning.",
+      "file": "/audio/pronunciation-v1/sentence-academic-assumption.wav",
+      "seconds": 3.529,
+      "peak": 32767,
+      "rms": 5214.57,
+      "sha256": "e78bd2149ac11d9c00ba2b047189179208d75389f17d9c65986e45cba840a34a"
+    },
+    {
+      "id": "word:academic-empirical",
+      "kind": "word",
+      "text": "empirical",
+      "file": "/audio/pronunciation-v1/word-academic-empirical.wav",
+      "seconds": 0.859,
+      "peak": 32767,
+      "rms": 5942.81,
+      "sha256": "28f959c46b034d9306067a42c9ae66827f595665655f0b032f7fec30d877d41a"
+    },
+    {
+      "id": "sentence:academic-empirical",
+      "kind": "sentence",
+      "text": "The argument needs empirical evidence.",
+      "file": "/audio/pronunciation-v1/sentence-academic-empirical.wav",
+      "seconds": 2.635,
+      "peak": 32767,
+      "rms": 3946.46,
+      "sha256": "486a6c75cdc750ba1225d3999ab0222f8569fa48e91a3f470692bc4c8412a026"
+    },
+    {
+      "id": "word:academic-disparity",
+      "kind": "word",
+      "text": "disparity",
+      "file": "/audio/pronunciation-v1/word-academic-disparity.wav",
+      "seconds": 0.94,
+      "peak": 32767,
+      "rms": 5258.33,
+      "sha256": "bf9217f566da219c9bc6707e99f1f988d77c9ab7c55e0844cbff9f37c2e8948c"
+    },
+    {
+      "id": "sentence:academic-disparity",
+      "kind": "sentence",
+      "text": "There is a marked disparity between the two regions.",
+      "file": "/audio/pronunciation-v1/sentence-academic-disparity.wav",
+      "seconds": 3.367,
+      "peak": 32767,
+      "rms": 4348.57,
+      "sha256": "00c561eaf9a3570b246226a8f762da124363c774ab9db21970044c95e9ff8773"
+    },
+    {
+      "id": "word:academic-allocate",
+      "kind": "word",
+      "text": "allocate",
+      "file": "/audio/pronunciation-v1/word-academic-allocate.wav",
+      "seconds": 0.813,
+      "peak": 32767,
+      "rms": 3504.49,
+      "sha256": "e564165c06493c651b236dc0243175d58df5d7591bd46a586518332c85bf1e46"
+    },
+    {
+      "id": "sentence:academic-allocate",
+      "kind": "sentence",
+      "text": "Schools should allocate resources according to need.",
+      "file": "/audio/pronunciation-v1/sentence-academic-allocate.wav",
+      "seconds": 3.239,
+      "peak": 32767,
+      "rms": 4825.8,
+      "sha256": "d6061521acb251426838c8c123ad71b080dc07dacc554516dfdf94b3d2b4a84e"
+    },
+    {
+      "id": "word:academic-viable",
+      "kind": "word",
+      "text": "viable",
+      "file": "/audio/pronunciation-v1/word-academic-viable.wav",
+      "seconds": 0.697,
+      "peak": 32767,
+      "rms": 5569.4,
+      "sha256": "e9706230d66714f6f351dac25317504593dd40ff24c454803e374525b604e58a"
+    },
+    {
+      "id": "sentence:academic-viable",
+      "kind": "sentence",
+      "text": "Public transport offers a viable alternative to driving.",
+      "file": "/audio/pronunciation-v1/sentence-academic-viable.wav",
+      "seconds": 3.785,
+      "peak": 32767,
+      "rms": 3212.99,
+      "sha256": "87f732879b8feb712ecf22e50b77f3c2d95696dce6e749cf433475fa00d0f80e"
+    },
+    {
+      "id": "word:academic-incentive",
+      "kind": "word",
+      "text": "incentive",
+      "file": "/audio/pronunciation-v1/word-academic-incentive.wav",
+      "seconds": 0.906,
+      "peak": 32767,
+      "rms": 4874.77,
+      "sha256": "405d8a60cbeabe04a40954eaf2a8b67affd253942c6ef8033a4100e1d35a429b"
+    },
+    {
+      "id": "sentence:academic-incentive",
+      "kind": "sentence",
+      "text": "A financial incentive may encourage people to save energy.",
+      "file": "/audio/pronunciation-v1/sentence-academic-incentive.wav",
+      "seconds": 4.226,
+      "peak": 32767,
+      "rms": 3804.83,
+      "sha256": "2dcd5c8a44fe84e1f263a27dcc8f0c88f16054d49ce8ebf5f67a7f8720f9f3e4"
+    },
+    {
+      "id": "word:academic-nevertheless",
+      "kind": "word",
+      "text": "nevertheless",
+      "file": "/audio/pronunciation-v1/word-academic-nevertheless.wav",
+      "seconds": 0.917,
+      "peak": 32767,
+      "rms": 6890.8,
+      "sha256": "6fc2bd92a57bab052bd68ee567f383d19c66ce667b197976452711943cf7cc26"
+    },
+    {
+      "id": "sentence:academic-nevertheless",
+      "kind": "sentence",
+      "text": "The plan is costly; nevertheless, it may bring lasting benefits.",
+      "file": "/audio/pronunciation-v1/sentence-academic-nevertheless.wav",
+      "seconds": 5.248,
+      "peak": 32767,
+      "rms": 3111.9,
+      "sha256": "2edbfe7a4aa618ab6b59861c088ed334f2c3f879344b6f06536118f32ddddf0c"
+    },
+    {
+      "id": "word:academic-whereas",
+      "kind": "word",
+      "text": "whereas",
+      "file": "/audio/pronunciation-v1/word-academic-whereas.wav",
+      "seconds": 0.824,
+      "peak": 32767,
+      "rms": 5977.07,
+      "sha256": "0df14f8f38b78b641dc0b41463961855480badc329dc2c1893667a1152ed1237"
+    },
+    {
+      "id": "sentence:academic-whereas",
+      "kind": "sentence",
+      "text": "Rail use increased, whereas car use declined.",
+      "file": "/audio/pronunciation-v1/sentence-academic-whereas.wav",
+      "seconds": 3.855,
+      "peak": 32767,
+      "rms": 5233.81,
+      "sha256": "ffcc877e41746b7da462bb6c3823cd91b6a81de6747f0674eca0b1250125490f"
+    },
+    {
+      "id": "word:academic-proportion",
+      "kind": "word",
+      "text": "proportion",
+      "file": "/audio/pronunciation-v1/word-academic-proportion.wav",
+      "seconds": 0.836,
+      "peak": 32767,
+      "rms": 5603.44,
+      "sha256": "700c3672536c3fa5a7fcf254734bb1d54cc137929beabed6030c23ea736df28b"
+    },
+    {
+      "id": "sentence:academic-proportion",
+      "kind": "sentence",
+      "text": "The proportion of people cycling rose steadily.",
+      "file": "/audio/pronunciation-v1/sentence-academic-proportion.wav",
+      "seconds": 3.03,
+      "peak": 32767,
+      "rms": 4961.45,
+      "sha256": "fbac96d3fccd050fbd5397b6bde9c06b5b62b9a6050bf2119b085370ed41d22c"
+    },
+    {
+      "id": "word:academic-coherent",
+      "kind": "word",
+      "text": "coherent",
+      "file": "/audio/pronunciation-v1/word-academic-coherent.wav",
+      "seconds": 0.871,
+      "peak": 32767,
+      "rms": 5994.54,
+      "sha256": "46718f8d1d2e0db6a172fb223a6d4d6a74b6b1e428ddd3ad17f5815ce80b1077"
+    },
+    {
+      "id": "sentence:academic-coherent",
+      "kind": "sentence",
+      "text": "A coherent argument connects each claim with supporting evidence.",
+      "file": "/audio/pronunciation-v1/sentence-academic-coherent.wav",
+      "seconds": 4.342,
+      "peak": 32767,
+      "rms": 3545.21,
+      "sha256": "75db4fd45a461d8543c9087cf3da0d3b2769a8196ff3d89214356420f3f21453"
+    },
+    {
+      "id": "chant:mage",
+      "kind": "chant",
+      "text": "When the night grows quiet, I gather every word I have learned and turn their light into a path that guides us home.",
+      "file": "/audio/pronunciation-v1/chant-mage.wav",
+      "seconds": 6.78,
+      "peak": 32767,
+      "rms": 3609.54,
+      "sha256": "2226e2eaf4c24d66d120ec300ef3a8f2609a7cca8e3e2de328ca100770f83134"
+    },
+    {
+      "id": "chant:knight",
+      "kind": "chant",
+      "text": "I will stand beside my friends through every storm, and the promise we share will become a shield that keeps the darkness away.",
+      "file": "/audio/pronunciation-v1/chant-knight.wav",
+      "seconds": 9.067,
+      "peak": 32767,
+      "rms": 2740.39,
+      "sha256": "92fbbd9dff3d065f106e06a0b896031458b59748f52950f3e052985a13585c0f"
+    },
+    {
+      "id": "chant:ranger",
+      "kind": "chant",
+      "text": "Every leaf remembers the wind, and every river knows its way, so let the voices of the forest guide my arrows toward the dawn.",
+      "file": "/audio/pronunciation-v1/chant-ranger.wav",
+      "seconds": 9.044,
+      "peak": 32767,
+      "rms": 3369.79,
+      "sha256": "210ccdd7770ed509905c26f53a35463e447ee1b401f79b47145517df2b4ecf19"
+    },
+    {
+      "id": "chant:scholar",
+      "kind": "chant",
+      "text": "Knowledge begins with a question, but understanding grows when we connect each idea with another and use what we have learned to help the world.",
+      "file": "/audio/pronunciation-v1/chant-scholar.wav",
+      "seconds": 8.789,
+      "peak": 32767,
+      "rms": 3247.77,
+      "sha256": "7d1e372ce5b9fca4053a4c00b5a654a4717d8ce00228ad94e492375a04f2d714"
+    },
+    {
+      "id": "chant:bard",
+      "kind": "chant",
+      "text": "Listen to the gentle rhythm of the sea, and let this song carry our hopes across the waves until every tired heart can shine again.",
+      "file": "/audio/pronunciation-v1/chant-bard.wav",
+      "seconds": 8.127,
+      "peak": 32767,
+      "rms": 3458.72,
+      "sha256": "4e15a3a3732a6940ba61f9c194dfbce133ab7a156ef43f2b258730a8cfebed81"
+    },
+    {
+      "id": "chant:alchemist",
+      "kind": "chant",
+      "text": "A mistake is not the end of our journey, because we can learn from every failure and turn the smallest spark into a brighter future.",
+      "file": "/audio/pronunciation-v1/chant-alchemist.wav",
+      "seconds": 9.822,
+      "peak": 32767,
+      "rms": 3533.96,
+      "sha256": "3fbccad6ba4b608acc3ee3bb5e040e97341959ac6cc2fbc8fef2db88e8d7a7cf"
+    }
+  ]
+}

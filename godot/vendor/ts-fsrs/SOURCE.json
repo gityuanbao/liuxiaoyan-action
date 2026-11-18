@@ -1,0 +1,8 @@
+{
+  "project": "https://github.com/open-spaced-repetition/ts-fsrs",
+  "version": "5.2.3",
+  "upstream": "https://registry.npmjs.org/ts-fsrs/-/ts-fsrs-5.2.3.tgz",
+  "sha512": "R3IjceC9WfnvUin6Nx+DwqEzh3Qil6Gg2yEHqvocUcC7Nbi+xDrFg/1fKaYBT0tJedDnDAguXMSX0hijhi859w==",
+  "verified": true,
+  "license": "MIT"
+}

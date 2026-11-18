@@ -1,0 +1,346 @@
+import express from 'express'
+import { createServer } from 'http'
+import { WebSocketServer, WebSocket } from 'ws'
+import { v4 as uuidv4 } from 'uuid'
+import { MessageType, type ClientMessage } from '@typeduel/shared'
+import { GameRoom } from './game-room.js'
+import path from 'path'
+import { fileURLToPath } from 'url'
+import { mountAtlas } from './atlas-integration.js'
+import { mountClient } from './static-client.js'
+
+const PORT = parseInt(process.env.PORT ?? '3001', 10)
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
+
+const app = express()
+app.get('/health', (_req, res) => res.json({ ok: true }))
+mountAtlas(app, __dirname)
+
+// In production, serve the client build
+const clientDist = path.resolve(__dirname, '../../client/dist')
+mountClient(app, clientDist)
+
+const server = createServer(app)
+const wss = new WebSocketServer({ server })
+
+// ── State ──
+
+const rooms = new Map<string, GameRoom>()          // roomId → GameRoom
+const roomsByCode = new Map<string, GameRoom>()     // roomCode → GameRoom
+const playerRooms = new Map<string, string>()       // playerId → roomId
+
+// Matchmaking queue: [{ id, displayName, ws }]
+const matchQueue: { id: string; displayName: string; ws: WebSocket; difficulty?: 'easy' | 'medium' | 'hard' }[] = []
+
+function getQueueDifficulty(entry: { difficulty?: 'easy' | 'medium' | 'hard' }) {
+  return entry.difficulty ?? 'medium'
+}
+
+function dequeueMatchPair() {
+  for (let i = 0; i < matchQueue.length; i++) {
+    const first = matchQueue[i]
+    const matchIndex = matchQueue.findIndex((candidate, candidateIndex) => {
+      return candidateIndex > i && getQueueDifficulty(candidate) === getQueueDifficulty(first)
+    })
+
+    if (matchIndex !== -1) {
+      const [second] = matchQueue.splice(matchIndex, 1)
+      const [matchedFirst] = matchQueue.splice(i, 1)
+      return [matchedFirst, second]
+    }
+  }
+
+  return null
+}
+
+function destroyRoom(roomId: string) {
+  const room = rooms.get(roomId)
+  if (room) {
+    roomsByCode.delete(room.roomCode)
+    rooms.delete(roomId)
+    for (const [pid, rid] of playerRooms) {
+      if (rid === roomId) playerRooms.delete(pid)
+    }
+  }
+}
+
+function tryMatchmaking() {
+  // Remove disconnected players from queue
+  for (let i = matchQueue.length - 1; i >= 0; i--) {
+    if (matchQueue[i].ws.readyState !== WebSocket.OPEN) {
+      matchQueue.splice(i, 1)
+    }
+  }
+
+  let pair = dequeueMatchPair()
+  while (pair) {
+    const [p1, p2] = pair
+
+    const room = new GameRoom(destroyRoom, getQueueDifficulty(p1))
+    rooms.set(room.roomId, room)
+    roomsByCode.set(room.roomCode, room)
+
+    room.addPlayer(p1.id, p1.displayName, p1.ws)
+    room.addPlayer(p2.id, p2.displayName, p2.ws)
+    playerRooms.set(p1.id, room.roomId)
+    playerRooms.set(p2.id, room.roomId)
+
+    // Notify both players
+    room.sendTo(p1.id, {
+      type: MessageType.MATCH_FOUND,
+      opponent: { id: p2.id, displayName: p2.displayName },
+      roomId: room.roomId,
+      roomCode: room.roomCode,
+    })
+    room.sendTo(p2.id, {
+      type: MessageType.MATCH_FOUND,
+      opponent: { id: p1.id, displayName: p1.displayName },
+      roomId: room.roomId,
+      roomCode: room.roomCode,
+    })
+
+    // Start countdown
+    room.startCountdown()
+    pair = dequeueMatchPair()
+  }
+}
+
+// ── WebSocket handling ──
+
+wss.on('connection', (ws) => {
+  let connectionId = uuidv4()
+
+  // Send player ID immediately
+  ws.send(JSON.stringify({ type: MessageType.WELCOME, playerId: connectionId }))
+
+  ws.on('message', (raw) => {
+    let msg: ClientMessage
+    try {
+      msg = JSON.parse(raw.toString())
+    } catch {
+      return
+    }
+
+    switch (msg.type) {
+      case MessageType.RESUME_SESSION: {
+        const room = roomsByCode.get(msg.roomCode.toUpperCase())
+        if (!room) {
+          ws.send(JSON.stringify({
+            type: MessageType.ERROR,
+            code: 'SESSION_RESUME_FAILED',
+            message: 'Room not found for resume',
+          }))
+          return
+        }
+
+        if (msg.spectator) {
+          if (!room.handleSpectatorReconnect(msg.playerId, ws)) {
+            ws.send(JSON.stringify({
+              type: MessageType.ERROR,
+              code: 'SESSION_RESUME_FAILED',
+              message: 'Spectator session not found',
+            }))
+            return
+          }
+
+          playerRooms.set(msg.playerId, room.roomId)
+          connectionId = msg.playerId
+          ws.send(JSON.stringify({
+            type: MessageType.SESSION_RESUMED,
+            playerId: msg.playerId,
+            roomId: room.roomId,
+            roomCode: room.roomCode,
+            isSpectating: true,
+            opponent: null,
+          }))
+          return
+        }
+
+        if (playerRooms.get(msg.playerId) !== room.roomId || !room.handleReconnect(msg.playerId, ws)) {
+          ws.send(JSON.stringify({
+            type: MessageType.ERROR,
+            code: 'SESSION_RESUME_FAILED',
+            message: 'Player session not found',
+          }))
+          return
+        }
+
+        playerRooms.set(msg.playerId, room.roomId)
+        connectionId = msg.playerId
+        ws.send(JSON.stringify({
+          type: MessageType.SESSION_RESUMED,
+          playerId: msg.playerId,
+          roomId: room.roomId,
+          roomCode: room.roomCode,
+          isSpectating: false,
+          opponent: room.getOpponentInfo(msg.playerId),
+        }))
+        ws.send(JSON.stringify({
+          type: MessageType.GAME_STATE,
+          state: room.getGameState(),
+        }))
+        const lastRoundResult = room.getLastRoundResult()
+        if (lastRoundResult) {
+          ws.send(JSON.stringify(lastRoundResult))
+        }
+        return
+      }
+
+      case MessageType.JOIN_QUEUE: {
+        matchQueue.push({ id: connectionId, displayName: msg.displayName, ws, difficulty: msg.difficulty })
+        tryMatchmaking()
+        break
+      }
+
+      case MessageType.CREATE_ROOM: {
+        const room = new GameRoom(destroyRoom, msg.difficulty)
+        rooms.set(room.roomId, room)
+        roomsByCode.set(room.roomCode, room)
+        room.addPlayer(connectionId, msg.displayName, ws)
+        playerRooms.set(connectionId, room.roomId)
+
+        // Send the room code back so the player can share it
+        room.sendTo(connectionId, {
+          type: MessageType.MATCH_FOUND,
+          opponent: { id: '', displayName: '' },
+          roomId: room.roomId,
+          roomCode: room.roomCode,
+        })
+        break
+      }
+
+      case MessageType.JOIN_ROOM: {
+        const room = roomsByCode.get(msg.roomCode.toUpperCase())
+        if (!room) {
+          const errMsg = JSON.stringify({
+            type: MessageType.ERROR,
+            code: 'ROOM_NOT_FOUND',
+            message: 'Room not found',
+          })
+          ws.send(errMsg)
+          return
+        }
+        if (room.isFull()) {
+          const errMsg = JSON.stringify({
+            type: MessageType.ERROR,
+            code: 'ROOM_FULL',
+            message: 'Room is full',
+          })
+          ws.send(errMsg)
+          return
+        }
+
+        room.addPlayer(connectionId, msg.displayName, ws)
+        playerRooms.set(connectionId, room.roomId)
+
+        // Notify both players
+        const players = [...room.players.values()]
+        const opponent = players.find(p => p.id !== connectionId)
+        if (opponent) {
+          room.sendTo(connectionId, {
+            type: MessageType.MATCH_FOUND,
+            opponent: { id: opponent.id, displayName: opponent.displayName },
+            roomId: room.roomId,
+            roomCode: room.roomCode,
+          })
+          room.sendTo(opponent.id, {
+            type: MessageType.MATCH_FOUND,
+            opponent: { id: connectionId, displayName: msg.displayName },
+            roomId: room.roomId,
+            roomCode: room.roomCode,
+          })
+        }
+
+        if (room.isFull()) {
+          room.startCountdown()
+        }
+        break
+      }
+
+      case MessageType.KEYSTROKE: {
+        const roomId = playerRooms.get(connectionId)
+        if (!roomId) return
+        const room = rooms.get(roomId)
+        if (!room) return
+        room.handleKeystroke(connectionId, msg)
+        break
+      }
+
+      case MessageType.USE_ABILITY: {
+        const abilityRoomId = playerRooms.get(connectionId)
+        if (!abilityRoomId) return
+        const abilityRoom = rooms.get(abilityRoomId)
+        if (!abilityRoom) return
+        abilityRoom.handleAbility(connectionId, msg)
+        break
+      }
+
+      case MessageType.REMATCH: {
+        const rematchRoomId = playerRooms.get(connectionId)
+        if (!rematchRoomId) return
+        const rematchRoom = rooms.get(rematchRoomId)
+        if (!rematchRoom) return
+        rematchRoom.handleRematch(connectionId)
+        break
+      }
+
+      case MessageType.LEAVE_ROOM: {
+        const leaveRoomId = playerRooms.get(connectionId)
+        if (!leaveRoomId) return
+        const leaveRoom = rooms.get(leaveRoomId)
+        if (!leaveRoom) {
+          playerRooms.delete(connectionId)
+          return
+        }
+        leaveRoom.handleLeave(connectionId)
+        playerRooms.delete(connectionId)
+        break
+      }
+
+      case MessageType.TAUNT: {
+        const tauntRoomId = playerRooms.get(connectionId)
+        if (!tauntRoomId) return
+        const tauntRoom = rooms.get(tauntRoomId)
+        if (!tauntRoom) return
+        tauntRoom.handleTaunt(connectionId, msg)
+        break
+      }
+
+      case MessageType.SPECTATE_ROOM: {
+        const room = roomsByCode.get(msg.roomCode.toUpperCase())
+        if (!room) {
+          ws.send(JSON.stringify({
+            type: MessageType.ERROR,
+            code: 'ROOM_NOT_FOUND',
+            message: 'Room not found',
+          }))
+          return
+        }
+        room.addSpectator(connectionId, ws)
+        playerRooms.set(connectionId, room.roomId)
+        break
+      }
+    }
+  })
+
+  ws.on('close', () => {
+    // Remove from queue
+    const idx = matchQueue.findIndex(p => p.id === connectionId)
+    if (idx !== -1) matchQueue.splice(idx, 1)
+
+    // Handle disconnect with grace period (players and spectators)
+    const roomId = playerRooms.get(connectionId)
+    if (roomId) {
+      const room = rooms.get(roomId)
+      if (room) {
+        room.handleDisconnect(connectionId)
+      } else {
+        playerRooms.delete(connectionId)
+      }
+    }
+  })
+})
+
+server.listen(PORT, process.env.HOST ?? '127.0.0.1', () => {
+  console.log(`TypeDuel server listening on port ${PORT}`)
+})

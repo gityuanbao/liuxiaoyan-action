@@ -1,0 +1,92 @@
+/* One family of readable, metal-and-enamel emblems throughout the seven rooms. */
+.game-polish .game-icon { display:inline-block; vertical-align:middle; flex:none; color:var(--moon-gold,#ead19b); overflow:visible; pointer-events:none; }
+.game-polish .page-emblem { display:inline-flex; justify-content:center; align-items:center; flex:0 0 62px; width:62px; height:62px; padding:5px; color:var(--moon-gold); background:linear-gradient(135deg,#3c5269b3,#14273ee6); border:1px solid #b99f6a85; border-radius:6px; box-shadow:inset 0 0 0 3px #d8bb7d0b,inset 0 1px #f3dbad20; }
+.game-polish :is(.route-heading,.folio-heading,.sanctum-heading,.notebook-page>.page-heading,.practice-heading):has(>.page-emblem) { display:flex; align-items:center; justify-content:space-between; gap:18px; }
+.game-polish :is(.route-heading,.folio-heading,.sanctum-heading,.notebook-page>.page-heading,.practice-heading)>.page-emblem~div:first-of-type { flex:1; min-width:0; }
+.game-polish .notebook-page>.page-heading:has(.page-emblem):before { display:none; }
+.game-polish .journey-menu .journey-menu-item .menu-crest { width:42px; height:45px; clip-path:none; border-radius:5px; border-color:#b99f6a80; background:linear-gradient(130deg,#314a63c9,#14283de6); box-shadow:inset 0 1px #ead19b1a; }
+.game-polish .journey-menu .menu-crest>.game-icon { width:35px; height:35px; }
+.game-polish .folio-tabs { max-width:100%; overflow-x:auto; overflow-y:hidden; scrollbar-width:thin; }
+.game-polish .folio-tabs button { display:inline-flex; align-items:center; justify-content:center; flex:none; gap:8px; }
+.game-polish .folio-tabs button:not(.selected) .game-icon { opacity:.65; }
+.game-polish .route-region>header>span { display:grid; place-items:center; color:var(--moon-gold); width:42px; height:42px; flex:none; }
+.game-polish .route-total em { display:flex; align-items:center; justify-content:flex-end; gap:6px; }
+.game-polish .route-star-icons { display:inline-flex; gap:2px; }
+.game-polish .game-icon.unlit { opacity:.27; --icon-crystal:#577187; --icon-enamel:#1b3046; }
+.game-polish .route-nodes button>small { display:flex; align-items:center; justify-content:center; gap:3px; }
+.game-polish :is(.route-reward,.route-loadout)>.game-icon { margin-right:7px; }
+.game-polish .route-brief-actions>.gal-button { display:flex; justify-content:center; align-items:center; gap:8px; }
+.game-polish :is(.journey-commissions,.rune-forge) h2 { display:flex; align-items:center; gap:9px; }
+.game-polish .journey-commissions article>span { display:grid; place-items:center; width:38px; flex:none; }
+.game-polish .rune-forge>header b { display:flex; align-items:center; gap:7px; }
+.game-polish .rune-choices .rune-glyph { display:flex; align-items:center; justify-content:center; height:68px; font-size:0; text-shadow:none; }
+.game-polish .rune-level i { display:grid; place-items:center; background:none; }
+.game-polish .rune-level i:not(.lit) .game-icon { opacity:.25; --icon-crystal:#577187; }
+.game-polish .bond-heading h3,.game-polish .bond-heading>span { display:flex; align-items:center; gap:6px; flex-wrap:wrap; }
+.game-polish .bond-heading h3 { font-size:.95rem; }
+.game-polish .bond-complete>.game-icon { margin-right:6px; }
+.game-polish :is(.camp-bond .gal-link,.wordbook-paper button,.notebook-toolbar button) { display:inline-flex; justify-content:center; align-items:center; gap:6px; }
+.game-polish .wordbook-notes>b { display:flex; align-items:center; gap:8px; }
+.game-polish .notebook-toolbar .spell-mode>button { display:inline-flex; align-items:center; gap:6px; white-space:nowrap; }
+.game-polish .notebook-toolbar .icon-search { display:flex; align-items:center; gap:4px; flex:1 1 200px; min-width:0; border:1px solid #a99b7e80; border-radius:4px; padding-left:8px; background:var(--moon-ink); }
+.game-polish .notebook-toolbar .icon-search>input { min-width:0; width:100%; flex:1; border:0; background:transparent; box-shadow:none; }
+.game-polish .notebook-toolbar .icon-search:focus-within { outline:1px solid var(--moon-gold); outline-offset:2px; }
+.game-polish .lore-index button>span { width:34px; display:inline-flex; align-items:center; justify-content:center; }
+.game-polish .lore-index button:not(.selected) .game-icon { opacity:.65; }
+.game-polish .lore-entry-copy>.game-icon { opacity:.75; top:20px; right:25px; width:70px; height:70px; }
+.game-polish .lore-entry-copy .button-row>button { display:inline-flex; align-items:center; justify-content:center; gap:7px; }
+.game-polish .sanctum-seals { align-items:center; }
+.game-polish .sanctum-seals>span { width:38px; height:42px; clip-path:none; border-radius:5px; border-color:var(--moon-line); background:#14273e; }
+.game-polish .sanctum-seals>span>.game-icon { width:31px; height:31px; }
+.game-polish .sanctum-seals>span:not(.lit) .game-icon { opacity:.45; --icon-crystal:#6c8799; }
+.game-polish .sanctum-seals>span.lit { background:#75603d55; border-color:var(--moon-gold); box-shadow:inset 0 0 8px #d6b16e26; }
+.game-polish .sanctum-gate .gate-number { width:52px; height:52px; display:grid; place-items:center; top:12px; left:14px; background:#12243de6; border:1px solid var(--moon-line); border-radius:6px; line-height:1; }
+.game-polish .sanctum-gate .gate-number>.game-icon { width:43px; height:43px; }
+.game-polish .sanctum-gate .gate-state { display:flex; align-items:center; gap:5px; }
+.game-polish .gate-enter>b { display:inline-flex; align-items:center; gap:6px; }
+.game-polish .official-audio-entry button,.game-polish .sanctum-mode button { display:inline-flex; align-items:center; justify-content:center; gap:7px; }
+.game-polish .trial-session-banner h1>.game-icon { vertical-align:middle; margin-right:8px; }
+.game-polish .trial-session-banner .gal-link { display:inline-flex; align-items:center; gap:6px; }
+.game-polish .practice-heading>.page-emblem { width:58px; height:58px; flex-basis:58px; }
+.game-polish .practice-mode-crest .game-icon { width:31px; height:31px; }
+.game-polish .practice-mode.selected .game-icon { --icon-crystal:#c9edf0; --icon-metal:#ecd29b; }
+.game-polish .network-heading { display:flex; align-items:center; gap:18px; }
+.game-polish .network-heading h1 { margin:0 0 4px; }
+.game-polish .network-heading p { margin:0; }
+.game-polish .network-columns :is(button,h2,label)>.game-icon { margin-right:7px; }
+.game-polish .network-columns :is(h2,label) { display:flex; align-items:center; gap:2px; }
+.game-polish .network-columns button { display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:3px; }
+.game-polish .network-waiting>.page-emblem { margin:0 auto 22px; }
+.game-polish .screen-waiting-room .page-emblem { margin:0 auto 20px; }
+.game-polish .high-contrast .game-icon { --icon-metal:#f2d79f; --icon-crystal:#c9f1f5; }
+@media(max-width:1100px) {
+  .game-polish :is(.route-heading,.folio-heading,.sanctum-heading,.notebook-page>.page-heading,.practice-heading):has(>.page-emblem) { gap:12px; }
+  .game-polish .page-emblem { width:48px; height:48px; flex-basis:48px; padding:4px; }
+  .game-polish .page-emblem>.game-icon { width:39px; height:39px; }
+}
+@media(max-width:680px) {
+  .game-polish :is(.route-heading,.folio-heading,.sanctum-heading,.notebook-page>.page-heading,.practice-heading):has(>.page-emblem) { display:grid; grid-template-columns:44px minmax(0,1fr); gap:10px 12px; align-items:start; }
+  .game-polish .page-emblem,.game-polish .practice-heading>.page-emblem { width:44px; height:44px; flex-basis:44px; padding:3px; }
+  .game-polish .page-emblem>.game-icon { width:36px; height:36px; }
+  .game-polish :is(.route-heading,.folio-heading,.sanctum-heading,.notebook-page>.page-heading):has(>.page-emblem)>:last-child:not(:nth-child(2)) { grid-column:1/-1; }
+  .game-polish .journey-menu .journey-menu-item .menu-crest { width:30px; height:34px; }
+  .game-polish .journey-menu .menu-crest>.game-icon { width:27px; height:27px; }
+  .game-polish .folio-tabs button { padding:9px 13px; gap:5px; }
+  .game-polish .folio-tabs .game-icon { width:19px; height:19px; }
+  .game-polish .notebook-toolbar .spell-mode { width:100%; }
+  .game-polish .notebook-toolbar .icon-search { flex-basis:100%; }
+  .game-polish .lore-entry-copy>.game-icon { width:44px; height:44px; right:14px; top:14px; }
+  .game-polish .network-heading { gap:12px; }
+  .game-polish .network-heading h1 { font-size:1.5rem; }
+  .game-polish .sanctum-gate .gate-number { width:45px; height:45px; }
+}
+
+.game-polish .rune-level { display:flex; justify-content:center; align-items:center; gap:6px; }
+.game-polish .rune-level i { width:18px; height:18px; clip-path:none; transform:none; border:0; box-shadow:none; }
+.game-polish .sanctum-mode .official-audio-entry { position:static; flex:none; margin:0 0 0 auto; padding:0; height:auto; width:auto; }
+.game-polish .sanctum-mode .official-audio-entry button { font-size:.75rem; padding:8px 12px; }
+.game-polish .trial-mode.sanctum-mode { display:flex; align-items:center; flex-wrap:wrap; gap:10px 14px; }
+.game-polish .sanctum-mode>p { flex:1; min-width:190px; }
+.game-polish .gal-button:not(.ghost) .game-icon,.game-polish .legacy-surface button.bg-accent .game-icon { color:inherit; --icon-metal:#304256; --icon-enamel:#d4b67a; --icon-crystal:#e5f0ed; }
+.game-polish.high-contrast .game-icon { --icon-metal:#f2d79f; --icon-crystal:#c9f1f5; }
+@media(max-width:680px) { .game-polish .sanctum-mode .official-audio-entry { width:100%; margin:0; } .game-polish .sanctum-mode .official-audio-entry button { width:100%; } }

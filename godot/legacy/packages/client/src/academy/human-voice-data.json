@@ -1,0 +1,74 @@
+[
+  {
+    "word": "academic",
+    "author": "Dvortygirl",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+    "page": "https://commons.wikimedia.org/wiki/File:En-us-academic.ogg",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/6/63/En-us-academic.ogg",
+    "file": "/audio/human-v1/academic.ogg",
+    "sha256": "f23ea6650a340acdebb3a84ec62ac7ec97289051cb5ad20b3c99a8f18988f8e1",
+    "bytes": 15427,
+    "changes": "None; original recording redistributed unchanged."
+  },
+  {
+    "word": "agriculture",
+    "author": "Neskaya",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+    "page": "https://commons.wikimedia.org/wiki/File:En-us-agriculture.ogg",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/e/e0/En-us-agriculture.ogg",
+    "file": "/audio/human-v1/agriculture.ogg",
+    "sha256": "b78e1edd9fb43ac2d7ead6b89c7032d66be03f0dd9a599774dd03450a86a77e9",
+    "bytes": 18337,
+    "changes": "None; original recording redistributed unchanged."
+  },
+  {
+    "word": "climate",
+    "author": "Dvortygirl",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+    "page": "https://commons.wikimedia.org/wiki/File:En-us-climate.ogg",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/9/93/En-us-climate.ogg",
+    "file": "/audio/human-v1/climate.ogg",
+    "sha256": "cd79c67fe25c4c495cdf169f3da1564256892aa717babc680170963260fd1038",
+    "bytes": 14322,
+    "changes": "None; original recording redistributed unchanged."
+  },
+  {
+    "word": "hypothesis",
+    "author": "Dvortygirl",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+    "page": "https://commons.wikimedia.org/wiki/File:En-us-hypothesis.ogg",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/2/26/En-us-hypothesis.ogg",
+    "file": "/audio/human-v1/hypothesis.ogg",
+    "sha256": "5a39f1679d33410c1eb5d6a5e1c3ceb896a2388fa41902d407e7879a195ced3c",
+    "bytes": 15330,
+    "changes": "None; original recording redistributed unchanged."
+  },
+  {
+    "word": "reception",
+    "author": "Dvortygirl",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+    "page": "https://commons.wikimedia.org/wiki/File:En-us-reception.ogg",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/7/7d/En-us-reception.ogg",
+    "file": "/audio/human-v1/reception.ogg",
+    "sha256": "57fcad6071a6fda0af0bb912cd470d294a940bc45678ef8c39312ad922836814",
+    "bytes": 14454,
+    "changes": "None; original recording redistributed unchanged."
+  },
+  {
+    "word": "resource",
+    "author": "Dvortygirl",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+    "page": "https://commons.wikimedia.org/wiki/File:En-us-resource.ogg",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/f/f3/En-us-resource.ogg",
+    "file": "/audio/human-v1/resource.ogg",
+    "sha256": "3ca5b51728014f83b8b821ea372edeb795cee3731e6ac7a618d02367728d25f9",
+    "bytes": 15363,
+    "changes": "None; original recording redistributed unchanged."
+  }
+]

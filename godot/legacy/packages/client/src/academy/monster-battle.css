@@ -1,0 +1,161 @@
+/* A clear desktop stage: persistent HUD has its own row, never over the actors. */
+.game-polish .spelling-duel{max-width:1680px;padding:12px 22px 18px}
+.game-polish .spelling-duel .encounter-hud{display:grid;grid-template-columns:minmax(240px,1fr) 145px minmax(240px,1fr) 180px;gap:10px;align-items:stretch;margin-bottom:12px;min-height:88px}
+.game-polish .spelling-duel .encounter-hud.is-preview{grid-template-columns:1fr 200px 1fr}
+.game-polish .spelling-duel .encounter-hud .duel-health{position:relative;inset:auto;width:auto!important;height:88px;min-width:0;margin:0;padding:8px 14px;border:2px solid #283b55;border-radius:13px;background:linear-gradient(125deg,#3b506c,#203650);box-shadow:inset 0 1px #b3c6dd55,0 3px #101f35}
+.game-polish .spelling-duel .encounter-hud .duel-health.left{grid-column:1;grid-row:1;padding-left:86px}
+.game-polish .spelling-duel .encounter-hud .duel-health.right{grid-column:3;grid-row:1}
+.game-polish .spelling-duel .encounter-hud .duel-hud-avatar{left:11px;top:10px;width:63px;height:63px;border:2px solid #c2ad83;border-radius:11px;box-shadow:0 2px 7px #101a2b80}
+.game-polish .spelling-duel .encounter-hud .duel-health>div:first-of-type{min-height:16px;display:flex;justify-content:space-between;gap:8px;overflow:hidden}
+.game-polish .spelling-duel .encounter-hud .duel-health b{font-size:.8rem;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.game-polish .spelling-duel .encounter-hud .duel-health span{font-size:.72rem;white-space:nowrap}
+.game-polish .spelling-duel .encounter-hud .duel-health strong{top:31px;right:15px;font-size:1rem;line-height:1.2}
+.game-polish .spelling-duel .encounter-hud .hp-track{height:20px;margin-top:5px}
+.game-polish .spelling-duel .encounter-hud .hud-energy{margin-top:4px}
+.game-polish .spelling-duel .encounter-hud .hud-energy>.energy-track{height:16px}
+.game-polish .spelling-duel .encounter-hud .hud-energy>span{font-size:.65rem!important;line-height:12px}
+.game-polish .spelling-duel .monster-status{display:block;font-size:.68rem;color:#c4d2e7;margin-top:5px}
+.game-polish .spelling-duel .encounter-hud .combat-readout{display:contents}
+.game-polish .spelling-duel .encounter-hud .enemy-intent{position:static;grid-column:4;grid-row:1;min-width:0;width:auto;border:2px solid #31445d;border-radius:13px;padding:9px 10px;background:linear-gradient(#354962,#1e344d);box-shadow:inset 0 1px #b3c6dd44,0 3px #101f35}
+.game-polish .spelling-duel .encounter-hud .enemy-intent>div:first-child{display:flex;justify-content:space-between;gap:6px;align-items:center;flex-direction:row}
+.game-polish .spelling-duel .encounter-hud .enemy-intent span{font-size:.7rem;color:#e7dfca}
+.game-polish .spelling-duel .encounter-hud .enemy-intent b{font:700 1.3rem/1.2 'Segoe UI',sans-serif;color:#f8e7be;white-space:nowrap}
+.game-polish .spelling-duel .encounter-hud .enemy-intent small{font-size:.68rem}
+.game-polish .spelling-duel .encounter-hud .enemy-intent-track{height:6px;margin-top:6px;border-radius:4px;background:#101e33;overflow:hidden}
+.game-polish .spelling-duel .encounter-hud .enemy-intent-track i{display:block;height:100%;background:linear-gradient(90deg,#c8b489,#f2a599)}
+.game-polish .spelling-duel .encounter-hud .intent-damage{display:block;margin-top:5px;color:#bacde2;line-height:1.4}
+.game-polish .spelling-duel .encounter-hud .intent-near{border-color:#dfaf8e;box-shadow:inset 0 0 14px #b5593628,0 0 0 1px #b66b4b}
+.game-polish .spelling-duel .encounter-hud .combo-runes{position:static;grid-column:2;grid-row:1;width:auto;min-width:0;padding:12px 6px;display:flex;flex-direction:column;justify-content:center;gap:7px;text-align:center;color:#d1dbeb;background:#1c324ad9;border:1px solid #7b8d9f65;border-radius:11px}
+.game-polish .spelling-duel .encounter-hud .combo-rune-slots{display:flex;justify-content:center;gap:8px}
+.game-polish .spelling-duel .encounter-hud .combo-rune-slots i{font-style:normal;color:#70829b;font-size:16px}
+.game-polish .spelling-duel .encounter-hud .combo-rune-slots i.lit{color:#f8d692;text-shadow:0 0 8px #dbac53}
+.game-polish .spelling-duel .encounter-hud .combo-runes>span{font-size:.68rem;line-height:1.5}
+.game-polish .encounter-intro{grid-column:2;grid-row:1;align-self:center;text-align:center;color:#eed9a8;font-size:.9rem;line-height:1.8}
+.game-polish .encounter-intro small{display:block;color:#bccbe0;font-size:.72rem}
+.game-polish .spelling-duel .encounter-arena .monster-stage{height:clamp(290px,38svh,430px);min-height:290px;overflow:hidden;border-radius:17px;isolation:isolate;background:linear-gradient(#0d1f3720,#20364b15 60%,#15273fb3);box-shadow:inset 0 0 0 1px #8ba5bf5e,0 4px #13223a88}
+.game-polish .spelling-duel .encounter-arena .monster-stage .duelist{top:10px;bottom:10px;width:33%;height:auto;max-width:none}
+.game-polish .spelling-duel .encounter-arena .monster-stage .duelist-left{left:9%}
+.game-polish .spelling-duel .encounter-arena .monster-stage .duelist-right{right:8%;width:31%}
+.game-polish .spelling-duel .monster-stage .portrait-idle,.game-polish .spelling-duel .monster-stage .portrait-motion{width:100%;height:100%;position:relative}
+.game-polish .spelling-duel .monster-stage .battle-body-art,.game-polish .spelling-duel .monster-stage .monster-body-art{width:100%;height:100%;max-height:100%;object-fit:contain;object-position:center bottom;filter:drop-shadow(0 7px 6px #07132677)}
+.game-polish .spelling-duel .monster-stage .monster-body-art{position:relative;z-index:2;display:block}
+.game-polish .spelling-duel .monster-stage .duelist-platform{bottom:0;height:25px;border-color:#d6c39455;box-shadow:0 0 20px #9ebee51f}
+.game-polish .spelling-duel .monster-stage .battle-companion{width:90px;height:90px;bottom:7px;right:-5%;z-index:4}
+.game-polish .spelling-duel .monster-stage .duel-sigil{bottom:0;top:auto;opacity:.18;max-height:100%;width:230px;height:230px}
+.game-polish .spelling-duel .monster-stage .duel-scene-caption{position:absolute;left:37%;right:37%;bottom:16px;text-align:center;font-size:.75rem;line-height:1.7;background:none;padding:0;pointer-events:none;color:#d1d8e8}
+.game-polish .spelling-duel .monster-stage .spell-projectile{top:auto;bottom:85px}
+.game-polish .spelling-duel .monster-stage .spell-impact{top:40%;width:110px;height:110px}
+.game-polish .spelling-duel .monster-stage .card-projectile{position:absolute;left:27%;bottom:13px;width:80px;height:116px;border:2px solid #e5c78e;border-radius:7px;padding:4px;background:#18273f;box-shadow:0 0 0 2px #19233c,0 0 18px #a1bfe099;opacity:0;pointer-events:none;z-index:12;will-change:transform,opacity}
+.game-polish .card-projectile .skill-illustration{display:block;width:100%;height:82px;object-fit:cover;border-radius:3px}
+.game-polish .card-projectile>b{display:block;color:#fff0ca;text-align:center;font-size:10px;font-weight:500;line-height:20px;white-space:nowrap;overflow:hidden}
+.game-polish .card-projectile>i{position:absolute;right:5px;top:5px;color:#fff3c0;text-shadow:0 0 6px #9f77ef;font-style:normal}
+.game-polish .spelling-duel .monster-stage .combat-callout{left:43%;top:auto;bottom:10px;max-width:25%;padding:5px 12px;border:1px solid #d5bc896e;background:#152b43d9;border-radius:9px;box-shadow:none;transform:none;animation:card-hit-caption .85s ease both}
+.game-polish .spelling-duel .monster-stage .combat-callout small{font-size:.65rem}
+.game-polish .spelling-duel .monster-stage .combat-callout b{font-size:.95rem}
+.game-polish .spelling-duel .monster-stage .combat-ray{animation-delay:.22s}
+.game-polish .spelling-duel .monster-stage .combat-impact{animation-delay:.25s}
+.game-polish .spelling-duel .monster-stage .damage-number{top:24%;font-size:2.6rem;animation-delay:.24s}
+.game-polish .spelling-duel .monster-stage .support-flash{left:3%;right:auto;bottom:5px;max-width:180px;font-size:.7rem;z-index:6;padding:5px 10px}
+.game-polish .spelling-duel .monster-stage .ultimate-cut-in{position:absolute;inset:auto;left:36%;bottom:8px;width:29%;height:auto;min-height:0;padding:9px 13px;border:1px solid #d6bd86;border-radius:10px;background:#152b44ef;animation:card-hit-caption 1.15s ease both;z-index:14;transform:none}
+.game-polish .spelling-duel .monster-stage .ultimate-cut-in>div{position:static;width:auto;padding:0}
+.game-polish .spelling-duel .monster-stage .ultimate-cut-in h2{font-size:1.1rem;margin:3px 0;color:#f7dd9e}
+.game-polish .spelling-duel .monster-stage .ultimate-cut-in small{font-size:.7rem}
+.game-polish .spelling-duel .monster-stage .ultimate-cut-in p{font-size:.7rem;margin:0;line-height:1.6}
+.game-polish .spelling-duel.is-live .duel-live-meta{margin:5px 0;min-height:26px}
+.game-polish .spelling-duel.is-live .spell-console{display:grid;grid-template-columns:minmax(410px,42%) minmax(0,1fr);gap:8px 22px;padding:13px 16px;border:2px solid #30465e;border-radius:17px;background:linear-gradient(115deg,#20354ee8,#172b43f5);overflow:visible}
+.game-polish .spelling-duel.is-live .spell-console>.speaker-name{display:none}
+.game-polish .spelling-duel.is-live .combat-actions.skill-hand{grid-column:1;grid-row:1/4;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:stretch;gap:10px;margin:0;min-width:0}
+.game-polish .spelling-duel.is-live .combat-actions.skill-hand .skill-card{position:relative;height:188px;padding:7px;display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;gap:0;min-width:0;grid-column:auto;grid-row:auto;border:2px solid #9e8c69;border-radius:10px;background:linear-gradient(145deg,#26354d,#15263d);box-shadow:inset 0 0 0 1px #e7ce922f,0 4px #0b182c;transform:none;transition:transform .15s,border-color .15s;overflow:visible;color:#f7e9ca;text-align:left}
+.game-polish .spelling-duel.is-live .combat-actions.skill-hand .skill-card::after{content:'✧';position:absolute;right:8px;bottom:5px;font-size:13px;color:#dac08b;pointer-events:none}
+.game-polish .spelling-duel.is-live .combat-actions.skill-hand .skill-card:disabled{opacity:.72;filter:saturate(.75);cursor:default}
+.game-polish .spelling-duel.is-live .combat-actions.skill-hand button.skill-card:hover:not(:disabled){transform:translateY(-5px);border-color:#f3d695}
+.game-polish .spelling-duel.is-live .combat-actions.skill-hand .charged{border-color:#f0cc83;box-shadow:inset 0 0 0 1px #e6cf8b44,0 4px #0b182c,0 0 12px #e1bc643b}
+.game-polish .spelling-duel.is-live .skill-card .skill-card-art{width:100%;height:95px;min-height:95px;flex-basis:auto;position:relative;display:block;margin:0;border:1px solid #c6b48a61;border-radius:5px;overflow:hidden;background:none}
+.game-polish .spelling-duel.is-live .skill-card-art .skill-illustration{display:block;width:100%;height:100%;object-fit:cover;object-position:center;transform:none;filter:none}
+.game-polish .spelling-duel.is-live .skill-card .skill-card-counter{position:absolute;right:4px;left:auto;top:4px;bottom:auto;z-index:2;min-width:24px;height:24px;padding:4px 5px;border:1px solid #bfa472;border-radius:50%;background:#17273ee8;color:#f9e2ab;font-size:.7rem!important;line-height:14px;text-align:center}
+.game-polish .spelling-duel.is-live .skill-card .skill-card-copy{display:flex;flex-direction:column;flex-wrap:nowrap;align-items:stretch;gap:3px;margin:7px 1px 0;min-width:0}
+.game-polish .spelling-duel.is-live .skill-card .skill-card-copy small{font-size:.65rem!important;color:#c7d5e6;line-height:1.4}
+.game-polish .spelling-duel.is-live .skill-card .skill-card-copy>b{font-size:.98rem;line-height:1.4;color:#f7dfaa;font-family:'STSong','SimSun',serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.game-polish .spelling-duel.is-live .skill-card .skill-card-copy>span{font-size:.7rem!important;line-height:1.5;color:#e0e7ef;padding-right:6px}
+.game-polish .spelling-duel.is-live .spirit-card .skill-card-art{display:grid;place-items:center;background:radial-gradient(ellipse at 50% 60%,#96c6c553,#1d3c50 60%,#162b41)}
+.game-polish .spelling-duel.is-live .spirit-card .skill-card-art img{width:100%;height:105%;object-fit:contain;filter:drop-shadow(0 0 6px #ccd5ed59);transform:none;position:static}
+.game-polish .spelling-duel.is-live .ultimate-button .skill-card-art::after{content:'';position:absolute;inset:3px;border:1px solid #ebd08c7d;pointer-events:none}
+.game-polish .spelling-duel.is-live .spell-prompt{grid-column:2;grid-row:1;display:flex;gap:12px;align-items:start;margin:0;min-width:0;align-self:end}
+.game-polish .spelling-duel.is-live .spell-prompt>div:first-child{min-width:0;flex:1}
+.game-polish .spelling-duel.is-live .spell-prompt h2.typed-word{font-size:1.65rem;line-height:1.45;max-height:120px;overflow:auto;overflow-wrap:anywhere}
+.game-polish .spelling-duel.is-live.sentence-duel .spell-prompt h2.typed-word{font-size:1.05rem;line-height:1.65}
+.game-polish .spelling-duel.is-live .spell-prompt p{font-size:.8rem;line-height:1.6}
+.game-polish .spelling-duel.is-live .spell-tools{display:flex;gap:5px;flex-shrink:0;margin:0}
+.game-polish .spelling-duel.is-live .spell-tools button{font-size:.72rem;padding:5px 8px}
+.game-polish .spelling-duel.is-live .spell-console form{grid-column:2;grid-row:2;display:flex;flex-direction:row;gap:9px;margin:0;align-self:center}
+.game-polish .spelling-duel.is-live .spell-console form input{height:47px;min-height:47px;min-width:0;flex:1}
+.game-polish .spelling-duel.is-live .spell-console form .gal-button{min-width:120px;height:47px;min-height:47px;width:auto;padding:6px 13px;font-size:.9rem}
+.game-polish .spelling-duel.is-live .spell-bottom{grid-column:2;grid-row:3;display:flex;flex-wrap:wrap;align-items:center;gap:3px 15px;margin:0;align-self:start}
+.game-polish .spelling-duel.is-live .spell-bottom p{font-size:.75rem;line-height:1.6;margin:0;max-width:70ch}
+.game-polish .spelling-duel.is-live .spell-bottom>span{font-size:.65rem;margin-left:auto}
+.game-polish .spelling-duel.is-live .spell-console>p{grid-column:2;font-size:.8rem}
+.game-polish .story-mission>.mission-return{position:static;display:block;width:fit-content;margin:7px 22px;padding:6px 12px;border-radius:9px;font-size:.8rem}
+.game-polish .story-battle .story-battle-heading{padding:5px 3px 10px;min-height:0}
+.game-polish .story-battle .story-battle-heading p{font-size:.8rem;line-height:1.6;margin:4px 0 0}
+.game-polish .story-battle .story-combat-voice{margin:10px 0 6px;padding:7px 13px}
+.game-polish .story-battle .story-combat-voice p{font-size:.8rem}
+.game-polish .spelling-duel .duel-options{flex-wrap:wrap}
+.game-polish .spelling-duel.is-live .combat-actions.skill-hand .skill-card{height:auto;min-height:188px}
+.game-polish .spelling-duel.is-live .skill-card .skill-card-art .skill-card-counter{background:#edd39e!important;color:#25344a!important;border-color:#fff0cb;font-size:.75rem!important;font-weight:700;font-style:normal}
+.game-polish .spelling-duel .monster-stage .damage-number{opacity:0;animation-fill-mode:forwards}
+@keyframes card-hit-caption{0%{opacity:0}15%,75%{opacity:1}100%{opacity:0}}
+@media(min-width:1100px) and (max-height:800px){
+  .game-polish .spelling-duel{padding-top:8px;padding-bottom:10px}
+  .game-polish .spelling-duel .encounter-hud{margin-bottom:9px}
+  .game-polish .spelling-duel .encounter-arena .monster-stage{height:285px;min-height:285px}
+  .game-polish .spelling-duel.is-live .combat-actions.skill-hand .skill-card{height:auto;min-height:174px}
+  .game-polish .spelling-duel.is-live .skill-card .skill-card-art{height:82px;min-height:82px}
+  .game-polish .spelling-duel.is-live .spell-console{padding-top:10px;padding-bottom:10px}
+}
+@media(max-width:1099px){
+  .game-polish .spelling-duel .encounter-hud{grid-template-columns:1fr 1fr;gap:9px}
+  .game-polish .spelling-duel .encounter-hud .duel-health.right{grid-column:2;grid-row:1}
+  .game-polish .spelling-duel .encounter-hud .combo-runes{grid-column:1;grid-row:2;flex-direction:row;align-items:center;padding:8px}
+  .game-polish .spelling-duel .encounter-hud .enemy-intent{grid-column:2;grid-row:2;padding:7px 10px}
+  .game-polish .spelling-duel .encounter-hud .intent-damage{display:none}
+  .game-polish .spelling-duel .encounter-hud .enemy-intent-track{margin-top:4px}
+  .game-polish .spelling-duel .encounter-hud.is-preview{grid-template-columns:1fr 1fr}
+  .game-polish .spelling-duel .encounter-hud.is-preview .encounter-intro{display:none}
+  .game-polish .spelling-duel.is-live .spell-console{grid-template-columns:minmax(0,1fr)}
+  .game-polish .spelling-duel.is-live .combat-actions.skill-hand{grid-column:1;grid-row:1}
+  .game-polish .spelling-duel.is-live .spell-prompt{grid-column:1;grid-row:2}
+  .game-polish .spelling-duel.is-live .spell-console form{grid-column:1;grid-row:3}
+  .game-polish .spelling-duel.is-live .spell-bottom{grid-column:1;grid-row:4}
+}
+@media(max-width:680px){
+  .game-polish .spelling-duel{padding:9px 10px 16px}
+  .game-polish .spelling-duel .encounter-hud .duel-health.left{padding-left:10px}
+  .game-polish .spelling-duel .encounter-hud .duel-health{height:98px}
+  .game-polish .spelling-duel .encounter-hud .duel-health>div:first-of-type{display:block}
+  .game-polish .spelling-duel .encounter-hud .duel-health strong{top:38px;font-size:.9rem;right:10px}
+  .game-polish .spelling-duel .encounter-hud .duel-health span,.game-polish .spelling-duel .encounter-hud .duel-health b{font-size:.65rem}
+  .game-polish .spelling-duel .encounter-hud .hp-track{margin-top:3px;height:18px}
+  .game-polish .spelling-duel .encounter-hud .duel-hud-avatar{display:none}
+  .game-polish .spelling-duel .encounter-hud .combo-runes>span{display:none}
+  .game-polish .spelling-duel .encounter-arena .monster-stage{height:280px;min-height:280px}
+  .game-polish .spelling-duel .encounter-arena .monster-stage .duelist-left{left:0;width:48%;top:12px;bottom:10px}
+  .game-polish .spelling-duel .encounter-arena .monster-stage .duelist-right{right:0;width:47%;top:12px;bottom:10px}
+  .game-polish .spelling-duel .monster-stage .battle-companion{width:60px;height:60px;right:-5%;bottom:9px}
+  .game-polish .spelling-duel.is-live .combat-actions.skill-hand{gap:7px}
+  .game-polish .spelling-duel.is-live .combat-actions.skill-hand .skill-card{height:auto;padding:5px;min-height:180px}
+  .game-polish .spelling-duel.is-live .skill-card .skill-card-art{height:75px;min-height:75px}
+  .game-polish .spelling-duel.is-live .skill-card .skill-card-copy>b{font-size:.8rem}
+  .game-polish .spelling-duel.is-live .skill-card .skill-card-copy small{font-size:.6rem!important}
+  .game-polish .spelling-duel.is-live .skill-card .skill-card-copy>span{font-size:.65rem!important}
+  .game-polish .spelling-duel.is-live .spell-prompt{display:block;margin-top:5px}
+  .game-polish .spelling-duel.is-live .spell-tools{margin-top:5px;justify-content:flex-end}
+  .game-polish .spelling-duel.is-live .spell-console form{flex-direction:column}
+  .game-polish .spelling-duel.is-live .spell-console form .gal-button{width:100%}
+  .game-polish .spelling-duel .monster-stage .card-projectile{width:56px;height:85px}
+  .game-polish .card-projectile .skill-illustration{height:55px}
+  .game-polish .spelling-duel .monster-stage .ultimate-cut-in{left:28%;width:44%}
+}
+.game-polish.reduced-motion .card-projectile,.game-polish .motion-reduced .card-projectile{display:none!important}
+.game-polish .spelling-duel .monster-stage.motion-reduced .damage-number,.game-polish .spelling-duel .monster-stage.duel-paused .damage-number{animation:none;opacity:1}
+.game-polish.reduced-motion .skill-hand .skill-card:hover,.game-polish .duel-paused .portrait-idle{transform:none!important}
+@media(prefers-reduced-motion:reduce){.game-polish .card-projectile{display:none!important}.game-polish .skill-card{transition:none!important}.game-polish .spelling-duel .monster-stage .damage-number{animation:none;opacity:1}}

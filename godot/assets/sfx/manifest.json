@@ -1,0 +1,146 @@
+{
+  "sounds": {
+    "rifle": {
+      "file": "rifle.ogg",
+      "original": "sks.wav",
+      "start": 0.3319,
+      "source": "https://opengameart.org/content/gunshot-sounds",
+      "credit": "Vincent Sevedge",
+      "license": "CC BY 3.0 (included source license)",
+      "duration": 0.72
+    },
+    "sniper": {
+      "file": "sniper.ogg",
+      "original": "mosin.wav",
+      "start": 0.4237,
+      "source": "https://opengameart.org/content/gunshot-sounds",
+      "credit": "Vincent Sevedge",
+      "license": "CC BY 3.0 (included source license)",
+      "duration": 0.72
+    },
+    "pistol": {
+      "file": "pistol.ogg",
+      "original": "cz.wav",
+      "start": 0.1262,
+      "source": "https://opengameart.org/content/gunshot-sounds",
+      "credit": "Vincent Sevedge",
+      "license": "CC BY 3.0 (included source license)",
+      "duration": 0.72
+    },
+    "shotgun": {
+      "file": "shotgun.ogg",
+      "original": "shotty.wav",
+      "start": 0.0147,
+      "source": "https://opengameart.org/content/gunshot-sounds",
+      "credit": "Vincent Sevedge",
+      "license": "CC BY 3.0 (included source license)",
+      "duration": 0.683167
+    },
+    "click": {
+      "file": "click.ogg",
+      "original": "click_001.ogg",
+      "source": "https://kenney.nl/assets/interface-sounds",
+      "credit": "Kenney",
+      "license": "CC0",
+      "duration": 0.100021
+    },
+    "type": {
+      "file": "type.ogg",
+      "original": "tick_001.ogg",
+      "source": "https://kenney.nl/assets/interface-sounds",
+      "credit": "Kenney",
+      "license": "CC0",
+      "duration": 0.047896
+    },
+    "error": {
+      "file": "error.ogg",
+      "original": "error_004.ogg",
+      "source": "https://kenney.nl/assets/interface-sounds",
+      "credit": "Kenney",
+      "license": "CC0",
+      "duration": 0.107396
+    },
+    "impact": {
+      "file": "impact.ogg",
+      "original": "impactMetal_light_001.ogg",
+      "source": "https://kenney.nl/assets/impact-sounds",
+      "credit": "Kenney",
+      "license": "CC0",
+      "duration": 0.251833
+    },
+    "hurt": {
+      "file": "hurt.ogg",
+      "original": "impactPunch_heavy_001.ogg",
+      "source": "https://kenney.nl/assets/impact-sounds",
+      "credit": "Kenney",
+      "license": "CC0",
+      "duration": 0.535938
+    },
+    "shield": {
+      "file": "shield.ogg",
+      "original": "impactMetal_heavy_000.ogg",
+      "source": "https://kenney.nl/assets/impact-sounds",
+      "credit": "Kenney",
+      "license": "CC0",
+      "duration": 0.167667
+    },
+    "reload": {
+      "file": "reload.ogg",
+      "original": "switch_005.ogg",
+      "source": "https://kenney.nl/assets/interface-sounds",
+      "credit": "Kenney",
+      "license": "CC0",
+      "duration": 0.611917
+    },
+    "combo": {
+      "file": "combo.ogg",
+      "original": "confirmation_002.ogg",
+      "source": "https://kenney.nl/assets/interface-sounds",
+      "credit": "Kenney",
+      "license": "CC0",
+      "duration": 0.539
+    },
+    "support": {
+      "file": "support.ogg",
+      "original": "confirmation_004.ogg",
+      "source": "https://kenney.nl/assets/interface-sounds",
+      "credit": "Kenney",
+      "license": "CC0",
+      "duration": 0.490417
+    },
+    "success": {
+      "file": "success.ogg",
+      "original": "confirmation_001.ogg",
+      "source": "https://kenney.nl/assets/interface-sounds",
+      "credit": "Kenney",
+      "license": "CC0",
+      "duration": 0.289854
+    },
+    "failure": {
+      "file": "failure.ogg",
+      "original": "lowDown.ogg",
+      "source": "https://kenney.nl/assets/digital-audio",
+      "credit": "Kenney",
+      "license": "CC0",
+      "duration": 0.783667
+    },
+    "low_health": {
+      "file": "low_health.ogg",
+      "original": "error_008.ogg",
+      "source": "https://kenney.nl/assets/interface-sounds",
+      "credit": "Kenney",
+      "license": "CC0",
+      "duration": 0.139333
+    },
+    "ultimate": {
+      "file": "ultimate.ogg",
+      "original": "sks.wav",
+      "start": 0.3319,
+      "source": "https://opengameart.org/content/gunshot-sounds",
+      "credit": "Vincent Sevedge",
+      "license": "CC BY 3.0 (included source license)",
+      "edit": "three rifle shots offset by 95ms",
+      "duration": 0.91
+    }
+  }
+}

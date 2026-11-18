@@ -1,0 +1,55 @@
+{
+  "source": "built-in image_gen",
+  "direction": "right",
+  "frames": [
+    {
+      "file": "res://assets/fx/direction-v27/projectile-1.png",
+      "nose": [
+        211,
+        129
+      ],
+      "tail_x": 78,
+      "forward": [
+        1,
+        0
+      ]
+    },
+    {
+      "file": "res://assets/fx/direction-v27/projectile-2.png",
+      "nose": [
+        213,
+        128
+      ],
+      "tail_x": 83,
+      "forward": [
+        1,
+        0
+      ]
+    },
+    {
+      "file": "res://assets/fx/direction-v27/projectile-3.png",
+      "nose": [
+        210,
+        128
+      ],
+      "tail_x": 80,
+      "forward": [
+        1,
+        0
+      ]
+    },
+    {
+      "file": "res://assets/fx/direction-v27/projectile-4.png",
+      "nose": [
+        211,
+        128
+      ],
+      "tail_x": 87,
+      "forward": [
+        1,
+        0
+      ]
+    }
+  ],
+  "frame_ms": 60
+}

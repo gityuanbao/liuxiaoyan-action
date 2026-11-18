@@ -1,0 +1,15 @@
+{
+  "file": "startup-signature-v18.ogg",
+  "source": "https://www.bilibili.com/video/BV1cWNJeoEPb/",
+  "source_title": "三角洲新版启动动画",
+  "uploader": "一个很聪明的家伙_",
+  "source_range_seconds": [
+    2.72,
+    6.42
+  ],
+  "duration": 3.7,
+  "sample_rate": 48000,
+  "channels": 2,
+  "processing": "Trim to game-logo section; 25 ms fade-in, 650 ms fade-out; stereo Vorbis conversion, original pitch. Runtime gain -2 dB.",
+  "rights": "Reference supplied by user; source rights remain with original rightsholders. This clip is not part of the CC0 / CC BY gameplay SFX collection."
+}

@@ -1,0 +1,8 @@
+* text=auto
+*.pck binary
+*.wasm binary
+*.ogg binary
+*.ogv binary
+*.gif binary
+*.png binary
+*.mp3 binary

@@ -1,0 +1,17 @@
+{
+  "source": "raw-sheet-clean.png",
+  "grid": [
+    3,
+    2
+  ],
+  "frame_size": [
+    256,
+    256
+  ],
+  "anchor": [
+    0.5,
+    0.5
+  ],
+  "duration_ms": 65,
+  "method": "fixed source cells; no per-frame translation or magnification"
+}

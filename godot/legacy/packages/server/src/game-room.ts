@@ -1,0 +1,807 @@
+import { WebSocket } from 'ws'
+import { v4 as uuidv4 } from 'uuid'
+import {
+  type GameState,
+  type PlayerState,
+  type ActiveEffect,
+  type ServerMessage,
+  type RoundEndMessage,
+  type PlayerInfo,
+  type KeystrokeMessage,
+  type UseAbilityMessage,
+  type TauntMessage,
+  MessageType,
+  AbilityId,
+  ABILITY_CONFIGS,
+  MAX_HP,
+  MAX_ENERGY,
+  ROUND_DURATION,
+  ROUNDS_TO_WIN,
+  ROUND_BREAK_MS,
+  STATE_BROADCAST_MS,
+  DAMAGE_TICK_MS,
+  DISCONNECT_GRACE_MS,
+} from '@typeduel/shared'
+import { buildLongPassage } from './text-corpus.js'
+import { generateRoomCode, calculateDamage } from './formulas.js'
+
+const disconnectGracePeriodMs = Number(process.env.DISCONNECT_GRACE_MS ?? DISCONNECT_GRACE_MS)
+
+interface Keystroke {
+  char: string
+  timestamp: number
+  correct: boolean
+}
+
+interface ServerPlayerState extends PlayerState {
+  ws: WebSocket
+  keystrokeLog: Keystroke[]
+  totalCorrect: number
+  totalKeystrokes: number
+  startTime: number
+  lastKeystrokeTime: number
+  consecutiveCorrect: number
+  damageDealt: number
+  abilitiesUsed: number
+  cooldowns: Map<AbilityId, number> // abilityId → timestamp when cooldown expires
+  frozenKeystrokeBuffer: { char: string; timestamp: number }[]
+  wpmHistory: number[]
+}
+
+export class GameRoom {
+  roomId: string
+  roomCode: string
+  status: 'waiting' | 'countdown' | 'active' | 'finished' = 'waiting'
+  countdownSeconds: number = 0
+  text: string = ''
+  timeLeft: number = ROUND_DURATION
+  players: Map<string, ServerPlayerState> = new Map()
+  spectators: Map<string, WebSocket> = new Map() // spectatorId → ws
+
+  private broadcastInterval: ReturnType<typeof setInterval> | null = null
+  private damageInterval: ReturnType<typeof setInterval> | null = null
+  private countdownTimer: ReturnType<typeof setTimeout> | null = null
+  private destroyTimer: ReturnType<typeof setTimeout> | null = null
+  private nextRoundTimer: ReturnType<typeof setTimeout> | null = null
+  private disconnectTimers: Map<string, ReturnType<typeof setTimeout>> = new Map()
+  private rematchVotes: Set<string> = new Set()
+  private onDestroy: (roomId: string) => void
+  private lastRoundResult: RoundEndMessage | null = null
+  private roundWins: Map<string, number> = new Map()
+  private currentRound: number = 1
+  difficulty?: 'easy' | 'medium' | 'hard'
+
+  constructor(onDestroy: (roomId: string) => void, difficulty?: 'easy' | 'medium' | 'hard') {
+    this.roomId = uuidv4()
+    this.roomCode = generateRoomCode()
+    this.onDestroy = onDestroy
+    this.difficulty = difficulty
+  }
+
+  addPlayer(id: string, displayName: string, ws: WebSocket): PlayerState {
+    const player: ServerPlayerState = {
+      id,
+      displayName,
+      hp: MAX_HP,
+      cursor: 0,
+      wpm: 0,
+      accuracy: 100,
+      energy: 0,
+      activeEffects: [],
+      streak: 0,
+      ws,
+      keystrokeLog: [],
+      totalCorrect: 0,
+      totalKeystrokes: 0,
+      startTime: 0,
+      lastKeystrokeTime: 0,
+      consecutiveCorrect: 0,
+      damageDealt: 0,
+      abilitiesUsed: 0,
+      cooldowns: new Map(),
+      frozenKeystrokeBuffer: [],
+      wpmHistory: [],
+    }
+    this.players.set(id, player)
+    return this.toPlayerState(player)
+  }
+
+  get playerCount(): number {
+    return this.players.size
+  }
+
+  isFull(): boolean {
+    return this.players.size >= 2
+  }
+
+  startCountdown(): void {
+    if (this.status !== 'waiting') return
+    this.status = 'countdown'
+
+    const passage = buildLongPassage(this.difficulty)
+    this.text = passage.text
+
+    let count = 3
+    this.countdownSeconds = count
+    this.broadcast({
+      type: MessageType.COUNTDOWN,
+      seconds: count,
+    })
+
+    const tick = () => {
+      count--
+      this.countdownSeconds = count
+      if (count > 0) {
+        this.broadcast({
+          type: MessageType.COUNTDOWN,
+          seconds: count,
+        })
+        this.countdownTimer = setTimeout(tick, 1000)
+      } else {
+        this.startRound()
+      }
+    }
+    this.countdownTimer = setTimeout(tick, 1000)
+  }
+
+  private startRound(): void {
+    this.status = 'active'
+    this.countdownSeconds = 0
+    this.timeLeft = ROUND_DURATION
+
+    const now = Date.now()
+    for (const player of this.players.values()) {
+      player.startTime = now
+      player.lastKeystrokeTime = now
+    }
+
+    // Broadcast state at 10Hz
+    this.broadcastInterval = setInterval(() => {
+      this.broadcastState()
+    }, STATE_BROADCAST_MS)
+
+    // Damage tick every 1s
+    this.damageInterval = setInterval(() => {
+      this.damageTick()
+    }, DAMAGE_TICK_MS)
+  }
+
+  handleAbility(playerId: string, msg: UseAbilityMessage): void {
+    if (this.status !== 'active') return
+
+    const player = this.players.get(playerId)
+    if (!player) return
+
+    const abilityId = msg.abilityId
+    const config = ABILITY_CONFIGS[abilityId]
+    if (!config) return
+
+    const now = Date.now()
+
+    // Check energy
+    if (player.energy < config.cost) return
+
+    // Check cooldown
+    const cooldownExpiry = player.cooldowns.get(abilityId) ?? 0
+    if (now < cooldownExpiry) return
+
+    // Find opponent
+    const opponent = [...this.players.values()].find(p => p.id !== playerId)
+    if (!opponent) return
+
+    // Check same ability not already active on target (no stacking)
+    const target = abilityId === AbilityId.SURGE || abilityId === AbilityId.MIRROR ? player : opponent
+    const alreadyActive = target.activeEffects.some(e => e.abilityId === abilityId)
+    if (alreadyActive) return
+
+    // Deduct energy and set cooldown
+    player.energy -= config.cost
+    player.cooldowns.set(abilityId, now + config.cooldown)
+    player.abilitiesUsed++
+
+    // Add active effect
+    const effect: ActiveEffect = {
+      abilityId,
+      expiresAt: now + config.duration,
+      source: playerId,
+    }
+    target.activeEffects.push(effect)
+
+    // Broadcast ability usage
+    this.broadcast({
+      type: MessageType.ABILITY_USED,
+      by: playerId,
+      ability: abilityId,
+      target: target.id,
+    })
+  }
+
+  private hasEffect(player: ServerPlayerState, abilityId: AbilityId): boolean {
+    return player.activeEffects.some(e => e.abilityId === abilityId)
+  }
+
+  private expireEffects(): void {
+    const now = Date.now()
+    for (const player of this.players.values()) {
+      const before = player.activeEffects.length
+      player.activeEffects = player.activeEffects.filter(e => e.expiresAt > now)
+
+      // If FREEZE just expired, replay buffered keystrokes at 2x speed
+      const hadFreeze = before > player.activeEffects.length &&
+        !this.hasEffect(player, AbilityId.FREEZE)
+      if (hadFreeze && player.frozenKeystrokeBuffer.length > 0) {
+        // Replay buffered keystrokes immediately (all at once = 2x speed effect)
+        for (const buffered of player.frozenKeystrokeBuffer) {
+          this.processKeystroke(player, buffered.char)
+        }
+        player.frozenKeystrokeBuffer = []
+      }
+    }
+  }
+
+  private processKeystroke(player: ServerPlayerState, char: string): void {
+    if (char === 'BACKSPACE') {
+      if (player.cursor > 0) {
+        player.cursor--
+        player.totalCorrect = Math.max(0, player.totalCorrect - 1)
+        player.consecutiveCorrect = 0
+        player.accuracy = player.totalKeystrokes > 0
+          ? (player.totalCorrect / player.totalKeystrokes) * 100
+          : 100
+
+        const elapsedMinutes = (Date.now() - player.startTime) / 60000
+        player.wpm = elapsedMinutes > 0
+          ? Math.round((player.totalCorrect / 5) / elapsedMinutes)
+          : 0
+      }
+      return
+    }
+
+    if (char.length !== 1) return
+    const expectedChar = this.text[player.cursor]
+    if (expectedChar === undefined) return
+
+    player.totalKeystrokes++
+
+    if (char === expectedChar) {
+      player.totalCorrect++
+      player.cursor++
+      player.consecutiveCorrect++
+
+      if (player.consecutiveCorrect > 0 && player.consecutiveCorrect % 20 === 0) {
+        player.energy = Math.min(MAX_ENERGY, player.energy + 5)
+      }
+    } else {
+      player.consecutiveCorrect = 0
+    }
+
+    player.accuracy = player.totalKeystrokes > 0
+      ? (player.totalCorrect / player.totalKeystrokes) * 100
+      : 100
+
+    const now = Date.now()
+    const elapsedMinutes = (now - player.startTime) / 60000
+    if (elapsedMinutes > 0) {
+      player.wpm = Math.round((player.totalCorrect / 5) / elapsedMinutes)
+    }
+  }
+
+  handleKeystroke(playerId: string, msg: KeystrokeMessage): void {
+    if (this.status !== 'active') return
+
+    const player = this.players.get(playerId)
+    if (!player) return
+
+    const now = Date.now()
+    player.lastKeystrokeTime = now
+
+    // If player is frozen, buffer the keystroke
+    if (this.hasEffect(player, AbilityId.FREEZE)) {
+      player.frozenKeystrokeBuffer.push({ char: msg.char, timestamp: now })
+      return
+    }
+
+    this.processKeystroke(player, msg.char)
+
+    player.keystrokeLog.push({
+      char: msg.char,
+      timestamp: now,
+      correct: msg.char === this.text[player.cursor - 1],
+    })
+  }
+
+  private damageTick(): void {
+    if (this.status !== 'active') return
+
+    this.timeLeft--
+
+    // Expire active effects (and replay freeze buffers)
+    this.expireEffects()
+
+    const playerArr = [...this.players.values()]
+
+    // Energy accrual
+    for (const player of playerArr) {
+      const now = Date.now()
+      const recentlyTyped = (now - player.lastKeystrokeTime) < 2000
+
+      if (recentlyTyped) {
+        // +2 base energy
+        player.energy = Math.min(MAX_ENERGY, player.energy + 2)
+
+        // +1 per 10 WPM above 40
+        if (player.wpm > 40) {
+          const bonus = Math.floor((player.wpm - 40) / 10)
+          player.energy = Math.min(MAX_ENERGY, player.energy + bonus)
+        }
+      }
+    }
+
+    // Auto-ability: randomly use abilities for players who have enough energy
+    for (const player of playerArr) {
+      this.tryAutoAbility(player)
+    }
+
+    // Track WPM history (one snapshot per second)
+    for (const player of playerArr) {
+      player.wpmHistory.push(player.wpm)
+    }
+
+    // Damage calculation: differential model
+    // Damage scales with WPM advantage over opponent, not raw WPM.
+    // Collect damage amounts first, then apply (so MIRROR works symmetrically)
+    const damageMap = new Map<string, number>() // playerId → damage they will receive
+
+    for (const player of playerArr) {
+      const opponent = playerArr.find(p => p.id !== player.id)
+      if (!opponent) continue
+
+      const damage = calculateDamage(
+        player.wpm,
+        opponent.wpm,
+        player.accuracy,
+        player.cursor >= this.text.length,
+        this.hasEffect(player, AbilityId.SURGE),
+        player.hp < 30,
+      )
+
+      if (damage > 0) {
+        player.damageDealt += damage
+
+        // Apply damage to opponent
+        const existing = damageMap.get(opponent.id) ?? 0
+        damageMap.set(opponent.id, existing + damage)
+
+        // MIRROR: reflect 50% back to attacker
+        if (this.hasEffect(opponent, AbilityId.MIRROR)) {
+          const reflected = damage * 0.5
+          const existingReflect = damageMap.get(player.id) ?? 0
+          damageMap.set(player.id, existingReflect + reflected)
+        }
+      }
+    }
+
+    // Apply all damage
+    for (const [playerId, damage] of damageMap) {
+      const player = this.players.get(playerId)
+      if (player) {
+        player.hp = Math.max(0, player.hp - damage)
+      }
+    }
+
+    // Check for KO (HP reaches 0)
+    for (const player of playerArr) {
+      if (player.hp <= 0) {
+        this.endRound()
+        return
+      }
+    }
+
+    // Check timer
+    if (this.timeLeft <= 0) {
+      this.endRound()
+      return
+    }
+  }
+
+  private tryAutoAbility(player: ServerPlayerState): void {
+    const now = Date.now()
+    const opponent = [...this.players.values()].find(p => p.id !== player.id)
+    if (!opponent) return
+
+    // Collect affordable, off-cooldown abilities
+    const available: AbilityId[] = []
+    for (const abilityId of Object.values(AbilityId)) {
+      const config = ABILITY_CONFIGS[abilityId]
+      if (!config) continue
+      if (player.energy < config.cost) continue
+
+      // Check cooldown
+      const cooldownExpiry = player.cooldowns.get(abilityId) ?? 0
+      if (now < cooldownExpiry) continue
+
+      // Check no stacking
+      const target = abilityId === AbilityId.SURGE || abilityId === AbilityId.MIRROR ? player : opponent
+      if (target.activeEffects.some(e => e.abilityId === abilityId)) continue
+
+      available.push(abilityId)
+    }
+
+    if (available.length === 0) return
+
+    // 40% chance per tick to use an ability (so it's not instant every time)
+    if (Math.random() > 0.4) return
+
+    // Pick a random available ability
+    const abilityId = available[Math.floor(Math.random() * available.length)]
+    this.handleAbility(player.id, { type: MessageType.USE_ABILITY, abilityId })
+  }
+
+  private endRound(): void {
+    this.status = 'finished'
+    this.countdownSeconds = 0
+    this.cleanup()
+
+    // Determine winner (highest HP, tiebreak by WPM)
+    const playerArr = [...this.players.values()]
+    playerArr.sort((a, b) => {
+      if (b.hp !== a.hp) return b.hp - a.hp
+      return b.wpm - a.wpm
+    })
+
+    const winner = playerArr[0]
+
+    // Track round wins
+    if (winner) {
+      const wins = this.roundWins.get(winner.id) ?? 0
+      this.roundWins.set(winner.id, wins + 1)
+    }
+
+    const roundWinsObj: Record<string, number> = {}
+    for (const [id, wins] of this.roundWins) {
+      roundWinsObj[id] = wins
+    }
+
+    const isMatchOver = (this.roundWins.get(winner?.id ?? '') ?? 0) >= ROUNDS_TO_WIN
+
+    const stats: Record<string, { wpm: number; accuracy: number; damageDealt: number; abilitiesUsed: number; hpRemaining: number; wpmHistory: number[] }> = {}
+    for (const p of playerArr) {
+      stats[p.id] = {
+        wpm: p.wpm,
+        accuracy: Math.round(p.accuracy * 10) / 10,
+        damageDealt: Math.round(p.damageDealt * 10) / 10,
+        abilitiesUsed: p.abilitiesUsed,
+        hpRemaining: Math.round(p.hp * 10) / 10,
+        wpmHistory: p.wpmHistory,
+      }
+    }
+
+    this.lastRoundResult = {
+      type: MessageType.ROUND_END,
+      winner: winner?.id ?? '',
+      stats,
+      roundWins: roundWinsObj,
+      currentRound: this.currentRound,
+      isMatchOver,
+    }
+
+    this.broadcast(this.lastRoundResult)
+
+    if (isMatchOver) {
+      // Match is over — destroy room after a delay (unless rematch)
+      this.destroyTimer = setTimeout(() => {
+        this.onDestroy(this.roomId)
+      }, 30000)
+    } else {
+      // More rounds to play — auto-start next round after break
+      this.nextRoundTimer = setTimeout(() => {
+        this.startNextRound()
+      }, ROUND_BREAK_MS)
+    }
+  }
+
+  private startNextRound(): void {
+    this.currentRound++
+    this.status = 'waiting'
+    this.countdownSeconds = 0
+    this.timeLeft = ROUND_DURATION
+
+    // Pick a new passage
+    const passage = buildLongPassage(this.difficulty)
+    this.text = passage.text
+
+    // Reset player state for new round (keep roundWins)
+    for (const player of this.players.values()) {
+      player.hp = MAX_HP
+      player.cursor = 0
+      player.wpm = 0
+      player.accuracy = 100
+      player.energy = 0
+      player.activeEffects = []
+      player.keystrokeLog = []
+      player.totalCorrect = 0
+      player.totalKeystrokes = 0
+      player.startTime = 0
+      player.lastKeystrokeTime = 0
+      player.consecutiveCorrect = 0
+      player.streak = 0
+      player.damageDealt = 0
+      player.abilitiesUsed = 0
+      player.cooldowns.clear()
+      player.frozenKeystrokeBuffer = []
+      player.wpmHistory = []
+    }
+
+    this.startCountdown()
+  }
+
+  private broadcastState(): void {
+    const state = this.getGameState()
+    this.broadcast({
+      type: MessageType.GAME_STATE,
+      state,
+    })
+  }
+
+  getGameState(): GameState {
+    const players: Record<string, PlayerState> = {}
+    for (const [id, p] of this.players) {
+      players[id] = this.toPlayerState(p)
+    }
+    const roundWinsObj: Record<string, number> = {}
+    for (const [id, wins] of this.roundWins) {
+      roundWinsObj[id] = wins
+    }
+
+    return {
+      roomId: this.roomId,
+      roomCode: this.roomCode,
+      status: this.status,
+      countdownSeconds: this.countdownSeconds,
+      text: this.text,
+      timeLeft: this.timeLeft,
+      players,
+      spectatorCount: this.spectators.size,
+      currentRound: this.currentRound,
+      roundWins: roundWinsObj,
+    }
+  }
+
+  getOpponentInfo(playerId: string): PlayerInfo | null {
+    const opponent = [...this.players.values()].find((player) => player.id !== playerId)
+    return opponent ? { id: opponent.id, displayName: opponent.displayName } : null
+  }
+
+  getLastRoundResult(): RoundEndMessage | null {
+    return this.lastRoundResult
+  }
+
+  private toPlayerState(p: ServerPlayerState): PlayerState {
+    return {
+      id: p.id,
+      displayName: p.displayName,
+      hp: p.hp,
+      cursor: p.cursor,
+      wpm: p.wpm,
+      accuracy: Math.round(p.accuracy * 10) / 10,
+      energy: p.energy,
+      activeEffects: p.activeEffects,
+      streak: p.consecutiveCorrect,
+    }
+  }
+
+  broadcast(msg: ServerMessage): void {
+    const data = JSON.stringify(msg)
+    for (const player of this.players.values()) {
+      if (player.ws.readyState === WebSocket.OPEN) {
+        player.ws.send(data)
+      }
+    }
+    // Also send to spectators
+    for (const [specId, ws] of this.spectators) {
+      if (ws.readyState === WebSocket.OPEN) {
+        ws.send(data)
+      } else {
+        this.spectators.delete(specId)
+      }
+    }
+  }
+
+  sendTo(playerId: string, msg: ServerMessage): void {
+    const player = this.players.get(playerId)
+    if (player && player.ws.readyState === WebSocket.OPEN) {
+      player.ws.send(JSON.stringify(msg))
+    }
+  }
+
+  addSpectator(spectatorId: string, ws: WebSocket): void {
+    this.spectators.set(spectatorId, ws)
+    // Send current game state immediately so spectator sees the match
+    const state = this.getGameState()
+    ws.send(JSON.stringify({ type: MessageType.GAME_STATE, state }))
+  }
+
+  removeSpectator(spectatorId: string): void {
+    this.spectators.delete(spectatorId)
+  }
+
+  handleTaunt(playerId: string, msg: TauntMessage): void {
+    const opponent = [...this.players.values()].find(p => p.id !== playerId)
+    if (!opponent) return
+    this.sendTo(opponent.id, {
+      type: MessageType.TAUNT_RECEIVED,
+      from: playerId,
+      tauntId: msg.tauntId,
+    })
+  }
+
+  handleDisconnect(playerId: string): void {
+    // Spectators are removed immediately — no grace period
+    if (this.spectators.has(playerId)) {
+      // Keep spectator entry for resume window, just mark ws as stale
+      const timer = setTimeout(() => {
+        this.disconnectTimers.delete(playerId)
+        this.spectators.delete(playerId)
+      }, disconnectGracePeriodMs)
+      this.disconnectTimers.set(playerId, timer)
+      return
+    }
+
+    if (this.status === 'active') {
+      // Grace period — if they don't reconnect, opponent wins
+      const timer = setTimeout(() => {
+        this.disconnectTimers.delete(playerId)
+        const player = this.players.get(playerId)
+        if (player) {
+          player.hp = 0
+          this.endRound()
+        }
+      }, disconnectGracePeriodMs)
+      this.disconnectTimers.set(playerId, timer)
+    } else if (this.status === 'countdown' || this.status === 'finished') {
+      // Grace period for countdown and results — allow reconnect
+      const timer = setTimeout(() => {
+        this.disconnectTimers.delete(playerId)
+        this.removePlayer(playerId)
+      }, disconnectGracePeriodMs)
+      this.disconnectTimers.set(playerId, timer)
+    } else {
+      // waiting — remove immediately
+      this.removePlayer(playerId)
+    }
+  }
+
+  handleLeave(playerId: string): void {
+    if (this.spectators.has(playerId)) {
+      this.removeSpectator(playerId)
+      return
+    }
+
+    if (this.status === 'active') {
+      const player = this.players.get(playerId)
+      if (player) {
+        player.hp = 0
+        this.endRound()
+      }
+      return
+    }
+
+    this.removePlayer(playerId)
+  }
+
+  handleReconnect(playerId: string, ws: WebSocket): boolean {
+    // Clear disconnect timer regardless
+    const timer = this.disconnectTimers.get(playerId)
+    if (timer) {
+      clearTimeout(timer)
+      this.disconnectTimers.delete(playerId)
+    }
+
+    const player = this.players.get(playerId)
+    if (player) {
+      player.ws = ws
+      return true
+    }
+
+    return false
+  }
+
+  handleSpectatorReconnect(spectatorId: string, ws: WebSocket): boolean {
+    // Clear disconnect timer
+    const timer = this.disconnectTimers.get(spectatorId)
+    if (timer) {
+      clearTimeout(timer)
+      this.disconnectTimers.delete(spectatorId)
+    }
+
+    if (!this.spectators.has(spectatorId)) return false
+    this.spectators.set(spectatorId, ws)
+    return true
+  }
+
+  handleRematch(playerId: string): void {
+    if (this.status !== 'finished') return
+    this.rematchVotes.add(playerId)
+
+    // Notify the other player that this player voted for rematch
+    if (this.rematchVotes.size === 1) {
+      const opponent = [...this.players.values()].find(p => p.id !== playerId)
+      if (opponent) {
+        this.sendTo(opponent.id, {
+          type: MessageType.REMATCH_VOTED,
+          playerId,
+        })
+      }
+    }
+
+    if (this.rematchVotes.size >= 2) {
+      // Both players want rematch — reset and start new round
+      if (this.destroyTimer) {
+        clearTimeout(this.destroyTimer)
+        this.destroyTimer = null
+      }
+      this.rematchVotes.clear()
+      this.status = 'waiting'
+      this.countdownSeconds = 0
+      this.text = ''
+      this.timeLeft = ROUND_DURATION
+      this.lastRoundResult = null
+      this.roundWins.clear()
+      this.currentRound = 1
+
+      for (const player of this.players.values()) {
+        player.hp = MAX_HP
+        player.cursor = 0
+        player.wpm = 0
+        player.accuracy = 100
+        player.energy = 0
+        player.activeEffects = []
+        player.keystrokeLog = []
+        player.totalCorrect = 0
+        player.totalKeystrokes = 0
+        player.startTime = 0
+        player.lastKeystrokeTime = 0
+        player.consecutiveCorrect = 0
+        player.streak = 0
+        player.damageDealt = 0
+        player.abilitiesUsed = 0
+        player.cooldowns.clear()
+        player.frozenKeystrokeBuffer = []
+        player.wpmHistory = []
+      }
+
+      this.startCountdown()
+    }
+  }
+
+  removePlayer(playerId: string): void {
+    this.players.delete(playerId)
+    if (this.players.size === 0) {
+      this.cleanup()
+      this.onDestroy(this.roomId)
+    }
+  }
+
+  private cleanup(): void {
+    if (this.broadcastInterval) {
+      clearInterval(this.broadcastInterval)
+      this.broadcastInterval = null
+    }
+    if (this.damageInterval) {
+      clearInterval(this.damageInterval)
+      this.damageInterval = null
+    }
+    if (this.countdownTimer) {
+      clearTimeout(this.countdownTimer)
+      this.countdownTimer = null
+    }
+    if (this.nextRoundTimer) {
+      clearTimeout(this.nextRoundTimer)
+      this.nextRoundTimer = null
+    }
+    for (const timer of this.disconnectTimers.values()) {
+      clearTimeout(timer)
+    }
+    this.disconnectTimers.clear()
+  }
+}

@@ -1,0 +1,61 @@
+/* Visual-novel dialogue skin shared by story scenes and map greetings. */
+.dialogue-frame { isolation:isolate; position:absolute; border:0; background:none; box-shadow:none; backdrop-filter:none; }
+.dialogue-frame::before { content:''; position:absolute; inset:0; z-index:-2; background:radial-gradient(ellipse at 10% 0%,color-mix(in srgb,var(--voice-tint) 13%,transparent),transparent 45%),linear-gradient(110deg,#0d1b2ef5,#242a43f2 60%,#101b30f5); clip-path:polygon(22px 0,calc(100% - 22px) 0,100% 22px,100% calc(100% - 22px),calc(100% - 22px) 100%,22px 100%,0 calc(100% - 22px),0 22px); box-shadow:inset 0 12px 45px #030a2144; pointer-events:none; }
+.dialogue-frame::after { content:''; position:absolute; inset:12px 25px; z-index:-1; background:repeating-linear-gradient(110deg,#c3b8ff04 0 1px,transparent 1px 17px); opacity:.6; pointer-events:none; }
+.dialogue-filigree { position:absolute; inset:0; width:100%; height:100%; color:#cdb384; stroke:currentColor; stroke-width:.8; filter:drop-shadow(0 0 3px #e1c59740); pointer-events:none; z-index:-1; }
+.dialogue-identity { position:absolute; left:27px; top:-30px; display:flex; align-items:center; gap:13px; padding:0 17px 0 0; background:linear-gradient(110deg,#152039ee,#30314bec,#15203900); min-height:64px; max-width:calc(100% - 54px); z-index:2; }
+.voice-right .dialogue-identity { left:auto; right:27px; flex-direction:row-reverse; padding:0 0 0 17px; background:linear-gradient(250deg,#152039ee,#30314bec,#15203900); }
+.voice-medallion { position:relative; width:64px; height:64px; flex-shrink:0; padding:4px; border:1px solid #d4bd8d; background:linear-gradient(145deg,#3c3d58,#0d172c); clip-path:polygon(18% 0,82% 0,100% 18%,100% 82%,82% 100%,18% 100%,0 82%,0 18%); }
+.voice-medallion img { width:100%; height:100%; object-fit:cover; clip-path:polygon(17% 0,83% 0,100% 17%,100% 83%,83% 100%,17% 100%,0 83%,0 17%); }
+.voice-medallion > span { position:absolute; bottom:-2px; left:26px; color:#ead5ab; font-size:0.875rem; text-shadow:0 0 9px #fbd6a9; }
+.voice-name { min-width:100px; padding:6px 0; }
+.voice-name b { display:block; font:1.1875rem/1.45 'STSong','SimSun',serif; color:#fff0d2; letter-spacing:2px; text-shadow:0 2px 4px #030817; white-space:nowrap; }
+.voice-name small { display:block; font:0.75rem/1.5 'Microsoft YaHei',sans-serif; letter-spacing:2px; color:#ccc2d6; margin-top:5px; white-space:nowrap; }
+.voice-right .voice-name { text-align:right; }.voice-flourish { font:1.4375rem Georgia,serif; color:var(--voice-tint); opacity:.7; padding:0 6px; }
+.dialogue-frame-content { position:relative; z-index:1; }
+.dialogue-theatre .story-dialogue.dialogue-frame { left:5%; right:5%; bottom:28px; padding:51px 34px 22px; min-height:180px; border:0; background:none; box-shadow:0 14px 45px #02071a66; backdrop-filter:none; }
+.dialogue-theatre .story-dialogue.dialogue-frame::before { content:''; inset:0; top:0; left:0; width:auto; height:auto; font-size:inherit; color:inherit; }
+.dialogue-theatre .story-actor > span { display:none; }
+.dialogue-theatre .dialogue-frame .story-line-enter { font:1.0625rem/1.9 'Microsoft YaHei',sans-serif; color:#f0edf5; letter-spacing:.6px; margin:0; min-height:54px; text-shadow:0 2px 3px #020818; }
+.dialogue-theatre .dialogue-frame .dialogue-footer { margin-top:20px; padding-top:14px; border-top:1px solid #bba2722b; display:flex; flex-wrap:wrap; gap:12px; align-items:center; }
+.dialogue-theatre .dialogue-frame .dialogue-footer > span { font-size:0.75rem; color:#b8afc6; letter-spacing:1px; margin-right:auto; }
+.dialogue-footer > span::before { content:'◇'; color:#d7bc8e; margin-right:8px; }
+.dialogue-theatre .dialogue-frame .dialogue-footer > div { display:flex; flex-wrap:wrap; gap:12px; }
+.dialogue-theatre .dialogue-frame .dialogue-footer button { min-height:37px; margin:0; padding:8px 14px; border:1px solid #c9b48735; background:#c5b3df08; color:#c9bfd8; cursor:pointer; font-size:0.8125rem; transition:background .15s,border-color .15s; }
+.dialogue-theatre .dialogue-frame .dialogue-footer > button:last-child,.dialogue-theatre .dialogue-frame .dialogue-footer > div > button:last-child { min-width:148px; padding:10px 20px; background:linear-gradient(115deg,#62567577,#263a5970); border:1px solid #d8c394; color:#f6e6c6; font:0.9375rem/1.4 'STSong',serif; letter-spacing:1px; clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px)); }
+.dialogue-theatre .dialogue-frame .dialogue-footer .encounter-action { background:linear-gradient(110deg,#8a6b356b,#40374f)!important; border-color:#e2bc7e!important; }
+.dialogue-theatre .dialogue-frame .dialogue-footer button:hover { background-color:#cbb5e42e; border-color:#e7d7b5; }.dialogue-frame button:focus-visible { outline:2px solid #e8d9b8; outline-offset:3px; }
+.dialogue-theatre .dialogue-frame .story-choices { position:relative; display:grid; grid-template-columns:1fr 1fr; gap:14px; padding-top:25px; margin-top:15px; }
+.dialogue-frame .story-choices::before { content:'选择你的回应'; position:absolute; top:0; left:0; font-size:0.75rem; letter-spacing:3px; color:#c2b292; }
+.dialogue-theatre .dialogue-frame .story-choices button { display:flex; align-items:center; gap:13px; min-height:56px; border:1px solid #c6ae7e77; background:linear-gradient(110deg,#51476680,#1b2c4599); padding:10px 16px; color:#f1e5cf; font-size:0.9375rem; line-height:1.65; transition:background .15s,border-color .15s; }
+.dialogue-frame .story-choices button:hover { background:linear-gradient(110deg,#76608488,#2c486488); border-color:#f1d8a4; }
+.dialogue-frame .story-choices button .choice-mark { display:block; font:1.4375rem Georgia,serif; color:#d9bb82; min-width:22px; text-align:center; font-style:normal; }
+.dialogue-frame .story-choices button .choice-copy { float:none; flex:1; text-align:left; }
+.dialogue-frame .story-choices button .choice-arrow { float:none; color:#d6c1a0; font-size:1.1875rem; }
+.dialogue-theatre .dialogue-frame .encounter-preview { margin-top:14px; padding:12px 15px; border:1px solid #c7ad7140; border-left:2px solid #d8b578; background:linear-gradient(90deg,#ac85401c,transparent); display:flex; flex-wrap:wrap; gap:5px 16px; color:#c9bdd3; font-size:0.8125rem; line-height:1.7; }
+.dialogue-frame .encounter-preview b { font:0.9375rem 'STSong',serif; color:#e5cba0; }.dialogue-frame .story-notice { margin-top:12px; line-height:1.7; }
+.world-map-scene .world-dialogue.dialogue-frame { display:block; min-height:132px; padding:43px 28px 22px; border:0; background:none; box-shadow:0 10px 30px #02091b55; }
+.world-dialogue.dialogue-frame .dialogue-identity { top:-28px; }.world-dialogue.dialogue-frame .voice-medallion { width:58px; height:58px; }.world-dialogue.dialogue-frame .voice-name b { font-size:1.0625rem; }.world-dialogue.dialogue-frame .voice-name small { font-size:0.75rem; }
+.world-dialogue.dialogue-frame .dialogue-frame-content { display:flex; align-items:center; gap:25px; }.world-dialogue.dialogue-frame .dialogue-frame-content > div { flex:1; min-width:0; }.world-dialogue.dialogue-frame p { font-size:1rem; line-height:1.8; margin:0 0 10px; color:#eeebf2; }.world-dialogue.dialogue-frame .dialogue-frame-content > div > span { font-size:0.75rem; color:#bdb1ca; line-height:1.7; }
+.world-dialogue.dialogue-frame .gal-button { padding:12px 20px; border:1px solid #d4be93; background:linear-gradient(110deg,#68527266,#29405e66); color:#f2e3c1; font:0.9375rem 'STSong',serif; letter-spacing:1px; clip-path:polygon(0 0,calc(100% - 9px) 0,100% 9px,100% 100%,9px 100%,0 calc(100% - 9px)); white-space:nowrap; }
+@media(max-width:900px) { .world-map-scene .world-dialogue.dialogue-frame { padding:43px 23px 21px; margin-top:21px; }.world-dialogue.dialogue-frame .dialogue-frame-content { flex-wrap:wrap; gap:15px; }.world-dialogue.dialogue-frame .dialogue-frame-content > div { flex-basis:100%; }.world-dialogue.dialogue-frame .gal-button { margin-left:auto; }.dialogue-theatre .dialogue-frame .story-line-enter { font-size:0.9375rem; } }
+@media(max-width:700px) {
+  .dialogue-theatre { min-height:610px; }.dialogue-theatre .story-actor { top:17%; height:70%; }
+  .dialogue-theatre .story-dialogue.dialogue-frame { left:4%; right:4%; bottom:21px; padding:43px 22px 19px; min-height:170px; }
+  .dialogue-identity { left:18px; top:-26px; gap:9px; min-height:54px; padding-right:8px; }.voice-right .dialogue-identity { right:18px; gap:9px; padding-left:8px; }
+  .voice-medallion { width:54px; height:54px; padding:3px; }.voice-name { min-width:75px; }.voice-name b { font-size:1rem; letter-spacing:1px; }.voice-name small { font-size:0.75rem; letter-spacing:1px; }.voice-flourish { font-size:1.125rem; padding:0; }.voice-medallion > span { left:21px; }
+  .dialogue-theatre .dialogue-frame .story-line-enter { font-size:1rem; line-height:1.85; letter-spacing:.25px; min-height:52px; }
+  .dialogue-theatre .dialogue-frame .dialogue-footer { gap:8px; margin-top:13px; padding-top:12px; }.dialogue-theatre .dialogue-frame .dialogue-footer > span { width:auto; font-size:0.75rem; margin-right:auto; }.dialogue-theatre .dialogue-frame .dialogue-footer button { padding:8px 10px; font-size:0.75rem; min-height:35px; }.dialogue-theatre .dialogue-frame .dialogue-footer > button:last-child,.dialogue-theatre .dialogue-frame .dialogue-footer > div > button:last-child { min-width:125px; font-size:0.8125rem; padding:9px 12px; }
+  .dialogue-theatre .dialogue-frame .story-choices { grid-template-columns:1fr; gap:9px; padding-top:23px; margin-top:12px; }.dialogue-theatre .dialogue-frame .story-choices button { min-height:48px; padding:8px 12px; font-size:0.875rem; gap:9px; }
+  .dialogue-theatre .dialogue-frame .encounter-preview { font-size:0.75rem; padding:10px 12px; }.dialogue-frame .encounter-preview b { font-size:0.875rem; }
+  .world-dialogue.dialogue-frame p { font-size:0.875rem; }.world-dialogue.dialogue-frame .voice-name b { font-size:1rem; }
+}
+.world-map-scene .world-dialogue.dialogue-frame { min-height:122px; padding:24px 28px 23px 240px; }
+.world-dialogue.dialogue-frame .dialogue-identity { top:22px; left:25px; padding-right:0; background:none; gap:11px; }
+.world-dialogue.dialogue-frame .voice-name { min-width:0; }.world-dialogue.dialogue-frame .voice-name b { font-size:1rem; letter-spacing:1px; }.world-dialogue.dialogue-frame .voice-name small { font-size:0.75rem; letter-spacing:1px; }.world-dialogue.dialogue-frame .voice-flourish { display:none; }
+@media(max-width:900px) {
+ .world-map-scene .world-dialogue.dialogue-frame { padding:43px 23px 21px; }
+ .world-dialogue.dialogue-frame .dialogue-identity { top:-28px; left:21px; background:linear-gradient(110deg,#152039ee,#30314bec,#15203900); padding-right:12px; }
+}
+@media(max-width:700px) { .dialogue-theatre { min-height:560px; } }
+@media(max-width:700px) { .dialogue-theatre .story-actor { top:23%; } }

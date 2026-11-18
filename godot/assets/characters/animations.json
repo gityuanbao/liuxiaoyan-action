@@ -1,0 +1,1588 @@
+{
+  "version": 1,
+  "source": "GIF masters; runtime PNGs decoded from these exact GIFs",
+  "characters": {
+    "mage": {
+      "name": "红狼",
+      "facing": "right",
+      "actions": {
+        "idle": {
+          "gif": "res://assets/characters/mage/idle/animation.gif",
+          "loop": true,
+          "frames": [
+            {
+              "file": "res://assets/characters/mage/idle/runtime-00.png",
+              "ms": 320
+            },
+            {
+              "file": "res://assets/characters/mage/idle/runtime-01.png",
+              "ms": 160
+            },
+            {
+              "file": "res://assets/characters/mage/idle/runtime-02.png",
+              "ms": 240
+            },
+            {
+              "file": "res://assets/characters/mage/idle/runtime-03.png",
+              "ms": 320
+            },
+            {
+              "file": "res://assets/characters/mage/idle/runtime-04.png",
+              "ms": 240
+            },
+            {
+              "file": "res://assets/characters/mage/idle/runtime-05.png",
+              "ms": 160
+            }
+          ]
+        },
+        "shoot": {
+          "gif": "res://assets/characters/mage/shoot/animation.gif",
+          "loop": false,
+          "frames": [
+            {
+              "file": "res://assets/characters/mage/shoot/runtime-00.png",
+              "ms": 70
+            },
+            {
+              "file": "res://assets/characters/mage/shoot/runtime-01.png",
+              "ms": 90
+            },
+            {
+              "file": "res://assets/characters/mage/shoot/runtime-02.png",
+              "ms": 100
+            },
+            {
+              "file": "res://assets/characters/mage/shoot/runtime-03.png",
+              "ms": 150
+            }
+          ],
+          "muzzles": [
+            [
+              355,
+              222
+            ],
+            [
+              334,
+              204
+            ],
+            [
+              353,
+              213
+            ],
+            [
+              355,
+              222
+            ]
+          ]
+        },
+        "hurt": {
+          "gif": "res://assets/characters/mage/hurt/animation.gif",
+          "loop": false,
+          "frames": [
+            {
+              "file": "res://assets/characters/mage/hurt/runtime-00.png",
+              "ms": 70
+            },
+            {
+              "file": "res://assets/characters/mage/hurt/runtime-01.png",
+              "ms": 90
+            },
+            {
+              "file": "res://assets/characters/mage/hurt/runtime-02.png",
+              "ms": 100
+            },
+            {
+              "file": "res://assets/characters/mage/hurt/runtime-03.png",
+              "ms": 150
+            }
+          ]
+        },
+        "tactic": {
+          "gif": "res://assets/characters/skills-v23/mage/tactic/animation.gif",
+          "loop": false,
+          "frames": [
+            {
+              "file": "res://assets/characters/skills-v23/mage/tactic/runtime-00.png",
+              "ms": 180
+            },
+            {
+              "file": "res://assets/characters/skills-v23/mage/tactic/runtime-01.png",
+              "ms": 280
+            },
+            {
+              "file": "res://assets/characters/skills-v23/mage/tactic/runtime-02.png",
+              "ms": 400
+            },
+            {
+              "file": "res://assets/characters/skills-v23/mage/tactic/runtime-03.png",
+              "ms": 490
+            }
+          ]
+        },
+        "ultimate": {
+          "gif": "res://assets/characters/skills-v23/mage/ultimate/animation.gif",
+          "loop": false,
+          "frames": [
+            {
+              "file": "res://assets/characters/skills-v23/mage/ultimate/runtime-00.png",
+              "ms": 160
+            },
+            {
+              "file": "res://assets/characters/skills-v23/mage/ultimate/runtime-01.png",
+              "ms": 180
+            },
+            {
+              "file": "res://assets/characters/skills-v23/mage/ultimate/runtime-02.png",
+              "ms": 300
+            },
+            {
+              "file": "res://assets/characters/skills-v23/mage/ultimate/runtime-03.png",
+              "ms": 410
+            }
+          ],
+          "muzzles": [
+            [
+              364,
+              226
+            ],
+            [
+              346,
+              208
+            ],
+            [
+              364,
+              226
+            ],
+            [
+              364,
+              226
+            ]
+          ]
+        }
+      }
+    },
+    "knight": {
+      "name": "牧羊人",
+      "facing": "right",
+      "actions": {
+        "idle": {
+          "gif": "res://assets/characters/knight/idle/animation.gif",
+          "loop": true,
+          "frames": [
+            {
+              "file": "res://assets/characters/knight/idle/runtime-00.png",
+              "ms": 320
+            },
+            {
+              "file": "res://assets/characters/knight/idle/runtime-01.png",
+              "ms": 160
+            },
+            {
+              "file": "res://assets/characters/knight/idle/runtime-02.png",
+              "ms": 240
+            },
+            {
+              "file": "res://assets/characters/knight/idle/runtime-03.png",
+              "ms": 320
+            },
+            {
+              "file": "res://assets/characters/knight/idle/runtime-04.png",
+              "ms": 240
+            },
+            {
+              "file": "res://assets/characters/knight/idle/runtime-05.png",
+              "ms": 160
+            }
+          ]
+        },
+        "shoot": {
+          "gif": "res://assets/characters/knight/shoot/animation.gif",
+          "loop": false,
+          "frames": [
+            {
+              "file": "res://assets/characters/knight/shoot/runtime-00.png",
+              "ms": 70
+            },
+            {
+              "file": "res://assets/characters/knight/shoot/runtime-01.png",
+              "ms": 90
+            },
+            {
+              "file": "res://assets/characters/knight/shoot/runtime-02.png",
+              "ms": 100
+            },
+            {
+              "file": "res://assets/characters/knight/shoot/runtime-03.png",
+              "ms": 150
+            }
+          ],
+          "muzzles": [
+            [
+              362,
+              224
+            ],
+            [
+              362,
+              217
+            ],
+            [
+              362,
+              229
+            ],
+            [
+              363,
+              224
+            ]
+          ]
+        },
+        "hurt": {
+          "gif": "res://assets/characters/knight/hurt/animation.gif",
+          "loop": false,
+          "frames": [
+            {
+              "file": "res://assets/characters/knight/hurt/runtime-00.png",
+              "ms": 70
+            },
+            {
+              "file": "res://assets/characters/knight/hurt/runtime-01.png",
+              "ms": 90
+            },
+            {
+              "file": "res://assets/characters/knight/hurt/runtime-02.png",
+              "ms": 100
+            },
+            {
+              "file": "res://assets/characters/knight/hurt/runtime-03.png",
+              "ms": 150
+            }
+          ]
+        },
+        "tactic": {
+          "gif": "res://assets/characters/skills-v23/knight/tactic/animation.gif",
+          "loop": false,
+          "frames": [
+            {
+              "file": "res://assets/characters/skills-v23/knight/tactic/runtime-00.png",
+              "ms": 180
+            },
+            {
+              "file": "res://assets/characters/skills-v23/knight/tactic/runtime-01.png",
+              "ms": 280
+            },
+            {
+              "file": "res://assets/characters/skills-v23/knight/tactic/runtime-02.png",
+              "ms": 400
+            },
+            {
+              "file": "res://assets/characters/skills-v23/knight/tactic/runtime-03.png",
+              "ms": 490
+            }
+          ]
+        },
+        "ultimate": {
+          "gif": "res://assets/characters/skills-v23/knight/ultimate/animation.gif",
+          "loop": false,
+          "frames": [
+            {
+              "file": "res://assets/characters/skills-v23/knight/ultimate/runtime-00.png",
+              "ms": 160
+            },
+            {
+              "file": "res://assets/characters/skills-v23/knight/ultimate/runtime-01.png",
+              "ms": 180
+            },
+            {
+              "file": "res://assets/characters/skills-v23/knight/ultimate/runtime-02.png",
+              "ms": 300
+            },
+            {
+              "file": "res://assets/characters/skills-v23/knight/ultimate/runtime-03.png",
+              "ms": 410
+            }
+          ],
+          "muzzles": [
+            [
+              300,
+              260
+            ],
+            [
+              337,
+              261
+            ],
+            [
+              338,
+              246
+            ],
+            [
+              339,
+              259
+            ]
+          ]
+        }
+      }
+    },
+    "ranger": {
+      "name": "露娜",
+      "facing": "right",
+      "actions": {
+        "idle": {
+          "gif": "res://assets/characters/ranger/idle/animation.gif",
+          "loop": true,
+          "frames": [
+            {
+              "file": "res://assets/characters/ranger/idle/runtime-00.png",
+              "ms": 320
+            },
+            {
+              "file": "res://assets/characters/ranger/idle/runtime-01.png",
+              "ms": 160
+            },
+            {
+              "file": "res://assets/characters/ranger/idle/runtime-02.png",
+              "ms": 240
+            },
+            {
+              "file": "res://assets/characters/ranger/idle/runtime-03.png",
+              "ms": 320
+            },
+            {
+              "file": "res://assets/characters/ranger/idle/runtime-04.png",
+              "ms": 240
+            },
+            {
+              "file": "res://assets/characters/ranger/idle/runtime-05.png",
+              "ms": 160
+            }
+          ]
+        },
+        "shoot": {
+          "gif": "res://assets/characters/ranger/shoot/animation.gif",
+          "loop": false,
+          "frames": [
+            {
+              "file": "res://assets/characters/ranger/shoot/runtime-00.png",
+              "ms": 70
+            },
+            {
+              "file": "res://assets/characters/ranger/shoot/runtime-01.png",
+              "ms": 90
+            },
+            {
+              "file": "res://assets/characters/ranger/shoot/runtime-02.png",
+              "ms": 100
+            },
+            {
+              "file": "res://assets/characters/ranger/shoot/runtime-03.png",
+              "ms": 150
+            }
+          ],
+          "muzzles": [
+            [
+              351,
+              225
+            ],
+            [
+              344,
+              211
+            ],
+            [
+              351,
+              223
+            ],
+            [
+              351,
+              224
+            ]
+          ]
+        },
+        "hurt": {
+          "gif": "res://assets/characters/ranger/hurt/animation.gif",
+          "loop": false,
+          "frames": [
+            {
+              "file": "res://assets/characters/ranger/hurt/runtime-00.png",
+              "ms": 70
+            },
+            {
+              "file": "res://assets/characters/ranger/hurt/runtime-01.png",
+              "ms": 90
+            },
+            {
+              "file": "res://assets/characters/ranger/hurt/runtime-02.png",
+              "ms": 100
+            },
+            {
+              "file": "res://assets/characters/ranger/hurt/runtime-03.png",
+              "ms": 150
+            }
+          ]
+        },
+        "tactic": {
+          "gif": "res://assets/characters/skills-v23/ranger/tactic/animation.gif",
+          "loop": false,
+          "frames": [
+            {
+              "file": "res://assets/characters/skills-v23/ranger/tactic/runtime-00.png",
+              "ms": 180
+            },
+            {
+              "file": "res://assets/characters/skills-v23/ranger/tactic/runtime-01.png",
+              "ms": 280
+            },
+            {
+              "file": "res://assets/characters/skills-v23/ranger/tactic/runtime-02.png",
+              "ms": 400
+            },
+            {
+              "file": "res://assets/characters/skills-v23/ranger/tactic/runtime-03.png",
+              "ms": 490
+            }
+          ]
+        },
+        "ultimate": {
+          "gif": "res://assets/characters/skills-v23/ranger/ultimate/animation.gif",
+          "loop": false,
+          "frames": [
+            {
+              "file": "res://assets/characters/skills-v23/ranger/ultimate/runtime-00.png",
+              "ms": 160
+            },
+            {
+              "file": "res://assets/characters/skills-v23/ranger/ultimate/runtime-01.png",
+              "ms": 180
+            },
+            {
+              "file": "res://assets/characters/skills-v23/ranger/ultimate/runtime-02.png",
+              "ms": 300
+            },
+            {
+              "file": "res://assets/characters/skills-v23/ranger/ultimate/runtime-03.png",
+              "ms": 410
+            }
+          ],
+          "muzzles": [
+            [
+              352,
+              226
+            ],
+            [
+              350,
+              274
+            ],
+            [
+              350,
+              274
+            ],
+            [
+              351,
+              278
+            ]
+          ]
+        }
+      }
+    },
+    "scholar": {
+      "name": "骇爪",
+      "facing": "right",
+      "actions": {
+        "idle": {
+          "gif": "res://assets/characters/scholar/idle/animation.gif",
+          "loop": true,
+          "frames": [
+            {
+              "file": "res://assets/characters/scholar/idle/runtime-00.png",
+              "ms": 320
+            },
+            {
+              "file": "res://assets/characters/scholar/idle/runtime-01.png",
+              "ms": 160
+            },
+            {
+              "file": "res://assets/characters/scholar/idle/runtime-02.png",
+              "ms": 240
+            },
+            {
+              "file": "res://assets/characters/scholar/idle/runtime-03.png",
+              "ms": 320
+            },
+            {
+              "file": "res://assets/characters/scholar/idle/runtime-04.png",
+              "ms": 240
+            },
+            {
+              "file": "res://assets/characters/scholar/idle/runtime-05.png",
+              "ms": 160
+            }
+          ]
+        },
+        "shoot": {
+          "gif": "res://assets/characters/scholar/shoot/animation.gif",
+          "loop": false,
+          "frames": [
+            {
+              "file": "res://assets/characters/scholar/shoot/runtime-00.png",
+              "ms": 70
+            },
+            {
+              "file": "res://assets/characters/scholar/shoot/runtime-01.png",
+              "ms": 90
+            },
+            {
+              "file": "res://assets/characters/scholar/shoot/runtime-02.png",
+              "ms": 100
+            },
+            {
+              "file": "res://assets/characters/scholar/shoot/runtime-03.png",
+              "ms": 150
+            }
+          ],
+          "muzzles": [
+            [
+              347,
+              223
+            ],
+            [
+              342,
+              200
+            ],
+            [
+              347,
+              211
+            ],
+            [
+              347,
+              222
+            ]
+          ]
+        },
+        "hurt": {
+          "gif": "res://assets/characters/scholar/hurt/animation.gif",
+          "loop": false,
+          "frames": [
+            {
+              "file": "res://assets/characters/scholar/hurt/runtime-00.png",
+              "ms": 70
+            },
+            {
+              "file": "res://assets/characters/scholar/hurt/runtime-01.png",
+              "ms": 90
+            },
+            {
+              "file": "res://assets/characters/scholar/hurt/runtime-02.png",
+              "ms": 100
+            },
+            {
+              "file": "res://assets/characters/scholar/hurt/runtime-03.png",
+              "ms": 150
+            }
+          ]
+        },
+        "tactic": {
+          "gif": "res://assets/characters/skills-v23/scholar/tactic/animation.gif",
+          "loop": false,
+          "frames": [
+            {
+              "file": "res://assets/characters/skills-v23/scholar/tactic/runtime-00.png",
+              "ms": 180
+            },
+            {
+              "file": "res://assets/characters/skills-v23/scholar/tactic/runtime-01.png",
+              "ms": 280
+            },
+            {
+              "file": "res://assets/characters/skills-v23/scholar/tactic/runtime-02.png",
+              "ms": 400
+            },
+            {
+              "file": "res://assets/characters/skills-v23/scholar/tactic/runtime-03.png",
+              "ms": 490
+            }
+          ]
+        },
+        "ultimate": {
+          "gif": "res://assets/characters/skills-v23/scholar/ultimate/animation.gif",
+          "loop": false,
+          "frames": [
+            {
+              "file": "res://assets/characters/skills-v23/scholar/ultimate/runtime-00.png",
+              "ms": 160
+            },
+            {
+              "file": "res://assets/characters/skills-v23/scholar/ultimate/runtime-01.png",
+              "ms": 180
+            },
+            {
+              "file": "res://assets/characters/skills-v23/scholar/ultimate/runtime-02.png",
+              "ms": 300
+            },
+            {
+              "file": "res://assets/characters/skills-v23/scholar/ultimate/runtime-03.png",
+              "ms": 410
+            }
+          ],
+          "muzzles": [
+            [
+              281,
+              244
+            ],
+            [
+              348,
+              230
+            ],
+            [
+              345,
+              223
+            ],
+            [
+              327,
+              282
+            ]
+          ]
+        }
+      }
+    },
+    "bard": {
+      "name": "蜂医",
+      "facing": "right",
+      "actions": {
+        "idle": {
+          "gif": "res://assets/characters/bard/idle/animation.gif",
+          "loop": true,
+          "frames": [
+            {
+              "file": "res://assets/characters/bard/idle/runtime-00.png",
+              "ms": 320
+            },
+            {
+              "file": "res://assets/characters/bard/idle/runtime-01.png",
+              "ms": 160
+            },
+            {
+              "file": "res://assets/characters/bard/idle/runtime-02.png",
+              "ms": 240
+            },
+            {
+              "file": "res://assets/characters/bard/idle/runtime-03.png",
+              "ms": 320
+            },
+            {
+              "file": "res://assets/characters/bard/idle/runtime-04.png",
+              "ms": 240
+            },
+            {
+              "file": "res://assets/characters/bard/idle/runtime-05.png",
+              "ms": 160
+            }
+          ]
+        },
+        "shoot": {
+          "gif": "res://assets/characters/bard/shoot/animation.gif",
+          "loop": false,
+          "frames": [
+            {
+              "file": "res://assets/characters/bard/shoot/runtime-00.png",
+              "ms": 70
+            },
+            {
+              "file": "res://assets/characters/bard/shoot/runtime-01.png",
+              "ms": 90
+            },
+            {
+              "file": "res://assets/characters/bard/shoot/runtime-02.png",
+              "ms": 100
+            },
+            {
+              "file": "res://assets/characters/bard/shoot/runtime-03.png",
+              "ms": 150
+            }
+          ],
+          "muzzles": [
+            [
+              363,
+              224
+            ],
+            [
+              365,
+              219
+            ],
+            [
+              364,
+              220
+            ],
+            [
+              363,
+              225
+            ]
+          ]
+        },
+        "hurt": {
+          "gif": "res://assets/characters/bard/hurt/animation.gif",
+          "loop": false,
+          "frames": [
+            {
+              "file": "res://assets/characters/bard/hurt/runtime-00.png",
+              "ms": 70
+            },
+            {
+              "file": "res://assets/characters/bard/hurt/runtime-01.png",
+              "ms": 90
+            },
+            {
+              "file": "res://assets/characters/bard/hurt/runtime-02.png",
+              "ms": 100
+            },
+            {
+              "file": "res://assets/characters/bard/hurt/runtime-03.png",
+              "ms": 150
+            }
+          ]
+        },
+        "tactic": {
+          "gif": "res://assets/characters/skills-v23/bard/tactic/animation.gif",
+          "loop": false,
+          "frames": [
+            {
+              "file": "res://assets/characters/skills-v23/bard/tactic/runtime-00.png",
+              "ms": 180
+            },
+            {
+              "file": "res://assets/characters/skills-v23/bard/tactic/runtime-01.png",
+              "ms": 280
+            },
+            {
+              "file": "res://assets/characters/skills-v23/bard/tactic/runtime-02.png",
+              "ms": 400
+            },
+            {
+              "file": "res://assets/characters/skills-v23/bard/tactic/runtime-03.png",
+              "ms": 490
+            }
+          ]
+        },
+        "ultimate": {
+          "gif": "res://assets/characters/skills-v23/bard/ultimate/animation.gif",
+          "loop": false,
+          "frames": [
+            {
+              "file": "res://assets/characters/skills-v23/bard/ultimate/runtime-00.png",
+              "ms": 160
+            },
+            {
+              "file": "res://assets/characters/skills-v23/bard/ultimate/runtime-01.png",
+              "ms": 180
+            },
+            {
+              "file": "res://assets/characters/skills-v23/bard/ultimate/runtime-02.png",
+              "ms": 300
+            },
+            {
+              "file": "res://assets/characters/skills-v23/bard/ultimate/runtime-03.png",
+              "ms": 410
+            }
+          ],
+          "muzzles": [
+            [
+              285,
+              279
+            ],
+            [
+              290,
+              278
+            ],
+            [
+              362,
+              225
+            ],
+            [
+              362,
+              225
+            ]
+          ]
+        }
+      }
+    },
+    "alchemist": {
+      "name": "威龙",
+      "facing": "right",
+      "actions": {
+        "idle": {
+          "gif": "res://assets/characters/alchemist/idle/animation.gif",
+          "loop": true,
+          "frames": [
+            {
+              "file": "res://assets/characters/alchemist/idle/runtime-00.png",
+              "ms": 320
+            },
+            {
+              "file": "res://assets/characters/alchemist/idle/runtime-01.png",
+              "ms": 160
+            },
+            {
+              "file": "res://assets/characters/alchemist/idle/runtime-02.png",
+              "ms": 240
+            },
+            {
+              "file": "res://assets/characters/alchemist/idle/runtime-03.png",
+              "ms": 320
+            },
+            {
+              "file": "res://assets/characters/alchemist/idle/runtime-04.png",
+              "ms": 240
+            },
+            {
+              "file": "res://assets/characters/alchemist/idle/runtime-05.png",
+              "ms": 160
+            }
+          ]
+        },
+        "shoot": {
+          "gif": "res://assets/characters/alchemist/shoot/animation.gif",
+          "loop": false,
+          "frames": [
+            {
+              "file": "res://assets/characters/alchemist/shoot/runtime-00.png",
+              "ms": 70
+            },
+            {
+              "file": "res://assets/characters/alchemist/shoot/runtime-01.png",
+              "ms": 90
+            },
+            {
+              "file": "res://assets/characters/alchemist/shoot/runtime-02.png",
+              "ms": 100
+            },
+            {
+              "file": "res://assets/characters/alchemist/shoot/runtime-03.png",
+              "ms": 150
+            }
+          ],
+          "muzzles": [
+            [
+              354,
+              229
+            ],
+            [
+              347,
+              205
+            ],
+            [
+              351,
+              221
+            ],
+            [
+              354,
+              230
+            ]
+          ]
+        },
+        "hurt": {
+          "gif": "res://assets/characters/alchemist/hurt/animation.gif",
+          "loop": false,
+          "frames": [
+            {
+              "file": "res://assets/characters/alchemist/hurt/runtime-00.png",
+              "ms": 70
+            },
+            {
+              "file": "res://assets/characters/alchemist/hurt/runtime-01.png",
+              "ms": 90
+            },
+            {
+              "file": "res://assets/characters/alchemist/hurt/runtime-02.png",
+              "ms": 100
+            },
+            {
+              "file": "res://assets/characters/alchemist/hurt/runtime-03.png",
+              "ms": 150
+            }
+          ]
+        },
+        "tactic": {
+          "gif": "res://assets/characters/skills-v23/alchemist/tactic/animation.gif",
+          "loop": false,
+          "frames": [
+            {
+              "file": "res://assets/characters/skills-v23/alchemist/tactic/runtime-00.png",
+              "ms": 180
+            },
+            {
+              "file": "res://assets/characters/skills-v23/alchemist/tactic/runtime-01.png",
+              "ms": 280
+            },
+            {
+              "file": "res://assets/characters/skills-v23/alchemist/tactic/runtime-02.png",
+              "ms": 400
+            },
+            {
+              "file": "res://assets/characters/skills-v23/alchemist/tactic/runtime-03.png",
+              "ms": 490
+            }
+          ]
+        },
+        "ultimate": {
+          "gif": "res://assets/characters/skills-v23/alchemist/ultimate/animation.gif",
+          "loop": false,
+          "frames": [
+            {
+              "file": "res://assets/characters/skills-v23/alchemist/ultimate/runtime-00.png",
+              "ms": 160
+            },
+            {
+              "file": "res://assets/characters/skills-v23/alchemist/ultimate/runtime-01.png",
+              "ms": 180
+            },
+            {
+              "file": "res://assets/characters/skills-v23/alchemist/ultimate/runtime-02.png",
+              "ms": 300
+            },
+            {
+              "file": "res://assets/characters/skills-v23/alchemist/ultimate/runtime-03.png",
+              "ms": 410
+            }
+          ],
+          "muzzles": [
+            [
+              321,
+              226
+            ],
+            [
+              325,
+              260
+            ],
+            [
+              297,
+              225
+            ],
+            [
+              325,
+              237
+            ]
+          ]
+        }
+      }
+    },
+    "crystal": {
+      "name": "哈夫克突击兵",
+      "facing": "left",
+      "actions": {
+        "idle": {
+          "gif": "res://assets/characters/refined-v22/crystal/idle/animation.gif",
+          "loop": true,
+          "frames": [
+            {
+              "file": "res://assets/characters/refined-v22/crystal/idle/runtime-00.png",
+              "ms": 360
+            },
+            {
+              "file": "res://assets/characters/refined-v22/crystal/idle/runtime-01.png",
+              "ms": 220
+            },
+            {
+              "file": "res://assets/characters/refined-v22/crystal/idle/runtime-02.png",
+              "ms": 260
+            },
+            {
+              "file": "res://assets/characters/refined-v22/crystal/idle/runtime-03.png",
+              "ms": 360
+            },
+            {
+              "file": "res://assets/characters/refined-v22/crystal/idle/runtime-04.png",
+              "ms": 260
+            },
+            {
+              "file": "res://assets/characters/refined-v22/crystal/idle/runtime-05.png",
+              "ms": 220
+            }
+          ]
+        },
+        "shoot": {
+          "gif": "res://assets/characters/refined-v22/crystal/shoot/animation.gif",
+          "loop": false,
+          "frames": [
+            {
+              "file": "res://assets/characters/refined-v22/crystal/shoot/runtime-00.png",
+              "ms": 70
+            },
+            {
+              "file": "res://assets/characters/refined-v22/crystal/shoot/runtime-01.png",
+              "ms": 90
+            },
+            {
+              "file": "res://assets/characters/refined-v22/crystal/shoot/runtime-02.png",
+              "ms": 100
+            },
+            {
+              "file": "res://assets/characters/refined-v22/crystal/shoot/runtime-03.png",
+              "ms": 150
+            }
+          ],
+          "muzzles": [
+            [
+              136,
+              191
+            ],
+            [
+              165,
+              180
+            ],
+            [
+              150,
+              177
+            ],
+            [
+              144,
+              177
+            ]
+          ]
+        },
+        "hurt": {
+          "gif": "res://assets/characters/refined-v22/crystal/hurt/animation.gif",
+          "loop": false,
+          "frames": [
+            {
+              "file": "res://assets/characters/refined-v22/crystal/hurt/runtime-00.png",
+              "ms": 70
+            },
+            {
+              "file": "res://assets/characters/refined-v22/crystal/hurt/runtime-01.png",
+              "ms": 130
+            },
+            {
+              "file": "res://assets/characters/refined-v22/crystal/hurt/runtime-02.png",
+              "ms": 200
+            },
+            {
+              "file": "res://assets/characters/refined-v22/crystal/hurt/runtime-03.png",
+              "ms": 250
+            }
+          ]
+        }
+      }
+    },
+    "thorn": {
+      "name": "哈夫克重装兵",
+      "facing": "left",
+      "actions": {
+        "idle": {
+          "gif": "res://assets/characters/refined-v22/thorn/idle/animation.gif",
+          "loop": true,
+          "frames": [
+            {
+              "file": "res://assets/characters/refined-v22/thorn/idle/runtime-00.png",
+              "ms": 360
+            },
+            {
+              "file": "res://assets/characters/refined-v22/thorn/idle/runtime-01.png",
+              "ms": 220
+            },
+            {
+              "file": "res://assets/characters/refined-v22/thorn/idle/runtime-02.png",
+              "ms": 260
+            },
+            {
+              "file": "res://assets/characters/refined-v22/thorn/idle/runtime-03.png",
+              "ms": 360
+            },
+            {
+              "file": "res://assets/characters/refined-v22/thorn/idle/runtime-04.png",
+              "ms": 260
+            },
+            {
+              "file": "res://assets/characters/refined-v22/thorn/idle/runtime-05.png",
+              "ms": 220
+            }
+          ]
+        },
+        "shoot": {
+          "gif": "res://assets/characters/refined-v22/thorn/shoot/animation.gif",
+          "loop": false,
+          "frames": [
+            {
+              "file": "res://assets/characters/refined-v22/thorn/shoot/runtime-00.png",
+              "ms": 70
+            },
+            {
+              "file": "res://assets/characters/refined-v22/thorn/shoot/runtime-01.png",
+              "ms": 90
+            },
+            {
+              "file": "res://assets/characters/refined-v22/thorn/shoot/runtime-02.png",
+              "ms": 100
+            },
+            {
+              "file": "res://assets/characters/refined-v22/thorn/shoot/runtime-03.png",
+              "ms": 150
+            }
+          ],
+          "muzzles": [
+            [
+              121,
+              174
+            ],
+            [
+              166,
+              180
+            ],
+            [
+              141,
+              168
+            ],
+            [
+              122,
+              169
+            ]
+          ]
+        },
+        "hurt": {
+          "gif": "res://assets/characters/refined-v22/thorn/hurt/animation.gif",
+          "loop": false,
+          "frames": [
+            {
+              "file": "res://assets/characters/refined-v22/thorn/hurt/runtime-00.png",
+              "ms": 70
+            },
+            {
+              "file": "res://assets/characters/refined-v22/thorn/hurt/runtime-01.png",
+              "ms": 130
+            },
+            {
+              "file": "res://assets/characters/refined-v22/thorn/hurt/runtime-02.png",
+              "ms": 200
+            },
+            {
+              "file": "res://assets/characters/refined-v22/thorn/hurt/runtime-03.png",
+              "ms": 250
+            }
+          ]
+        }
+      }
+    },
+    "tide": {
+      "name": "哈夫克喷火兵",
+      "facing": "left",
+      "actions": {
+        "idle": {
+          "gif": "res://assets/characters/refined-v22/tide/idle/animation.gif",
+          "loop": true,
+          "frames": [
+            {
+              "file": "res://assets/characters/refined-v22/tide/idle/runtime-00.png",
+              "ms": 360
+            },
+            {
+              "file": "res://assets/characters/refined-v22/tide/idle/runtime-01.png",
+              "ms": 220
+            },
+            {
+              "file": "res://assets/characters/refined-v22/tide/idle/runtime-02.png",
+              "ms": 260
+            },
+            {
+              "file": "res://assets/characters/refined-v22/tide/idle/runtime-03.png",
+              "ms": 360
+            },
+            {
+              "file": "res://assets/characters/refined-v22/tide/idle/runtime-04.png",
+              "ms": 260
+            },
+            {
+              "file": "res://assets/characters/refined-v22/tide/idle/runtime-05.png",
+              "ms": 220
+            }
+          ]
+        },
+        "shoot": {
+          "gif": "res://assets/characters/refined-v22/tide/shoot/animation.gif",
+          "loop": false,
+          "frames": [
+            {
+              "file": "res://assets/characters/refined-v22/tide/shoot/runtime-00.png",
+              "ms": 70
+            },
+            {
+              "file": "res://assets/characters/refined-v22/tide/shoot/runtime-01.png",
+              "ms": 90
+            },
+            {
+              "file": "res://assets/characters/refined-v22/tide/shoot/runtime-02.png",
+              "ms": 100
+            },
+            {
+              "file": "res://assets/characters/refined-v22/tide/shoot/runtime-03.png",
+              "ms": 150
+            }
+          ],
+          "muzzles": [
+            [
+              141,
+              204
+            ],
+            [
+              138,
+              203
+            ],
+            [
+              140,
+              205
+            ],
+            [
+              139,
+              204
+            ]
+          ]
+        },
+        "hurt": {
+          "gif": "res://assets/characters/refined-v22/tide/hurt/animation.gif",
+          "loop": false,
+          "frames": [
+            {
+              "file": "res://assets/characters/refined-v22/tide/hurt/runtime-00.png",
+              "ms": 70
+            },
+            {
+              "file": "res://assets/characters/refined-v22/tide/hurt/runtime-01.png",
+              "ms": 130
+            },
+            {
+              "file": "res://assets/characters/refined-v22/tide/hurt/runtime-02.png",
+              "ms": 200
+            },
+            {
+              "file": "res://assets/characters/refined-v22/tide/hurt/runtime-03.png",
+              "ms": 250
+            }
+          ]
+        }
+      }
+    },
+    "gargoyle": {
+      "name": "哈夫克盾兵",
+      "facing": "left",
+      "actions": {
+        "idle": {
+          "gif": "res://assets/characters/refined-v22/gargoyle/idle/animation.gif",
+          "loop": true,
+          "frames": [
+            {
+              "file": "res://assets/characters/refined-v22/gargoyle/idle/runtime-00.png",
+              "ms": 360
+            },
+            {
+              "file": "res://assets/characters/refined-v22/gargoyle/idle/runtime-01.png",
+              "ms": 220
+            },
+            {
+              "file": "res://assets/characters/refined-v22/gargoyle/idle/runtime-02.png",
+              "ms": 260
+            },
+            {
+              "file": "res://assets/characters/refined-v22/gargoyle/idle/runtime-03.png",
+              "ms": 360
+            },
+            {
+              "file": "res://assets/characters/refined-v22/gargoyle/idle/runtime-04.png",
+              "ms": 260
+            },
+            {
+              "file": "res://assets/characters/refined-v22/gargoyle/idle/runtime-05.png",
+              "ms": 220
+            }
+          ]
+        },
+        "shoot": {
+          "gif": "res://assets/characters/refined-v22/gargoyle/shoot/animation.gif",
+          "loop": false,
+          "frames": [
+            {
+              "file": "res://assets/characters/refined-v22/gargoyle/shoot/runtime-00.png",
+              "ms": 70
+            },
+            {
+              "file": "res://assets/characters/refined-v22/gargoyle/shoot/runtime-01.png",
+              "ms": 90
+            },
+            {
+              "file": "res://assets/characters/refined-v22/gargoyle/shoot/runtime-02.png",
+              "ms": 100
+            },
+            {
+              "file": "res://assets/characters/refined-v22/gargoyle/shoot/runtime-03.png",
+              "ms": 150
+            }
+          ],
+          "muzzles": [
+            [
+              136,
+              170
+            ],
+            [
+              162,
+              175
+            ],
+            [
+              143,
+              173
+            ],
+            [
+              134,
+              174
+            ]
+          ]
+        },
+        "hurt": {
+          "gif": "res://assets/characters/refined-v22/gargoyle/hurt/animation.gif",
+          "loop": false,
+          "frames": [
+            {
+              "file": "res://assets/characters/refined-v22/gargoyle/hurt/runtime-00.png",
+              "ms": 70
+            },
+            {
+              "file": "res://assets/characters/refined-v22/gargoyle/hurt/runtime-01.png",
+              "ms": 130
+            },
+            {
+              "file": "res://assets/characters/refined-v22/gargoyle/hurt/runtime-02.png",
+              "ms": 200
+            },
+            {
+              "file": "res://assets/characters/refined-v22/gargoyle/hurt/runtime-03.png",
+              "ms": 250
+            }
+          ]
+        }
+      }
+    },
+    "mentor": {
+      "name": "英语总监",
+      "facing": "right",
+      "actions": {
+        "idle": {
+          "gif": "res://assets/characters/mentor/idle/animation.gif",
+          "loop": true,
+          "frames": [
+            {
+              "file": "res://assets/characters/mentor/idle/runtime-00.png",
+              "ms": 1600
+            },
+            {
+              "file": "res://assets/characters/mentor/idle/runtime-01.png",
+              "ms": 100
+            },
+            {
+              "file": "res://assets/characters/mentor/idle/runtime-02.png",
+              "ms": 130
+            },
+            {
+              "file": "res://assets/characters/mentor/idle/runtime-03.png",
+              "ms": 1000
+            }
+          ]
+        },
+        "talk": {
+          "gif": "res://assets/characters/mentor/talk/animation.gif",
+          "loop": true,
+          "frames": [
+            {
+              "file": "res://assets/characters/mentor/talk/runtime-00.png",
+              "ms": 100
+            },
+            {
+              "file": "res://assets/characters/mentor/talk/runtime-01.png",
+              "ms": 160
+            },
+            {
+              "file": "res://assets/characters/mentor/talk/runtime-02.png",
+              "ms": 100
+            },
+            {
+              "file": "res://assets/characters/mentor/talk/runtime-03.png",
+              "ms": 160
+            }
+          ]
+        }
+      }
+    },
+    "director": {
+      "name": "英语总监",
+      "facing": "left",
+      "actions": {
+        "idle": {
+          "gif": "res://assets/characters/refined-v22/director/idle/animation.gif",
+          "loop": true,
+          "frames": [
+            {
+              "file": "res://assets/characters/refined-v22/director/idle/runtime-00.png",
+              "ms": 360
+            },
+            {
+              "file": "res://assets/characters/refined-v22/director/idle/runtime-01.png",
+              "ms": 220
+            },
+            {
+              "file": "res://assets/characters/refined-v22/director/idle/runtime-02.png",
+              "ms": 260
+            },
+            {
+              "file": "res://assets/characters/refined-v22/director/idle/runtime-03.png",
+              "ms": 360
+            },
+            {
+              "file": "res://assets/characters/refined-v22/director/idle/runtime-04.png",
+              "ms": 260
+            },
+            {
+              "file": "res://assets/characters/refined-v22/director/idle/runtime-05.png",
+              "ms": 220
+            }
+          ]
+        },
+        "charge": {
+          "gif": "res://assets/characters/refined-v22/director/charge/animation.gif",
+          "loop": false,
+          "frames": [
+            {
+              "file": "res://assets/characters/refined-v22/director/charge/runtime-00.png",
+              "ms": 350
+            },
+            {
+              "file": "res://assets/characters/refined-v22/director/charge/runtime-01.png",
+              "ms": 350
+            },
+            {
+              "file": "res://assets/characters/refined-v22/director/charge/runtime-02.png",
+              "ms": 400
+            },
+            {
+              "file": "res://assets/characters/refined-v22/director/charge/runtime-03.png",
+              "ms": 400
+            }
+          ]
+        },
+        "shoot": {
+          "gif": "res://assets/characters/refined-v22/director/shoot/animation.gif",
+          "loop": false,
+          "frames": [
+            {
+              "file": "res://assets/characters/refined-v22/director/shoot/runtime-00.png",
+              "ms": 50
+            },
+            {
+              "file": "res://assets/characters/refined-v22/director/shoot/runtime-01.png",
+              "ms": 70
+            },
+            {
+              "file": "res://assets/characters/refined-v22/director/shoot/runtime-02.png",
+              "ms": 60
+            },
+            {
+              "file": "res://assets/characters/refined-v22/director/shoot/runtime-03.png",
+              "ms": 90
+            },
+            {
+              "file": "res://assets/characters/refined-v22/director/shoot/runtime-04.png",
+              "ms": 100
+            },
+            {
+              "file": "res://assets/characters/refined-v22/director/shoot/runtime-05.png",
+              "ms": 130
+            }
+          ],
+          "muzzles": [
+            [
+              138,
+              204
+            ],
+            [
+              151,
+              177
+            ],
+            [
+              140,
+              203
+            ],
+            [
+              165,
+              163
+            ],
+            [
+              140,
+              209
+            ],
+            [
+              139,
+              199
+            ]
+          ]
+        },
+        "hurt": {
+          "gif": "res://assets/characters/refined-v22/director/hurt/animation.gif",
+          "loop": false,
+          "frames": [
+            {
+              "file": "res://assets/characters/refined-v22/director/hurt/runtime-00.png",
+              "ms": 70
+            },
+            {
+              "file": "res://assets/characters/refined-v22/director/hurt/runtime-01.png",
+              "ms": 130
+            },
+            {
+              "file": "res://assets/characters/refined-v22/director/hurt/runtime-02.png",
+              "ms": 200
+            },
+            {
+              "file": "res://assets/characters/refined-v22/director/hurt/runtime-03.png",
+              "ms": 250
+            }
+          ]
+        },
+        "taunt": {
+          "gif": "res://assets/characters/refined-v22/director/taunt/animation.gif",
+          "loop": false,
+          "frames": [
+            {
+              "file": "res://assets/characters/refined-v22/director/taunt/runtime-00.png",
+              "ms": 240
+            },
+            {
+              "file": "res://assets/characters/refined-v22/director/taunt/runtime-01.png",
+              "ms": 280
+            },
+            {
+              "file": "res://assets/characters/refined-v22/director/taunt/runtime-02.png",
+              "ms": 280
+            },
+            {
+              "file": "res://assets/characters/refined-v22/director/taunt/runtime-03.png",
+              "ms": 500
+            }
+          ]
+        },
+        "defeat": {
+          "gif": "res://assets/characters/refined-v22/director/defeat/animation.gif",
+          "loop": false,
+          "frames": [
+            {
+              "file": "res://assets/characters/refined-v22/director/defeat/runtime-00.png",
+              "ms": 200
+            },
+            {
+              "file": "res://assets/characters/refined-v22/director/defeat/runtime-01.png",
+              "ms": 300
+            },
+            {
+              "file": "res://assets/characters/refined-v22/director/defeat/runtime-02.png",
+              "ms": 400
+            },
+            {
+              "file": "res://assets/characters/refined-v22/director/defeat/runtime-03.png",
+              "ms": 800
+            }
+          ]
+        }
+      }
+    }
+  }
+}

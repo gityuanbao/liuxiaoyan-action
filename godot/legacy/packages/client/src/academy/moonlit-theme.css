@@ -1,0 +1,132 @@
+/* One material system for the islands, combat, books and settings. */
+.game-polish {
+  --moon-panel:#15273ff2; --moon-panel-raised:#20344eef; --moon-ink:#101e33;
+  --moon-line:#b99f6a7a; --moon-gold:#e1c58c; --moon-text:#e8e8e2; --moon-muted:#adbdcd;
+  --moon-radius:6px; --moon-shadow:inset 0 1px 0 #e4d3a51a,0 3px 10px #080f222e;
+  color:var(--moon-text); font-family:'Microsoft YaHei','PingFang SC',system-ui,sans-serif;
+}
+.game-polish.high-contrast { --moon-panel:#0c1729; --moon-panel-raised:#192b43; --moon-line:#e1c58c; --moon-text:#fffdf6; --moon-muted:#d7e3ed; }
+.game-polish :is(.gal-shell,.title-screen,.journey-dialog,.system-settings) { color:var(--moon-text); }
+.game-polish :is(.gal-button,.primary-button) {
+  border:1px solid #eddaaa; border-radius:var(--moon-radius); background:linear-gradient(#e4cc99,#c9a86c);
+  color:#17283e; box-shadow:inset 0 1px #fff4d573,0 2px 0 #0c182c; font-weight:600; letter-spacing:.02em;
+}
+.game-polish :is(.gal-button.ghost,.secondary-button,.return-to-islands,.gal-status>button) {
+  border:1px solid var(--moon-line); border-radius:var(--moon-radius); background:linear-gradient(#30445f,#20344e);
+  color:var(--moon-text); box-shadow:var(--moon-shadow); font-weight:400;
+}
+.game-polish :is(.gal-link,.text-button) { color:var(--moon-gold); text-shadow:none; }
+.game-polish :is(.gal-button,.primary-button,.secondary-button):disabled { opacity:.48; box-shadow:none; cursor:default; }
+.game-polish .gal-topbar { background:linear-gradient(#172a43f7,#15273ff2); border-bottom:1px solid var(--moon-line); box-shadow:0 3px 14px #0710224d; }
+.game-polish :is(.gal-status>span,.gal-status>.wallet-balance) { border:1px solid var(--moon-line); background:var(--moon-ink); border-radius:var(--moon-radius); color:var(--moon-gold); box-shadow:inset 0 1px #d9c58e12; font-weight:400; }
+.game-polish .gal-shell:not(.screen-academy):not(.screen-vocabulary):not(.screen-sentence):not(.screen-listening):not(.screen-story) .gal-content {
+  background:linear-gradient(115deg,var(--moon-panel),#1d2e47ed); border-color:var(--moon-line); border-radius:var(--moon-radius); box-shadow:inset 0 0 0 4px #d8bf8e06,0 8px 30px #0711264d;
+}
+.game-polish :is(.world-heading,.world-dialogue,.gal-dialogue,.spell-console,.story-dialogue,.dialogue-frame,.character-bio,.bond-panel,.camp-bond,.route-brief,.rune-choices>article,.study-stats>.white-card,.table-card,.local-audio-player,.local-audio-shelf,.trial-source,.trial-responses,.trial-history,.trial-boundary) {
+  background:linear-gradient(125deg,var(--moon-panel-raised),var(--moon-panel)); border:1px solid var(--moon-line); border-radius:var(--moon-radius); box-shadow:var(--moon-shadow);
+}
+.game-polish :is(.world-heading,.dialogue-frame,.world-dialogue)::before,.game-polish :is(.world-heading,.dialogue-frame,.world-dialogue)::after { border-color:#b99f6a55; }
+.game-polish .world-quick-links.journey-menu { background:linear-gradient(#20344ef5,#14253cf5); border-color:var(--moon-line); border-radius:var(--moon-radius); box-shadow:var(--moon-shadow); }
+.game-polish .journey-menu .journey-menu-item { border-right-color:#b99f6a40; }
+.game-polish .world-region>b { border:1px solid var(--moon-line); border-radius:var(--moon-radius); background:linear-gradient(#2c425dec,#192e48f2); box-shadow:0 2px 6px #0a162d66; color:var(--moon-text); font-weight:400; }
+.game-polish .world-region.is-current-route>b { background:linear-gradient(#6d5f41,#463e30); border-color:var(--moon-gold); color:#ffedbe; }
+.game-polish .current-route-marker { border:1px solid #b99f6a; border-radius:3px; background:#dfc38a; color:#1a2a40; box-shadow:0 1px 5px #10213a50; }
+.game-polish :is(.character-choices button,.spirit-roster button,.lore-index button,.route-region,.rune-forge,.notebook-toolbar,.study-toolbar,.audio-sources article,.human-clip-list article,.personal-goals,.combat-preview) {
+  border-color:var(--moon-line); border-radius:var(--moon-radius); background:var(--moon-panel); box-shadow:none;
+}
+.game-polish :is(.character-choices button.selected,.spirit-roster button.selected,.lore-index button.selected,.rune-choices>article.equipped,.route-nodes>button.selected) {
+  border-color:var(--moon-gold); background:linear-gradient(110deg,#7a67442e,#293c52); box-shadow:inset 2px 0 var(--moon-gold);
+}
+.game-polish :is(.route-region,.camp-bond,.route-brief,.rune-choices>article,.human-clip-list article) { border-width:1px; }
+.game-polish :is(.route-heading h1,.folio-heading h1,.appearance-copy h1,.sanctuary-roster h1,.page-heading h1,.sanctum-heading h1,.trial-session-banner h1,.audio-library-heading h1,.title-current h2) {
+  color:var(--moon-gold); font-family:'STSong','Songti SC',SimSun,serif; font-weight:400; letter-spacing:.07em; text-shadow:none;
+}
+.game-polish :is(.character-bio p,.spirit-dossier p,.route-story,.page-heading p,.audio-library-heading p,.route-heading p,.gate-copy>small,.garden-rule) { color:var(--moon-muted); }
+.game-polish :is(.folio-tabs,.tab-group,.spell-mode,.form-switch,.audio-library-tabs) { border-radius:0; box-shadow:none; }
+.game-polish :is(.tab-group,.spell-mode,.form-switch,.audio-library-tabs)>button {
+  border:1px solid transparent; border-bottom-color:#b99f6a50; border-radius:3px 3px 0 0; background:transparent; color:var(--moon-muted); box-shadow:none; font-weight:400;
+}
+.game-polish :is(.tab-group,.spell-mode,.form-switch,.audio-library-tabs)>button:is(.active,.selected) {
+  background:linear-gradient(0deg,#bda87926,transparent); color:var(--moon-gold); border-color:transparent; border-bottom-color:var(--moon-gold); box-shadow:none;
+}
+.game-polish .sanctum-gate { border:1px solid var(--moon-line); border-radius:var(--moon-radius); box-shadow:var(--moon-shadow); }
+.game-polish .gate-copy { background:linear-gradient(var(--moon-panel),#15273f); }
+.game-polish .lore-entry { border-color:var(--moon-line); border-radius:var(--moon-radius); }
+.game-polish .lore-entry-copy { background:linear-gradient(90deg,#15273ff2,#15273f85); }
+.game-polish .lore-progress { background:transparent; border:0; border-top:1px solid var(--moon-line); }
+.game-polish .wordbook-open { border:1px solid var(--moon-line); border-radius:var(--moon-radius); box-shadow:0 5px 24px #08132644; }
+.game-polish .wordbook-open>aside { background:#12233cef; border:0; border-right:1px solid var(--moon-line); }
+.game-polish .wordbook-paper {
+  background:repeating-linear-gradient(transparent,transparent 31px,#e1c58c05 31px,#e1c58c05 32px),linear-gradient(110deg,#23354ce8,#192c43f7);
+  border:0; color:var(--moon-text); box-shadow:inset 10px 0 15px #080f201f;
+}
+.game-polish .wordbook-paper :is(h2,h3) { color:#f0dbb3; text-shadow:none; }
+.game-polish .wordbook-paper h2 { font-family:Georgia,serif; }
+.game-polish .wordbook-page-head { color:#ccb888; border-bottom-color:var(--moon-line); }
+.game-polish .wordbook-example { background:#0b19264d; border-left-color:var(--moon-gold); }
+.game-polish .wordbook-example>p { color:var(--moon-text); }
+.game-polish .wordbook-example small,.game-polish .wordbook-notes p { color:var(--moon-muted); }
+.game-polish .wordbook-memory { color:#c0cddd; border-color:#b99f6a47; }
+.game-polish .wordbook-notes>b { color:var(--moon-gold); }
+.game-polish .wordbook-paper button { background:#263c55; color:#e7d6b0; border-color:var(--moon-line); border-radius:4px; box-shadow:none; }
+.game-polish .wordbook-recall small { color:var(--moon-muted); }
+.game-polish .wordbook-paper .wordbook-notes textarea { background:#102038; border-color:var(--moon-line); color:var(--moon-text); }
+.game-polish .notebook-page .wordbook-paper :is(.wordbook-memory,.wordbook-recall small,.wordbook-example small) { color:var(--moon-muted); }
+.game-polish .notebook-page .wordbook-notes { background:#10203870; border:1px solid var(--moon-line); border-radius:4px; }
+.game-polish .notebook-page .wordbook-notes p { color:var(--moon-muted); }
+.game-polish .wordbook-open aside>button { background:#293c521f; border-radius:4px; }
+.game-polish .wordbook-open aside>button.selected { background:#6f60422b; border-color:var(--moon-line); }
+.game-polish :is(.notebook-toolbar,.word-add-form,.study-toolbar,.atlas-info,.audio-library-tabs) { background:#14253ce6; border-color:var(--moon-line); }
+.game-polish :is(.notebook-toolbar input,.word-add-form input,.gal-shell input:not([type=range]):not([type=checkbox]),.gal-shell textarea,.gal-shell select) { border:1px solid #a99b7e80; border-radius:4px; background-color:var(--moon-ink); color:var(--moon-text); box-shadow:inset 0 1px 3px #060d1b33; }
+.game-polish .gal-shell input::placeholder,.game-polish .gal-shell textarea::placeholder { color:#9daec4; opacity:1; }
+.game-polish .system-settings,.game-polish .journey-dialog { background:linear-gradient(135deg,#243750,#14253c); border:1px solid var(--moon-line); border-radius:var(--moon-radius); box-shadow:0 0 0 4px #0e1d30,0 0 0 5px #b99f6a44,0 20px 70px #03091480; }
+.game-polish .system-settings h2,.game-polish .journey-dialog h2 { color:var(--moon-gold); font-family:'STSong',SimSun,serif; font-weight:400; letter-spacing:.06em; }
+.game-polish .system-settings h3 { font-size:.9rem; color:#d2c09a; letter-spacing:.04em; text-transform:none; }
+.game-polish .system-settings .settings-help { font-size:.73rem; line-height:1.7; color:var(--moon-muted); margin:0 0 6px; }
+.game-polish .system-settings [class*='text-text/'] { color:var(--moon-muted); }
+.game-polish .title-menu>button { border-radius:var(--moon-radius); border-color:transparent; box-shadow:none; }
+.game-polish .title-menu>.title-primary { background:linear-gradient(90deg,#c1a66d2b,transparent); border-left:2px solid var(--moon-gold); }
+.game-polish .title-menu>button:hover:not(:disabled) { border-color:#b99f6a45; background:linear-gradient(90deg,#a58e5b25,transparent); }
+.game-polish .personal-goals { border-width:1px; }
+.game-polish .gal-shell .legacy-surface .bg-surface { background:linear-gradient(130deg,#20344ef0,#14253cf5); border-color:var(--moon-line); border-radius:var(--moon-radius); box-shadow:var(--moon-shadow); }
+.game-polish .gal-shell .legacy-surface button { border-radius:4px; }
+.game-polish .gal-shell .legacy-surface button.bg-accent { background:linear-gradient(#e4cc99,#c9a86c); border:1px solid #ecd6a4; color:#17283e; box-shadow:inset 0 1px #fff4d54d,0 2px #0c182c; }
+.game-polish .gal-shell .legacy-surface button.border-accent { border-color:var(--moon-line); color:var(--moon-gold); background:#ad93691c; }
+.game-polish .spelling-duel .encounter-hud :is(.encounter-health,.combo-runes),.game-polish .duel-health { border-width:1px; border-color:var(--moon-line); border-radius:var(--moon-radius); box-shadow:var(--moon-shadow); background:linear-gradient(#263b56ee,#15273ff2); }
+.game-polish .combat-actions .skill-card { border-radius:6px; border-width:1px; box-shadow:0 3px 8px #08142670; }
+.game-polish .combat-actions .skill-card:disabled { opacity:.65; }
+.game-polish .gal-shell .spelling-duel .encounter-hud :is(.duel-health,.enemy-intent,.combo-runes) {
+  border-width:1px; border-color:var(--moon-line); border-radius:var(--moon-radius); box-shadow:var(--moon-shadow); background:linear-gradient(#263b56ee,#15273ff2);
+}
+.game-polish .gal-shell .spelling-duel.is-live .combat-actions.skill-hand .skill-card {
+  border-width:1px; border-color:var(--moon-line); border-radius:var(--moon-radius); box-shadow:inset 0 1px #e1c58c16,0 2px 7px #0814266b;
+}
+.game-polish .gal-shell .spelling-duel.is-live .spell-console,.game-polish .gal-shell .combat-preview {
+  background:linear-gradient(125deg,var(--moon-panel-raised),var(--moon-panel)); border:1px solid var(--moon-line); border-radius:var(--moon-radius); box-shadow:var(--moon-shadow);
+}
+.game-polish .gal-shell .spelling-duel .spell-console form>.gal-button {
+  border:1px solid #eddaaa; border-radius:var(--moon-radius); background:linear-gradient(#e4cc99,#c9a86c); color:#17283e; box-shadow:inset 0 1px #fff4d573,0 2px 0 #0c182c; text-shadow:none;
+}
+.game-polish .spell-tools button { color:#dcccaa; border:1px solid #b99f6a55; border-radius:4px; background:#182e485e; box-shadow:none; }
+.game-polish .spelling-duel.is-live .learning-response { border:1px solid #819d9d66; border-left:2px solid #a9d9ca; border-radius:4px; background:#1a3542bd; box-shadow:none; }
+.game-polish .learning-response:has(.pronunciation-feedback.has-phrase) { display:grid; grid-template-columns:minmax(0,1.1fr) minmax(180px,.9fr); align-items:center; gap:4px 12px; }
+.game-polish .learning-response>.learning-ack { min-width:0; }
+.game-polish .learning-response>.learning-session { grid-column:1/-1; margin-top:0; }
+.game-polish .pronunciation-feedback { display:none; }
+.game-polish .pronunciation-feedback.has-phrase { display:flex; align-items:center; gap:10px; min-width:0; border-left:1px solid #c7c29438; padding-left:10px; color:var(--moon-text); }
+.game-polish .pronunciation-copy { min-width:0; flex:1; }
+.game-polish .pronunciation-copy>span { color:#acc7ce; font-size:.68rem; margin-right:6px; }
+.game-polish .pronunciation-copy>b { display:block; font:400 .9rem/1.45 Georgia,serif; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; color:#f3dfb5; }
+.game-polish .pronunciation-copy>small { display:block; font-size:.7rem; line-height:1.5; color:#c1d1db; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.game-polish .pronunciation-feedback>button { display:flex; align-items:center; gap:4px; flex:none; padding:7px 9px; font-size:.69rem; white-space:nowrap; background:#263f55; border:1px solid #b6a27480; color:#ecd8aa; border-radius:4px; cursor:pointer; }
+.game-polish .pronunciation-feedback>button:disabled { opacity:.5; cursor:default; }
+.game-polish .pronunciation-error small { color:#f2c499; }
+.game-polish .duel-result>.pronunciation-feedback { max-width:800px; margin:15px auto; padding:12px 18px; border:1px solid var(--moon-line); background:var(--moon-panel); border-radius:var(--moon-radius); text-align:left; }
+.game-polish .duel-result .pronunciation-copy>b { white-space:normal; font-size:1rem; }
+.game-polish .duel-result .pronunciation-copy>small { font-size:.72rem; }
+@media(max-width:680px) {
+  .game-polish .learning-response:has(.pronunciation-feedback.has-phrase) { grid-template-columns:minmax(0,1fr); }
+  .game-polish .pronunciation-feedback.has-phrase { border:0; border-top:1px solid #c7c29438; padding:5px 0 0; }
+  .game-polish .pronunciation-copy>b { font-size:.9rem; }
+  .game-polish .pronunciation-copy>small { font-size:.68rem; }
+}
