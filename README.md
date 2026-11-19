@@ -6,9 +6,9 @@
 
 这个公开仓库用于分享游戏项目、提供版本下载、记录后续更新，也欢迎大家反馈体验和问题。
 
-**[下载 v51 完整项目包](https://github.com/gityuanbao/liuxiaoyan-action/releases/download/v51/liuxiaoyan-action-v51-godot-github.zip)** · **[查看所有版本](https://github.com/gityuanbao/liuxiaoyan-action/releases)** · **[反馈问题](https://github.com/gityuanbao/liuxiaoyan-action/issues)**
+**[在线试玩](https://gityuanbao.github.io/liuxiaoyan-action/)** · **[下载 v51 完整项目包](https://github.com/gityuanbao/liuxiaoyan-action/releases/download/v51/liuxiaoyan-action-v51-godot-github.zip)** · **[查看所有版本](https://github.com/gityuanbao/liuxiaoyan-action/releases)** · **[反馈问题](https://github.com/gityuanbao/liuxiaoyan-action/issues)**
 
-> 当前版本：**v51（Godot）**。下载包包含完整源码、素材、词库、语音和已导出的网页版；当前未提供独立的 Windows `.exe` 安装包。解压后可按下文运行网页版，或在 Godot 编辑器中运行。
+> 当前版本：**v51（Godot）**。可直接在线试玩，也可下载完整源码、素材、词库、语音和已导出的网页版，在本机运行或继续开发。当前未提供独立的 Windows `.exe` 安装包。
 
 ## 游戏实机截图
 
@@ -96,13 +96,19 @@
 
 ## 下载与运行
 
-### 方式一：下载后运行网页版
+### 方式一：直接在线试玩（推荐）
 
-适合想先体验游戏的玩家，无需安装 Godot 或 Node.js。
+打开 **[刘晓艳行动网页版](https://gityuanbao.github.io/liuxiaoyan-action/)**，等待页面显示“整备完成”，再点击“开始行动”。首次打开需要加载游戏资源。手机游玩时请横屏使用。
+
+在线试玩无需安装 Python、Godot 或 Node.js，也不用在电脑上启动服务。分享给朋友时，直接发送这个在线试玩链接即可。
+
+### 方式二：下载后在本机运行
+
+适合希望保留一份完整项目、从本机运行网页版的玩家。**本机地址只有在下面的服务启动后才能打开。**
 
 1. 打开 [Releases 下载页](https://github.com/gityuanbao/liuxiaoyan-action/releases)，在 **Assets** 中下载 `liuxiaoyan-action-v51-godot-github.zip`。
-2. 完整解压压缩包，保留目录结构。
-3. 安装 Python 3，在解压后的项目根目录打开终端，运行：
+2. 完整解压压缩包，打开能同时看到 `README.md` 和 `docs` 文件夹的项目根目录。
+3. 安装 Python 3，在这个文件夹中打开终端。Windows 可以在文件资源管理器的地址栏输入 `powershell` 并回车，然后运行：
 
    ```bash
    python -m http.server 8000 --bind 127.0.0.1 --directory docs
@@ -110,11 +116,12 @@
 
    Windows 如果提示找不到 `python`，可尝试将命令开头改为 `py`。
 
-4. 在浏览器中打开 **http://localhost:8000/**，等待资源加载完成，点击“开始行动”。
+4. 等终端出现 `Serving HTTP on 127.0.0.1 port 8000` 后，再点击 **[打开本机游戏](http://127.0.0.1:8000/)**。也可以只复制 `http://127.0.0.1:8000/` 到浏览器地址栏，不要带星号或后面的说明文字。
+5. 等待资源加载完成，点击“开始行动”。
 
-运行时请保持终端窗口开启；结束后按 `Ctrl+C` 停止本地服务。请通过本地 HTTP 服务打开游戏，不要直接双击 `docs/index.html`。手机游玩时请使用横屏；上面的本地命令仅供当前电脑访问。
+运行时请保持终端窗口开启；结束后按 `Ctrl+C` 停止本地服务。请通过上面的本机地址打开游戏，不要直接双击 `docs/index.html`。`127.0.0.1` 和 `localhost` 都指向当前这台电脑，不能作为试玩地址发给其他人；对外分享请使用上方的在线试玩链接。
 
-### 方式二：在 Godot 编辑器中运行
+### 方式三：在 Godot 编辑器中运行
 
 适合希望查看项目、调整玩法或继续开发的朋友。
 
@@ -182,11 +189,13 @@ npm run build
 
 **下载后为什么找不到安装程序？**
 
-当前 v51 分享的是完整工程和网页版。可以使用“方式一”在浏览器中体验，或使用“方式二”在 Godot 中运行。后续发布的版本和下载附件统一在 [Releases](https://github.com/gityuanbao/liuxiaoyan-action/releases) 查看。
+当前 v51 分享的是完整工程和网页版。可以使用“方式一”直接在线试玩、“方式二”从本机运行网页版，或使用“方式三”在 Godot 中运行。后续发布的版本和下载附件统一在 [Releases](https://github.com/gityuanbao/liuxiaoyan-action/releases) 查看。
 
-**浏览器打开后没有进入游戏？**
+**为什么 `localhost:8000` 或 `127.0.0.1:8000` 打不开？**
 
-确认通过 `http://localhost:8000/` 访问，压缩包已经完整解压，本地服务仍在运行。首次加载需要读取游戏资源，请等待加载完成后再点击“开始行动”。
+这是本机服务地址，需要先按“方式二”启动服务，并保持终端开启。如果终端没有显示服务已启动，先检查 Python 是否可用，以及当前目录中是否有 `docs` 文件夹。浏览器地址栏应只有 `http://127.0.0.1:8000/`，不要包含星号或说明文字。
+
+想直接游玩，可以打开 [在线试玩入口](https://gityuanbao.github.io/liuxiaoyan-action/)，无需启动本机服务。
 
 **Godot 提示找不到 Node.js 或玩法服务未连接？**
 
