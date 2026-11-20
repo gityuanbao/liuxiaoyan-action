@@ -6,9 +6,13 @@
 
 这个公开仓库用于分享游戏项目、提供版本下载、记录后续更新，也欢迎大家反馈体验和问题。
 
-**[在线试玩](https://gityuanbao.github.io/liuxiaoyan-action/)** · **[下载 v51 完整项目包](https://github.com/gityuanbao/liuxiaoyan-action/releases/download/v51/liuxiaoyan-action-v51-godot-github.zip)** · **[查看所有版本](https://github.com/gityuanbao/liuxiaoyan-action/releases)** · **[反馈问题](https://github.com/gityuanbao/liuxiaoyan-action/issues)**
+**[在线试玩](https://gityuanbao.github.io/liuxiaoyan-action/)** · **[视频教程](https://www.bilibili.com/video/BV1bNsb6fENp/)** · **[下载 v51 完整项目包](https://github.com/gityuanbao/liuxiaoyan-action/releases/download/v51/liuxiaoyan-action-v51-godot-github.zip)** · **[查看所有版本](https://github.com/gityuanbao/liuxiaoyan-action/releases)** · **[反馈问题](https://github.com/gityuanbao/liuxiaoyan-action/issues)**
 
 > 当前版本：**v51（Godot）**。可直接在线试玩，也可下载完整源码、素材、词库、语音和已导出的网页版，在本机运行或继续开发。当前未提供独立的 Windows `.exe` 安装包。
+
+## 视频教程
+
+第一次体验，可以先观看 **[刘晓艳行动视频教程（B 站）](https://www.bilibili.com/video/BV1bNsb6fENp/)**，再在线试玩或按下方说明下载运行。
 
 ## 游戏实机截图
 
