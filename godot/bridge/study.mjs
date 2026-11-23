@@ -1,7 +1,7 @@
 import {existsSync,readFileSync,writeFileSync,renameSync,mkdirSync} from 'node:fs';
 import {dirname} from 'node:path';
 import {fsrs,createEmptyCard,Rating} from '../vendor/ts-fsrs/index.mjs';
-import {allBookWords,requireBook} from './wordbooks.mjs';
+import {requireBook,wordsAtDifficulty,WORD_DIFFICULTIES} from './wordbooks.mjs';
 import {ANSWER_MODES,isChoice} from './choice-questions.mjs';
 
 const scheduler=fsrs({enable_fuzz:false,enable_short_term:true,request_retention:0.9,maximum_interval:365});
@@ -21,7 +21,7 @@ export class StudyPlanner {
   constructor(path=null,now=()=>new Date()){
     this.path=path;this.now=now;this.cache=null;this.memoryCache=null;this.dailyCache=null;
     this.revision=0;this.selectionCache=new Map();this.selectionEpoch='';this.selectionProfile=null;
-    this.data={version:1,settings:{source:'new',pos:'all',chapter:0,batch:10,goal:20,recall:false,planMode:'daily',answerMode:'spelling'},cards:{},days:{},evidence:{}};
+    this.data={version:1,settings:{source:'new',pos:'all',chapter:0,batch:10,goal:20,recall:false,planMode:'daily',answerMode:'spelling',difficulty:'all'},cards:{},days:{},evidence:{}};
     if(path&&existsSync(path)){
       const stored=JSON.parse(readFileSync(path,'utf8'));
       if(stored.version!==1||!stored.cards||!stored.days)throw Error('学习计划文件无法识别，请保留备份后检查。');
@@ -35,7 +35,7 @@ export class StudyPlanner {
     mkdirSync(dirname(this.path),{recursive:true});
     writeFileSync(this.path+'.tmp',JSON.stringify(this.data));renameSync(this.path+'.tmp',this.path);
   }
-  configure(p){
+  configure(p,profile){
     const s={...this.data.settings};
     if(p.answerMode!==undefined){if(!Object.hasOwn(ANSWER_MODES,p.answerMode))throw Error('请选择拼写、选词义或选单词。');s.answerMode=p.answerMode;}
     if(p.mobileAnswerMode!==undefined){
@@ -43,7 +43,11 @@ export class StudyPlanner {
       s.mobileAnswerMode=p.mobileAnswerMode;
     }
     if(p.planMode!==undefined){if(!['daily','custom'].includes(p.planMode))throw Error('请选择今日计划或自主练习。');s.planMode=p.planMode;}
-    if(p.selectedBook!==undefined){requireBook(p.selectedBook);s.selectedBook=p.selectedBook;}
+    if(p.selectedBook!==undefined){requireBook(p.selectedBook,profile);s.selectedBook=p.selectedBook;}
+    if(p.difficulty!==undefined){
+      if(!Object.hasOwn(WORD_DIFFICULTIES,p.difficulty))throw Error('请选择有效的词汇难度。');
+      s.difficulty=p.difficulty;s.chapter=0;
+    }
     if(p.source!==undefined){if(!Object.hasOwn(SOURCES,p.source))throw Error('未知学习范围。');s.source=p.source;s.chapter=0;}
     if(p.pos!==undefined){if(!validPos.has(p.pos))throw Error('未知词性。');s.pos=p.pos;s.chapter=0;}
     if(p.chapter!==undefined)s.chapter=Math.max(0,Math.floor(Number(p.chapter)||0));
@@ -114,13 +118,13 @@ export class StudyPlanner {
       message:choice?(correct?'辨认正确；还可用拼写检验记忆。':'看清正确答案，稍后再练这个词。'):!correct?'校对拼写后再试；稍后还会安排回忆。':!independent?'拼写正确；还需遮住答案独立回忆。':accepted?'独立回忆成功，复习时间已更新。':'本次拼写正确；原复习时间保留。'};
   }
   selection(book,profile,overrides={}){
-    requireBook(book);const now=this.now(),s={...this.data.settings,...overrides};
+    const now=this.now(),s={...this.data.settings,...overrides};
     const epoch=Math.floor(now.getTime()/1000);
     if(this.selectionEpoch!==epoch||this.selectionProfile!==profile){this.selectionCache.clear();this.selectionEpoch=epoch;this.selectionProfile=profile;}
     const key=JSON.stringify([book,s]);
     if(this.selectionCache.has(key))return this.selectionCache.get(key);
     const saved=new Set(profile.notebook?.saved??[]),cards=this.data.cards;
-    const base=allBookWords(book).filter(w=>matchesPos(w,s.pos));
+    const base=wordsAtDifficulty(book,profile,s.difficulty).filter(w=>matchesPos(w,s.pos));
     const seen=w=>!!cards[w.id]||!!profile.words[w.id];
     const due=w=>seen(w)&&new Date(cards[w.id]?.due??profile.words[w.id]?.due??0).getTime()<=now.getTime();
     const wrong=w=>this.data.evidence[w.id]?.unresolved||cards[w.id]?.lastRating===Rating.Again||(!cards[w.id]&&(profile.words[w.id]?.attempts??0)>(profile.words[w.id]?.correct??0)&&(profile.words[w.id]?.streak??0)<3);
@@ -144,11 +148,11 @@ export class StudyPlanner {
     if(today.ready&&!today.checked){action='checkin';title='完成今日打卡';detail='今日总目标已达到。打卡后，仍可继续复习到期词。';}
     else if(due.available){action='review';pool=due.pool;recall=true;title='先复习到期词';detail='按到期时间从早到晚安排；根据中文独立拼写，提示后会穿插复测。';}
     else if(remaining&&fresh.available){action='learn';pool=fresh.pool.slice(0,remaining);title='学习一组新词';detail='先看词义、听读音并拼写，再遮住英文回忆同一组单词。';}
-    else if(remaining){action='empty';title='本书暂无未学新词';detail='当前也没有到期词。可以换一本词书，或进入自主练习巩固已学内容。';}
+    else if(remaining){action='empty';title='当前范围暂无新词';detail='当前范围没有新词或到期词。可以切换难度、换一本词书，或自主练习已学内容。';}
     if(isChoice(this.data.settings.answerMode)&&pool.length)detail='四选一辨认词义，答后查看解析；错题会穿插重练，辨认不计入独立拼写掌握。';
     const value={action,title,detail,book,remaining,due:due.available,newAvailable:fresh.available,recall,pool,
       preview:pool.map(({id,word,meaning,phonetic=''})=>({id,word,meaning,phonetic})),
-      count:pool.length,steps:pool.length*(recall||isChoice(this.data.settings.answerMode)?1:2),settings:{source:recall?'due':'new',recall,answerMode:this.data.settings.answerMode},sourceLabel:recall?'今日到期复习':'今日新词'};
+      count:pool.length,steps:pool.length*(recall||isChoice(this.data.settings.answerMode)?1:2),settings:{source:recall?'due':'new',recall,answerMode:this.data.settings.answerMode,difficulty:this.data.settings.difficulty},sourceLabel:recall?'今日到期复习':'今日新词'};
     this.dailyCache={key,profile,value};return value;
   }
   summary(book,profile){const {pool,...value}=this.selection(book,profile);const {pool:dailyPool,...daily}=this.dailySelection(book,profile);return {...value,daily,today:this.dayStatus(),scheduler:'FSRS 6 / ts-fsrs 5.2.3'};}
@@ -162,7 +166,7 @@ export class StudyPlanner {
   memorySummary(book,profile,selectedId='',page=0){
     const now=this.now(),key=JSON.stringify([book,selectedId,page,Math.floor(now.getTime()/1000)]);
     if(this.memoryCache?.key===key&&this.memoryCache.profile===profile)return this.memoryCache.value;
-    const rows=allBookWords(book).filter(w=>this.data.cards[w.id]||profile.words[w.id]).map(w=>this.wordStatus(w,profile,now)).sort((a,b)=>new Date(a.due)-new Date(b.due)||a.word.localeCompare(b.word));
+    const rows=wordsAtDifficulty(book,profile,this.data.settings.difficulty).filter(w=>this.data.cards[w.id]||profile.words[w.id]).map(w=>this.wordStatus(w,profile,now)).sort((a,b)=>new Date(a.due)-new Date(b.due)||a.word.localeCompare(b.word));
     const selected=rows.find(w=>w.id===selectedId)??rows[0]??null;
     const pages=Math.max(1,Math.ceil(rows.length/6));page=Math.max(0,Math.min(page,pages-1));
     const forecast=[];
@@ -179,7 +183,7 @@ export class StudyPlanner {
         lastReview:card?.last_review??null,retention:(e?.independent??0)>0?retention(card,now):null,elapsed,horizon,
         curve:card?.stability>0&&(e?.independent??0)>0?Array.from({length:41},(_,i)=>({day:horizon*i/40,r:scheduler.forgetting_curve(horizon*i/40,card.stability)})):[],history:e?.history.slice(-4)??[]};
     }
-    const value={book:requireBook(book).name,seen:rows.length,due:rows.filter(w=>w.overdue).length,stable:rows.filter(w=>w.stable).length,
+    const value={book:requireBook(book,profile).name,seen:rows.length,due:rows.filter(w=>w.overdue).length,stable:rows.filter(w=>w.stable).length,
       needsRecall:rows.filter(w=>w.status==='待独立回忆').length,rows:rows.slice(page*6,page*6+6),page,pages,forecast,detail,targetRetention:0.9};
     this.memoryCache={key,profile,value};return value;
   }

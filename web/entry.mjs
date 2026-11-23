@@ -28,7 +28,7 @@ window.WordGame={
       if(action==='mobile_boss_start'){
         if(session.state&&!session.state.outcome)throw Error('请先完成当前行动。');
         session.study.configure({mobileAnswerMode:payload.answerMode});
-        const result=session.command('boss_start',{id:payload.id});
+        const result=session.command('boss_start',{id:payload.id,difficulty:payload.difficulty});
         return JSON.stringify({ok:true,...result,uiAction:'boss_start'});
       }
       const result=session.command(action,payload);

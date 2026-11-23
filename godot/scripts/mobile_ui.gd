@@ -1,6 +1,7 @@
 extends RefCounted
 const T=preload("res://scripts/design_tokens.gd")
 const Q=preload("res://scripts/choice_ui.gd")
+const CUSTOM=preload("res://scripts/custom_book_ui.gd")
 var enabled=false
 var canvas=Vector2(360,780)
 var portrait=true
@@ -9,8 +10,9 @@ var last_size=Vector2i.ZERO
 var draft_book=""
 var draft_batch=10
 var draft_goal=20
+var draft_difficulty="all"
 const PHONE_MODES=["choose_meaning","choose_word"]
-const BOOK_LABELS={"zk":"中考","gk":"高考","cet4":"四级","cet6":"六级","ky":"考研"}
+const BOOK_LABELS={"zk":"中考","gk":"高考","cet4":"四级","cet6":"六级","ky":"考研","custom":"自编"}
 const BOOK_MAPS={"zk":"valley","gk":"spaceport","cet4":"dam","cet6":"city","ky":"director"}
 const SURFACE=T.SURFACE
 const BORDER=T.EDGE
@@ -124,23 +126,32 @@ func plan_area() -> Rect2:
 
 func book_rect(index:int,count:int) -> Rect2:
 	var r=plan_area();var width=(r.size.x-6*(count-1))/count
-	return Rect2(r.position.x+index*(width+6),86,width,82)
+	return Rect2(r.position.x+index*(width+6),86,width,62)
 
 func build_plan(h) -> void:
 	var w=canvas.x;var ht=canvas.y
 	if draft_book.is_empty():
 		draft_book=h.data.bookSettings.selected;draft_batch=int(h.data.study.settings.batch);draft_goal=int(h.data.study.settings.goal)
+		draft_difficulty=h.data.study.settings.get("difficulty","all")
 		var previous=h.data.study.settings.get("mobileAnswerMode",h.data.study.settings.get("answerMode","choose_meaning"))
 		draft_mode=previous if previous in PHONE_MODES else "choose_meaning"
 	var r=plan_area();var x=r.position.x;var area=r.size.x
+	var active=not h.state().is_empty() and h.state().get("outcome")==null
+	button(h,"自定义词书",Rect2(r.end.x-110,52,110,30),func():h.custom_book_ui.open(h),false,active or start_pending,"EditCustomBook").add_theme_font_size_override("font_size",14)
+	var available=0
 	for i in h.data.books.size():
 		var id=h.data.books[i].id
+		if id==draft_book:available=CUSTOM.count(h.data.books[i],draft_difficulty)
 		var card=button(h,"",book_rect(i,h.data.books.size()),func():draft_book=id;h.rebuild(),draft_book==id,start_pending,"MobileBook_"+id)
 		card.add_theme_stylebox_override("normal",T.style(Color.TRANSPARENT,T.GREEN if draft_book==id else T.EDGE))
 		card.add_theme_stylebox_override("hover",T.style(Color(T.GREEN,0.05),T.GREEN))
+	for i in CUSTOM.LEVELS.size():
+		var level=CUSTOM.LEVELS[i]
+		var width=(area-12)/3
+		button(h,CUSTOM.LEVEL_LABELS[i],Rect2(x+i*(width+6),153,width,33),func():draft_difficulty=level;h.rebuild(),draft_difficulty==level,start_pending,"Difficulty_"+level).add_theme_font_size_override("font_size",14)
 	for i in PHONE_MODES.size():
 		var mode=PHONE_MODES[i]
-		button(h,["看词选意","看意选词"][i],Rect2(x+i*(area+8)/2,197,(area-8)/2,48),func():draft_mode=mode;h.rebuild(),draft_mode==mode,start_pending,"AnswerMode_"+mode)
+		button(h,["看词选意","看意选词"][i],Rect2(x+i*(area+8)/2,204,(area-8)/2,40),func():draft_mode=mode;h.rebuild(),draft_mode==mode,start_pending,"AnswerMode_"+mode)
 	var half=(area-24)/2
 	for i in 3:
 		var amount=[5,10,15][i]
@@ -148,18 +159,17 @@ func build_plan(h) -> void:
 	for i in 4:
 		var amount=[5,10,20,30][i]
 		button(h,str(amount),Rect2(x+half+24+i*(half+6)/4,278,(half-18)/4,40),func():draft_goal=amount;h.rebuild(),draft_goal==amount,start_pending,"MobileGoal_%d" % amount)
-	var active=not h.state().is_empty() and h.state().get("outcome")==null
 	if not active:
-		button(h,"总监百词挑战",Rect2(24,273,x-50,46),func():h.bridge.request("mobile_boss_start",{"id":draft_book,"answerMode":draft_mode}),false,start_pending,"MobileBoss")
+		button(h,"总监百词挑战" if available>=100 else "百词挑战需 100 词",Rect2(24,273,x-50,38),func():h.bridge.request("mobile_boss_start",{"id":draft_book,"answerMode":draft_mode,"difficulty":draft_difficulty}),false,start_pending or available<100,"MobileBoss")
 	button(h,"收藏单词",Rect2(24,272 if active else 315,x-50,39 if active else 33),func():h.go("favorites"),false,false,"MobileFavorites").add_theme_font_size_override("font_size",14)
-	button(h,"正在准备行动…" if start_pending else "继续当前行动" if active else "保存计划并开始",Rect2(x,334,area,44),func():
+	button(h,"正在准备行动…" if start_pending else "继续当前行动" if active else "当前难度没有词条" if available==0 else "保存计划并开始",Rect2(x,334,area,44),func():
 		if active:h.ActionFlow.run(h)
 		else:
 			if start_pending:return
 			start_pending=true;h.error_text=""
-			h.bridge.request("mobile_plan_start",{"id":draft_book,"batch":draft_batch,"goal":draft_goal,"answerMode":draft_mode})
+			h.bridge.request("mobile_plan_start",{"id":draft_book,"batch":draft_batch,"goal":draft_goal,"difficulty":draft_difficulty,"answerMode":draft_mode})
 			h.rebuild.call_deferred()
-		,true,start_pending,"MobileStart")
+		,true,start_pending or (not active and available==0),"MobileStart")
 	if not h.error_text.is_empty():
 		var message=Label.new()
 		message.text=h.error_text;message.position=Vector2(24,266);message.size=Vector2(x-44,62)
@@ -356,11 +366,11 @@ func draw_plan(h) -> void:
 		var book=h.data.books[i];var card=book_rect(i,h.data.books.size());var chosen=book.id==draft_book
 		var texture=h.textures["scene_"+BOOK_MAPS.get(book.id,"dam")]
 		h.image_cover(texture,card,Color.WHITE if chosen else Color(0.64,0.69,0.65))
-		h.draw_rect(Rect2(card.position+Vector2(0,30),card.size-Vector2(0,30)),Color(T.INK,0.84))
+		h.draw_rect(Rect2(card.position+Vector2(0,19),card.size-Vector2(0,19)),Color(T.INK,0.84))
 		if chosen:h.draw_rect(Rect2(card.position,Vector2(3,card.size.y)),MINT)
-		h.text_at(BOOK_LABELS.get(book.id,book.name),card.position.x+8,card.position.y+54,22,T.TEXT)
-		h.text_at("%d 词" % book.count,card.position.x+8,card.position.y+74,14,MINT if chosen else T.MUTED)
-	h.text_at("训练方式",x,190,16,T.TEXT)
+		h.text_at(BOOK_LABELS.get(book.id,book.name),card.position.x+6,card.position.y+38,18,T.TEXT,card.size.x-10)
+		h.text_at("%d 词" % CUSTOM.count(book,draft_difficulty),card.position.x+6,card.position.y+55,13,MINT if chosen else T.MUTED,card.size.x-10)
+	h.text_at("训练方式",x,200,13,T.MUTED)
 	h.text_at("每轮词数",x,270,15,T.TEXT)
 	h.text_at("每日目标",x+(area-24)/2+24,270,15,T.TEXT)
 

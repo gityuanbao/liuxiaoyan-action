@@ -2,7 +2,8 @@ import './loader.mjs';
 import { readFileSync, writeFileSync, renameSync, existsSync, mkdirSync } from 'node:fs';
 import { dirname } from 'node:path';
 import { randomUUID } from 'node:crypto';
-import {BOOKS,requireBook,bookPool,bookCatalog,allBookWords} from './wordbooks.mjs';
+import {BOOKS,requireBook,bookPool,bookCatalog,allBookWords,WORD_DIFFICULTIES,wordsAtDifficulty} from './wordbooks.mjs';
+import {activeCustomWords,attachCustomBook,customBookEditor,CUSTOM_BOOK_ID,editCustomBook,getCustomBook,hasCustomBook} from './custom-book.mjs';
 import {StudyPlanner} from './study.mjs';
 import {StudyMission} from './study-mission.mjs';
 import {migrateProgression,progressionSummary,claimLevels,setSupplyEnabled,applyLevelPerks,recordWallet,learningLevel} from './progression.mjs';
@@ -20,14 +21,21 @@ export class Session {
   constructor(savePath,{drawOnly=false}={}) {
     this.savePath = savePath;
     this.drawOnly = drawOnly;
+    this.profile = savePath && existsSync(savePath) ? learning.parseBackup(readFileSync(savePath, 'utf8')) : learning.emptyProfile();
+    this.customBookPath=savePath?savePath+'.custom-book.json':null;
+    if(this.customBookPath&&existsSync(this.customBookPath)){
+      const saved=JSON.parse(readFileSync(this.customBookPath,'utf8'));
+      this.customBook={name:saved.name,words:saved.rows.map(([id,word,meaning,example='',translation=''])=>({id,word,meaning,example,translation,pack:CUSTOM_BOOK_ID}))};
+    }else this.customBook=getCustomBook(this.profile);
+    attachCustomBook(this.profile,this.customBook);
+    const available=id=>BOOKS.some(b=>b.id===id)||(id===CUSTOM_BOOK_ID&&hasCustomBook(this.profile));
     this.bookSettings={selected:'cet4',recall:false};
     if(savePath&&existsSync(savePath+'.books.json')){
       const stored=JSON.parse(readFileSync(savePath+'.books.json','utf8'));
-      if(BOOKS.some(b=>b.id===stored.selected))this.bookSettings={selected:stored.selected,recall:!!stored.recall};
+      if(available(stored.selected))this.bookSettings={selected:stored.selected,recall:!!stored.recall};
     }
-    this.profile = savePath && existsSync(savePath) ? learning.parseBackup(readFileSync(savePath, 'utf8')) : learning.emptyProfile();
     this.study=new StudyPlanner(savePath?savePath+'.study.json':null);
-    if(BOOKS.some(b=>b.id===this.study.data.settings.selectedBook))this.bookSettings.selected=this.study.data.settings.selectedBook;
+    if(available(this.study.data.settings.selectedBook))this.bookSettings.selected=this.study.data.settings.selectedBook;
     const migrated=migrateProgression(migrateRecruitment(this.profile,this.study));
     if(migrated!==this.profile)this.save(migrated);
     this.learningRewards={xp:0,coins:0,newWords:0,reviewWords:0};
@@ -46,7 +54,7 @@ export class Session {
       writeFileSync(this.savePath + '.tmp', JSON.stringify(next, null, 2));
       renameSync(this.savePath + '.tmp', this.savePath);
     }
-    this.profile = next;
+    this.profile = attachCustomBook(next,this.customBook);
   }
   get word() { return this.mission?.item(this.index).word??this.pool[this.index % this.pool.length]; }
   get recalling() { return this.mission?this.mission.item(this.index).mode!=='learn':!!this.stage?.recall; }
@@ -60,7 +68,11 @@ export class Session {
   choice(){
     if(!this.choiceMode||this.chanting||!this.word)return null;
     const token=this.id+':'+this.index;
-    if(this.choiceQuestion?.token!==token)this.choiceQuestion=createChoice(this.word,this.stage.bookMode?this.stage.pack:this.bookSettings.selected,this.stage.answerMode,token);
+    if(this.choiceQuestion?.token!==token){
+      const active=this.stage.bookMode?this.stage.pack:this.bookSettings.selected;
+      const book=!this.stage.bookMode&&active===CUSTOM_BOOK_ID?'cet4':active;
+      this.choiceQuestion=createChoice(this.word,book,this.stage.answerMode,token,undefined,{profile:this.profile,difficulty:this.stage.difficulty});
+    }
     return this.choiceQuestion;
   }
   start(id) {
@@ -89,9 +101,9 @@ export class Session {
     if(deployment.profile!==this.profile)this.save(deployment.profile);
   }
   selectBook(id,recall=this.bookSettings.recall){
-    requireBook(id);
+    requireBook(id,this.profile);
     if(id!==this.bookSettings.selected)
-      this.study.configure({selectedBook:id,chapter:id!==this.bookSettings.selected?0:this.study.data.settings.chapter});
+      this.study.configure({selectedBook:id,chapter:0},this.profile);
     this.bookSettings={selected:id,recall:!!recall};
     if(this.savePath){
       mkdirSync(dirname(this.savePath),{recursive:true});
@@ -99,31 +111,32 @@ export class Session {
       renameSync(this.savePath+'.books.json.tmp',this.savePath+'.books.json');
     }
   }
-  saveBookPlan({id,batch,goal}){
-    requireBook(id);
+  saveBookPlan({id,batch,goal,difficulty}){
+    requireBook(id,this.profile);
     if(![5,10,15].includes(batch)||![5,10,20,30].includes(goal))throw Error('请选择支持的每轮词数与每日目标。');
     // The study file is authoritative for the saved plan. The book file remains a legacy mirror.
-    this.study.configure({selectedBook:id,batch,goal,chapter:0,planMode:'daily'});
+    this.study.configure({selectedBook:id,batch,goal,difficulty,chapter:0,planMode:'daily'},this.profile);
     this.bookSettings={...this.bookSettings,selected:id};
     if(this.savePath){
       writeFileSync(this.savePath+'.books.json.tmp',JSON.stringify(this.bookSettings));
       renameSync(this.savePath+'.books.json.tmp',this.savePath+'.books.json');
     }
   }
-  startBook(id,recall=false,keepPlan=false){
-    const book=requireBook(id);
+  startBook(id,recall=false,keepPlan=false,difficulty=this.study.data.settings.difficulty){
+    const book=requireBook(id,this.profile);
     if(!keepPlan)this.selectBook(id,recall);
     this.start('bridge-1');
-    this.stage={...this.stage,id:'book:'+id,name:book.name,region:'词书训练',pack:id,bookMode:true,recall:!!recall,reward:0,answerMode:this.phoneLayout?this.phoneMode:this.study.data.settings.answerMode??'spelling'};
-    this.pool=bookPool(id,this.profile,60);
+    this.stage={...this.stage,id:'book:'+id,name:book.name,region:'词书训练',pack:id,bookMode:true,difficulty,recall:!!recall,reward:0,answerMode:this.phoneLayout?this.phoneMode:this.study.data.settings.answerMode??'spelling'};
+    this.pool=bookPool(id,this.profile,60,difficulty);
     this.id='wordbook:'+id+':'+randomUUID();
   }
   startStudy(retry=false,planned=null){
     const selected=planned??(retry?{pool:this.pool.filter(w=>this.mission?.summary(this.index).weakWords.some(x=>x.id===w.id)),settings:{source:'session',recall:true},sourceLabel:'本局薄弱词'}:this.study.selection(this.bookSettings.selected,this.profile)),pool=[...selected.pool];
-    if(!pool.length)throw Error('当前范围没有可练单词，请切换学习内容或词性。');
+    if(!pool.length)throw Error('当前范围没有可练单词，请调整词汇难度、学习范围或词性。');
     const recall=selected.settings.recall,id=retry?this.stage.pack:this.bookSettings.selected;
-    this.startBook(id,recall,selected.settings.source==='saved');this.pool=pool;
-    this.stage={...this.stage,studyMode:true,name:selected.settings.source==='saved'?selected.sourceLabel:requireBook(id).name+' · '+selected.sourceLabel,region:'学习行动'};
+    const difficulty=selected.settings.source==='saved'?'all':retry?this.stage.difficulty:selected.settings.difficulty;
+    this.startBook(id,recall,selected.settings.source==='saved',difficulty);this.pool=pool;
+    this.stage={...this.stage,studyMode:true,name:selected.settings.source==='saved'?selected.sourceLabel:requireBook(id,this.profile).name+' · '+selected.sourceLabel,region:'学习行动'};
     this.id='study:'+id+':'+randomUUID();
     this.mission=new StudyMission(pool,recall,this.stage.answerMode);
     this.lesson={total:this.mission.items.length,completed:0,wave:1,source:selected.settings.source,recall,words:pool.map(w=>w.id)};
@@ -140,9 +153,10 @@ export class Session {
     const page=Math.min(this.favoritesPage,pages-1);
     return {count,page,pages,rows:all.slice(page*FAVORITES_PAGE_SIZE,(page+1)*FAVORITES_PAGE_SIZE)};
   }
-  startBoss({id=this.bookSettings.selected,recall=true}={}){
-    const pool=directorPool(id,this.study,this.profile);
-    this.startBook(id,recall);
+  startBoss({id=this.bookSettings.selected,recall=true,difficulty=this.study.data.settings.difficulty}={}){
+    if(!Object.hasOwn(WORD_DIFFICULTIES,difficulty))throw Error('请选择有效的词汇难度。');
+    const pool=directorPool(id,this.study,this.profile,undefined,difficulty);
+    this.startBook(id,recall,false,difficulty);
     this.pool=pool;
     this.stage={...this.stage,id:'boss:director:'+id,name:DIRECTOR_RULES.name+' · 百词挑战',region:'总监试炼',monster:'director',boss:true,bossMode:true,recall:!!recall,hp:DIRECTOR_RULES.hp};
     this.state=createDirector(this.state);
@@ -190,9 +204,28 @@ export class Session {
     if (action === 'start') this.start(p.id);
     if (action === 'book_select') this.selectBook(p.id,p.recall??this.bookSettings.recall);
     if (action === 'book_plan_save') this.saveBookPlan(p);
-    if (action === 'start_book') this.startBook(p.id??this.bookSettings.selected,!!p.recall);
-    if (action === 'study_settings') this.study.configure(p);
-    if (action === 'study_start') this.startStudy();
+    if (action === 'custom_book_save') {
+      if(this.state&&!this.state.outcome)throw Error('请先完成当前行动，再编辑自定义词书。');
+      const book=editCustomBook(this.customBook,p);
+      if(this.customBookPath){
+        mkdirSync(dirname(this.customBookPath),{recursive:true});
+        const saved={name:book.name,rows:book.words.map(w=>w.example||w.translation?
+          [w.id,w.word,w.meaning,w.example,w.translation]:[w.id,w.word,w.meaning])};
+        writeFileSync(this.customBookPath+'.tmp',JSON.stringify(saved));
+        renameSync(this.customBookPath+'.tmp',this.customBookPath);
+      }
+      this.customBook=book;
+      const previous=this.profile.notebook??notebook.emptyNotebook();
+      this.save({...this.profile,notebook:{...previous,customBookLocal:true}});
+    }
+    if (action === 'start_book') {
+      const id=p.id??this.bookSettings.selected;
+      if(!wordsAtDifficulty(id,this.profile,this.study.data.settings.difficulty).length)throw Error('当前难度没有词条，请调整筛选。');
+      this.startBook(id,!!p.recall);
+    }
+    if (action === 'study_settings') this.study.configure(p,this.profile);
+    if (action === 'study_start') this.startStudy(false,p.includeStudied?
+      this.study.selection(this.bookSettings.selected,this.profile,{source:'all',pos:'all',chapter:0}):null);
     if (action === 'daily_start') {
       // Never replace a live mission when the user changes planning settings.
       if(this.state&&!this.state.outcome)throw Error('请先继续并完成当前行动，再开始新的计划。');
@@ -328,7 +361,13 @@ export class Session {
       if(id&&(id===this.word?.id||(exists&&p.saved===false))){
         const keep=p.saved??!exists;
         if(keep&&!exists&&book.saved.length>=1000)throw Error('已收藏 1000 个单词，请先移除部分收藏。');
-        if(keep!==exists)this.save({...this.profile,notebook:{...book,saved:keep?[...book.saved,id]:book.saved.filter(wordId=>wordId!==id)}});
+        if(keep!==exists){
+          const definition=keep&&this.word?.pack===CUSTOM_BOOK_ID&&!book.custom.some(w=>w.id===id)?this.word:null;
+          const removeDefinition=!keep&&book.customBookLocal&&id.startsWith('custom:term-')&&!Object.hasOwn(book.notes,id);
+          const custom=definition?[...book.custom,definition]:removeDefinition?book.custom.filter(w=>w.id!==id):book.custom;
+          this.save({...this.profile,notebook:{...book,custom,
+            saved:keep?[...book.saved,id]:book.saved.filter(wordId=>wordId!==id)}});
+        }
       }
     }
     if(this.lesson&&!this.stage?.bossMode&&this.state?.outcome!=='defeat'){
@@ -367,7 +406,7 @@ export class Session {
     const level=learningLevel(this.profile.xp);
     Object.assign(stats,{level:level.level,levelProgress:level.progress,levelRequired:level.required});
     const recruitment=recruitmentSummary(this.profile,this.drawOnly);
-    const value={stats,progression:progressionSummary(this.profile),recruitment,books:bookCatalog(this.profile,this.study),
+    const value={stats,progression:progressionSummary(this.profile),recruitment,books:bookCatalog(this.profile,this.study),customBook:customBookEditor(this.profile),
       stages:data.EXPEDITION.map(x=>({...x,unlocked:expedition.stageUnlocked(this.profile,x.id),stars:this.profile.expedition?.clears[x.id]?.stars??0})),
       spirits:words.SPIRITS.map(x=>({...x,unlocked:stats.battles>=x.threshold,bond:growth.spiritBond(this.profile,x.id),skill:combat.SPIRIT_SKILLS[x.id]})),
       avatars:chars.ALL_OPERATOR_IDS.filter(id=>this.drawOnly||id!=='wildfire'||isUnlocked(this.profile,id)).map(id=>({id,...chars.CHARACTERS[id],...combat.CHARACTER_SKILLS[id],bond:growth.heroBond(this.profile,id)})),
@@ -379,7 +418,10 @@ export class Session {
     const epoch=Math.floor(this.study.now().getTime()/1000),revision=this.study.revision;
     if(this.collectionCache?.profile===this.profile&&this.collectionCache.epoch===epoch&&this.collectionCache.revision===revision)return this.collectionCache.value;
     const saved=new Set(this.profile.notebook?.saved??[]);
-    const value=notebook.allStudyWords(this.profile).filter(w=>this.profile.words[w.id]||this.study.data.cards[w.id]||saved.has(w.id)).map(w=>{
+    const seen=w=>this.profile.words[w.id]||this.study.data.cards[w.id]||saved.has(w.id);
+    const wordsById=new Map([...notebook.allStudyWords(this.profile),...activeCustomWords(this.profile)]
+      .filter(seen).map(w=>[w.id,w]));
+    const value=[...wordsById.values()].map(w=>{
         const memory=this.study.wordStatus(w,this.profile);
         return {...w,attempts:0,correct:0,streak:0,...this.profile.words[w.id],memoryStatus:memory.status,reviewIn:memory.reviewIn,needsReview:!memory.stable};
       });

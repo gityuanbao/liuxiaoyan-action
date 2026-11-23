@@ -1,5 +1,5 @@
 import { ARCHIVED_WORD_IDS, WORDS, type StudyWord } from './words'
-export interface Notebook { saved: string[]; notes: Record<string, string>; custom: StudyWord[] }
+export interface Notebook { saved: string[]; notes: Record<string, string>; custom: StudyWord[]; customBook?: { name: string; ids: string[] }; customBookLocal?: boolean }
 export const emptyNotebook = (): Notebook => ({ saved: [], notes: {}, custom: [] })
 const rows = `mitigate|缓解；减轻|Green spaces can mitigate the effects of urban heat.|绿地可以缓解城市高温的影响。
 resilience|韧性；恢复能力|A diverse ecosystem has greater resilience to change.|多样化的生态系统应对变化的恢复力更强。
@@ -21,11 +21,19 @@ export const ACADEMIC_WORDS: StudyWord[] = rows.split('\n').map(row => { const [
 export function allStudyWords(profile: { notebook?: Notebook }): StudyWord[] { return [...WORDS, ...ACADEMIC_WORDS, ...(profile.notebook?.custom ?? [])] }
 export function validateNotebook(value: unknown): value is Notebook {
   const book = value as Notebook
-  if (!book || !Array.isArray(book.saved) || book.saved.length > 1000 || new Set(book.saved).size !== book.saved.length || !Array.isArray(book.custom) || book.custom.length > 300 || !book.notes || typeof book.notes !== 'object' || Array.isArray(book.notes)) return false
+  if (!book || !Array.isArray(book.saved) || book.saved.length > 1000 || new Set(book.saved).size !== book.saved.length || !Array.isArray(book.custom) || book.custom.length > 1300 || !book.notes || typeof book.notes !== 'object' || Array.isArray(book.notes)) return false
+  if (book.customBookLocal !== undefined && typeof book.customBookLocal !== 'boolean') return false
   const known = new Set([...ARCHIVED_WORD_IDS, ...[...WORDS, ...ACADEMIC_WORDS].map(w => w.id)])
   for (const w of book.custom) {
-    if (!w || typeof w.id !== 'string' || !/^custom:[a-z0-9-]{8,60}$/.test(w.id) || known.has(w.id) || w.pack !== 'custom' || typeof w.word !== 'string' || !/^[a-zA-Z]+(?:[-'][a-zA-Z]+)*$/.test(w.word) || w.word.length > 40 || typeof w.meaning !== 'string' || !w.meaning.trim() || w.meaning.length > 200 || typeof w.example !== 'string' || w.example.length > 800 || typeof w.translation !== 'string' || w.translation.length > 800) return false
+    if (!w || typeof w.id !== 'string' || !/^custom:[a-z0-9-]{8,60}$/.test(w.id) || known.has(w.id) || w.pack !== 'custom' || typeof w.word !== 'string' || !/^[a-zA-Z]+(?:[-' ][a-zA-Z]+)*$/.test(w.word) || w.word.length > 40 || typeof w.meaning !== 'string' || !w.meaning.trim() || w.meaning.length > 200 || typeof w.example !== 'string' || w.example.length > 800 || typeof w.translation !== 'string' || w.translation.length > 800) return false
     known.add(w.id)
+  }
+  if (book.customBook !== undefined) {
+    const meta = book.customBook
+    if (!meta || typeof meta.name !== 'string' || !meta.name.trim() || meta.name.length > 16 ||
+      !Array.isArray(meta.ids) || !meta.ids.length || meta.ids.length > 200 || new Set(meta.ids).size !== meta.ids.length) return false
+    const customIds = new Set(book.custom.map(word => word.id))
+    if (!meta.ids.every(id => customIds.has(id))) return false
   }
   return book.saved.every(id => known.has(id)) && Object.entries(book.notes).every(([id, note]) => known.has(id) && typeof note === 'string' && note.length <= 2000)
 }

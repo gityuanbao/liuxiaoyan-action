@@ -1,6 +1,7 @@
 extends RefCounted
 
 const T=preload("res://scripts/design_tokens.gd")
+const CUSTOM=preload("res://scripts/custom_book_ui.gd")
 
 static func describe(h) -> Dictionary:
 	var d:Dictionary=h.data
@@ -10,10 +11,13 @@ static func describe(h) -> Dictionary:
 	var book=str(d.get("bookSettings",{}).get("selected","cet4"))
 	if (active or (weak and h.page!="books")) and d.get("stage") is Dictionary and d.stage.get("bookMode",false): book=str(d.stage.pack)
 	var name="经典行动"
+	var eligible=0
 	var mode=str(d.get("study",{}).get("settings",{}).get("answerMode","spelling"))
 	var mode_label="选中文意思" if mode=="choose_meaning" else "选英文单词" if mode=="choose_word" else ""
 	for item in d.get("books",[]):
-		if item.id==book: name=str(item.name)
+		if item.id==book:
+			name=str(item.name)
+			eligible=CUSTOM.count(item,str(d.study.settings.get("difficulty","all")))
 	var result={"book":book,"context":name+" · %d 词计划" % d.get("study",{}).get("preview",[]).size(),"action":"plan","label":"确认词单并出击"}
 	if active:
 		result.action="resume"
@@ -23,9 +27,9 @@ static func describe(h) -> Dictionary:
 			result.label="继续总监挑战"
 			result.context="英语总监 · 已击破 %d/100 词" % d.boss.completed
 	elif h.page=="boss":
-		result.action="boss_start"
-		result.label="开始百词挑战"
-		result.context=name+" · "+("中文默写" if h.boss_recall else "看词练习")+" · 100 词"
+		result.action="boss_start" if eligible>=100 else "empty"
+		result.label="开始百词挑战" if eligible>=100 else "当前范围不足 100 词"
+		result.context=name+" · "+("中文默写" if h.boss_recall else "看词练习")+" · %d 词可选" % eligible
 	elif h.page=="books":
 		if d.study.settings.get("planMode","daily")=="daily":
 			var plan:Dictionary=d.study.daily
@@ -42,7 +46,7 @@ static func describe(h) -> Dictionary:
 		else:
 			result.action="empty"
 			result.label="当前范围没有可练单词"
-			result.context="切换学习范围或词性"
+			result.context="切换难度、学习范围或词性"
 	elif weak:
 		result.action="retry"
 		result.label="复测薄弱词 · %d" % mission.needsReview

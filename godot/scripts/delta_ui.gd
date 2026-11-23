@@ -24,6 +24,7 @@ var level_notice_time=0.0
 var level_notice=""
 var level_notice_detail=""
 var book_setup_open=false
+var custom_book_ui=preload("res://scripts/custom_book_ui.gd").new()
 var book_draft:Dictionary={}
 var music:Node
 var skill_effects=SkillEffects.new()
@@ -222,6 +223,11 @@ func handle_combat_keys(event: InputEvent) -> bool:
 
 func _input(event: InputEvent) -> void:
 	if startup_locked: return
+	if custom_book_ui.opened:
+		if event is InputEventKey and event.pressed and event.keycode==KEY_ESCAPE:
+			custom_book_ui.close(self)
+			get_viewport().set_input_as_handled()
+		return
 	if handle_combat_keys(event):return
 	if sound_menu_open and event is InputEventMouseButton and event.pressed:
 		var local=make_input_local(event).position
@@ -352,6 +358,10 @@ func _focus_gained() -> void:
 			mentor_voice.trigger("return",true)
 
 func _on_update(value: Dictionary, action: String) -> void:
+	if action=="custom_book_save":
+		custom_book_ui.dismiss()
+		if mobile_ui.enabled:mobile_ui.draft_book="custom"
+		else:book_draft.id="custom"
 	if action=="recruit_draw":recruit_center.receive(self,value)
 	if action in ["daily_start","study_start"]:mobile_ui.start_pending=false
 	if OS.has_feature("web") and action in ["state","daily_start","study_start","submit","choose"]:_web_frame_ready.call_deferred(action)
@@ -581,6 +591,10 @@ func clear_ui() -> void:
 	if not keep_field:field = null
 
 func rebuild() -> void:
+	if custom_book_ui.opened:
+		clear_ui()
+		custom_book_ui.build(self)
+		return
 	if mobile_ui.enabled:
 		if is_instance_valid(field):battle_draft=field.text
 		mobile_ui.build(self)
@@ -924,6 +938,9 @@ func character_action(enemy: bool=false) -> String:
 	return "idle"
 
 func _draw() -> void:
+	if custom_book_ui.opened:
+		custom_book_ui.draw(self)
+		return
 	if page=="battle" and shot_vfx.frames.is_empty():
 		skill_effects.prepare()
 		shot_vfx.prepare()

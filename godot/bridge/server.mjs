@@ -11,7 +11,14 @@ const server=createServer(async(req,res)=>{
   res.setHeader('Content-Type','application/json; charset=utf-8');
   if(req.headers.authorization!==`Bearer ${token}`){res.writeHead(403);res.end('{}');return;}
   try {
-    let body=''; for await(const part of req){body+=part;if(body.length>65536)throw Error('请求过长');}
+    const chunks=[];
+    let bytes=0;
+    for await(const part of req){
+      bytes+=part.length;
+      if(bytes>3_500_000)throw Error('词书文件过大，请导入不超过 2 MB 的词表。');
+      chunks.push(part);
+    }
+    const body=Buffer.concat(chunks).toString('utf8');
     const {action='state',payload={},transport:format,snapshot_sequence=0}=JSON.parse(body||'{}');
     let snapshot;
     if(action==='mobile_plan_start') snapshot=startSavedPlan(session,payload);
@@ -19,7 +26,7 @@ const server=createServer(async(req,res)=>{
       if(session.state&&!session.state.outcome)throw Error('请先完成当前行动。');
       session.phoneLayout=true;
       session.study.configure({mobileAnswerMode:payload.answerMode});
-      snapshot=session.command('boss_start',{id:payload.id});
+      snapshot=session.command('boss_start',{id:payload.id,difficulty:payload.difficulty});
     }else snapshot=session.command(action,payload);
     res.end(format==='delta-v1'?transport.encode(snapshot,snapshot_sequence):JSON.stringify({ok:true,...snapshot}));
   } catch(e){res.end(JSON.stringify({ok:false,error:e.message}));}

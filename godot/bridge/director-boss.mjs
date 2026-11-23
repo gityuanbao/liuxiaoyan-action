@@ -1,17 +1,17 @@
-import {allBookWords} from './wordbooks.mjs';
+import {wordsAtDifficulty} from './wordbooks.mjs';
 
 export const DIRECTOR_RULES=Object.freeze({name:'英语总监',words:100,hp:5000,armorPerWord:50,feedbackMs:650,staggerMs:800,chargeMs:1500});
-export function directorPool(book,study,profile,rng=Math.random){
+export function directorPool(book,study,profile,rng=Math.random,difficulty='all'){
   const now=study.now().getTime(),seen=new Set();
   const rank=w=>study.data.evidence[w.id]?.unresolved?0:
     study.data.cards[w.id]&&new Date(study.data.cards[w.id].due).getTime()<=now?1:
     profile.words[w.id]&&new Date(profile.words[w.id].due).getTime()<=now?1:2;
-  const pool=allBookWords(book).filter(w=>{
+  const pool=wordsAtDifficulty(book,profile,difficulty).filter(w=>{
     const spelling=w.word.trim().toLowerCase();
     if(!spelling||seen.has(spelling))return false;
     seen.add(spelling);return true;
   }).sort((a,b)=>rank(a)-rank(b)||a.frequency-b.frequency||a.word.localeCompare(b.word)).slice(0,DIRECTOR_RULES.words);
-  if(pool.length!==DIRECTOR_RULES.words)throw Error('当前词书不足 100 个不同单词。');
+  if(pool.length!==DIRECTOR_RULES.words)throw Error('当前范围不足 100 个不同单词，请调整难度或换词书。');
   for(let i=pool.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[pool[i],pool[j]]=[pool[j],pool[i]];}
   return pool;
 }
