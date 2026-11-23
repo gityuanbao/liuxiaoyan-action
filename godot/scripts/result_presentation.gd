@@ -12,7 +12,7 @@ static func arrange_controls(h) -> void:
 		b.position=rect.position;b.size=rect.size
 		b.add_theme_font_size_override("font_size",15)
 	if h.data.get("result",{}).has("rewards") and not h.ui.has_node("ResultRecruit"):
-		var recruit=h.button("招募干员  ›",T.RESULT_RECRUIT,func():h.go("spirits"))
+		var recruit=h.button("查看卡池  ›",T.RESULT_RECRUIT,func():h.go("recruit"))
 		recruit.name="ResultRecruit";recruit.add_theme_font_size_override("font_size",12)
 
 static func draw(h) -> void:

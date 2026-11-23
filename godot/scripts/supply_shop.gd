@@ -12,7 +12,7 @@ static func build(h) -> void:
 		var enabled:bool=h.data.progression.autoSupply[item.id]
 		var toggle=h.button("下场使用：开" if enabled else "下场使用：关",Rect2(56+i*412,395,344,30),func():h.bridge.request("supply_enabled",{"id":item.id,"enabled":not enabled}),enabled)
 		toggle.name="ToggleSupply_"+item.id;toggle.add_theme_font_size_override("font_size",14)
-	h.button("招募干员",Rect2(888,444,336,46),func():h.go("spirits")).add_theme_font_size_override("font_size",18)
+	h.button("查看干员卡池",Rect2(888,444,336,46),func():h.go("recruit")).add_theme_font_size_override("font_size",18)
 
 static func draw(h) -> void:
 	h.text_at("行动补给",32,116,30,T.TEXT)
@@ -32,7 +32,7 @@ static func draw(h) -> void:
 		C.amount(h,item.cost,Vector2(x+278,384),24,T.TEXT,false,24)
 	h.panel(Rect2(864,150,384,374),T.SURFACE)
 	h.text_at("哈弗币用途",888,192,22,T.TEXT)
-	h.text_at("01  永久招募干员",888,240,17,T.TEXT)
+	h.text_at("01  从卡池随机招募干员",888,240,17,T.TEXT)
 	h.text_at("02  干员与装备进阶",888,278,17,T.TEXT)
 	h.text_at("03  储备出击补给",888,316,17,T.GREEN)
 	h.text_at("累计获得 %d · 已使用 %d" % [h.data.recruitment.earned,h.data.recruitment.spent],888,373,13,T.MUTED)

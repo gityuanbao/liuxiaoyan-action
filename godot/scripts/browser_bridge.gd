@@ -1,5 +1,6 @@
 extends GameBridge
 var api: JavaScriptObject
+
 func _ready() -> void:
 	api = JavaScriptBridge.get_interface("WordGame")
 	request.call_deferred("state")

@@ -1,0 +1,26 @@
+{
+  "version": "v56-pages",
+  "title": "刘晓艳行动",
+  "engine": "Godot 4.5.1 Web single-thread",
+  "layout": "landscape, animation above questions; letterbox fallback in portrait previews",
+  "answerModes": [
+    "spelling",
+    "choose_meaning",
+    "choose_word"
+  ],
+  "mobileAnswerModes": [
+    "choose_meaning",
+    "choose_word"
+  ],
+  "books": [
+    "zk",
+    "gk",
+    "cet4",
+    "cet6",
+    "ky"
+  ],
+  "speechFiles": 6156,
+  "cloud": "Existing versioned browser-local save",
+  "startup": "streaming gzip + immutable local cache; adaptive mobile rendering up to 2560x1440 at 3x pixel density; standard devices up to 1920x1080; 1280x720 for reported low-memory devices",
+  "limitBytes": 140000000
+}

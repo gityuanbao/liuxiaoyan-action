@@ -172,36 +172,15 @@ func _add_asset(path: String) -> void:
 	if path not in tasks: tasks.append(path)
 
 func _begin() -> void:
-	# Yield one display frame before doing any asset work.
+	# Only the lobby art is on the critical path. Single-threaded Web builds
+	# synchronously decode each queued texture, even when called by the pump.
 	await get_tree().process_frame
-	for path in ["base.png","zero-dam-battle-v15.png","mentor.png","allies.png","enemies.png","operators/sheet-transparent.png"]:
-		_add_asset("res://assets/generated/"+path)
-	for i in range(1,7):
-		_add_asset("res://assets/official/operator-%02d.jpg" % i)
-		_add_asset("res://assets/official/portrait-%02d.jpg" % i)
-		_add_asset("res://assets/fx/muzzle/fx-%d.png" % i)
-		_add_asset("res://assets/fx/impact/fx-%d.png" % i)
-	_add_asset("res://assets/official/m7.png")
-	for name in ["question","victory","defeat"]: _add_asset("res://assets/memes/"+name+".png")
-	var animations=JSON.parse_string(FileAccess.get_file_as_string("res://assets/characters/animations.json"))
-	var sounds=JSON.parse_string(FileAccess.get_file_as_string("res://assets/sfx/manifest.json"))
-	var voices=JSON.parse_string(FileAccess.get_file_as_string("res://assets/voice/manifest.json"))
-	if not animations is Dictionary or not sounds is Dictionary or not voices is Dictionary:
-		_fail("素材清单无法读取。请刷新网页后重试。")
-		return
-	for character in animations.get("characters",{}).values():
-		for action in character.get("actions",{}).values():
-			for frame in action.get("frames",[]):_add_asset(str(frame.file))
-	for key in ["valley","city","spaceport","director"]:_add_asset("res://assets/maps/v23/"+key+".png")
-	for actor in ["mage","knight","ranger","scholar","bard","alchemist"]:
-		for i in 4:_add_asset("res://assets/fx/skills-v23/"+actor+"/fx-%d.png" % i)
-	for key in ["menu","combat","boss"]:_add_asset("res://assets/music/"+key+".ogg")
-	for sound in sounds.get("sounds",{}).values(): _add_asset("res://assets/sfx/"+str(sound.file))
-	var delta_sounds=JSON.parse_string(FileAccess.get_file_as_string("res://assets/sfx/delta-manifest.json"))
-	for sound in delta_sounds.get("sounds",{}).values(): _add_asset("res://assets/sfx/"+str(sound.file))
-	for clip in voices.get("clips",[]):
-		if clip.has("image"): _add_asset("res://assets/voice/"+str(clip.image))
-		if clip.id=="uploaded_english": _add_asset("res://assets/voice/"+str(clip.file))
+	if OS.has_feature("web"):
+		await RenderingServer.frame_post_draw
+		JavaScriptBridge.eval("window.dispatchEvent(new CustomEvent('toy-game-milestone',{detail:{name:'frame:boot',at:performance.now()}}))")
+	_add_asset("res://assets/generated/base.png")
+	var scenes=preload("res://scripts/scene_catalog.gd").SCENES
+	for scene in scenes.values():_add_asset(scene.path)
 	_add_asset(MAIN_SCENE)
 	total=tasks.size()
 	_pump()
@@ -297,6 +276,7 @@ func _reveal_duration() -> float:
 
 func _finish() -> void:
 	finished=true
+	retained.clear()
 	for player in sound_players: player.stop()
 	shield.queue_free()
 	# The lobby paints the identical icon and title at the final animation coordinates.

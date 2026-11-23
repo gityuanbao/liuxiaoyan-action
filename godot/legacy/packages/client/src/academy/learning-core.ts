@@ -2,8 +2,8 @@ import { settleExpedition, validExpedition, type ExpeditionProgress } from './ex
 import { EXPEDITION } from './expedition-data'
 import { awardPractice, validGrowth, type Growth, SPIRIT_IDS } from './growth-core'
 import type { SpiritId } from './combat-skills'
-import { WORDS } from './words'
-import { AVATAR_IDS, type AvatarId } from './character-data'
+import { ARCHIVED_WORD_IDS, WORDS } from './words'
+import { ALL_OPERATOR_IDS, type AvatarId } from './character-data'
 import { validateStory, type StoryProgress } from './story-data'
 import { allStudyWords, validateNotebook, type Notebook } from './notebook-data'
 import { validateTrials, validateDrafts, type TrialAttempt, type TrialDraft } from './trial-core'
@@ -43,12 +43,12 @@ export function parseBackup(text: string): LearningProfile {
   if (value.learningGoals !== undefined && !validLearningGoals(value.learningGoals)) throw new Error('备份中的学习目标无效。')
   if (!['moon', 'leaf', 'spark', 'sun'].includes(value.companion)) throw new Error('备份中的精灵信息无效。')
   if (value.notebook !== undefined && !validateNotebook(value.notebook)) throw new Error('备份中的单词本无效。')
-  const knownWords = new Set(allStudyWords(value).map(w => w.id))
+  const knownWords = new Set([...ARCHIVED_WORD_IDS, ...allStudyWords(value).map(w => w.id)])
   const seen = new Set<string>()
   for (const r of value.records) {
     if (!r || typeof r.id !== 'string' || !r.id || seen.has(r.id) || !['vocabulary', 'reading', 'typing', 'sentence', 'listening', 'exam', 'writing', 'speaking'].includes(r.kind) || typeof r.title !== 'string' || typeof r.date !== 'string' || !Number.isFinite(Date.parse(r.date)) || ![r.correct, r.total, r.duration, r.xp].every(finite) || r.correct > r.total || (r.outcome !== undefined && !['victory', 'defeat'].includes(r.outcome))) throw new Error('备份中的练习记录无效。')
     if (r.ultimates !== undefined && (!Number.isInteger(r.ultimates) || r.ultimates < 0 || r.ultimates > r.correct)) throw new Error('备份中的大招记录无效。')
-    if ((r.avatar !== undefined && !AVATAR_IDS.includes(r.avatar)) || (r.companion !== undefined && !SPIRIT_IDS.includes(r.companion))) throw new Error('备份中的出战搭配无效。')
+    if ((r.avatar !== undefined && !ALL_OPERATOR_IDS.includes(r.avatar)) || (r.companion !== undefined && !SPIRIT_IDS.includes(r.companion))) throw new Error('备份中的出战搭配无效。')
     if (r.expedition !== undefined && (!r.expedition || !EXPEDITION.some(s => s.id === r.expedition.stage && s.lesson === r.kind) || !Number.isInteger(r.expedition.hp) || r.expedition.hp < 0 || r.expedition.hp > 140)) throw new Error('备份中的远征成绩无效。')
     seen.add(r.id)
     if (r.words && (!Array.isArray(r.words) || r.words.some((w: any) => !w || !knownWords.has(w.id) || typeof w.correct !== 'boolean' || typeof w.hinted !== 'boolean'))) throw new Error('备份中的单词记录无效。')
@@ -56,7 +56,7 @@ export function parseBackup(text: string): LearningProfile {
   for (const [id, w] of Object.entries(value.words) as [string, WordProgress][]) {
     if (!knownWords.has(id) || !w || ![w.attempts, w.correct, w.streak, w.due].every(finite) || w.correct > w.attempts || w.streak > w.correct || !Number.isFinite(Date.parse(w.lastSeen))) throw new Error('备份中的单词进度无效。')
   }
-  if (value.avatar !== undefined && !AVATAR_IDS.includes(value.avatar)) throw new Error('备份中的角色形象无效。')
+  if (value.avatar !== undefined && !ALL_OPERATOR_IDS.includes(value.avatar)) throw new Error('备份中的角色形象无效。')
   if (value.story !== undefined && !validateStory(value.story)) throw new Error('备份中的剧情进度无效。')
   if (value.trials !== undefined && !validateTrials(value.trials)) throw new Error('备份中的雅思试炼记录无效。')
   if (value.trialDrafts !== undefined && !validateDrafts(value.trialDrafts)) throw new Error('备份中的练习草稿无效。')

@@ -1,0 +1,246 @@
+{
+  "name": "野火",
+  "source": {
+    "operator": "https://df.qq.com/cp/a20240906main/index.html",
+    "portrait": "https://game.gtimg.cn/images/dfm/cp/a20240906main/p4_img18.jpg",
+    "skills": "https://df.qq.com/cp/a20261030ma5/",
+    "animation": "游戏适配专用角色动画，依据官方造型重新绘制。"
+  },
+  "facing": "right",
+  "actions": {
+    "idle": {
+      "loop": true,
+      "frames": [
+        {
+          "file": "res://assets/characters/wildfire/idle/runtime-00.png",
+          "ms": 170
+        },
+        {
+          "file": "res://assets/characters/wildfire/idle/runtime-01.png",
+          "ms": 170
+        },
+        {
+          "file": "res://assets/characters/wildfire/idle/runtime-02.png",
+          "ms": 170
+        },
+        {
+          "file": "res://assets/characters/wildfire/idle/runtime-03.png",
+          "ms": 170
+        },
+        {
+          "file": "res://assets/characters/wildfire/idle/runtime-04.png",
+          "ms": 170
+        },
+        {
+          "file": "res://assets/characters/wildfire/idle/runtime-05.png",
+          "ms": 170
+        }
+      ]
+    },
+    "entry": {
+      "loop": false,
+      "frames": [
+        {
+          "file": "res://assets/characters/wildfire/entry/runtime-00.png",
+          "ms": 95
+        },
+        {
+          "file": "res://assets/characters/wildfire/entry/runtime-01.png",
+          "ms": 85
+        },
+        {
+          "file": "res://assets/characters/wildfire/entry/runtime-02.png",
+          "ms": 80
+        },
+        {
+          "file": "res://assets/characters/wildfire/entry/runtime-03.png",
+          "ms": 100
+        },
+        {
+          "file": "res://assets/characters/wildfire/entry/runtime-04.png",
+          "ms": 110
+        },
+        {
+          "file": "res://assets/characters/wildfire/entry/runtime-05.png",
+          "ms": 110
+        },
+        {
+          "file": "res://assets/characters/wildfire/entry/runtime-06.png",
+          "ms": 150
+        }
+      ]
+    },
+    "shoot": {
+      "loop": false,
+      "frames": [
+        {
+          "file": "res://assets/characters/wildfire/shoot/runtime-00.png",
+          "ms": 80
+        },
+        {
+          "file": "res://assets/characters/wildfire/shoot/runtime-01.png",
+          "ms": 65
+        },
+        {
+          "file": "res://assets/characters/wildfire/shoot/runtime-02.png",
+          "ms": 80
+        },
+        {
+          "file": "res://assets/characters/wildfire/shoot/runtime-03.png",
+          "ms": 85
+        },
+        {
+          "file": "res://assets/characters/wildfire/shoot/runtime-04.png",
+          "ms": 120
+        }
+      ],
+      "muzzles": [
+        [
+          320,
+          267
+        ],
+        [
+          392,
+          252
+        ],
+        [
+          403,
+          252
+        ],
+        [
+          396,
+          252
+        ],
+        [
+          324,
+          267
+        ]
+      ]
+    },
+    "hurt": {
+      "loop": false,
+      "frames": [
+        {
+          "file": "res://assets/characters/wildfire/hurt/runtime-00.png",
+          "ms": 75
+        },
+        {
+          "file": "res://assets/characters/wildfire/hurt/runtime-01.png",
+          "ms": 90
+        },
+        {
+          "file": "res://assets/characters/wildfire/hurt/runtime-02.png",
+          "ms": 120
+        },
+        {
+          "file": "res://assets/characters/wildfire/hurt/runtime-03.png",
+          "ms": 145
+        }
+      ]
+    },
+    "tactic": {
+      "loop": false,
+      "frames": [
+        {
+          "file": "res://assets/characters/wildfire/tactic/runtime-00.png",
+          "ms": 160
+        },
+        {
+          "file": "res://assets/characters/wildfire/tactic/runtime-01.png",
+          "ms": 170
+        },
+        {
+          "file": "res://assets/characters/wildfire/tactic/runtime-02.png",
+          "ms": 210
+        },
+        {
+          "file": "res://assets/characters/wildfire/tactic/runtime-03.png",
+          "ms": 220
+        },
+        {
+          "file": "res://assets/characters/wildfire/tactic/runtime-04.png",
+          "ms": 215
+        },
+        {
+          "file": "res://assets/characters/wildfire/tactic/runtime-05.png",
+          "ms": 180
+        },
+        {
+          "file": "res://assets/characters/wildfire/tactic/runtime-06.png",
+          "ms": 190
+        }
+      ]
+    },
+    "ultimate": {
+      "loop": false,
+      "frames": [
+        {
+          "file": "res://assets/characters/wildfire/ultimate/runtime-00.png",
+          "ms": 120
+        },
+        {
+          "file": "res://assets/characters/wildfire/ultimate/runtime-01.png",
+          "ms": 125
+        },
+        {
+          "file": "res://assets/characters/wildfire/ultimate/runtime-02.png",
+          "ms": 105
+        },
+        {
+          "file": "res://assets/characters/wildfire/ultimate/runtime-03.png",
+          "ms": 100
+        },
+        {
+          "file": "res://assets/characters/wildfire/ultimate/runtime-04.png",
+          "ms": 115
+        },
+        {
+          "file": "res://assets/characters/wildfire/ultimate/runtime-05.png",
+          "ms": 140
+        },
+        {
+          "file": "res://assets/characters/wildfire/ultimate/runtime-06.png",
+          "ms": 130
+        },
+        {
+          "file": "res://assets/characters/wildfire/ultimate/runtime-07.png",
+          "ms": 185
+        }
+      ],
+      "muzzles": [
+        [
+          320,
+          267
+        ],
+        [
+          386,
+          316
+        ],
+        [
+          405,
+          311
+        ],
+        [
+          436,
+          303
+        ],
+        [
+          464,
+          310
+        ],
+        [
+          459,
+          316
+        ],
+        [
+          438,
+          316
+        ],
+        [
+          324,
+          267
+        ]
+      ]
+    }
+  }
+}

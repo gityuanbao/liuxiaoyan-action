@@ -8,7 +8,8 @@ static func active(h) -> bool:
 static func build(h) -> void:
 	for i in h.data.get("books",[]).size():
 		var book=h.data.books[i]
-		h.button(book.name,Rect2(592+i*214,208,202,44),func(): h.bridge.request("book_select",{"id":book.id}),h.data.bookSettings.selected==book.id).add_theme_font_size_override("font_size",17)
+		var step=634.0/h.data.books.size()
+		h.button(book.name,Rect2(592+i*step,208,step-8,44),func(): h.bridge.request("book_select",{"id":book.id}),h.data.bookSettings.selected==book.id).add_theme_font_size_override("font_size",16)
 	h.button("中文默写",Rect2(592,296,304,44),func(): h.boss_recall=true;h.rebuild(),h.boss_recall)
 	h.button("看词练习",Rect2(912,296,306,44),func(): h.boss_recall=false;h.rebuild(),not h.boss_recall)
 	h.button("整备出战干员",Rect2(592,544,240,42),func(): h.go("spirits")).add_theme_font_size_override("font_size",16)

@@ -62,6 +62,8 @@ export function castWord(state: DuelState, typed: string, expected: string, kind
   if (state.encounter?.monster === 'crystal' && burst) power += 6
   const rank = state.heroRank - 1
   if (state.avatar === 'mage') energy += 4 + rank * 4
+  const cover = state.avatar === 'wildfire' && normalHits % 3 === 0
+  if (cover) shield += 4 + rank * 2
   if (state.avatar === 'knight') shield += 3 + rank * 2
   if (state.avatar === 'ranger' && combo >= 3) power += 3 + rank * 2
   if (state.avatar === 'scholar' && kind === 'sentence') power += 4 + rank * 4
@@ -79,7 +81,7 @@ export function castWord(state: DuelState, typed: string, expected: string, kind
   const warded = state.ultimateSeal && state.ultimateUses === 0 && power >= state.botHp
   const damage = Math.min(Math.max(0, state.botHp - (state.ultimateSeal && state.ultimateUses === 0 ? 1 : 0)), power), botHp = state.botHp - damage, playerHp = Math.min(MAX_HP, state.playerHp + heal)
   shield = Math.min(MAX_SHIELD, shield)
-  return { ...state, preparedSpell: null, botHp, playerHp, shield, energy: Math.min(MAX_ENERGY, energy), combo, normalHits, focusReady: false, nextBotAt: state.nextBotAt + (proc && state.companion === 'moon' && state.spiritRank >= 3 ? 800 : 0), hits: state.hits + 1, reactionReady: false, dealt: state.dealt + damage, outcome: botHp === 0 ? 'victory' : null, last: { actor: 'player', damage, burst, warded, spell: prepared ?? undefined, skill: card?.name, energySpent, id: (state.last?.id ?? 0) + 1, energyGain: Math.min(MAX_ENERGY, energy) - (state.energy - energySpent), passive: state.avatar === 'mage' || state.avatar === 'knight' || (state.avatar === 'ranger' && combo >= 3) || (state.avatar === 'scholar' && kind === 'sentence') || (state.avatar === 'bard' && normalHits % 3 === 0) || (state.avatar === 'alchemist' && state.reactionReady) ? CHARACTER_SKILLS[state.avatar].passive : undefined, heal: playerHp - state.playerHp, shield: shield - state.shield, spirit: proc ? spirit.name : undefined } }
+  return { ...state, preparedSpell: null, botHp, playerHp, shield, energy: Math.min(MAX_ENERGY, energy), combo, normalHits, focusReady: false, nextBotAt: state.nextBotAt + (proc && state.companion === 'moon' && state.spiritRank >= 3 ? 800 : 0), hits: state.hits + 1, reactionReady: false, dealt: state.dealt + damage, outcome: botHp === 0 ? 'victory' : null, last: { actor: 'player', damage, burst, warded, spell: prepared ?? undefined, skill: card?.name, energySpent, id: (state.last?.id ?? 0) + 1, energyGain: Math.min(MAX_ENERGY, energy) - (state.energy - energySpent), passive: cover || state.avatar === 'mage' || state.avatar === 'knight' || (state.avatar === 'ranger' && combo >= 3) || (state.avatar === 'scholar' && kind === 'sentence') || (state.avatar === 'bard' && normalHits % 3 === 0) || (state.avatar === 'alchemist' && state.reactionReady) ? CHARACTER_SKILLS[state.avatar].passive : undefined, heal: playerHp - state.playerHp, shield: shield - state.shield, spirit: proc ? spirit.name : undefined } }
 }
 // The engine owns the chant: callers cannot substitute a shorter expected sentence.
 export function castUltimate(state: DuelState, typed: string): DuelState {
@@ -117,9 +119,9 @@ export function castTactic(state: DuelState): DuelState {
   if (state.outcome || state.tacticUsed || state.normalHits < 3 || (state.avatar === 'mage' && state.energy >= MAX_ENERGY)) return state
   const skill = TACTICS[state.avatar]
   const playerHp = state.avatar === 'bard' ? Math.min(MAX_HP, state.playerHp + 26) : state.playerHp
-  const shield = state.avatar === 'knight' ? Math.min(MAX_SHIELD, state.shield + 22) : state.shield
+  const shield = Math.min(MAX_SHIELD, state.shield + (state.avatar === 'knight' ? 22 : state.avatar === 'wildfire' ? 14 : 0))
   const energy = state.avatar === 'mage' ? Math.min(MAX_ENERGY, state.energy + 40) : state.energy
-  return validatePreparedSpell({ ...state, playerHp, shield, energy, tacticUsed: true, focusReady: ['ranger','scholar'].includes(state.avatar), reactionReady: state.avatar === 'alchemist' || state.reactionReady, burnTicks: state.avatar === 'alchemist' ? Math.max(2, state.burnTicks) : state.burnTicks, nextBotAt: state.nextBotAt + (state.avatar === 'ranger' ? 4000 : state.avatar === 'knight' ? 1200 : 0), last: { id: (state.last?.id ?? 0) + 1, actor: 'player', damage: 0, burst: false, tactic: true, skill: skill.name, heal: playerHp - state.playerHp, shield: shield - state.shield, energyGain: energy - state.energy } })
+  return validatePreparedSpell({ ...state, playerHp, shield, energy, tacticUsed: true, focusReady: ['ranger','scholar'].includes(state.avatar), reactionReady: state.avatar === 'alchemist' || state.reactionReady, burnTicks: state.avatar === 'alchemist' ? Math.max(2, state.burnTicks) : state.burnTicks, nextBotAt: state.nextBotAt + (state.avatar === 'ranger' ? 4000 : state.avatar === 'knight' ? 1200 : state.avatar === 'wildfire' ? 2000 : 0), last: { id: (state.last?.id ?? 0) + 1, actor: 'player', damage: 0, burst: false, tactic: true, skill: skill.name, heal: playerHp - state.playerHp, shield: shield - state.shield, energyGain: energy - state.energy } })
 }
 
 // A telegraphed action is derived from the same state used to resolve it.

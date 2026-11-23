@@ -1,40 +1,213 @@
-<!doctype html>
-<html lang="zh-CN"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>刘晓艳行动</title>
-<link id="-gd-engine-icon" rel="icon" type="image/png" href="index.icon.png" />
-<link rel="apple-touch-icon" href="index.apple-touch-icon.png"/>
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover"><title>刘晓艳行动</title><style>
+:root{color-scheme:dark;font-family:Arial,"Microsoft YaHei",sans-serif;background:#090e0d;color:#f1f5ed;--top:max(env(safe-area-inset-top,0px),var(--toy-top,0px));--right:max(env(safe-area-inset-right,0px),var(--toy-right,0px));--bottom:max(env(safe-area-inset-bottom,0px),var(--toy-bottom,0px));--left:max(env(safe-area-inset-left,0px),var(--toy-left,0px))}*{box-sizing:border-box}[hidden]{display:none!important}html,body{touch-action:manipulation}body{margin:0;overflow:hidden}button{touch-action:manipulation}#viewport{position:relative;width:min(100vw,var(--toy-width,100vw));height:min(100dvh,var(--toy-height,100dvh))}#stage{position:absolute;inset:calc(var(--top) + 28px) var(--right) var(--bottom) var(--left)}#canvas{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);outline:none;width:100%;height:100%;touch-action:none;display:block}#syncbar{position:absolute;top:var(--top);left:var(--left);right:var(--right);height:28px;display:flex;align-items:center;justify-content:space-between;padding:0 10px;border-bottom:1px solid #2a3a30;background:#0b1511;gap:12px;font-size:11px;color:#a3b7a9}#sync-status{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}#syncbar button{background:none;color:#bdf8cb;border:0;padding:2px 9px;font-size:11px;min-height:26px;cursor:pointer}.actions{display:flex;flex-shrink:0}#loading{position:fixed;inset:0;background:radial-gradient(ellipse at 50% 45%,#213a2a,#090e0d 65%);display:grid;place-items:center;z-index:10}.card{width:min(580px,90vw);text-align:center;max-height:95dvh;overflow:auto;padding:12px}#logo{width:250px;height:48px;object-fit:cover;object-position:50% 49.5%;margin:12px 0}.eyebrow{font:12px monospace;letter-spacing:.25em;color:#84f0ad}h1{font-size:30px;letter-spacing:.12em;margin:16px 0}p{color:#adb9b0;font-size:14px;line-height:1.7;margin:10px 0}button.primary{font:inherit;background:#8effac;color:#0a2012;border:1px solid #abffbf;padding:12px 32px;cursor:pointer;font-weight:700}button:disabled{opacity:.5;cursor:wait}progress{width:100%;height:5px;accent-color:#8effac;margin:12px 0}#error{color:#ffad8c;white-space:pre-wrap;font-size:13px}.small{font-size:12px;color:#849b8a}#recovery button{padding:8px 14px;background:#18291e;color:#d2f7dc;border:1px solid #4b7057;cursor:pointer}#rotate{display:none;position:fixed;bottom:calc(var(--bottom) + 12px);left:12px;right:12px;z-index:5;text-align:center;color:#a3b7a9;font-size:13px;pointer-events:none}#rotate button{pointer-events:auto;font-size:14px;padding:9px 18px}#rotate p{font-size:12px}.landscape-start{display:none;background:transparent;color:#bdf8cb;border:1px solid #486a52;padding:9px 18px;margin:10px auto 0}#backup-dialog{width:min(620px,90vw);background:#0d1913;color:#d7e6db;border:1px solid #659876}#backup-text{width:100%;height:160px}#backup-dialog button{padding:10px;margin:6px}#sync-status[data-error=true]{color:#ffa782}
+@media(max-height:500px){#logo{width:190px;height:35px;margin:4px 0}h1{font-size:23px;margin:8px 0}.card p{margin:6px 0}.eyebrow{font-size:10px}progress{margin:6px 0}.card{max-height:99dvh}}
+@media(pointer:coarse) and (max-aspect-ratio:6/5){#rotate{display:block}.landscape-start{display:block}}@media(max-aspect-ratio:6/5){.toy-mobile #rotate{display:block}.toy-mobile .landscape-start{display:block}}
+.toy-mobile #syncbar{background:#0d1916;border-color:#31473e;color:#d2e1d9;font-size:12px}.toy-mobile #syncbar button{color:#d4ffdf;font-size:12px;font-weight:600}.toy-mobile #sync-status{display:flex;align-items:center;gap:6px}.toy-mobile #sync-status::before{content:"";width:6px;height:6px;border-radius:50%;background:#87ddac;flex-shrink:0}.toy-mobile #sync-status[data-error=true]::before{background:#ff9e80}
+#loading{background:linear-gradient(115deg,#14251d 0%,#0b1510 56%,#07110d 100%);padding:env(safe-area-inset-top,0px) env(safe-area-inset-right,0px) env(safe-area-inset-bottom,0px) env(safe-area-inset-left,0px)}
+.card{box-sizing:border-box;text-align:left;width:min(480px,90vw);padding:22px 24px;border-left:3px solid #8bfaa8;background:#101d17;box-shadow:0 14px 55px #02080477}
+.intro{display:flex;align-items:center;gap:8px;color:#a2e6b6;font-weight:700;font-size:13px}.insignia{font-size:22px;line-height:1;color:#76ff9d}
+.card h1{font-family:system-ui,sans-serif;font-size:clamp(32px,5vw,56px);line-height:1.1;letter-spacing:-.05em;margin:14px 0 4px}.card .books{margin:4px 0 18px;color:#c1cfc6}
+#progress{display:block;width:100%;height:4px;border:0;background:#314439;appearance:none}#progress::-webkit-progress-bar{background:#314439}#progress::-webkit-progress-value{background:#97ffad}
+#status{min-height:1.6em;margin:5px 0 14px;font-variant-numeric:tabular-nums}.card button.primary{min-width:156px;min-height:42px}
+.card button.primary:disabled{opacity:.72}.card .small{margin-bottom:0}.card #error:empty{display:none}.card .landscape-start{margin:8px 0}
+@media(max-height:420px){.card{padding:12px 20px}.card h1{font-size:32px;margin:6px 0 2px}.card .books{margin:2px 0 10px}#status{margin-bottom:6px}}
+</style><link rel="icon" href="index.icon.png"></head><body><div id="viewport"><div id="syncbar"><span id="sync-status">本机存档</span><div class="actions"><button id="backup">备份</button><button id="fullscreen">全屏</button></div></div><div id="stage"><canvas id="canvas" width="1920" height="1080" tabindex="0">请使用支持 WebGL 2 的现代浏览器。</canvas></div></div><div id="rotate"><p>已显示横版画面 · 横置手机可放大操作区域</p><button id="landscape" class="primary">横屏全屏</button><p class="small">若未切换，请旋转手机并关闭方向锁定。</p></div><div id="loading"><div class="card"><div class="intro"><span class="insignia" aria-hidden="true">◢</span><span>学习行动</span></div><h1>刘晓艳行动</h1><p class="books">中考 · 高考 · 四级 · 六级 · 考研</p><progress id="progress" value="0" max="1"></progress><p id="status" role="status">正在准备游戏资源</p><button id="start" class="primary">进入行动</button><button id="loading-landscape" class="landscape-start">横屏全屏</button><p class="small">学习进度保存在当前浏览器，可在顶部备份。</p><p id="error" role="alert"></p></div></div><dialog id="backup-dialog"><strong>学习存档备份</strong><p>可下载文件；若 App 不支持下载，请复制下方全部文字保存。</p><textarea id="backup-text" readonly></textarea><button id="download-backup">下载 JSON</button><button id="close-backup">关闭</button></dialog><script>// Local diagnostics only: no uploads, user identifiers, words or save content.
+(()=>{
+ const trace={timeOrigin:performance.timeOrigin,events:[],longTasks:[]};
+ window.WordPerf=trace;
+ window.WordMark=name=>{const at=performance.now();trace.events.push({name,at});performance.mark('toy:'+name);};
+ addEventListener('toy-game-milestone',e=>trace.events.push(e.detail));
+ try{new PerformanceObserver(list=>{for(const x of list.getEntries())trace.longTasks.push({at:x.startTime,duration:x.duration});}).observe({type:'longtask',buffered:true});}catch{}
+ WordMark('navigation-shell');
+})();
+</script><script>window.WordAssetManifest={"index.wasm": {"file": "wasm.afc6a3d4c975b539.data", "bytes": 9237412, "rawBytes": 38034280, "mime": "application/wasm"}, "index.data": {"file": "data.dc2855af277701a7.data", "bytes": 39410293, "rawBytes": 40987748, "mime": "application/octet-stream"}};</script><script>/* Compressed Godot downloads; cache only immutable game assets, never saves. */
+(()=>{
+ const manifest=window.WordAssetManifest,cacheName='lxya-engine-assets-v1';
+ const progress=new Map();
+ const totalBytes=Object.values(manifest).reduce((n,v)=>n+v.bytes,0);
+ let reportedPercent=-1,reportedCached=false;
+ function report(name,loaded,total,cached=false){
+  progress.set(name,{loaded,total,cached});
+  const values=[...progress.values()];
+  const combined=values.reduce((n,v)=>n+v.loaded,0),percent=Math.floor(combined*100/totalBytes);
+  const allCached=values.length===Object.keys(manifest).length&&values.every(v=>v.cached);
+  if(percent===reportedPercent&&allCached===reportedCached)return;
+  reportedPercent=percent;reportedCached=allCached;
+  window.dispatchEvent(new CustomEvent('toy-assets-progress',{detail:{loaded:combined,total:totalBytes,cached:allCached}}));
+ }
+ window.WordClearAssetCache=async()=>{try{await caches.delete(cacheName);}catch{}};
+ window.WordAssetFetch=async file=>{
+  const name=String(file).split('/').pop(),asset=manifest[name];
+  if(!asset)return fetch(file);
+  if(typeof DecompressionStream==='undefined')throw Error('请更新 B站 App 或浏览器：当前内核不支持游戏资源解压。');
+  const url=new URL(asset.file,location.href).href;
+  let cache,response,cached=false,compressed=null;
+  try{cache=await caches.open(cacheName);response=await cache.match(url);cached=!!response;}catch{/* Private mode / quota: network still works. */}
+  if(!response){
+   response=await fetch(url);
+   if(!response.ok)throw Error('资源下载失败（'+response.status+'），请重试。');
+   if(cache){try{compressed=new Uint8Array(asset.bytes);}catch{/* The game can stream on low-memory devices without a cache write. */}}
+  }
+  let loaded=0;
+  report(name,0,asset.bytes,cached);
+  const tracked=response.body.pipeThrough(new TransformStream({
+   transform(chunk,controller){
+    if(loaded+chunk.byteLength>asset.bytes)throw Error('游戏资源大小不符，请重新下载。');
+    if(compressed)compressed.set(chunk,loaded);
+    loaded+=chunk.byteLength;report(name,loaded,asset.bytes,cached);controller.enqueue(chunk);
+   },
+   flush(){if(loaded!==asset.bytes)throw Error('游戏资源不完整，请重新下载。');}
+  }));
+  const decoded=tracked.pipeThrough(new DecompressionStream('gzip')).getReader();
+  const body=new ReadableStream({
+   async pull(controller){
+    try{
+     const piece=await decoded.read();
+     if(piece.done){
+      if(compressed){
+       try{await cache.put(url,new Response(compressed,{headers:{'Content-Type':'application/octet-stream'}}));}catch{/* Full or read-only storage still permits play. */}
+       compressed=null;
+      }
+      controller.close();
+     }else controller.enqueue(piece.value);
+    }catch(error){
+     compressed=null;
+     if(cached)await cache.delete(url).catch(()=>{});
+     controller.error(error);
+    }
+   },
+   cancel:reason=>decoded.cancel(reason)
+  });
+  return new Response(body,{headers:{'Content-Type':asset.mime,'Content-Length':String(asset.rawBytes)}});
+ };
+})();
+</script><script>// prepare.py inserts relative, content-addressed JPG names from this exact build.
+(() => {
+  const files = {"01":"operator-art/operator-01.b34545ee9278c33c.jpg","02":"operator-art/operator-02.735d632f94d24648.jpg","03":"operator-art/operator-03.05acdafef63a6f6d.jpg","04":"operator-art/operator-04.e590f08634cac1a5.jpg","05":"operator-art/operator-05.07e9f6187ffdc7b7.jpg","06":"operator-art/operator-06.15182fa7a335ed93.jpg","07":"operator-art/operator-07.5cdddff47902a3e1.jpg"};
+  let active;
 
-<style>
-:root{color-scheme:dark;font-family:system-ui,"Microsoft YaHei",sans-serif;background:#0d1512;color:#edf7ef}*{box-sizing:border-box}body{margin:0;overflow:hidden}main{position:fixed;inset:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);display:flex;flex-direction:column}header{display:flex;align-items:center;gap:12px;padding:3px 12px;color:#bdd6c5;font-size:13px}header span{flex:1}button{cursor:pointer;font:inherit;color:inherit;border:1px solid #4c6455;background:#17251e;padding:.35em .8em}section{position:relative;flex:1}canvas{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);outline:0;touch-action:none}aside{position:fixed;inset:0;background:radial-gradient(ellipse at center,#213d2c,#090e0d 72%);display:grid;place-content:center;text-align:center;padding:16px}aside img{width:min(280px,62vw);height:60px;object-fit:cover;object-position:50% 49.5%;margin:auto}progress{width:min(360px,75vw);accent-color:#82ffaa}aside button{color:#102218;background:#93f9ad;padding:.65em 2em;font-weight:700}aside button:disabled{opacity:.45}#status{min-height:1.5em}#rotate{display:none}@media(orientation:portrait) and (pointer:coarse){#rotate{display:inline}}[hidden]{display:none!important}
-</style></head><body>
-<main><header><span>本机存档 <b id="rotate">· 请横置手机</b></span><button id="backup">导出进度</button><button id="full">全屏</button></header>
-<section id="stage"><canvas id="canvas" width="1280" height="720" tabindex="0" aria-label="游戏画面"></canvas></section></main>
-<aside id="loading"><img src="wordmark.png" alt="刘晓艳行动"><p>四级 · 六级 · 考研</p><progress id="progress" max="1"></progress><p id="status" role="status">正在整备游戏资源</p><button disabled id="start">开始行动</button></aside>
-<script src="learning.js"></script><script src="index.js"></script><script>
-const cfg={"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":true,"fileSizes":{"index.pck":48579196,"index.wasm":38034280},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4};
-const $=selector=>document.querySelector(selector);
-cfg.canvasResizePolicy=0;
-cfg.onProgress=(n,total)=>{if(total)$('#progress').value=n/total};
-const engine=new Engine(cfg),canvas=$('#canvas'),start=$('#start');
-function resize(){
-  const {width,height}=$('#stage').getBoundingClientRect();
-  window.WordToyMobile=WordGame.isMobileLayout(width,height,matchMedia('(pointer:coarse)').matches);
-  const m=WordGame.stageMetrics(width,height,devicePixelRatio,window.WordToyMobile);
-  canvas.style.width=m.width+'px';canvas.style.height=m.height+'px';
-  if(canvas.width!==m.pixelWidth)canvas.width=m.pixelWidth;
-  if(canvas.height!==m.pixelHeight)canvas.height=m.pixelHeight;
+  function cancel() {
+    if (!active) return;
+    active.controller.abort();
+    active = undefined;
+  }
+
+  async function request(key, done) {
+    cancel();
+    const file = files[key];
+    if (!file) { done(key, null); return; }
+    const job = {controller: new AbortController()};
+    active = job;
+    const timer = setTimeout(() => job.controller.abort(), 12000);
+    let data = null;
+    try {
+      const response = await fetch(new URL(file, document.baseURI), {
+        signal: job.controller.signal, cache: 'force-cache'
+      });
+      if (response.ok) {
+        const bytes = new Uint8Array(await response.arrayBuffer());
+        if (bytes[0] === 0xff && bytes[1] === 0xd8) data = bytes;
+      }
+    } catch { /* The game keeps the bundled portrait available. */ }
+    finally { clearTimeout(timer); }
+    if (active === job) {
+      active = undefined;
+      done(key, data);
+    }
+  }
+
+  window.WordOperatorArt = {request, cancel};
+})();
+</script><script>
+const config={"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":true,"fileSizes":{"index.pck":40987748,"index.wasm":38034280},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4};config.onProgress=()=>{};config.canvasResizePolicy=0;
+const canvas=document.querySelector('#canvas'),start=document.querySelector('#start'),statusEl=document.querySelector('#status'),bar=document.querySelector('#progress');
+const mobileDeviceHint=matchMedia('(pointer:coarse)').matches||/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1)||new URLSearchParams(location.search).get('mobile')==='1';
+function resizeStage(){
+ if(typeof WordGame==="undefined")return;
+ const r=document.querySelector('#stage').getBoundingClientRect();
+ window.WordToyMobile=WordGame.isMobileLayout(r.width,r.height,mobileDeviceHint,window.WordToyContainer?.deviceType);
+ document.documentElement.classList.toggle('toy-mobile',window.WordToyMobile);
+ const m=WordGame.stageMetrics(r.width,r.height,window.devicePixelRatio||1,window.WordToyMobile,navigator.deviceMemory);
+ canvas.style.width=m.width+'px';canvas.style.height=m.height+'px';
+ if(canvas.width!==m.pixelWidth)canvas.width=m.pixelWidth;
+ if(canvas.height!==m.pixelHeight)canvas.height=m.pixelHeight;
 }
-function fail(err){$('#status').textContent=err.message||String(err);start.disabled=false;start.textContent='重新加载';start.onclick=()=>location.reload()}
-new ResizeObserver(resize).observe($('#stage'));resize();
-$('#backup').onclick=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([WordGame.backup()],{type:'application/json'}));a.download='刘晓艳行动_学习存档.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)};
-$('#full').onclick=async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else{await document.documentElement.requestFullscreen();if(window.WordToyMobile)await screen.orientation?.lock?.('landscape')}}catch{}};
-(async()=>{
-  const missing=Engine.getMissingFeatures({threads:false});
-  if(missing.length)throw Error('浏览器缺少 '+missing.join('、'));
-  await Promise.all([WordGame.ready,engine.init(cfg.executable),engine.preloadFile(cfg.executable+'.pck',cfg.executable+'.pck')]);
-  $('#progress').value=1;$('#status').textContent='整备完成';start.disabled=false;
-  start.onclick=async()=>{try{start.disabled=true;await engine.start({canvas,args:['--main-pack',cfg.executable+'.pck']});$('#loading').hidden=true;canvas.focus()}catch(err){fail(err)}};
-})().catch(fail);
-</script></body></html>
+new ResizeObserver(resizeStage).observe(document.querySelector('#stage'));window.addEventListener('resize',resizeStage);resizeStage();
 
+async function landscape(){
+ try{if(!document.fullscreenElement&&document.documentElement.requestFullscreen)await document.documentElement.requestFullscreen();await screen.orientation?.lock?.('landscape');}catch{/* Landscape canvas stays usable when the host refuses orientation/fullscreen. */}
+ resizeStage();
+}
+document.querySelector('#fullscreen').onclick=landscape;
+document.querySelector('#loading-landscape').onclick=landscape;
+function backup(){document.querySelector('#backup-text').value=WordGame.backup();document.querySelector('#backup-dialog').showModal();}
+document.querySelector('#backup').onclick=backup;document.querySelector('#close-backup').onclick=()=>document.querySelector('#backup-dialog').close();
+document.querySelector('#download-backup').onclick=()=>{const a=document.createElement('a');a.download='刘晓艳行动_学习存档_'+new Date().toISOString().slice(0,10)+'.json';a.href=URL.createObjectURL(new Blob([document.querySelector('#backup-text').value],{type:'application/json'}));a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);};
+document.querySelector('#landscape').onclick=landscape;
+const learningFile='learning.js?v=b27ae03ee8307abc',engineFile='index.js?v=085e27ee7fdc036a';
+// Inlined into the published landing page so the first tap can arrive before either runtime.
+let engine, attemptActive=false, engineStarted=false, launchError=false, resourceError=false, saveConnected=false;
+const overlay=document.querySelector('#loading'),errorLine=document.querySelector('#error');
+function scriptReady(file){
+ return new Promise((resolve,reject)=>{
+  const tag=document.createElement('script');tag.src=file;
+  tag.onload=resolve;tag.onerror=()=>reject(Error('脚本加载失败，请检查网络后重试。'));
+  document.head.appendChild(tag);
+ });
+}
+function failLaunch(error,kind){
+ launchError=true;attemptActive=false;resourceError=kind==='resources';
+ errorLine.textContent=String(error?.message??error);
+
+ statusEl.textContent=resourceError?'游戏资源尚未就绪':'存档连接尚未完成';
+ start.disabled=false;start.textContent=resourceError?'重新加载':'重试连接';
+}
+const studyReady=scriptReady(learningFile).then(()=>{resizeStage();});
+let resourcesReady=false;
+const engineReady=scriptReady(engineFile).then(async()=>{
+ const missing=Engine.getMissingFeatures({threads:false});
+ if(missing.length)throw Error('浏览器缺少 '+missing.join('、')+'，请更新浏览器。');
+ config.fileSizes[config.executable+'.data']=config.fileSizes[config.executable+'.pck'];
+ engine=new Engine(config);
+ await Promise.all([engine.init(config.executable),engine.preloadFile(config.executable+'.data',config.executable+'.pck')]);
+ resourcesReady=true;bar.value=1;WordMark('resource-ready');
+ if(!launchError)statusEl.textContent=attemptActive?(saveConnected?'正在进入行动':'正在连接学习存档'):'整备完成，可以进入行动';
+});
+engineReady.catch(error=>failLaunch(error,'resources'));
+studyReady.catch(error=>failLaunch(error,'resources'));
+window.addEventListener('toy-assets-progress',e=>{
+ if(launchError||resourcesReady)return;
+ const {loaded,total,cached}=e.detail;
+ bar.value=Math.min(1,loaded/total);
+ statusEl.textContent=loaded>=total?'正在准备游戏画面':(cached?'读取本机资源 ':'下载游戏资源 ')+Math.floor(loaded/total*100)+'%';
+});
+let frameTimer;
+window.addEventListener('toy-game-milestone',e=>{
+ if(!engineStarted||!['frame:boot','frame:state','frame:interactive'].includes(e.detail.name))return;
+ clearTimeout(frameTimer);
+ if(overlay.isConnected){overlay.remove();canvas.focus();}
+});
+async function enter(){
+ if(attemptActive)return;
+ if(resourceError){location.reload();return;}
+ attemptActive=true;launchError=false;errorLine.textContent='';
+ start.disabled=true;start.textContent='正在进入';WordMark('start-click');
+ let connecting;
+ try{
+  await studyReady;
+  connecting=WordGame.connect();
+  await Promise.all([engineReady,connecting.then(()=>{saveConnected=true;WordMark('save-ready');})]);
+ }catch(error){
+  if(!resourceError)failLaunch(error,'save');
+  return;
+ }
+ statusEl.textContent='正在进入行动';engineStarted=true;
+ try{
+  frameTimer=setTimeout(()=>{if(overlay.isConnected)failLaunch(Error('游戏画面启动超时，可重新载入已缓存的资源。'),'resources');},60000);
+  await engine.start({canvas,args:['--main-pack',config.executable+'.pck'],onExit:()=>location.reload()});
+ }catch(error){clearTimeout(frameTimer);failLaunch(error,'resources');}
+}
+start.onclick=()=>enter();
+
+
+</script></body></html>

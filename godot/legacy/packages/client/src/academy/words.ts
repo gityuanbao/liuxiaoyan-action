@@ -1,4 +1,6 @@
 export interface StudyWord { id: string; word: string; meaning: string; example: string; translation: string; pack: string }
+// Removed curriculum entries are valid in historical records, never question candidates.
+export const ARCHIVED_WORD_IDS = new Set<string>()
 export const PACKS = [
   { id: 'beginner', name: '启程 · 基础单词', subtitle: '从短词开始施法', icon: 'star', color: '#a2ded1', description: '短单词与简单句，先熟悉拼写攻击，再逐步挑战雅思主题。' },
   { id: 'environment', name: '自然与环境', subtitle: '探索风之森林', icon: 'leaf', color: '#3da896', description: '生态、资源与可持续发展，雅思阅读常见主题。' },

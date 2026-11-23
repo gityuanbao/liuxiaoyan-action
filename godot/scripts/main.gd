@@ -283,10 +283,15 @@ func rebuild() -> void:
 				var chosen = profile().get("companion", "moon") == sp.id
 				button("已出战" if chosen else "选择队员" if sp.unlocked else "完成 %d 场战斗解锁" % sp.threshold, Rect2(48 + i * 304, 352, 272, 42), func(): bridge.request("companion", {"id": sp.id}), chosen, not sp.unlocked).tooltip_text = sp.skill.description
 				button("进阶  ·  R%d" % int(sp.bond.rank), Rect2(48 + i * 304, 402, 272, 34), func(): bridge.request("upgrade", {"kind": "spirit", "id": sp.id}), false, not sp.unlocked or sp.bond.rank >= 3).add_theme_font_size_override("font_size", T.FONT_SMALL)
-			var names = ["突击", "防御", "侦察", "情报", "支援", "爆破"]
-			var ids = ["mage", "knight", "ranger", "scholar", "bard", "alchemist"]
-			for i in ids.size():
-				button(names[i], Rect2(48 + i * 197, 508, 181, 44), func(): bridge.request("avatar", {"id": ids[i]}), profile().get("avatar", "mage") == ids[i])
+			var roster:Array=data.get("recruitment",{}).get("operators",[])
+			var slot_width=1184.0/maxi(1,roster.size())
+			for i in roster.size():
+				var op:Dictionary=roster[i]
+				var active=profile().get("avatar","mage")==op.id
+				var label=str(op.name) if op.unlocked else "%s · 卡池" % op.name
+				button(label,Rect2(48+i*slot_width,508,slot_width-8,44),func():
+					if op.unlocked:bridge.request("avatar",{"id":op.id})
+					else:go("recruit"),active,active)
 		"arsenal":
 			for i in 3:
 				var rune: Dictionary = data.runes[i]

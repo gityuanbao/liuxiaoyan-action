@@ -2,11 +2,11 @@ import './loader.mjs';
 import { readFileSync, writeFileSync, renameSync, existsSync, mkdirSync } from 'node:fs';
 import { dirname } from 'node:path';
 import { randomUUID } from 'node:crypto';
-import {BOOKS,requireBook,bookPool,bookCatalog} from './wordbooks.mjs';
+import {BOOKS,requireBook,bookPool,bookCatalog,allBookWords} from './wordbooks.mjs';
 import {StudyPlanner} from './study.mjs';
 import {StudyMission} from './study-mission.mjs';
 import {migrateProgression,progressionSummary,claimLevels,setSupplyEnabled,applyLevelPerks,recordWallet,learningLevel} from './progression.mjs';
-import {migrateRecruitment,recruitmentSummary,awardRecall,awardRecognition,isUnlocked,recruit,buySupply,deploySupplies} from './recruitment.mjs';
+import {migrateRecruitment,recruitmentSummary,awardRecall,awardRecognition,isUnlocked,recruit,drawRecruit,buySupply,deploySupplies} from './recruitment.mjs';
 import {createChoice,publicChoice,isChoice} from './choice-questions.mjs';
 import {DIRECTOR_RULES,directorPool,createDirector,directorCast,advanceDirector,directorIntent,directorSnapshot} from './director-boss.mjs';
 const root = '../legacy/packages/client/src/academy/';
@@ -14,9 +14,12 @@ const [duel, learning, expedition, data, words, growth, combat, notebook, audio,
   'duel-engine', 'learning-core', 'expedition-core', 'expedition-data', 'words', 'growth-core',
   'combat-skills', 'notebook-data', 'audio-library-data', 'character-data'
 ].map(name => import(root + name + '.ts')));
+const FAVORITES_PAGE_SIZE=6;
+const favoriteBookWords=new Map(BOOKS.flatMap(book=>allBookWords(book.id).map(word=>[word.id,word])));
 export class Session {
-  constructor(savePath) {
+  constructor(savePath,{drawOnly=false}={}) {
     this.savePath = savePath;
+    this.drawOnly = drawOnly;
     this.bookSettings={selected:'cet4',recall:false};
     if(savePath&&existsSync(savePath+'.books.json')){
       const stored=JSON.parse(readFileSync(savePath+'.books.json','utf8'));
@@ -31,7 +34,7 @@ export class Session {
     this.deployedSupplies=[];
     this.state = null; this.stage = null; this.pool = []; this.index = 0;
     this.attempts = []; this.result = null; this.peak = 0; this.lesson=null;
-    this.lastAnswer=null;this.memoryWord='';this.memoryPage=0;this.mission=null;
+    this.lastAnswer=null;this.memoryWord='';this.memoryPage=0;this.favoritesPage=0;this.mission=null;
     this.choiceQuestion=null;
     this.hinted = false; this.wrong = false; this.chanting = false;
     this.heard = false; this.playing = false; this.paused = false; this.cooldown = 0;
@@ -47,13 +50,17 @@ export class Session {
   }
   get word() { return this.mission?.item(this.index).word??this.pool[this.index % this.pool.length]; }
   get recalling() { return this.mission?this.mission.item(this.index).mode!=='learn':!!this.stage?.recall; }
-  get stopped() { return this.paused || (this.stage?.lesson === 'listening' && (!this.heard || this.playing)); }
+  get stopped() { return this.paused || (!this.choiceMode && this.stage?.lesson === 'listening' && (!this.heard || this.playing)); }
   get expected() { return this.chanting ? combat.CHARACTER_SKILLS[this.state.avatar].chant : this.stage?.lesson === 'sentence' ? this.word?.example : this.word?.word; }
-  get choiceMode(){return this.stage?.bookMode&&isChoice(this.stage.answerMode);}
+  get phoneMode(){
+    const {mobileAnswerMode,answerMode}=this.study.data.settings;
+    return isChoice(mobileAnswerMode)?mobileAnswerMode:answerMode==='choose_word'?'choose_word':'choose_meaning';
+  }
+  get choiceMode(){return (this.stage?.bookMode||this.stage?.touchChoices)&&isChoice(this.stage.answerMode);}
   choice(){
     if(!this.choiceMode||this.chanting||!this.word)return null;
     const token=this.id+':'+this.index;
-    if(this.choiceQuestion?.token!==token)this.choiceQuestion=createChoice(this.word,this.stage.pack,this.stage.answerMode,token);
+    if(this.choiceQuestion?.token!==token)this.choiceQuestion=createChoice(this.word,this.stage.bookMode?this.stage.pack:this.bookSettings.selected,this.stage.answerMode,token);
     return this.choiceQuestion;
   }
   start(id) {
@@ -67,7 +74,8 @@ export class Session {
     if (!pool.length) throw Error('这个主题暂没有可练习的内容。');
     const avatar = this.profile.avatar ?? 'mage';
     const companion = words.SPIRITS.find(s => s.id === this.profile.companion && learning.profileStats(this.profile).battles >= s.threshold)?.id ?? 'moon';
-    this.stage = stage; this.pool = pool; this.index = 0; this.attempts = []; this.result = null; this.peak = 0; this.lesson=null;this.lastAnswer=null;this.mission=null;
+    this.stage = this.phoneLayout?{...stage,lesson:'vocabulary',touchChoices:true,answerMode:this.phoneMode}:stage;
+    this.pool = pool; this.index = 0; this.attempts = []; this.result = null; this.peak = 0; this.lesson=null;this.lastAnswer=null;this.mission=null;
     this.hinted = false; this.wrong = false; this.chanting = false; this.heard = false; this.playing = false; this.paused = false; this.cooldown = 0;
     this.id = `expedition:${id}:${randomUUID()}`;
     this.choiceQuestion=null;
@@ -102,10 +110,11 @@ export class Session {
       renameSync(this.savePath+'.books.json.tmp',this.savePath+'.books.json');
     }
   }
-  startBook(id,recall=false){
-    const book=requireBook(id);this.selectBook(id,recall);
+  startBook(id,recall=false,keepPlan=false){
+    const book=requireBook(id);
+    if(!keepPlan)this.selectBook(id,recall);
     this.start('bridge-1');
-    this.stage={...this.stage,id:'book:'+id,name:book.name,region:'词书训练',pack:id,bookMode:true,recall:!!recall,reward:0,answerMode:this.study.data.settings.answerMode??'spelling'};
+    this.stage={...this.stage,id:'book:'+id,name:book.name,region:'词书训练',pack:id,bookMode:true,recall:!!recall,reward:0,answerMode:this.phoneLayout?this.phoneMode:this.study.data.settings.answerMode??'spelling'};
     this.pool=bookPool(id,this.profile,60);
     this.id='wordbook:'+id+':'+randomUUID();
   }
@@ -113,11 +122,23 @@ export class Session {
     const selected=planned??(retry?{pool:this.pool.filter(w=>this.mission?.summary(this.index).weakWords.some(x=>x.id===w.id)),settings:{source:'session',recall:true},sourceLabel:'本局薄弱词'}:this.study.selection(this.bookSettings.selected,this.profile)),pool=[...selected.pool];
     if(!pool.length)throw Error('当前范围没有可练单词，请切换学习内容或词性。');
     const recall=selected.settings.recall,id=retry?this.stage.pack:this.bookSettings.selected;
-    this.startBook(id,recall);this.pool=pool;
-    this.stage={...this.stage,studyMode:true,name:requireBook(id).name+' · '+selected.sourceLabel,region:'学习行动'};
+    this.startBook(id,recall,selected.settings.source==='saved');this.pool=pool;
+    this.stage={...this.stage,studyMode:true,name:selected.settings.source==='saved'?selected.sourceLabel:requireBook(id).name+' · '+selected.sourceLabel,region:'学习行动'};
     this.id='study:'+id+':'+randomUUID();
     this.mission=new StudyMission(pool,recall,this.stage.answerMode);
     this.lesson={total:this.mission.items.length,completed:0,wave:1,source:selected.settings.source,recall,words:pool.map(w=>w.id)};
+  }
+  favorites(){
+    const ids=this.profile.notebook?.saved??[];
+    if(this.favoriteCache?.profile!==this.profile){
+      const legacyIds=new Set(ids.filter(id=>!favoriteBookWords.has(id)));
+      const legacy=new Map(legacyIds.size?notebook.allStudyWords(this.profile).filter(word=>legacyIds.has(word.id)).map(word=>[word.id,word]):[]);
+      const rows=[...ids].reverse().map(id=>favoriteBookWords.get(id)??legacy.get(id)).filter(Boolean);
+      this.favoriteCache={profile:this.profile,rows};
+    }
+    const all=this.favoriteCache.rows,count=all.length,pages=Math.max(1,Math.ceil(count/FAVORITES_PAGE_SIZE));
+    const page=Math.min(this.favoritesPage,pages-1);
+    return {count,page,pages,rows:all.slice(page*FAVORITES_PAGE_SIZE,(page+1)*FAVORITES_PAGE_SIZE)};
   }
   startBoss({id=this.bookSettings.selected,recall=true}={}){
     const pool=directorPool(id,this.study,this.profile);
@@ -147,6 +168,15 @@ export class Session {
     this.result = record;
   }
   command(action, p = {}) {
+    // The Toy host can report a mobile container after a mission has already started.
+    if(this.phoneLayout&&this.stage&&!this.stage.touchChoices&&!this.state?.outcome){
+      this.stage={...this.stage,touchChoices:true,answerMode:this.phoneMode,lesson:'vocabulary'};
+      this.chanting=false;
+      if(!this.choiceQuestion?.answered)this.choiceQuestion=null;
+      if(this.mission&&!this.mission.choice){
+        this.mission.choice=true;this.mission.answerMode=this.phoneMode;
+      }
+    }
     let choiceAnswer=null;
     if(action==='choose'){
       const q=this.choice();
@@ -178,19 +208,28 @@ export class Session {
     if (action === 'review_start') {this.study.configure({source:'due',pos:'all',chapter:0,recall:true});this.startStudy();}
     if (action === 'memory_select') this.memoryWord=String(p.id??'');
     if (action === 'memory_page') this.memoryPage=Math.max(0,Math.floor(Number(p.page)||0));
+    if (action === 'favorites_page') this.favoritesPage=Math.max(0,Math.floor(Number(p.page)||0));
+    if (action === 'favorite_review') {
+      if(this.state&&!this.state.outcome)throw Error('请先完成当前行动，再开始收藏复习。');
+      const {rows}=this.favorites();
+      if(!rows.length)throw Error('还没有可复习的收藏单词。');
+      this.startStudy(false,{pool:rows,settings:{source:'saved',recall:true},sourceLabel:'收藏单词复习'});
+    }
     if (action === 'check_in') {
       if(this.state&&!this.state.outcome)throw Error('请先完成当前行动，再完成今日打卡。');
       this.study.checkIn();
     }
-    if (action === 'tick' && this.state && !this.state.outcome) {
+    if (action==='tick' && this.state?.outcome && this.choiceMode && this.choiceQuestion?.answered && !this.paused){
+      this.cooldown=Math.max(0,this.cooldown-Math.max(0,Math.min(Number(p.delta)||0,500)));
+    }else if (action === 'tick' && this.state && !this.state.outcome) {
       const dt = Math.max(0,Math.min(Number(p.delta)||0,500));
       const choiceRecap=this.choiceMode&&this.choice()?.answered&&!this.chanting;
       const recap=(this.stage?.studyMode||choiceRecap)&&this.cooldownKind==='word'&&this.cooldown>0;
-      const waitForNext = choiceRecap && !this.stage.bossMode;
       if (!this.stopped) this.state = this.stage.bossMode
         ? advanceDirector(this.state,dt)
         : duel.advanceDuel(this.state,recap?Math.max(0,dt-this.cooldown):dt);
-      if (this.cooldown > 0 && !waitForNext && (!(this.stage?.studyMode||this.stage?.bossMode)||!this.stopped)) {
+      const pauseFeedback=choiceRecap?this.paused:(this.stage?.studyMode||this.stage?.bossMode)&&this.stopped;
+      if (this.cooldown > 0 && !pauseFeedback) {
         this.cooldown = Math.max(0,this.cooldown-dt);
         if (this.cooldown <= 0 && !this.state.outcome) {
           if (this.cooldownKind === 'ultimate') this.chanting=false;
@@ -227,13 +266,9 @@ export class Session {
       }
       if (success) { this.peak=Math.max(this.peak,this.state.combo); this.cooldown=this.chanting?850:this.stage.bossMode?DIRECTOR_RULES.feedbackMs:this.stage.studyMode?1600:420; this.cooldownKind=this.chanting?'ultimate':'word'; }
       else if (!this.chanting) this.wrong=true;
-      if(choiceAnswer){this.cooldown=2200;this.cooldownKind='word';}
+      if(choiceAnswer){this.cooldown=success?350:700;this.cooldownKind='word';}
     }
     if (action === 'pause') this.paused = !!p.value;
-    if(action==='choice_next'&&this.choiceMode&&this.choice()?.answered&&!this.stopped&&!this.state?.outcome){
-      if(p.token&&p.token!==this.choice().token)throw Error('题目已更新。');
-      this.index++;this.cooldown=0;this.wrong=false;this.hinted=false;this.heard=false;
-    }
     if (action === 'heard') { this.heard=true; this.playing=false; }
     if (action === 'audio') this.playing=true;
     if (action === 'audio_stop') this.playing=false;
@@ -246,7 +281,14 @@ export class Session {
     }
     if (action === 'tactic' && active && !this.chanting) this.state=duel.castTactic(this.state);
     if (action === 'chant' && active && this.state.energy>=100) {
-      this.chanting=!this.chanting; this.state=duel.prepareSpell(this.state,null);
+      if(this.stage.touchChoices){
+        const before=this.state;
+        this.state=duel.castUltimate(before,combat.CHARACTER_SKILLS[before.avatar].chant);
+        if(this.stage.bossMode)this.state=directorCast(before,this.state,true);
+        this.peak=Math.max(this.peak,this.state.combo);
+      }else{
+        this.chanting=!this.chanting; this.state=duel.prepareSpell(this.state,null);
+      }
     }
     if (action === 'companion') {
       const spirit=words.SPIRITS.find(s=>s.id===p.id);
@@ -254,13 +296,23 @@ export class Session {
       this.save({...this.profile,companion:p.id});
     }
     if (action === 'avatar') {
-      if (!chars.AVATAR_IDS.includes(p.id)) throw Error('无效角色。');
-      if(!isUnlocked(this.profile,p.id))throw Error('这位干员尚未解锁，请先用哈弗币解锁。');
+      if (!chars.ALL_OPERATOR_IDS.includes(p.id)) throw Error('无效角色。');
+      if(!isUnlocked(this.profile,p.id))throw Error('这位干员尚未解锁。');
       this.save({...this.profile,avatar:p.id});
     }
     if(action==='claim_levels')this.save(claimLevels(this.profile),'学习升级奖励');
     if(action==='supply_enabled')this.save(setSupplyEnabled(this.profile,p.id,p.enabled));
-    if(action==='unlock_avatar')this.save(recruit(this.profile,p.id),'永久招募干员');
+    if(action==='recruit_draw'){
+      const next=drawRecruit(this.profile,p.expectedSerial,Math.random,this.drawOnly);
+      if(next!==this.profile){
+        const draw=next.growth.recruitment.gacha.lastDraw;
+        this.save(next,draw.isNew?'招募新干员':draw.version===2?'招募返币':'招募重复干员 · 已返还哈弗币');
+      }
+    }
+    if(action==='unlock_avatar'){
+      if(this.drawOnly)throw Error('请前往干员招募进行抽卡。');
+      this.save(recruit(this.profile,p.id),'永久招募干员');
+    }
     if(action==='buy_supply')this.save(buySupply(this.profile,p.id),'购买'+(p.id==='armor'?'防护补给':'战术电池'));
     if (action === 'upgrade') {
       if(p.kind==='hero'&&!isUnlocked(this.profile,p.id))throw Error('请先解锁这位干员。');
@@ -270,9 +322,14 @@ export class Session {
     if (action === 'rune') this.save(expedition.improveRune(this.profile,p.id),'装备进阶');
     if (action === 'equip_rune') this.save(expedition.equipRune(this.profile,p.id));
     if (action === 'claim') this.save(expedition.claimCommission(this.profile,p.id),'行动委托奖励');
-    if (action === 'bookmark' && this.word) {
-      const book=this.profile.notebook??notebook.emptyNotebook(), id=this.word.id;
-      this.save({...this.profile,notebook:{...book,saved:book.saved.includes(id)?book.saved.filter(w=>w!==id):[...book.saved,id]}});
+    if (action === 'bookmark') {
+      const book=this.profile.notebook??notebook.emptyNotebook(), id=p.id??this.word?.id;
+      const exists=book.saved.includes(id);
+      if(id&&(id===this.word?.id||(exists&&p.saved===false))){
+        const keep=p.saved??!exists;
+        if(keep&&!exists&&book.saved.length>=1000)throw Error('已收藏 1000 个单词，请先移除部分收藏。');
+        if(keep!==exists)this.save({...this.profile,notebook:{...book,saved:keep?[...book.saved,id]:book.saved.filter(wordId=>wordId!==id)}});
+      }
     }
     if(this.lesson&&!this.stage?.bossMode&&this.state?.outcome!=='defeat'){
       if(this.lesson.completed>=this.lesson.total)this.state={...this.state,outcome:'victory'};
@@ -287,16 +344,19 @@ export class Session {
   }
   snapshot() {
     const derived=this.profileSnapshot(), s=this.state;
-    return {...derived,profile:this.profile,state:s,stage:this.stage?{...this.stage,recall:this.recalling}:null,word:this.word??null,
+    // Commit the last word immediately, then keep its feedback on screen for the same short interval.
+    const finalFeedback=!!s?.outcome&&this.choiceMode&&this.choiceQuestion?.answered&&this.cooldownKind==='word'&&this.cooldown>0;
+    return {...derived,profile:this.profile,state:finalFeedback?{...s,outcome:null}:s,stage:this.stage?{...this.stage,recall:this.recalling}:null,word:this.word??null,
       learningRewards:this.learningRewards,bookSettings:this.bookSettings,deployedSupplies:this.deployedSupplies,
       study:this.study.summary(this.bookSettings.selected,this.profile),lesson:this.lesson,learningMission:this.mission?.summary(this.index)??null,
       memory:this.study.memorySummary(this.bookSettings.selected,this.profile,this.memoryWord,this.memoryPage),lastAnswer:this.lastAnswer,
+      ...(this.drawOnly?{favorites:this.favorites(),wordSaved:(this.profile.notebook?.saved??[]).includes(this.word?.id)}:{}),
       boss:this.stage?.bossMode?directorSnapshot(s,this.attempts):null,
       answerFeedback:!!((this.stage?.studyMode||this.stage?.bossMode)&&this.cooldownKind==='word'&&this.cooldown>0&&this.lastAnswer?.correct&&!this.chanting),
       choice:publicChoice(this.choice()),
       prompt:this.chanting||this.hinted||(this.stage?.lesson!=='listening'&&!this.recalling)?this.expected??'':this.stage?.lesson==='sentence'?this.word?.translation:this.stage?.lesson==='listening'?'听音后拼写':this.word?.meaning,
       index:this.index, chanting:this.chanting, hinted:this.hinted, heard:this.heard, playing:this.playing, paused:this.paused, stopped:this.stopped, cooldown:this.cooldown,
-      attempts:this.attempts, peak:this.peak, result:this.result, intent:s?(this.stage?.bossMode?directorIntent(s):duel.enemyIntent(s)):null,
+      attempts:this.attempts, peak:this.peak, result:finalFeedback?null:this.result, intent:s?(this.stage?.bossMode?directorIntent(s):duel.enemyIntent(s)):null,
       audio:this.word?(this.stage?.pack==='human'?audio.humanClip(this.word.word)?.file:`/audio/${this.stage?.lesson==='sentence'?'sentence':'word'}-${this.word.id}.wav`):null,
       collection:this.collectionSnapshot()};
   }
@@ -306,10 +366,11 @@ export class Session {
     const stats=learning.profileStats(this.profile);
     const level=learningLevel(this.profile.xp);
     Object.assign(stats,{level:level.level,levelProgress:level.progress,levelRequired:level.required});
-    const value={stats,progression:progressionSummary(this.profile),recruitment:recruitmentSummary(this.profile),books:bookCatalog(this.profile,this.study),
+    const recruitment=recruitmentSummary(this.profile,this.drawOnly);
+    const value={stats,progression:progressionSummary(this.profile),recruitment,books:bookCatalog(this.profile,this.study),
       stages:data.EXPEDITION.map(x=>({...x,unlocked:expedition.stageUnlocked(this.profile,x.id),stars:this.profile.expedition?.clears[x.id]?.stars??0})),
       spirits:words.SPIRITS.map(x=>({...x,unlocked:stats.battles>=x.threshold,bond:growth.spiritBond(this.profile,x.id),skill:combat.SPIRIT_SKILLS[x.id]})),
-      avatars:chars.AVATAR_IDS.map(id=>({id,...chars.CHARACTERS[id],...combat.CHARACTER_SKILLS[id],bond:growth.heroBond(this.profile,id)})),
+      avatars:chars.ALL_OPERATOR_IDS.filter(id=>this.drawOnly||id!=='wildfire'||isUnlocked(this.profile,id)).map(id=>({id,...chars.CHARACTERS[id],...combat.CHARACTER_SKILLS[id],bond:growth.heroBond(this.profile,id)})),
       runes:Object.entries(data.RUNES).map(([id,r])=>({id,...r,rank:this.profile.expedition?.runes[id]??0})),
       commissions:expedition.COMMISSIONS.map(c=>({id:c.id,name:c.name,detail:c.detail,reward:c.reward,progress:c.progress(this.profile),target:c.target,claimed:this.profile.expedition?.claims.includes(c.id)??false}))};
     this.profileCache={profile:this.profile,revision,epoch,value};return value;

@@ -1,7 +1,8 @@
 import {readFileSync} from 'node:fs';
-import {WORDS} from '../legacy/packages/client/src/academy/words.ts';
+import {WORDS,ARCHIVED_WORD_IDS} from '../legacy/packages/client/src/academy/words.ts';
 
 const read=name=>JSON.parse(readFileSync(new URL('../data/books/'+name,import.meta.url),'utf8'));
+for(const id of read('archived-words.json'))ARCHIVED_WORD_IDS.add(id);
 export const BOOKS=read('catalog.json');
 const pools=new Map(BOOKS.map(book=>[book.id,read(book.id+'.json')]));
 // The original engine intentionally reads its extensible StudyWord array at runtime.

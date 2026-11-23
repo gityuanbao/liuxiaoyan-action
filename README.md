@@ -2,13 +2,23 @@
 
 **把背单词变成一场行动。**
 
-刘晓艳行动是一款把英语单词学习融入闯关战斗的游戏，由 Git源宝团队制作。选择四级、六级或考研词书，通过拼写和四选一练习完成训练，在战斗中积累经验、获得哈弗币，并按学习计划持续复习。
+刘晓艳行动是一款把英语单词学习融入闯关战斗的游戏，由 Git源宝团队制作。选择中考、高考、四级、六级或考研词书，通过拼写和四选一练习完成训练，在战斗中积累经验、获得哈弗币，并按学习计划持续复习。
 
 这个公开仓库用于分享游戏项目、提供版本下载、记录后续更新，也欢迎大家反馈体验和问题。
 
 **[在线试玩](https://gityuanbao.github.io/liuxiaoyan-action/)** · **[视频教程](https://www.bilibili.com/video/BV1bNsb6fENp/)** · **[下载 v51 完整项目包](https://github.com/gityuanbao/liuxiaoyan-action/releases/download/v51/liuxiaoyan-action-v51-godot-github.zip)** · **[查看所有版本](https://github.com/gityuanbao/liuxiaoyan-action/releases)** · **[反馈问题](https://github.com/gityuanbao/liuxiaoyan-action/issues)**
 
-> 当前版本：**v51（Godot）**。可直接在线试玩，也可下载完整源码、素材、词库、语音和已导出的网页版，在本机运行或继续开发。当前未提供独立的 Windows `.exe` 安装包。
+> 当前版本为 **v56（Godot）**。在线试玩与 `main` 源码同步更新，网页版沿用当前浏览器的学习存档。历史发布包可在 Releases 查看。
+
+## v56 更新
+
+- 特战干员页在机库内展示全身 2D 角色。选中野火会自动播放入场动作，休息时循环待机，可单独演示两个技能。
+- 招募每次消耗 30 哈弗币，每抽返还 3、6 或 9 币，另有 5% 概率返还 300 币。每满 40 抽，从尚未获得的干员中随机解锁一名。
+- 答题时可以收藏单词，在「收藏单词」里跨词书单独复习。选择题在反馈后自动切换，手机横屏提供两种四选一模式，电脑也支持拼写。
+
+![v56 特战干员页的野火全身展示](docs/screenshots/v56-desktop-wildfire.png)
+
+[查看手机横屏展示](docs/screenshots/v56-mobile-wildfire.png)
 
 ## 视频教程
 
@@ -16,7 +26,7 @@
 
 ## 游戏实机截图
 
-下面是 **v51 桌面网页版的实际运行画面**。从选词书、答题到战斗结算，可以先顺着截图看一遍完整流程；点击图片可查看大图。
+下面保留 **v51 桌面网页版的流程截图**，涵盖选词书、答题和结算。
 
 ### 选择今天的行动
 
@@ -82,7 +92,7 @@
 
 ## 可以怎么玩
 
-- **按考试选词书**：大学英语四级、大学英语六级、考研英语。
+- **按考试选词书**：中考、高考、大学英语四级、大学英语六级和考研英语。
 - **拼写与四选一训练**：拼写练习用于主动回忆；选择题帮助辨认词义，答题后有反馈，错题会穿插重练。
 - **制定学习计划**：每轮可选 5 / 10 / 15 个词，每日目标可选 5 / 10 / 20 / 30 个词。
 - **战斗与成长**：把单词输入融入战斗，获得经验和哈弗币，体验远征关卡、职业技能和成长系统。
@@ -92,9 +102,11 @@
 
 | 词书 | 当前词条数 |
 | --- | ---: |
-| 大学英语四级 | 3,837 |
-| 大学英语六级 | 5,396 |
-| 考研英语 | 4,801 |
+| 中考英语 | 1,597 |
+| 高考英语 | 3,674 |
+| 大学英语四级 | 3,836 |
+| 大学英语六级 | 5,390 |
+| 考研英语 | 4,793 |
 
 以上为各词书的词条数，不同词书之间可能包含相同单词。
 
@@ -110,7 +122,7 @@
 
 适合希望保留一份完整项目、从本机运行网页版的玩家。**本机地址只有在下面的服务启动后才能打开。**
 
-1. 打开 [Releases 下载页](https://github.com/gityuanbao/liuxiaoyan-action/releases)，在 **Assets** 中下载 `liuxiaoyan-action-v51-godot-github.zip`。
+1. 下载并解压 [当前 main 源码 ZIP](https://github.com/gityuanbao/liuxiaoyan-action/archive/refs/heads/main.zip)。v51 的完整归档可在 [Releases](https://github.com/gityuanbao/liuxiaoyan-action/releases) 下载。
 2. 完整解压压缩包，打开能同时看到 `README.md` 和 `docs` 文件夹的项目根目录。
 3. 安装 Python 3，在这个文件夹中打开终端。Windows 可以在文件资源管理器的地址栏输入 `powershell` 并回车，然后运行：
 
@@ -193,7 +205,7 @@ npm run build
 
 **下载后为什么找不到安装程序？**
 
-当前 v51 分享的是完整工程和网页版。可以使用“方式一”直接在线试玩、“方式二”从本机运行网页版，或使用“方式三”在 Godot 中运行。后续发布的版本和下载附件统一在 [Releases](https://github.com/gityuanbao/liuxiaoyan-action/releases) 查看。
+当前 `main` 分支包含 v56 的工程和网页版。历史发布附件见 [Releases](https://github.com/gityuanbao/liuxiaoyan-action/releases)。
 
 **为什么 `localhost:8000` 或 `127.0.0.1:8000` 打不开？**
 

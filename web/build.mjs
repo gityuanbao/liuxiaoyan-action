@@ -1,5 +1,6 @@
 import * as esbuild from 'esbuild';
-import {readFileSync,mkdirSync} from 'node:fs';
+import {createHash} from 'node:crypto';
+import {readFileSync,writeFileSync,mkdirSync,existsSync} from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 const here=path.dirname(fileURLToPath(import.meta.url));
@@ -23,9 +24,22 @@ await esbuild.build({entryPoints:[path.join(here,'entry.mjs')],bundle:true,forma
   build.onLoad({filter:/[\\/]bridge[\\/]wordbooks\.mjs$/},args=>{
     let code=readFileSync(args.path,'utf8').replace("import {readFileSync} from 'node:fs';",'');
     const catalog=JSON.parse(readFileSync(path.join(game,'data/books/catalog.json'),'utf8'));
-    const imports=[`import catalog from '../data/books/catalog.json';`,...catalog.map((b,i)=>`import pool${i} from '../data/books/${b.id}.json';`)];
-    code=code.replace(/const read=name=>[^\n]+/,`const bundled={'catalog.json':catalog,${catalog.map((b,i)=>`'${b.id}.json':pool${i}`).join(',')}};\nconst read=name=>bundled[name];`);
+    const imports=[
+      "import catalog from '../data/books/catalog.json';",
+      "import archivedWords from '../data/books/archived-words.json';",
+      ...catalog.map((book,i)=>`import pool${i} from '../data/books/${book.id}.json';`),
+    ];
+    code=code.replace(/const read=name=>[^\n]+/,`const bundled={'catalog.json':catalog,'archived-words.json':archivedWords,${catalog.map((book,i)=>`'${book.id}.json':pool${i}`).join(',')}};\nconst read=name=>bundled[name];`);
     return {contents:imports.join('\n')+'\n'+code,loader:'js',resolveDir:path.dirname(args.path)};
   });
  }}]});
+const docs=path.resolve(here,'../docs');
+const htmlFile=path.join(docs,'index.html');
+if(existsSync(htmlFile)&&existsSync(path.join(docs,'index.js'))){
+  const html=readFileSync(htmlFile,'utf8');
+  const versioned=name=>`${name}?v=${createHash('sha256').update(readFileSync(path.join(docs,name))).digest('hex').slice(0,16)}`;
+  const updated=html.replace(/const learningFile='learning\.js(?:\?v=[a-f0-9]+)?',engineFile='index\.js(?:\?v=[a-f0-9]+)?';/,
+    () => `const learningFile='${versioned('learning.js')}',engineFile='${versioned('index.js')}';`);
+  if(updated!==html)writeFileSync(htmlFile,updated);
+}
 console.log('GitHub browser bundle built from latest Godot gameplay source.');

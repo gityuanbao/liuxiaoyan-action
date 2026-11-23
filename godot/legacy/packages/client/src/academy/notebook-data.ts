@@ -1,4 +1,4 @@
-import { WORDS, type StudyWord } from './words'
+import { ARCHIVED_WORD_IDS, WORDS, type StudyWord } from './words'
 export interface Notebook { saved: string[]; notes: Record<string, string>; custom: StudyWord[] }
 export const emptyNotebook = (): Notebook => ({ saved: [], notes: {}, custom: [] })
 const rows = `mitigate|缓解；减轻|Green spaces can mitigate the effects of urban heat.|绿地可以缓解城市高温的影响。
@@ -22,7 +22,7 @@ export function allStudyWords(profile: { notebook?: Notebook }): StudyWord[] { r
 export function validateNotebook(value: unknown): value is Notebook {
   const book = value as Notebook
   if (!book || !Array.isArray(book.saved) || book.saved.length > 1000 || new Set(book.saved).size !== book.saved.length || !Array.isArray(book.custom) || book.custom.length > 300 || !book.notes || typeof book.notes !== 'object' || Array.isArray(book.notes)) return false
-  const known = new Set([...WORDS, ...ACADEMIC_WORDS].map(w => w.id))
+  const known = new Set([...ARCHIVED_WORD_IDS, ...[...WORDS, ...ACADEMIC_WORDS].map(w => w.id)])
   for (const w of book.custom) {
     if (!w || typeof w.id !== 'string' || !/^custom:[a-z0-9-]{8,60}$/.test(w.id) || known.has(w.id) || w.pack !== 'custom' || typeof w.word !== 'string' || !/^[a-zA-Z]+(?:[-'][a-zA-Z]+)*$/.test(w.word) || w.word.length > 40 || typeof w.meaning !== 'string' || !w.meaning.trim() || w.meaning.length > 200 || typeof w.example !== 'string' || w.example.length > 800 || typeof w.translation !== 'string' || w.translation.length > 800) return false
     known.add(w.id)

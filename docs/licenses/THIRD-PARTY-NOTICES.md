@@ -3,7 +3,7 @@
 TypeDuel upstream: https://github.com/8tp/typeduel
 Upstream README declares MIT; preserved in docs/upstream/README.md. The checkout did not contain a separate LICENSE file. This fork includes the MIT text and preserves upstream attribution.
 
-Original game illustrations, map, examples, chants and public reading passages were created for this project. IELTS Atlas and its third-party question corpus are not included in this deployment.
+The Toy combines project-made game assets and learning examples with third-party materials. Delta Force operator promotional artwork and skill icons are sourced from the official operator roster (https://df.qq.com/cp/a20240906main/index.html). Classroom clips and accompanying images include material from Bilibili video BV1FtBkBUEYj. The software licenses below apply to their respective components. IELTS Atlas and its third-party question corpus are not included in this deployment.
 
 ## animejs
 

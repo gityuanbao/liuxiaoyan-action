@@ -1,5 +1,9 @@
 # 美术素材与参考
 
+## v56 野火
+
+立绘来自[三角洲行动官方干员页](https://df.qq.com/cp/a20240906main/index.html)。特战干员页使用项目内的全身动作帧，文件和播放节奏见 [野火动画清单](assets/characters/wildfire/animations.json)。第三方素材的相关权利归各权利方。
+
 ## v31 哈弗币图标
 
 使用[哈夫币资料页](https://orzice.com/v/info/p1393)链接的[腾讯游戏 CDN 原始 PNG](https://game.gtimg.cn/images/dfm/cp/a20240807community/profile/gold_icon.png)，21×21 RGBA，未经重绘；按用户本轮用字显示“哈弗币”。本地 `assets/ui/currency/haf_coin.png`，文件校验与使用位置见同目录 `SOURCE.md`。

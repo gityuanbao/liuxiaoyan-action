@@ -5,7 +5,7 @@ import {startSavedPlan} from './plan-start.mjs';
 import { Session } from './session.mjs';
 import {SnapshotTransport} from './snapshot-transport.mjs';
 const [port, token, savePath, parent] = process.argv.slice(2);
-const session = new Session(savePath);
+const session = new Session(savePath,{drawOnly:true});
 const transport=new SnapshotTransport();
 const server=createServer(async(req,res)=>{
   res.setHeader('Content-Type','application/json; charset=utf-8');
@@ -13,7 +13,14 @@ const server=createServer(async(req,res)=>{
   try {
     let body=''; for await(const part of req){body+=part;if(body.length>65536)throw Error('请求过长');}
     const {action='state',payload={},transport:format,snapshot_sequence=0}=JSON.parse(body||'{}');
-    const snapshot=action==='mobile_plan_start'?startSavedPlan(session,payload):session.command(action,payload);
+    let snapshot;
+    if(action==='mobile_plan_start') snapshot=startSavedPlan(session,payload);
+    else if(action==='mobile_boss_start'){
+      if(session.state&&!session.state.outcome)throw Error('请先完成当前行动。');
+      session.phoneLayout=true;
+      session.study.configure({mobileAnswerMode:payload.answerMode});
+      snapshot=session.command('boss_start',{id:payload.id});
+    }else snapshot=session.command(action,payload);
     res.end(format==='delta-v1'?transport.encode(snapshot,snapshot_sequence):JSON.stringify({ok:true,...snapshot}));
   } catch(e){res.end(JSON.stringify({ok:false,error:e.message}));}
 });

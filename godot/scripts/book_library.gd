@@ -1,11 +1,11 @@
 extends RefCounted
 const T=preload("res://scripts/design_tokens.gd")
 const CARD_ORIGIN=Vector2(32,154)
-const CARD_SIZE=Vector2(392,278)
-const CARD_STEP=412
-const TITLES={"cet4":"大学英语四级","cet6":"大学英语六级","ky":"考研英语"}
-const CODES={"cet4":"CET / 04","cet6":"CET / 06","ky":"POSTGRAD"}
-const NOTES={"cet4":"从基础词汇开始，建立日常积累。","cet6":"扩展词汇范围，巩固辨析与拼写。","ky":"面向考研词汇标签的系统学习。"}
+const CARD_SIZE=Vector2(232,278)
+const CARD_STEP=246
+const TITLES={"zk":"中考英语","gk":"高考英语","cet4":"大学英语四级","cet6":"大学英语六级","ky":"考研英语"}
+const CODES={"zk":"中考","gk":"高考","cet4":"CET / 04","cet6":"CET / 06","ky":"POSTGRAD"}
+const NOTES={"zk":"初中阶段常用词汇","gk":"高中阶段常用词汇","cet4":"从基础词汇开始，建立日常积累。","cet6":"扩展词汇范围，巩固辨析与拼写。","ky":"面向考研词汇标签的系统学习。"}
 
 static func open(h) -> void:
 	h.book_draft={"id":h.data.bookSettings.selected,"batch":h.data.study.settings.batch,"goal":h.data.study.settings.goal}
@@ -48,21 +48,21 @@ static func draw(h) -> void:
 		var x=r.position.x;var y=r.position.y
 		h.draw_rect(r,T.SURFACE)
 		h.draw_rect(Rect2(x,y,6,CARD_SIZE.y),T.GREEN if selected else T.EDGE)
-		h.text_at(CODES[book.id],x+24,y+35,15,T.GREEN if selected else T.MUTED,-1,true)
-		h.text_at("待保存" if selected and h.data.bookSettings.selected!=book.id else "当前词书" if h.data.bookSettings.selected==book.id else "词汇专项",x+302,y+35,12,T.GREEN if selected else T.DIM)
-		h.text_at(TITLES[book.id],x+24,y+79,27,T.TEXT)
-		h.text_at("%d" % int(book.count),x+24,y+123,32,T.GREEN if selected else T.TEXT,-1,true)
+		h.text_at(CODES[book.id],x+13,y+35,15,T.GREEN if selected else T.MUTED,-1,true)
+		h.text_at("待保存" if selected and h.data.bookSettings.selected!=book.id else "当前词书" if h.data.bookSettings.selected==book.id else "词汇专项",x+150,y+35,12,T.GREEN if selected else T.DIM)
+		h.text_at(TITLES[book.id],x+13,y+79,24,T.TEXT)
+		h.text_at("%d" % int(book.count),x+13,y+123,32,T.GREEN if selected else T.TEXT,-1,true)
 		h.text_at("个词条",x+128,y+120,13,T.MUTED)
-		h.text_at(NOTES[book.id],x+24,y+153,12,T.MUTED,344)
-		h.draw_line(Vector2(x+24,y+171),Vector2(x+368,y+171),T.EDGE)
-		h.text_at("已学 %d" % book.seen,x+24,y+195,13,T.TEXT)
-		h.text_at("未学 %d" % maxi(0,book.count-book.seen),x+138,y+195,13,T.MUTED)
-		h.text_at("到期 %d" % book.get("due",0),x+274,y+195,13,T.GREEN if book.get("due",0)>0 else T.MUTED)
-		h.bar(Rect2(x+24,y+208,344,4),book.seen,book.count,T.GREEN)
+		h.text_at(NOTES[book.id],x+13,y+153,12,T.MUTED,200)
+		h.draw_line(Vector2(x+13,y+171),Vector2(x+216,y+171),T.EDGE)
+		h.text_at("已学 %d" % book.seen,x+13,y+195,13,T.TEXT)
+		h.text_at("未学 %d" % maxi(0,book.count-book.seen),x+80,y+195,13,T.MUTED)
+		h.text_at("到期 %d" % book.get("due",0),x+147,y+195,13,T.GREEN if book.get("due",0)>0 else T.MUTED)
+		h.bar(Rect2(x+13,y+208,200,4),book.seen,book.count,T.GREEN)
 		var sample:PackedStringArray=[]
 		for j in mini(3,book.preview.size()):sample.append(book.preview[j].word)
-		h.text_at(" · ".join(sample),x+24,y+242,12,T.MUTED,344,true)
-		h.text_at("ECDICT / 开源词库筛选",x+24,y+262,10,T.DIM)
+		h.text_at(" · ".join(sample),x+13,y+242,12,T.MUTED,200,true)
+		h.text_at("ECDICT / 开源词库筛选",x+13,y+262,10,T.DIM)
 	h.panel(Rect2(32,450,1216,152),T.SURFACE)
 	h.text_at("每轮词数",48,482,18,T.TEXT)
 	h.text_at("每日总目标",452,482,18,T.TEXT)

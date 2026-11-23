@@ -7,6 +7,7 @@ export const TACTICS = {
   scholar: { name: '语境透镜', role: '完整句子', effect: '下一次句子命中额外造成16伤害；单词命中消耗此效果并额外造成4伤害。' },
   bard: { name: '回潮短歌', role: '持续治疗', effect: '恢复26生命，在长句与听写之间稳住节奏。' },
   alchemist: { name: '余烬配方', role: '纠错与灼烧', effect: '施加两次灼烧，每次在敌人行动前造成10伤害；下一次纠错攻击获得额外伤害。' },
+  wildfire: { name: '环形烟幕', role: '烟幕掩护', effect: '获得14护盾，将敌方下次行动延后2秒。' },
 } satisfies Record<AvatarId, { name: string; role: string; effect: string }>
 export const HERO_GROWTH: Record<AvatarId, string[]> = {
   mage: ['每次普通命中额外4能量', '每次普通命中额外8能量', '每次普通命中额外12能量'],
@@ -15,6 +16,7 @@ export const HERO_GROWTH: Record<AvatarId, string[]> = {
   scholar: ['句子命中额外4伤害', '句子命中额外8伤害', '句子命中额外12伤害'],
   bard: ['每三次命中恢复6生命', '每三次命中恢复10生命', '每三次命中恢复14生命'],
   alchemist: ['纠错后命中额外6伤害；灼烧10', '纠错后命中额外10伤害；灼烧13', '纠错后命中额外14伤害；灼烧16'],
+  wildfire: ['每三次普通命中获得4护盾','每三次普通命中获得6护盾','每三次普通命中获得8护盾'],
 }
 export const SPIRIT_FORMS: Record<SpiritId, { shape: string; awakened: string }> = { moon: { shape: '月狐', awakened: '三尾月辉狐' }, leaf: { shape: '林鹿', awakened: '铃花灵鹿' }, spark: { shape: '雷龙', awakened: '晶翼雷龙' }, sun: { shape: '曦鸟', awakened: '流金曦凤' } }
 export const spiritEvery = (id: SpiritId, rank: number) => SPIRIT_SKILLS[id].every - (rank >= 3 && id !== 'moon' ? 1 : 0)

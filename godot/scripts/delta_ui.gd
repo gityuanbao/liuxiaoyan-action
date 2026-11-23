@@ -1,5 +1,6 @@
 extends "res://scripts/main.gd"
 const MemoryCenter=preload("res://scripts/memory_center.gd")
+const FavoritesCenter=preload("res://scripts/favorites_center.gd")
 const ActionFlow=preload("res://scripts/action_flow.gd")
 const SkillPresentation=preload("res://scripts/skill_presentation.gd")
 const Communications=preload("res://scripts/communications.gd")
@@ -46,17 +47,20 @@ const OPS = [
 	{"id":"ranger", "name":"露娜", "en":"LUNA", "role":"侦察", "asset":3, "skill":"战场侦察", "ultimate":"追踪射击"},
 	{"id":"scholar", "name":"骇爪", "en":"HACKCLAW", "role":"侦察", "asset":6, "skill":"情报解析", "ultimate":"精准打击"},
 	{"id":"bard", "name":"蜂医", "en":"STINGER", "role":"支援", "asset":4, "skill":"战地医疗", "ultimate":"救援火力"},
-	{"id":"alchemist", "name":"威龙", "en":"VYRON", "role":"突击", "asset":5, "skill":"动能突破", "ultimate":"爆破突进"}
+	{"id":"alchemist", "name":"威龙", "en":"VYRON", "role":"突击", "asset":5, "skill":"动能突破", "ultimate":"爆破突进"},
+	{"id":"wildfire", "name":"野火", "en":"MARTELO", "role":"突击", "asset":7, "skill":"环形烟幕", "ultimate":"盾式破障器"}
 ]
 const FX_STEP = 0.065
 const HEADER_NAV_X = 238.0
 const NAV_WIDTH = 92.0
 var operator_select=preload("res://scripts/operator_select.gd").new()
+var recruit_center=preload("res://scripts/recruit_center.gd").new()
 var inspect_operator = -1
 var ui_time = 0.0
 var impact_frames: Array = []
 var qa_recording = false
-var mentor_voice: MentorVoicePack
+const PlanVoice=preload("res://scripts/plan_voice.gd")
+var mentor_voice: PlanVoice
 var character_gifs: CharacterAnimations
 var director_portrait=preload("res://scripts/director_portrait.gd").new()
 const RecruitmentUI=preload("res://scripts/recruitment_ui.gd")
@@ -68,6 +72,17 @@ var voice_library_group = "全部"
 var voice_library_selected = "local_30"
 var voice_return_page = "home"
 var voice_pictures: Dictionary = {}
+var voice_picture_id=""
+var voice_picture:Texture2D
+var artwork_id=""
+var artwork_texture:CanvasTexture
+var artwork_key=""
+var artwork_api:JavaScriptObject
+var artwork_callback:JavaScriptObject
+var artwork_pending=false
+var artwork_attempts=0
+var artwork_retry_at=0
+var web_interactive_reported=false
 var battle_audio: BattleAudio
 var low_health_clock = 0.0
 var result_meme: ResultMeme
@@ -79,6 +94,10 @@ var prompt_layout_cache:Dictionary={}
 var battle_controls_stamp:Array=[]
 
 func _ready() -> void:
+	if OS.has_feature("web"):
+		artwork_api=JavaScriptBridge.get_interface("WordOperatorArt")
+		if artwork_api:
+			artwork_callback=JavaScriptBridge.create_callback(_receive_operator_art)
 	mobile_ui.sync(self)
 	character_gifs=CharacterAnimations.new()
 	var skill_icons=["surge","ward","voice_speaker","voice_pause"]
@@ -100,19 +119,14 @@ func _ready() -> void:
 	textures["brand_wordmark"]=brand_wordmark
 	textures["battle_stage"]=load("res://assets/generated/zero-dam-battle-v15.png")
 	SceneCatalog.prepare(self)
-	skill_effects.prepare()
-	shot_vfx.prepare()
 	for op in OPS:
-		textures["hero_"+op.id] = load("res://assets/official/operator-%02d.jpg" % op.asset)
 		textures["portrait_"+op.id] = load("res://assets/official/portrait-%02d.jpg" % op.asset)
 	textures["rifle"] = load("res://assets/official/m7.png")
 	if ResourceLoader.exists("res://assets/generated/operators/sheet-transparent.png"):
 		load_atlas("res://assets/generated/operators/sheet-transparent.png", ["op_mage","op_knight","op_ranger","op_scholar","op_bard","op_alchemist"],3,2)
-	for i in 6:
-		impact_frames.append(load("res://assets/fx/impact/fx-%d.png" % (i+1)))
 	super._ready()
-	bridge.failed.connect(func(_message):mobile_ui.start_pending=false;rebuild.call_deferred())
-	mentor_voice=MentorVoicePack.new()
+	bridge.failed.connect(func(message):mobile_ui.start_pending=false;recruit_center.failed(message);rebuild.call_deferred())
+	mentor_voice=PlanVoice.new()
 	mentor_voice.caption_changed.connect(_on_voice_caption)
 	add_child(mentor_voice)
 	mentor_voice.page_cues["boss"]={"general":mentor_voice.clips.filter(func(c): return "start" in c.get("events",[]) and c.get("scope","general")=="general").map(func(c): return c.id),"ky":mentor_voice.clips.filter(func(c): return "start" in c.get("events",[]) and c.get("scope","general")=="ky").map(func(c): return c.id)}
@@ -126,7 +140,7 @@ func _ready() -> void:
 	result_meme.bind(self)
 	for clip in mentor_voice.clips:
 		if clip.has("image"):
-			voice_pictures[clip.id]=load("res://assets/voice/"+str(clip.image))
+			voice_pictures[clip.id]="res://assets/voice/"+str(clip.image)
 	rebuild()
 	if OS.get_cmdline_user_args().has("--smoke"): _run_smoke.call_deferred()
 	elif OS.get_cmdline_user_args().has("--voice-qa"): _run_voice_qa.call_deferred()
@@ -137,12 +151,14 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if mobile_ui.sync(self):rebuild()
+	if page=="battle":character_gifs.warm_next()
 	if battle_audio and mentor_voice: battle_audio.mentor_speaking=mentor_voice.is_speaking() or (result_meme and result_meme.is_speaking())
 	if music:music.sync(self)
 	if qa_recording:
 		queue_redraw()
 		return
 	operator_select.advance(self,delta)
+	recruit_center.advance(self,delta)
 	level_notice_time=maxf(0,level_notice_time-delta)
 	ui_time += delta
 	mode_age+=delta
@@ -151,7 +167,8 @@ func _process(delta: float) -> void:
 	skill_effects.advance(delta,page!="battle" or data.get("paused",false))
 	if page=="battle" and not data.get("paused",false) and skill_effects.active() and skill_effects.kind=="ultimate" and skill_effects.age>=0.34 and not skill_effects.fire_cued:
 		skill_effects.fire_cued=true
-		battle_audio.shot(skill_effects.actor)
+		if skill_effects.actor=="wildfire":battle_audio.play_effect("impact",-5)
+		else:battle_audio.shot(skill_effects.actor)
 	if page=="battle" and DirectorBoss.active(self) and not data.get("paused",false): director_clock+=delta
 	if page=="battle" and not data.get("paused",false):success_time=maxf(0,success_time-delta)
 	memory_refresh_clock+=delta
@@ -243,6 +260,7 @@ func finish_startup() -> void:
 	startup_locked=false
 	_sync_page_voice()
 	queue_redraw()
+	if OS.has_feature("web"):_web_frame_ready.call_deferred("interactive")
 
 func say(value: String) -> void:
 	if routing_page_voice: return
@@ -267,6 +285,8 @@ func say(value: String) -> void:
 		super.say(value)
 
 func go(target: String) -> void:
+	if target=="spirits" and page!="spirits":operator_select.open(self)
+	if target=="recruit" and page!="recruit":recruit_center.open()
 	sound_menu_open=false
 	if target!="books":book_setup_open=false
 	if is_instance_valid(opening_preview): opening_preview.stop()
@@ -321,6 +341,7 @@ func _sync_page_voice() -> void:
 	# Base actions may rebuild controls many times; only entering a new context speaks.
 	var book=str(data.get("bookSettings",{}).get("selected","cet4"))
 	mentor_voice.context="ky" if book=="ky" else "general"
+	mentor_voice.book_id=book
 	mentor_voice.enter_page(key,book,page)
 
 func _focus_gained() -> void:
@@ -331,6 +352,7 @@ func _focus_gained() -> void:
 			mentor_voice.trigger("return",true)
 
 func _on_update(value: Dictionary, action: String) -> void:
+	if action=="recruit_draw":recruit_center.receive(self,value)
 	if action in ["daily_start","study_start"]:mobile_ui.start_pending=false
 	if OS.has_feature("web") and action in ["state","daily_start","study_start","submit","choose"]:_web_frame_ready.call_deferred(action)
 	if action=="choose":action="submit"
@@ -341,6 +363,8 @@ func _on_update(value: Dictionary, action: String) -> void:
 	if action in ["start","start_book","study_start","daily_start","review_start","retry_study","boss_start"]: battle_draft=""
 	if action in ["start","start_book","study_start","daily_start","review_start","retry_study","boss_start"]:
 		skill_effects.clear();hit_feedback.clear();success_time=0
+		if value.get("stage") is Dictionary and value.get("state") is Dictionary:
+			character_gifs.queue_battle(str(value.state.avatar),str(value.stage.monster))
 	if result_meme and action in ["start","start_book","study_start","daily_start","review_start","retry_study","boss_start"]: result_meme.hide()
 	var before = int(state().get("dealt",0))
 	var old=state().duplicate()
@@ -354,6 +378,7 @@ func _on_update(value: Dictionary, action: String) -> void:
 		if action in ["start","start_book","study_start","daily_start","review_start","retry_study","boss_start"] or page in ["battle","result"]:
 			chosen=str(value.get("stage",{}).get("pack","")) if value.get("stage") is Dictionary else chosen
 		mentor_voice.context="ky" if chosen=="ky" else "general"
+		mentor_voice.book_id=chosen
 	if mentor_voice and action in ["start","start_book","study_start","daily_start","review_start","retry_study","boss_start"]:
 		if battle_audio:
 			battle_audio.cancel_reads()
@@ -378,9 +403,6 @@ func _on_update(value: Dictionary, action: String) -> void:
 	if action=="buy_supply" and coin_change<0:
 		show_system_notice("补给已入库","-%d 哈弗币 · 按下场使用开关装备" % -coin_change)
 		if battle_audio:battle_audio.play_ui_cue("purchase")
-	if action=="unlock_avatar" and coin_change<0:
-		show_system_notice("%s 已加入行动" % operator_for(str(profile().get("avatar","mage"))).name,"-%d 哈弗币 · 永久解锁" % -coin_change)
-		if battle_audio:battle_audio.play_ui_cue("recruit")
 	if action=="upgrade" and coin_change<0:
 		show_system_notice("进阶完成","-%d 哈弗币 · 下一场生效" % -coin_change)
 		if battle_audio:battle_audio.play_ui_cue("recruit")
@@ -493,7 +515,7 @@ func button(caption: String, rect: Rect2, callback: Callable, accent: bool = fal
 	var b = super.button(caption,rect,callback,accent,disabled)
 	b.pressed.connect(_on_ui_click)
 	# Selected filters stay quiet; only the next major action gets a solid fill.
-	var primary=accent and (caption.begins_with("继续当前") or caption.begins_with("复测薄弱") or caption.begins_with("复习本书") or caption.begins_with("开始学习") or caption.begins_with("开始这段") or caption.begins_with("选择干员") or caption.begins_with("解锁并出战") or caption.begins_with("释放攻击") or caption.begins_with("完成今日打卡") or caption.begins_with("返回学习") or caption.begins_with("返回路线"))
+	var primary=accent and (caption.begins_with("继续当前") or caption.begins_with("复测薄弱") or caption.begins_with("复习本书") or caption.begins_with("开始学习") or caption.begins_with("开始这段") or caption.begins_with("选择干员") or caption.begins_with("查看卡池") or caption.begins_with("释放攻击") or caption.begins_with("完成今日打卡") or caption.begins_with("返回学习") or caption.begins_with("返回路线"))
 	b.add_theme_stylebox_override("normal",T.style(T.GREEN if primary else T.SELECTED if accent else T.SURFACE,T.GREEN if accent else T.EDGE))
 	b.add_theme_stylebox_override("hover",T.style(Color("beffd1") if primary else T.HOVER,T.GREEN))
 	b.add_theme_stylebox_override("pressed",T.style(T.GREEN,T.GREEN))
@@ -525,9 +547,12 @@ func _update_battle_controls() -> void:
 	battle_controls_stamp=stamp
 	super._update_battle_controls()
 	var recap=bool(data.get("answerFeedback",false))
-	for name in ["Hint","Bookmark"]:
-		var control=ui.get_node_or_null(name)
-		if control:control.visible=not recap
+	var hint_control=ui.get_node_or_null("Hint")
+	if hint_control:hint_control.visible=not recap
+	var bookmark_control=ui.get_node_or_null("BookmarkWord")
+	if bookmark_control:
+		bookmark_control.visible=not data.get("chanting",false)
+		bookmark_control.text="已收藏" if data.get("wordSaved",false) else "收藏单词"
 	var help=ui.get_node_or_null("QuestionHelp")
 	if help:help.tooltip_text=str(data.get("prompt",""))+"\n"+str(data.get("word",{}).get("meaning",""))
 	var reader=ui.get_node_or_null("ReadAudio")
@@ -548,7 +573,7 @@ func _update_battle_controls() -> void:
 			content.sync({"state":state(),"paused":data.get("paused",false),"cooldown":data.get("cooldown",0),"chanting":data.get("chanting",false)})
 
 func clear_ui() -> void:
-	var keep_field=page=="battle" and not ChoiceUI.active(self) and is_instance_valid(field)
+	var keep_field=page=="battle" and not mobile_ui.enabled and not ChoiceUI.active(self) and is_instance_valid(field)
 	for child in ui.get_children():
 		if keep_field and child==field:continue
 		ui.remove_child(child)
@@ -560,7 +585,7 @@ func rebuild() -> void:
 		if is_instance_valid(field):battle_draft=field.text
 		mobile_ui.build(self)
 		return
-	if page in ["home","spirits","books","voices","memory","boss","modes","supplies","progression"]:
+	if page in ["home","spirits","recruit","books","voices","memory","favorites","boss","modes","supplies","progression"]:
 		clear_ui()
 		if bridge.ready_to_play:
 			if page=="modes":ModeSelector.build(self)
@@ -573,6 +598,8 @@ func rebuild() -> void:
 				button("记忆曲线 · %d 词到期" % data.get("memory",{}).get("due",0),Rect2(984,568,240,30),func(): go("memory"),data.get("memory",{}).get("due",0)>0).add_theme_font_size_override("font_size",14)
 			elif page=="spirits":
 				operator_select.build(self)
+			elif page=="recruit":
+				recruit_center.build(self)
 			elif page=="voices":
 				build_voice_library_controls()
 			elif page=="books":
@@ -585,6 +612,9 @@ func rebuild() -> void:
 				DirectorBoss.build(self)
 			elif page=="memory":
 				MemoryCenter.build(self)
+				button("收藏单词",Rect2(884,80,156,36),func():go("favorites")).add_theme_font_size_override("font_size",15)
+			elif page=="favorites":
+				FavoritesCenter.build(self)
 	else:
 		super.rebuild()
 		# Replace the old header, preserving each original command and field.
@@ -598,7 +628,10 @@ func rebuild() -> void:
 					if child.text=="路线" and data.get("stage",{}).get("bookMode",false):
 						ui.remove_child(child);child.queue_free()
 						button("词书",Rect2(904,82,72,36),func(): go("books"))
-					if child.text in ["提示","收藏"]:
+					if child.name=="Bookmark":
+						ui.remove_child(child);child.queue_free()
+						continue
+					if child.text=="提示":
 						child.visible=not data.get("answerFeedback",false)
 						child.position=Vector2(448 if child.text=="提示" else 532,562)
 						child.size=Vector2(72,28)
@@ -641,6 +674,7 @@ func rebuild() -> void:
 			help.tooltip_text=str(data.get("prompt",""))+"\n"+str(data.get("word",{}).get("meaning",""))
 			ui.add_child(help);ui.move_child(help,0)
 			_update_battle_controls()
+			if not ChoiceUI.active(self):FavoritesCenter.bookmark(self,Rect2(532,562,90,28))
 		if page=="result" and data.get("stage",{}).get("bookMode",false):
 			for child in ui.get_children():
 				if child is Button and child.text=="返回路线":
@@ -669,9 +703,11 @@ func rebuild() -> void:
 				button("已编入" if selected else "选择" if sp.unlocked else "%d 战后解锁" % sp.threshold,Rect2(44+i*225,486,199,34),func(): bridge.request("companion",{"id":sp.id}),selected,not sp.unlocked).add_theme_font_size_override("font_size",14)
 				button("进阶 · R%d" % int(sp.bond.rank),Rect2(44+i*225,528,199,30),func(): bridge.request("upgrade",{"kind":"spirit","id":sp.id}),false,not sp.unlocked or sp.bond.rank>=3).add_theme_font_size_override("font_size",14)
 	if page=="collection":
-		button("用本书%s训练" % {"all":"全部词","review":"错词","saved":"收藏词"}.get(collection_filter,"词汇"),Rect2(544,148,260,40),func():
-			bridge.request("study_settings",{"planMode":"custom","source":{"all":"all","review":"wrong","saved":"saved"}.get(collection_filter,"all"),"recall":true})
-			go("books"),true).add_theme_font_size_override("font_size",15)
+		button("收藏单词" if collection_filter=="saved" else "用本书%s训练" % {"all":"全部词","review":"错词"}.get(collection_filter,"词汇"),Rect2(544,148,260,40),func():
+			if collection_filter=="saved":go("favorites")
+			else:
+				bridge.request("study_settings",{"planMode":"custom","source":"wrong" if collection_filter=="review" else "all","recall":true})
+				go("books"),true).add_theme_font_size_override("font_size",15)
 	ActionFlow.build(self)
 	if page=="battle" and ChoiceUI.active(self):ChoiceUI.build(self)
 	if bridge.ready_to_play and page in ["home","spirits","books","arsenal","supplies"] and not book_setup_open:
@@ -695,7 +731,7 @@ func add_navigation() -> void:
 		var b=button(tabs[i],Rect2(HEADER_NAV_X+i*NAV_WIDTH,8,NAV_WIDTH-6,48),func():
 			if target=="collection": collection_filter="all";collection_page=0
 			go(target),false,not bridge.ready_to_play)
-		var selected=page==target or (i==0 and page=="map") or (i==1 and (page in ["memory","boss"] or (page in ["battle","result"] and data.get("stage",{}).get("bookMode",false))))
+		var selected=page==target or (target=="spirits" and page=="recruit") or (i==0 and page=="map") or (i==1 and (page in ["memory","boss"] or (page in ["battle","result"] and data.get("stage",{}).get("bookMode",false))))
 		b.add_theme_stylebox_override("normal",T.style(Color(0.6,1,0.75,0.08) if selected else Color.TRANSPARENT,Color.TRANSPARENT,0))
 		b.add_theme_color_override("font_color",T.GREEN if selected else T.TEXT)
 		b.add_theme_font_size_override("font_size",16)
@@ -789,7 +825,10 @@ func draw_voice_library() -> void:
 		if clip.id==voice_library_selected: selected=clip;break
 	if selected.is_empty(): return
 	if voice_pictures.has(selected.id):
-		image_contain(voice_pictures[selected.id],Rect2(48,159,334,302))
+		if voice_picture_id!=str(selected.id):
+			voice_picture=load(voice_pictures[selected.id])
+			voice_picture_id=str(selected.id)
+		image_contain(voice_picture,Rect2(48,159,334,302))
 	else:
 		draw_character("director","taunt" if mentor_voice.is_speaking() else "idle",fmod(ui_time,1.3),Rect2(48,110,334,380))
 	text_at(str(selected.get("group","")).replace("考研复刻","考研语音")+"  /  %.2f 秒" % float(selected.duration),48,486,13,T.GREEN)
@@ -805,10 +844,62 @@ func bar(rect: Rect2,value: float,max_value: float,color: Color) -> void:
 	draw_rect(rect,Color(0.05,0.09,0.11,0.8))
 	draw_rect(Rect2(rect.position,Vector2(rect.size.x*clampf(value/maxf(1,max_value),0,1),rect.size.y)),color)
 
-func image_cover(tex: Texture2D,rect: Rect2,tint: Color=Color.WHITE) -> void:
+func operator_artwork(op:Dictionary) -> Texture2D:
+	if artwork_id!=op.id:
+		artwork_id=op.id
+		artwork_key="%02d" % op.asset
+		artwork_texture=null
+		artwork_pending=false
+		artwork_attempts=0
+		artwork_retry_at=0
+	if artwork_texture:
+		return artwork_texture
+	if not OS.has_feature("web"):
+		_set_operator_texture(load("res://assets/official/operator-%s.jpg" % artwork_key))
+		return artwork_texture
+	if artwork_api and not artwork_pending and artwork_attempts<2 and Time.get_ticks_msec()>=artwork_retry_at:
+		artwork_pending=true
+		artwork_attempts+=1
+		artwork_api.request(artwork_key,artwork_callback)
+	return textures["portrait_"+artwork_id]
+
+func _receive_operator_art(args:Array) -> void:
+	if not is_inside_tree() or args.size()!=2 or str(args[0])!=artwork_key:
+		return
+	artwork_pending=false
+	artwork_retry_at=Time.get_ticks_msec()+4000
+	var bytes:PackedByteArray
+	if args[1] is PackedByteArray:
+		bytes=args[1]
+	elif args[1] is JavaScriptObject and JavaScriptBridge.is_js_buffer(args[1]):
+		bytes=JavaScriptBridge.js_buffer_to_packed_byte_array(args[1])
+	else:
+		return
+	var art_image=Image.new()
+	if art_image.load_jpg_from_buffer(bytes)!=OK:
+		return
+	art_image.generate_mipmaps()
+	_set_operator_texture(ImageTexture.create_from_image(art_image))
+	queue_redraw()
+	JavaScriptBridge.eval("window.dispatchEvent(new CustomEvent('toy-game-milestone',{detail:{name:"+JSON.stringify("art:ready:"+artwork_id)+",at:performance.now()}}))")
+
+func _set_operator_texture(diffuse:Texture2D) -> void:
+	artwork_texture=CanvasTexture.new()
+	artwork_texture.diffuse_texture=diffuse
+	artwork_texture.texture_filter=CanvasItem.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
+
+func _exit_tree() -> void:
+	if artwork_api:
+		artwork_api.cancel()
+
+func draw_operator_poster(op:Dictionary,rect:Rect2) -> void:
+	var anchor=Vector2(0.58,0.08) if op.id=="wildfire" else Vector2(0.5,0.5)
+	image_cover(operator_artwork(op),rect,Color.WHITE,anchor)
+
+func image_cover(tex: Texture2D,rect: Rect2,tint: Color=Color.WHITE,anchor:Vector2=Vector2(0.5,0.5)) -> void:
 	var ratio=maxf(rect.size.x/tex.get_width(),rect.size.y/tex.get_height())
 	var source=rect.size/ratio
-	draw_texture_rect_region(tex,rect,Rect2((tex.get_size()-source)/2,source),tint)
+	draw_texture_rect_region(tex,rect,Rect2((tex.get_size()-source)*anchor,source),tint)
 
 func draw_flipped(tex: Texture2D,rect: Rect2,tint: Color=Color.WHITE) -> void:
 	draw_set_transform(Vector2(rect.end.x,rect.position.y),0,Vector2(-1,1))
@@ -833,6 +924,10 @@ func character_action(enemy: bool=false) -> String:
 	return "idle"
 
 func _draw() -> void:
+	if page=="battle" and shot_vfx.frames.is_empty():
+		skill_effects.prepare()
+		shot_vfx.prepare()
+		for i in 6:impact_frames.append(load("res://assets/fx/impact/fx-%d.png" % (i+1)))
 	if mobile_ui.enabled:
 		mobile_ui.draw(self)
 		return
@@ -869,12 +964,14 @@ func _draw() -> void:
 		"battle": draw_battle()
 		"collection": draw_collection()
 		"spirits": draw_spirits()
+		"recruit": recruit_center.draw(self)
 		"arsenal": draw_arsenal()
 		"supplies": SupplyShop.draw(self)
 		"progression": ProgressionCenter.draw(self)
 		"result": draw_result()
 		"books": draw_books()
 		"memory": MemoryCenter.draw(self)
+		"favorites": FavoritesCenter.draw(self)
 		"voices": draw_voice_library()
 	draw_communications()
 	if page=="battle" and ChoiceUI.active(self):ChoiceUI.draw(self)
@@ -1139,6 +1236,7 @@ func firing_geometry(enemy:bool,elapsed:float,offset:Vector2) -> Dictionary:
 
 func draw_shooting(elapsed: float,enemy: bool,offset: Vector2) -> void:
 	if elapsed<0:return
+	if not enemy and skill_effects.actor=="wildfire" and skill_effects.body_action()=="ultimate":return
 	var geometry=firing_geometry(enemy,elapsed,offset)
 	var muzzle:Vector2=geometry.muzzle;var target:Vector2=geometry.target
 	shot_vfx.draw(self,muzzle,target,elapsed)
@@ -1193,7 +1291,7 @@ func _run_qa() -> void:
 	assert(mentor_voice.trigger("start",true) and not mentor_voice.player.playing,"Muted caption failed or voice played")
 	mentor_voice.stop()
 	mentor_voice.enabled=voice_enabled
-	assert(character_gifs.characters.size()==12,"Character GIF registry incomplete")
+	assert(character_gifs.characters.size()==13,"Character animation registry incomplete")
 	for id in character_gifs.characters:
 		for action in character_gifs.characters[id].actions:
 			assert(character_gifs.action_data(id,action).frames.size()>=4,"Static GIF action")
@@ -1236,11 +1334,13 @@ func _run_qa() -> void:
 	for i in OPS.size():
 		inspect_operator=i
 		go("spirits")
-		bridge.request("avatar",{"id":OPS[i].id})
-		await bridge.updated
+		var owned=RecruitmentUI.info(self,OPS[i].id).unlocked
+		if owned:
+			bridge.request("avatar",{"id":OPS[i].id})
+			await bridge.updated
 		await RenderingServer.frame_post_draw
 		get_viewport().get_texture().get_image().save_png(directory+"/operator-"+OPS[i].id+".png")
-		if profile().get("avatar","")!=OPS[i].id: push_error("QA operator mismatch")
+		if owned and profile().get("avatar","")!=OPS[i].id: push_error("QA operator mismatch")
 	inspect_operator=0
 	bridge.request("avatar",{"id":"mage"})
 	await bridge.updated
@@ -1291,15 +1391,15 @@ func _run_smoke() -> void:
 		push_error("SMOKE: local gameplay did not connect")
 		get_tree().quit(2)
 		return
-	assert(data.get("books",[]).size()==3)
-	assert(mentor_voice.clips.size()==61 and battle_audio.sounds.size()==22)
-	assert(character_gifs.characters.size()==12)
+	assert(data.get("books",[]).size()==5)
+	assert(mentor_voice.clips.size()==53 and battle_audio.sounds.size()==22)
+	assert(character_gifs.characters.has("wildfire"))
 	for id in character_gifs.characters:
 		for action in character_gifs.characters[id].actions:
 			assert(character_gifs.frame(id,action,0)!=null,"Animation texture not imported")
 	await get_tree().process_frame
 	await get_tree().process_frame
-	print("SMOKE_OK: 3 wordbooks, 11 characters, 32 GIF actions, 61 voices, 22 SFX, original gameplay connected")
+	print("SMOKE_OK: 5 wordbooks, Wildfire, 53 voices, 22 SFX, gameplay connected")
 	var smoke_tree=get_tree()
 	smoke_tree.create_timer(0.4).timeout.connect(smoke_tree.quit.bind(0))
 	smoke_tree.current_scene.queue_free()
@@ -1344,7 +1444,7 @@ func _run_page_voice_qa() -> void:
 	rebuild()
 	assert(mentor_voice.page_cursors==before_paging,"Collection paging repeated dialogue")
 	go("books")
-	var study_cues={"due":"local_26","wrong":"local_22","saved":"local_25","all":"local_06"}
+	var study_cues=["due","wrong","saved","all"]
 	for source in study_cues:
 		await qa_command("study_settings",{"source":source})
 		_assert_page_voice()
@@ -1446,10 +1546,10 @@ func _run_voice_qa() -> void:
 	mentor_voice.set_blocked(false)
 	mentor_voice.set_paused(false)
 	mentor_voice.context="general"
-	assert(mentor_voice.clips.size()==61,"Missing recordings")
-	assert(voice_pictures.size()==30,"Missing paired meme pictures")
-	assert(mentor_voice.clips.filter(func(c): return c.get("audio_kind")=="source_recording").size()==43)
-	assert(mentor_voice.clips.filter(func(c): return c.get("scope")=="ky").size()==18)
+	assert(mentor_voice.clips.size()==53,"Missing recordings")
+	assert(voice_pictures.size()==17,"Missing paired meme pictures")
+	assert(mentor_voice.clips.filter(func(c): return c.get("audio_kind")=="source_recording").size()==27)
+	assert(mentor_voice.clips.filter(func(c): return c.get("scope")=="ky").size()==16)
 	assert(mentor_voice.trigger("defeat",true))
 	assert(mentor_text==mentor_voice.active_clip.caption,"Caption/audio text mismatch")
 	assert(mentor_text.begins_with("回家吧，孩子"))
@@ -1490,13 +1590,13 @@ func _run_voice_qa() -> void:
 	await RenderingServer.frame_post_draw
 	get_viewport().get_texture().get_image().save_png(directory+"/voice-sync-complete.png")
 	go("voices")
-	assert(library_clips().size()==61)
+	assert(library_clips().size()==53)
 	voice_library_group="考研复刻"
-	assert(library_clips().size()==18)
+	assert(library_clips().size()==16)
 	voice_library_group="德穆兰原声"
-	assert(library_clips().size()==12)
+	assert(library_clips().size()==9)
 	voice_library_group="课堂原声"
-	assert(library_clips().size()==30)
+	assert(library_clips().size()==17)
 	voice_library_group="用户原声"
 	assert(library_clips().size()==1)
 	voice_library_group="课堂原声"
@@ -1513,7 +1613,7 @@ func _run_voice_qa() -> void:
 	get_viewport().get_texture().get_image().save_png(directory+"/原声库.png")
 	await get_tree().create_timer(1.0).timeout
 	mentor_voice.stop()
-	var result={"clips":mentor_voice.clips.size(),"original_recordings":43,"kaoyan_synthesized":18,"paired_images":voice_pictures.size(),"library_filter_and_preview":true,"early_visible":early,"paused_visible":frozen_count,"timed_caption":true,"pause_resume":true,"mute_resume":true,"priority_and_queue":true,"dictation_no_overlap":true,"complete_caption":true}
+	var result={"clips":mentor_voice.clips.size(),"original_recordings":27,"kaoyan_synthesized":16,"paired_images":voice_pictures.size(),"library_filter_and_preview":true,"early_visible":early,"paused_visible":frozen_count,"timed_caption":true,"pause_resume":true,"mute_resume":true,"priority_and_queue":true,"dictation_no_overlap":true,"complete_caption":true}
 	var report=FileAccess.open(directory+"/voice-sync-verification.json",FileAccess.WRITE)
 	report.store_string(JSON.stringify(result,"  "))
 	print("VOICE_QA_OK ",JSON.stringify(result))
@@ -1626,7 +1726,7 @@ func _run_audio_qa() -> void:
 	await RenderingServer.frame_post_draw
 	var directory=ProjectSettings.globalize_path("res://qa")
 	get_viewport().get_texture().get_image().save_png(directory+"/考研语音库.png")
-	var result={"kaoyan_clips":18,"original_clips":43,"sfx":battle_audio.sounds.size(),"english_voice":battle_audio.voice_id,"completed_word":completed,"reading_history":battle_audio.reading_history,"scoped_dialogue":true,"correct_only":true,"previous_word_captured":true,"english_tts_started_and_ended":true,"queued_words_in_order":true,"pause_resume":true,"caption_frozen_during_read":true,"result_after_reading":true,"dictation_no_overlap":true,"independent_saved_toggles":true,"runtime_errors":0}
+	var result={"kaoyan_clips":16,"original_clips":27,"sfx":battle_audio.sounds.size(),"english_voice":battle_audio.voice_id,"completed_word":completed,"reading_history":battle_audio.reading_history,"scoped_dialogue":true,"correct_only":true,"previous_word_captured":true,"english_tts_started_and_ended":true,"queued_words_in_order":true,"pause_resume":true,"caption_frozen_during_read":true,"result_after_reading":true,"dictation_no_overlap":true,"independent_saved_toggles":true,"runtime_errors":0}
 	var report=FileAccess.open(directory+"/audio-v7-verification.json",FileAccess.WRITE)
 	report.store_string(JSON.stringify(result,"  "))
 	mentor_voice.stop()
@@ -1749,5 +1849,9 @@ func _run_meme_qa() -> void:
 
 func _web_frame_ready(action:String) -> void:
 	await RenderingServer.frame_post_draw
-	if is_inside_tree():
+	if not is_inside_tree():return
+	if action!="interactive":
 		JavaScriptBridge.eval("window.dispatchEvent(new CustomEvent('toy-game-milestone',{detail:{name:"+JSON.stringify("frame:"+action)+",at:performance.now()}}))")
+	if not web_interactive_reported and not startup_locked and bridge.ready_to_play:
+		web_interactive_reported=true
+		JavaScriptBridge.eval("window.dispatchEvent(new CustomEvent('toy-game-milestone',{detail:{name:'frame:interactive',at:performance.now()}}))")

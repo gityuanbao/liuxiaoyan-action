@@ -9,7 +9,13 @@ var last_size=Vector2i.ZERO
 var draft_book=""
 var draft_batch=10
 var draft_goal=20
-var draft_mode="spelling"
+const PHONE_MODES=["choose_meaning","choose_word"]
+const BOOK_LABELS={"zk":"中考","gk":"高考","cet4":"四级","cet6":"六级","ky":"考研"}
+const BOOK_MAPS={"zk":"valley","gk":"spaceport","cet4":"dam","cet6":"city","ky":"director"}
+const SURFACE=T.SURFACE
+const BORDER=T.EDGE
+const MINT=T.GREEN
+var draft_mode="choose_meaning"
 var start_pending=false
 var orientation_paused=false
 
@@ -37,18 +43,26 @@ func sync(h) -> bool:
 	return enabled or previous
 
 func button(h,label:String,rect:Rect2,fn:Callable,accent=false,disabled=false,id="") -> Button:
-	var b=h.button(label,rect,fn,accent,disabled);b.add_theme_font_size_override("font_size",16)
-	var primary=id in ["MobileStart","MobileRecruit","ChoiceNext","Submit","MobileResultNext"]
-	var fill=T.GREEN if primary and not disabled else Color("263a2e") if accent else Color("18211d")
-	var style=T.style(fill,T.GREEN if accent else Color("344239"))
-	style.content_margin_left=6;style.content_margin_right=6
+	var b=h.button(label,rect,fn,accent,disabled);b.add_theme_font_size_override("font_size",17)
+	b.texture_filter=CanvasItem.TEXTURE_FILTER_LINEAR
+	var primary=id in ["MobileStart","MobileRecruit","Submit","MobileResultNext"]
+	var fill=MINT if primary and not disabled else Color("24473b") if accent else SURFACE
+	var style=touch_style(fill,MINT if accent else BORDER)
 	b.add_theme_stylebox_override("normal",style)
+	if primary or accent:b.add_theme_font_override("font",h.display_font)
 	b.add_theme_color_override("font_color",T.INK if primary and not disabled else T.GREEN if accent else T.TEXT)
 	b.add_theme_color_override("font_hover_color",T.INK if primary else T.TEXT)
-	b.add_theme_stylebox_override("hover",T.style(Color("baffce") if primary else Color("304436"),T.GREEN))
-	b.add_theme_stylebox_override("disabled",T.style(Color("17201c"),Color("2b3730")))
+	b.add_theme_stylebox_override("hover",touch_style(Color("baffce") if primary else Color("304b40"),MINT))
+	b.add_theme_stylebox_override("pressed",touch_style(Color("a6ffd1"),MINT))
+	b.add_theme_stylebox_override("disabled",touch_style(Color("192520"),Color("32423c")))
 	if not id.is_empty():b.name=id
 	return b
+
+static func touch_style(fill:Color,edge:Color) -> StyleBoxFlat:
+	var style=T.style(fill,edge)
+	style.set_corner_radius_all(1)
+	style.content_margin_left=5;style.content_margin_right=5
+	return style
 
 func label(h,value:String,rect:Rect2,px=16,color=T.TEXT) -> void:
 	h.wrapped(value,Rect2(rect.position+Vector2(0,px),rect.size-Vector2(0,px)),px,color)
@@ -63,14 +77,14 @@ func battle_rects() -> Dictionary:
 		var height=minf(68,floor((ht-166-start-(rows-1)*8)/rows)) if rows==4 else floor((ht-166-start-8)/2)
 		var options=[]
 		for i in 4:options.append(Rect2(16 if rows==4 else 16+(i%2)*(w-24)/2,start+(i if rows==4 else i/2)*(height+8),w-32 if rows==4 else (w-40)/2,height))
-		return {"scene":scene,"question":question,"options":options,"skills":Rect2(16,ht-156,w-32,44),"next":Rect2(16,ht-104,w-32,44),"caption":Rect2(16,ht-52,w-32,44)}
-	var left=floor(w*0.42)
-	var scene=Rect2(16,54,w-32,154)
-	var question=Rect2(16,220,left-24,88)
+		return {"scene":scene,"question":question,"options":options,"skills":Rect2(16,ht-156,w-32,44),"caption":Rect2(16,ht-52,w-32,44)}
+	var split=floor(w*0.40)
+	var scene=Rect2(12,52,w-24,157)
+	var question=Rect2(12,217,split-20,85)
 	var options=[]
-	var option_width=(w-left-32)/2
-	for i in 4:options.append(Rect2(left+8+(i%2)*(option_width+8),220+(i/2)*62,option_width,54))
-	return {"scene":scene,"question":question,"options":options,"skills":Rect2(16,318,left-24,46),"next":Rect2(w-164,348,148,40),"caption":Rect2(16,370,w-200,26)}
+	var option_width=(w-split-20)/2
+	for i in 4:options.append(Rect2(split+(i%2)*(option_width+8),217+(i/2)*64,option_width,58))
+	return {"scene":scene,"question":question,"options":options,"skills":Rect2(12,310,split-20,48),"caption":Rect2(12,362,w-24,31)}
 
 func build(h) -> void:
 	h.clear_ui()
@@ -82,46 +96,51 @@ func build(h) -> void:
 	else:
 		for i in 3:
 			var target=["books","spirits","progression"][i]
-			var selected=h.page==target or (i==0 and h.page in ["home","modes","map"])
-			var b=button(h,["学习","干员","成长"][i],Rect2(194+i*64,7,60,36),func():h.go(target),selected,false,"MobileNav_"+target)
+			var selected=h.page==target or (target=="spirits" and h.page=="recruit") or (i==0 and h.page in ["home","modes","map"])
+			var b=button(h,["学习中心","特战干员","干员成长"][i],Rect2(171+i*84,5,80,40),func():h.go(target),selected,false,"MobileNav_"+target)
 			var normal=T.style(Color.TRANSPARENT,T.GREEN if selected else Color.TRANSPARENT)
 			normal.set_border_width_all(0);normal.border_width_bottom=2;b.add_theme_stylebox_override("normal",normal)
 	button(h,"声音",Rect2(w-72,7,56,36),func():h.go("sound"),false,false,"MobileSound")
 	match h.page:
 		"battle":build_battle(h)
 		"result":
+			button(h,"查看干员卡池",Rect2(205,7,112,36),func():h.go("recruit"),false,false,"MobileResultRecruit")
 			button(h,"返回学习计划",Rect2(24,ht-62,(w-60)/2,44),func():h.go("books"),false,false,"MobileResultBack")
 			button(h,"再练本轮薄弱词" if h.data.get("learningMission") is Dictionary and h.data.learningMission.needsReview>0 else "继续今日计划",Rect2(36+(w-60)/2,ht-62,(w-60)/2,44),func():h.bridge.request("retry_study") if h.data.get("learningMission") is Dictionary and h.data.learningMission.needsReview>0 else h.go("books"),true,false,"MobileResultNext")
 		"spirits":build_operators(h)
+		"recruit":h.recruit_center.build(h)
+		"favorites":h.FavoritesCenter.build(h)
 		"progression","arsenal","supplies":build_growth(h)
 		"sound","voices":
 			var controls=[["游戏音效",h.battle_audio.effects_enabled,func():h.battle_audio.toggle_effects();h.rebuild()],["单词读音",h.battle_audio.words_enabled,func():h.battle_audio.toggle_words();h.rebuild()],["总监语音",h.mentor_voice.enabled,func():h.mentor_voice.toggle();h.rebuild()],["减少动效",h.slow_motion,func():h.slow_motion=not h.slow_motion;h.rebuild()]]
 			for i in controls.size():button(h,controls[i][0]+("：开" if controls[i][1] else "：关"),Rect2(16 if portrait else 16+(i%2)*w/2,100+(i if portrait else i/2)*60,w-32 if portrait else w/2-24,48),controls[i][2],controls[i][1])
 		"memory","collection":
 			button(h,"复习到期词",Rect2(16,ht-106,w-32,48),func():h.bridge.request("review_start"),true,h.data.get("memory",{}).get("due",0)==0)
+			button(h,"收藏单词",Rect2(w-155,59,139,35),func():h.go("favorites"))
 		_ :build_plan(h)
 
 func plan_area() -> Rect2:
 	return Rect2(floor(canvas.x*0.36),58,canvas.x-floor(canvas.x*0.36)-24,320)
 
-func book_rect(index:int) -> Rect2:
-	var r=plan_area();var width=(r.size.x-16)/3
-	return Rect2(r.position.x+index*(width+8),86,width,88)
+func book_rect(index:int,count:int) -> Rect2:
+	var r=plan_area();var width=(r.size.x-6*(count-1))/count
+	return Rect2(r.position.x+index*(width+6),86,width,82)
 
 func build_plan(h) -> void:
 	var w=canvas.x;var ht=canvas.y
 	if draft_book.is_empty():
 		draft_book=h.data.bookSettings.selected;draft_batch=int(h.data.study.settings.batch);draft_goal=int(h.data.study.settings.goal)
-		draft_mode=h.data.study.settings.get("answerMode","spelling")
+		var previous=h.data.study.settings.get("mobileAnswerMode",h.data.study.settings.get("answerMode","choose_meaning"))
+		draft_mode=previous if previous in PHONE_MODES else "choose_meaning"
 	var r=plan_area();var x=r.position.x;var area=r.size.x
-	for i in 3:
-		var id=["cet4","cet6","ky"][i]
-		var card=button(h,"",book_rect(i),func():draft_book=id;h.rebuild(),draft_book==id,start_pending,"MobileBook_"+id)
+	for i in h.data.books.size():
+		var id=h.data.books[i].id
+		var card=button(h,"",book_rect(i,h.data.books.size()),func():draft_book=id;h.rebuild(),draft_book==id,start_pending,"MobileBook_"+id)
 		card.add_theme_stylebox_override("normal",T.style(Color.TRANSPARENT,T.GREEN if draft_book==id else T.EDGE))
 		card.add_theme_stylebox_override("hover",T.style(Color(T.GREEN,0.05),T.GREEN))
-	for i in 3:
-		var mode=Q.MODES[i]
-		button(h,["拼写单词","选择词义","选择单词"][i],Rect2(x+i*(area+8)/3,204,(area-16)/3,42),func():draft_mode=mode;h.rebuild(),draft_mode==mode,start_pending,"AnswerMode_"+mode)
+	for i in PHONE_MODES.size():
+		var mode=PHONE_MODES[i]
+		button(h,["看词选意","看意选词"][i],Rect2(x+i*(area+8)/2,197,(area-8)/2,48),func():draft_mode=mode;h.rebuild(),draft_mode==mode,start_pending,"AnswerMode_"+mode)
 	var half=(area-24)/2
 	for i in 3:
 		var amount=[5,10,15][i]
@@ -130,6 +149,9 @@ func build_plan(h) -> void:
 		var amount=[5,10,20,30][i]
 		button(h,str(amount),Rect2(x+half+24+i*(half+6)/4,278,(half-18)/4,40),func():draft_goal=amount;h.rebuild(),draft_goal==amount,start_pending,"MobileGoal_%d" % amount)
 	var active=not h.state().is_empty() and h.state().get("outcome")==null
+	if not active:
+		button(h,"总监百词挑战",Rect2(24,273,x-50,46),func():h.bridge.request("mobile_boss_start",{"id":draft_book,"answerMode":draft_mode}),false,start_pending,"MobileBoss")
+	button(h,"收藏单词",Rect2(24,272 if active else 315,x-50,39 if active else 33),func():h.go("favorites"),false,false,"MobileFavorites").add_theme_font_size_override("font_size",14)
 	button(h,"正在准备行动…" if start_pending else "继续当前行动" if active else "保存计划并开始",Rect2(x,334,area,44),func():
 		if active:h.ActionFlow.run(h)
 		else:
@@ -151,27 +173,11 @@ func build_battle(h) -> void:
 	button(h,"继续" if h.data.paused else "暂停",Rect2(canvas.x-72,7,56,36),func():h.bridge.request("pause",{"value":not h.data.paused}),false,false,"MobilePause")
 	var sound=h.ui.get_node_or_null("MobileSound")
 	if sound:h.ui.remove_child(sound);sound.queue_free()
+	h.FavoritesCenter.bookmark(h,Rect2(338,7,96,36),true)
 	if Q.active(h):
 		for i in 4:
-			var option=Q.option(h,h.data.choice.options[i],i,r.options[i],17)
+			var option=Q.option(h,h.data.choice.options[i],i,r.options[i],18,true)
 			option.tooltip_text="";option.focus_mode=Control.FOCUS_NONE
-		button(h,"下一题" if h.data.choice.answered else "请选择一个答案",r.next,func():h.bridge.request("choice_next",{"token":h.data.choice.token}),true,not h.data.choice.answered or h.data.paused,"ChoiceNext")
-	else:
-		var rect:Rect2=r.options[0]
-		var new_field=not is_instance_valid(h.field)
-		if new_field:h.field=LineEdit.new()
-		h.field.keep_editing_on_text_submit=true
-		h.field.position=rect.position+Vector2(0,4);h.field.size=Vector2(canvas.x-rect.position.x-16,58)
-		h.field.add_theme_font_size_override("font_size",22);h.field.placeholder_text="输入英文 · 回车提交"
-		h.field.add_theme_stylebox_override("normal",T.style(T.DEEP,T.EDGE))
-		h.field.add_theme_stylebox_override("focus",T.style(T.DEEP,T.GREEN,2))
-		if new_field:h.field.text=h.battle_draft
-		h.field.add_theme_font_override("font",h.font)
-		h.field.editable=not h.data.paused
-		if new_field:
-			h.field.text_submitted.connect(func(_v):h.submit());h.ui.add_child(h.field)
-			h.resume_word_input()
-		button(h,"提交单词",r.next,func():h.submit(),true,h.data.paused or h.data.cooldown>0,"Submit").focus_mode=Control.FOCUS_NONE
 	for i in 4:
 		var action=["surge","ward","tactic","chant"][i]
 		var disabled=h.data.paused or h.data.cooldown>0 or (h.data.get("chanting",false) and i<3) or (Q.active(h) and h.data.choice.answered) or (s.energy<30 if i==0 else s.energy<20 or s.shield>=40 if i==1 else s.tacticUsed or s.normalHits<3 or (s.avatar=="mage" and s.energy>=100) if i==2 else s.energy<100)
@@ -181,21 +187,21 @@ func build_battle(h) -> void:
 		icon.expand_mode=TextureRect.EXPAND_IGNORE_SIZE;icon.stretch_mode=TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 		icon.position=Vector2(6,7);icon.size=Vector2(28,28);icon.modulate=T.DIM if disabled else T.TEXT
 		icon.mouse_filter=Control.MOUSE_FILTER_IGNORE;b.add_child(icon)
-		var cost=Label.new();cost.text=["30","20","战技","大招"][i];cost.position=Vector2(35,12)
-		cost.add_theme_font_override("font",h.font);cost.add_theme_font_size_override("font_size",12);cost.add_theme_color_override("font_color",T.DIM if disabled else T.GREEN)
+		var cost=Label.new();cost.text=["强化","护甲","战技","大招"][i];cost.position=Vector2(32,10)
+		cost.add_theme_font_override("font",h.font);cost.add_theme_font_size_override("font_size",14);cost.add_theme_color_override("font_color",T.MUTED if disabled else MINT)
 		cost.mouse_filter=Control.MOUSE_FILTER_IGNORE;b.add_child(cost)
 
 func use_skill(h,action:String) -> void:
-	if action=="chant" and is_instance_valid(h.field):
-		if not h.data.get("chanting",false):h.saved_draft=h.field.text;h.field.text=""
-		else:h.field.text=h.saved_draft
 	h.bridge.request(action if action in ["tactic","chant"] else "prepare",{} if action in ["tactic","chant"] else {"spell":action})
 
 func build_operators(h) -> void:
 	var w=canvas.x
-	for i in h.OPS.size():
-		var index=i
-		var b=button(h,"",operator_card_rect(i),func():h.operator_select.choose(h,index),false,false,"MobileOperator_"+h.OPS[i].id)
+	button(h,"干员招募  ›",Rect2(w*0.5-117,55,102,39),func():h.go("recruit"),true,false,"OpenRecruitCenter")
+	if h.OPS.size()>h.operator_select.PAGE_SIZE:
+		button(h,"%d / %d ›" % [h.operator_select.roster_page+1,ceili(float(h.OPS.size())/h.operator_select.PAGE_SIZE)],Rect2(w*0.5-197,55,72,39),func():h.operator_select.next_roster_page(h),false,false,"MoreOperators")
+	for i in h.operator_select.visible_slots(h):
+		var index=h.operator_select.index_for(i)
+		var b=button(h,"",operator_card_rect(i),func():h.operator_select.choose(h,index),false,false,"MobileOperator_"+h.OPS[index].id)
 		b.add_theme_stylebox_override("normal",T.style(Color.TRANSPARENT,Color.TRANSPARENT))
 		b.add_theme_stylebox_override("hover",T.style(Color(0.5,1,0.7,0.04),T.GREEN))
 	var op=h.shown_operator();var info=h.RecruitmentUI.info(h,op.id)
@@ -203,32 +209,45 @@ func build_operators(h) -> void:
 	for i in 2:
 		var kind=["tactic","ultimate"][i]
 		button(h,"演示战技" if i==0 else "演示大招",Rect2(24+i*(left+8)/2,334,(left-8)/2,44),func():h.operator_select.tab=kind;h.operator_select.preview(h),false,h.slow_motion,"MobileSkill_"+kind)
-	button(h,"当前出战" if h.profile().get("avatar","mage")==op.id else "选择干员" if info.unlocked else "解锁 · %d 哈弗币" % info.cost,Rect2(w*0.5+24,334,w*0.5-48,44),func():h.bridge.request("avatar" if info.unlocked else "unlock_avatar",{"id":op.id}),true,h.profile().get("avatar","mage")==op.id or (not info.unlocked and not info.affordable),"MobileRecruit")
+	button(h,"当前出战" if h.profile().get("avatar","mage")==op.id else "选择干员" if info.unlocked else "查看卡池  ›",Rect2(w*0.5+24,334,w*0.5-48,44),func():
+		if info.unlocked:h.bridge.request("avatar",{"id":op.id})
+		else:h.recruit_center.browse(h,op.id),true,h.profile().get("avatar","mage")==op.id,"MobileRecruit")
 
 func operator_card_rect(index:int) -> Rect2:
 	var width=(canvas.x*0.5-40)/2
-	return Rect2(24+(index%2)*(width+8),100+(index/2)*72,width,64)
+	return Rect2(24+(index%2)*(width+8),100+(index/2)*57,width,51)
 
 func draw_operators(h) -> void:
 	var op=h.shown_operator()
-	for i in h.OPS.size():
-		var item=h.OPS[i];var info=h.RecruitmentUI.info(h,item.id);var r=operator_card_rect(i)
+	for i in h.operator_select.visible_slots(h):
+		var item=h.OPS[h.operator_select.index_for(i)];var info=h.RecruitmentUI.info(h,item.id);var r=operator_card_rect(i)
 		var selected=item.id==op.id
 		h.draw_rect(r,T.SELECTED if selected else Color(T.INK,0.8))
 		h.draw_rect(r,T.GREEN if selected else T.EDGE,false,1)
-		h.image_cover(h.textures["portrait_"+item.id],Rect2(r.position,Vector2(54,64)))
-		h.text_at(item.name,r.position.x+62,r.position.y+25,16,T.TEXT if selected else T.MUTED)
-		if info.unlocked:h.text_at("当前出战" if h.profile().get("avatar","mage")==item.id else "已解锁",r.position.x+62,r.position.y+48,11,T.GREEN)
-		else:h.CurrencyUI.amount(h,int(info.cost),r.position+Vector2(62,48),12,T.MUTED,false,13)
-	var side=minf(260,canvas.x*0.5-24)
-	h.text_at(op.name,canvas.x*0.5+24,84,24,T.TEXT)
-	h.text_at(op.role,canvas.x*0.5+106,82,13,T.GREEN)
-	h.draw_character(op.id,h.operator_select.tab if h.operator_select.playing else "idle",h.operator_select.clock if h.operator_select.playing else h.ui_time,Rect2(canvas.x*0.75-side/2,46,side,side))
-	h.text_at(op.skill+" / "+op.ultimate,canvas.x*0.5+24,318,13,T.MUTED)
+		h.image_cover(h.textures["portrait_"+item.id],Rect2(r.position,Vector2(49,r.size.y)))
+		h.text_at(item.name,r.position.x+57,r.position.y+22,16,T.TEXT if selected else T.MUTED)
+		if info.unlocked:h.text_at("当前出战" if h.profile().get("avatar","mage")==item.id else "已解锁",r.position.x+57,r.position.y+42,11,T.GREEN)
+		else:h.text_at("保底候选",r.position.x+57,r.position.y+42,12,T.MUTED)
+	var stage=Rect2(canvas.x*0.5+24,68,canvas.x*0.5-48,181)
+	h.image_cover(h.textures.hangar,stage,Color(0.68,0.71,0.66))
+	h.draw_rect(stage,T.EDGE,false,1)
+	var side=minf(242,stage.size.x-16)
+	var model=Rect2(stage.get_center().x-side/2,stage.end.y-side*0.95,side,side)
+	h.operator_select.draw_model(h,op.id,model)
+	if h.operator_select.playing:
+		h.text_at("干员入场" if h.operator_select.entering else "技能动作演示",stage.position.x+10,stage.position.y+22,13,T.GREEN)
+	var identity=Rect2(stage.position.x,stage.end.y,stage.size.x,49)
+	h.draw_rect(identity,Color(T.INK,0.88))
+	h.draw_rect(Rect2(identity.position,Vector2(3,49)),T.ORANGE if op.id=="wildfire" else T.GREEN)
+	h.text_at(op.name,identity.position.x+12,identity.end.y-14,25,T.TEXT)
+	h.text_at(op.en+"  /  "+op.role,identity.position.x+99,identity.end.y-15,14,T.GREEN)
+	var owned=h.RecruitmentUI.info(h,op.id).unlocked
+	h.text_at(op.skill+" / "+op.ultimate if owned else "获取方式  /  干员卡池随机招募",canvas.x*0.5+24,318,13,T.MUTED if owned else T.GREEN)
 
 func build_growth(h) -> void:
 	var w=canvas.x;var p=h.data.progression
 	button(h,"领取 %d 哈弗币" % p.pending if p.pending>0 else "升级后领取奖励",Rect2(36,290,w*0.40-60,44),func():h.bridge.request("claim_levels"),true,p.pending<=0)
+	button(h,"查看干员卡池",Rect2(36,342,w*0.40-60,38),func():h.go("recruit"),false,false,"MobileGrowthRecruit")
 	for i in 2:
 		var item=h.data.recruitment.supplies[i]
 		var x=w*0.43;var area=w-x-36
@@ -240,7 +259,10 @@ func arrange_media(h) -> void:
 	var meme=h.result_meme
 	if h.page=="result":
 		meme.show()
-		var rect=Rect2(canvas.x*0.49,74,canvas.x*0.51-24,238)
+		var slot=Rect2(canvas.x*0.48,64,canvas.x*0.52-20,248)
+		var width=minf(slot.size.x,slot.size.y*16.0/9.0)
+		var media_size=Vector2(width,width*9.0/16.0)
+		var rect=Rect2(slot.get_center()-media_size*0.5,media_size)
 		meme.video.position=rect.position;meme.video.size=rect.size;meme.picture.position=rect.position;meme.picture.size=rect.size
 		meme.caption.position=Vector2(rect.position.x,rect.end.y-38);meme.caption.size=Vector2(rect.size.x,36);meme.caption.add_theme_font_size_override("font_size",14);meme.caption.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
 		meme.caption.add_theme_stylebox_override("normal",T.style(Color(0.04,0.06,0.05,0.88),Color.TRANSPARENT))
@@ -258,8 +280,10 @@ func draw(h) -> void:
 		label(h,"横屏后继续选择计划与答题\n进行中的战斗会自动暂停",Rect2(28,ht*0.48,w-56,100),17,T.MUTED)
 		if h.result_meme:h.result_meme.hide()
 		return
-	if h.textures.has("hangar"):h.image_cover(h.textures.hangar,Rect2(Vector2.ZERO,canvas),Color(0.24,0.29,0.25))
-	h.draw_rect(Rect2(0,0,w,50),Color("101914"))
+	var background=h.textures.get("scene_"+h.SceneCatalog.current(h)) if h.page in ["battle","result"] else h.textures.get("hangar")
+	if background:h.image_cover(background,Rect2(Vector2.ZERO,canvas),Color(0.38,0.42,0.38))
+	h.draw_rect(Rect2(0,0,w,canvas.y),Color(T.INK,0.54))
+	h.draw_rect(Rect2(0,0,w,50),T.INK)
 	h.draw_line(Vector2(16,49),Vector2(w-16,49),T.EDGE,1)
 	if h.page in ["battle","result"]:
 		h.text_at("学习行动" if h.page=="battle" else "行动结算",116,31,17,T.TEXT)
@@ -271,16 +295,18 @@ func draw(h) -> void:
 		h.CurrencyUI.amount(h,int(h.data.recruitment.coins),Vector2(w-175,31),13,T.TEXT,false,17)
 	else:
 		var mission=h.data.get("learningMission")
-		if mission is Dictionary:h.text_at("本轮 %d / %d" % [h.data.lesson.completed,h.data.lesson.total],w-230,31,13,T.MUTED)
+		if mission is Dictionary:h.text_at("本轮 %d / %d" % [h.data.lesson.completed,h.data.lesson.total],w-226,32,16,T.MUTED)
 	match h.page:
 		"battle":draw_battle(h)
 		"result":
-			var x=16;var area=w-32 if portrait else w*0.45-16
+			var x=32;var area=w*0.45-32
+			h.panel(Rect2(16,64,w*0.46-16,248),T.SURFACE,T.EDGE)
+			h.draw_rect(Rect2(16,64,3,50),T.GREEN if h.state().outcome=="victory" else T.RED)
 			h.text_at("任务完成" if h.state().outcome=="victory" else "回家吧，孩子",x,97,28,T.GREEN if h.state().outcome=="victory" else T.RED)
-			var mission:Dictionary=h.data.get("learningMission",{})
+			var mission:Dictionary=h.data.learningMission if h.data.get("learningMission") is Dictionary else {}
 			label(h,"本轮辨认 %d 词 / 待巩固 %d" % [mission.get("recognized",0),mission.get("needsReview",0)] if h.data.get("choice") is Dictionary else "本轮学习已记录",Rect2(x,116,area,48),17)
 			label(h,"+%d XP   +%d 哈弗币" % [h.data.learningRewards.xp,h.data.learningRewards.coins],Rect2(x,165,area,42),23,T.GREEN)
-			label(h,"辨认与拼写分开记录，按排期继续复习。",Rect2(x,211,area,38),13,T.MUTED)
+			label(h,"本轮已计入学习进度，错词可再次练习。",Rect2(x,211,area,38),13,T.MUTED)
 		"progression","arsenal","supplies":
 			var p=h.data.progression
 			h.draw_rect(Rect2(24,70,w*0.40-36,292),Color(T.DEEP,0.94))
@@ -303,6 +329,8 @@ func draw(h) -> void:
 		"spirits":
 			h.text_at("特战干员",24,82,24,T.TEXT)
 			draw_operators(h)
+		"recruit":h.recruit_center.draw(h)
+		"favorites":h.FavoritesCenter.draw(h)
 		"sound","voices":
 			h.text_at("声音与动效",16,84,22,T.TEXT)
 		_:
@@ -311,67 +339,77 @@ func draw(h) -> void:
 
 func draw_plan(h) -> void:
 	var r=plan_area();var x=r.position.x;var area=r.size.x
-	var stage_key={"cet4":"dam","cet6":"valley","ky":"city"}.get(draft_book,"dam")
-	var hero=Rect2(16,60,x-34,318)
-	h.image_cover(h.textures["scene_"+stage_key],hero,Color(0.55,0.61,0.55))
-	h.draw_rect(Rect2(16,60,x-34,96),Color(0.03,0.06,0.04,0.68))
-	h.text_at("学习行动",30,91,24,T.TEXT)
 	var op=h.operator_for(h.profile().get("avatar","mage"))
-	h.text_at(op.name+" / "+op.role,30,116,13,T.GREEN)
-	var size=minf(270,x+4)
-	h.draw_character(op.id,"idle",h.ui_time,Rect2(x*0.5-size/2,68,size,size))
-	h.draw_rect(Rect2(16,326,x-34,52),Color(0.03,0.06,0.04,0.9))
-	h.text_at("今日已学",30,347,12,T.MUTED)
-	h.text_at("%d / %d 词" % [h.data.study.today.count,draft_goal],x-116,347,14,T.TEXT)
-	h.bar(Rect2(30,361,x-62,4),h.data.study.today.count,draft_goal,T.GREEN)
-	h.draw_rect(Rect2(x-12,58,area+24,328),Color(0.045,0.075,0.056,0.9))
-	h.text_at("选择词书",x,76,14,T.TEXT)
-	for i in 3:
-		var book=h.data.books[i];var card=book_rect(i);var chosen=book.id==draft_book
-		h.draw_rect(card,Color("21372a") if chosen else Color("17221c"))
-		h.draw_rect(Rect2(card.position,Vector2(3,card.size.y)),T.GREEN if chosen else T.EDGE)
-		h.text_at(["四级词书","六级词书","考研词书"][i],card.position.x+12,card.position.y+28,18,T.TEXT if chosen else T.MUTED)
-		h.text_at("%d 词" % book.count,card.position.x+12,card.position.y+49,12,T.GREEN if chosen else T.DIM)
-		h.text_at("已学 %d" % book.seen,card.position.x+12,card.position.y+70,11,T.MUTED)
-		if chosen:h.draw_circle(card.end-Vector2(14,15),3,T.GREEN)
-	h.text_at("训练方式",x,196,13,T.TEXT)
-	h.text_at("每轮词数",x,270,13,T.MUTED)
-	h.text_at("每日目标",x+(area-24)/2+24,270,13,T.MUTED)
+	var art=Rect2(16,60,x-34,208)
+	h.panel(Rect2(16,60,x-34,318),T.SURFACE,T.EDGE)
+	h.image_cover(h.operator_artwork(op),art)
+	h.draw_rect(Rect2(16,211,x-34,57),Color(T.INK,0.88))
+	h.draw_rect(Rect2(16,211,3,57),MINT)
+	h.text_at("今日学习计划",28,238,25,T.TEXT)
+	h.text_at(op.name+"  /  "+op.role,29,260,15,MINT)
+	h.text_at("今日已学",28,346,15,T.MUTED)
+	h.text_at("%d / %d 词" % [h.data.study.today.count,draft_goal],x-120,346,17,T.TEXT)
+	h.bar(Rect2(28,360,x-58,5),h.data.study.today.count,draft_goal,MINT)
+	h.panel(Rect2(x-12,58,area+24,328),T.SURFACE,T.EDGE)
+	h.text_at("选择词书",x,77,17,T.TEXT)
+	for i in h.data.books.size():
+		var book=h.data.books[i];var card=book_rect(i,h.data.books.size());var chosen=book.id==draft_book
+		var texture=h.textures["scene_"+BOOK_MAPS.get(book.id,"dam")]
+		h.image_cover(texture,card,Color.WHITE if chosen else Color(0.64,0.69,0.65))
+		h.draw_rect(Rect2(card.position+Vector2(0,30),card.size-Vector2(0,30)),Color(T.INK,0.84))
+		if chosen:h.draw_rect(Rect2(card.position,Vector2(3,card.size.y)),MINT)
+		h.text_at(BOOK_LABELS.get(book.id,book.name),card.position.x+8,card.position.y+54,22,T.TEXT)
+		h.text_at("%d 词" % book.count,card.position.x+8,card.position.y+74,14,MINT if chosen else T.MUTED)
+	h.text_at("训练方式",x,190,16,T.TEXT)
+	h.text_at("每轮词数",x,270,15,T.TEXT)
+	h.text_at("每日目标",x+(area-24)/2+24,270,15,T.TEXT)
 
 func actor_rect(enemy:bool) -> Rect2:
 	var scene:Rect2=battle_rects().scene
-	var side=148.0 if enemy else 184.0
+	var side=164.0 if enemy else 180.0
 	return Rect2(Vector2(scene.position.x+scene.size.x*(0.77 if enemy else 0.23)-side/2,scene.end.y-side-6),Vector2(side,side))
 
 func draw_battle(h) -> void:
 	var r=battle_rects();var s:Dictionary=h.state()
 	if s.is_empty():return
-	h.image_cover(h.textures["scene_"+h.SceneCatalog.current(h)],r.scene,Color(0.80,0.84,0.80))
+	h.image_cover(h.textures["scene_"+h.SceneCatalog.current(h)],r.scene,Color(0.94,0.98,0.95))
 	var scene:Rect2=r.scene
 	h.draw_character(str(s.avatar),h.skill_effects.body_action() if not h.skill_effects.body_action().is_empty() else h.character_action(false),h.skill_effects.age if h.skill_effects.active() else h.ui_time,actor_rect(false))
 	var enemy=str(h.data.stage.monster)
-	h.draw_character(enemy,h.character_action(true),h.ui_time,actor_rect(true))
+	var boss=h.DirectorBoss.active(h)
+	h.draw_character(enemy,h.director_action if boss else h.character_action(true),h.director_clock if boss else h.ui_time,actor_rect(true))
 	if h.fx_time>0 and h.fx_kind in ["hit","hurt"]:h.draw_shooting(T.FX_TIME-h.fx_time,h.fx_kind=="hurt",Vector2.ZERO)
 	if h.skill_effects.active():
 		var actor=h.skill_effects.actor
 		var frames=h.skill_effects.textures.get(actor,[])
-		if not frames.is_empty():h.draw_texture_rect(frames[mini(3,int(h.skill_effects.age*4))],Rect2(scene.position+Vector2(52,36),Vector2(80,80)),false)
-	h.bar(Rect2(scene.position+Vector2(8,8),Vector2(scene.size.x*0.42,4)),s.playerHp,140,T.GREEN)
-	h.bar(Rect2(scene.position+Vector2(scene.size.x*0.55,8),Vector2(scene.size.x*0.42-8,4)),s.botHp,s.enemyMaxHp,T.RED)
-	h.draw_rect(Rect2(scene.position+Vector2(0,scene.size.y-24),Vector2(scene.size.x,24)),Color(0.03,0.06,0.04,0.72))
-	h.text_at("生命 %d" % s.playerHp,scene.position.x+8,scene.end.y-8,12,T.TEXT)
-	h.text_at("敌方 %d" % s.botHp,scene.end.x-90,scene.end.y-8,12,T.TEXT)
+		if actor=="wildfire":h.skill_effects.draw_wildfire(h,Vector2.ZERO)
+		elif not frames.is_empty():h.draw_texture_rect(frames[mini(3,int(h.skill_effects.age*4))],Rect2(scene.position+Vector2(52,36),Vector2(80,80)),false)
+	var plate_width=clampf(scene.size.x*0.19,132,166)
+	var ally=Rect2(scene.position+Vector2(6,5),Vector2(plate_width,43))
+	var opponent=Rect2(scene.end.x-plate_width-6,ally.position.y,plate_width,43)
+	var op=h.operator_for(str(s.avatar))
+	for plate in [ally,opponent]:
+		h.panel(plate,Color(T.INK,0.87),T.EDGE)
+	h.draw_rect(Rect2(ally.position,Vector2(3,43)),T.GREEN)
+	h.draw_rect(Rect2(opponent.end.x-3,opponent.position.y,3,43),T.RED)
+	h.text_at(op.name,ally.position.x+9,ally.position.y+17,15,T.TEXT)
+	h.text_at("生命 %d" % s.playerHp,ally.position.x+9,ally.position.y+37,13,T.MUTED)
+	h.text_at("英语总监" if boss else h.Look.ENEMIES.get(enemy,"敌方"),opponent.position.x+9,opponent.position.y+17,15,T.TEXT)
+	h.text_at("生命 %d" % s.botHp,opponent.position.x+9,opponent.position.y+37,13,T.MUTED)
+	h.bar(Rect2(ally.position+Vector2(9,21),Vector2(plate_width-18,3)),s.playerHp,140,T.GREEN)
+	var enemy_bar=Rect2(opponent.position+Vector2(9,21),Vector2(plate_width-18,3))
+	h.bar(enemy_bar,s.botHp,s.enemyMaxHp,T.RED)
+	if not boss:h.hit_feedback.hp_trail(h,enemy_bar)
 	var q=h.data.get("choice")
-	h.panel(r.question,T.SURFACE)
+	h.panel(r.question,SURFACE,BORDER)
 	if q is Dictionary:
-		var title="选择中文意思" if q.mode=="choose_meaning" else "选择英文单词"
-		h.text_at("答对了" if q.answered and q.correct else "看清正确答案" if q.answered else title,r.question.position.x+12,r.question.position.y+23,13,T.GREEN if not q.answered or q.correct else T.RED)
-		label(h,(h.data.lastAnswer.word+" · "+str(h.data.lastAnswer.meaning).split(";")[0].split("；")[0]) if q.answered else q.prompt,Rect2(r.question.position+Vector2(12,26),r.question.size-Vector2(24,28)),14 if q.answered else 19 if q.mode=="choose_word" else 27,T.TEXT)
+		var title="看词选意" if q.mode=="choose_meaning" else "看意选词"
+		h.text_at("答对了" if q.answered and q.correct else "看清正确答案" if q.answered else title,r.question.position.x+12,r.question.position.y+22,15,T.GREEN if not q.answered or q.correct else T.RED)
+		label(h,(h.data.lastAnswer.word+" · "+str(h.data.lastAnswer.meaning).split(";")[0].split("；")[0]) if q.answered else q.prompt,Rect2(r.question.position+Vector2(12,30),r.question.size-Vector2(24,28)),16 if q.answered else 22 if q.mode=="choose_word" else 30,T.TEXT)
 	else:
-		h.text_at("输入短语释放大招" if h.data.get("chanting",false) else "拼写正确" if h.data.get("answerFeedback",false) else "根据提示拼写",r.question.position.x+12,r.question.position.y+22,12,T.GREEN)
-		label(h,str(h.data.get("prompt","")),Rect2(r.question.position+Vector2(12,30),r.question.size-Vector2(24,38)),22 if str(h.data.get("prompt","")).length()<20 else 15,T.TEXT)
+		h.text_at("正在准备选项…",r.question.position.x+12,r.question.position.y+32,16,T.MUTED)
 	var comms=h.Communications.presentation(h)
-	var caption=str(comms.caption)
+	var caption="轻点选项作答，答后自动进入下一题。" if comms.mode=="guide" else str(comms.caption)
 	var notice=h.error_text if not h.error_text.is_empty() else h.level_notice if h.level_notice_time>0 else ""
 	if not notice.is_empty():
 		h.text_at(notice,r.caption.position.x,r.caption.position.y+13,12,T.GREEN,r.caption.size.x)

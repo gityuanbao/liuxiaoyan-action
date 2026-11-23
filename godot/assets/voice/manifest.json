@@ -1,7 +1,7 @@
 {
   "version": 6,
   "name": "德穆兰 · 考研复刻与原声语音包",
-  "method": "43 source recordings, 18 reference-synthesized kaoyan lines, and 10 new reference-synthesized learning guides.",
+  "method": "Classroom recordings and synthesized study prompts curated for this Toy.",
   "cooldown_seconds": 2.5,
   "clips": [
     {
@@ -129,131 +129,6 @@
         {
           "at": 2.38,
           "visible": 16
-        }
-      ],
-      "alignment": "Whisper forced alignment on the original audio",
-      "audio_kind": "source_recording"
-    },
-    {
-      "id": "delta_mouse",
-      "title": "臭老鼠，看着我的脸，说的就是你。",
-      "caption": "臭老鼠，看着我的脸，说的就是你。",
-      "events": [
-        "hurt",
-        "miss"
-      ],
-      "group": "德穆兰原声",
-      "source": "https://www.bilibili.com/video/BV1hTnb6XEju/",
-      "source_start": 2.94,
-      "source_end": 5.76,
-      "file": "original_delta_mouse.ogg",
-      "duration": 2.82,
-      "cues": [
-        {
-          "at": 0,
-          "visible": 1
-        },
-        {
-          "at": 0.44,
-          "visible": 2
-        },
-        {
-          "at": 0.64,
-          "visible": 3
-        },
-        {
-          "at": 0.64,
-          "visible": 4
-        },
-        {
-          "at": 1.04,
-          "visible": 5
-        },
-        {
-          "at": 1.2,
-          "visible": 6
-        },
-        {
-          "at": 1.32,
-          "visible": 7
-        },
-        {
-          "at": 1.37,
-          "visible": 8
-        },
-        {
-          "at": 1.42,
-          "visible": 9
-        },
-        {
-          "at": 1.42,
-          "visible": 10
-        },
-        {
-          "at": 1.98,
-          "visible": 11
-        },
-        {
-          "at": 2.1,
-          "visible": 12
-        },
-        {
-          "at": 2.26,
-          "visible": 13
-        },
-        {
-          "at": 2.38,
-          "visible": 14
-        },
-        {
-          "at": 2.5,
-          "visible": 15
-        },
-        {
-          "at": 2.5,
-          "visible": 16
-        }
-      ],
-      "alignment": "Whisper forced alignment on the original audio",
-      "audio_kind": "source_recording"
-    },
-    {
-      "id": "delta_dare",
-      "title": "你怎么敢的？",
-      "caption": "你怎么敢的？",
-      "events": [
-        "miss"
-      ],
-      "group": "德穆兰原声",
-      "source": "https://www.bilibili.com/video/BV1hTnb6XEju/",
-      "source_start": 56.08,
-      "source_end": 57.07,
-      "file": "original_delta_dare.ogg",
-      "duration": 0.99,
-      "cues": [
-        {
-          "at": 0,
-          "visible": 1
-        },
-        {
-          "at": 0.24,
-          "visible": 2
-        },
-        {
-          "at": 0.36,
-          "visible": 3
-        },
-        {
-          "at": 0.48,
-          "visible": 4
-        },
-        {
-          "at": 0.76,
-          "visible": 5
-        },
-        {
-          "at": 0.76,
-          "visible": 6
         }
       ],
       "alignment": "Whisper forced alignment on the original audio",
@@ -518,65 +393,6 @@
         {
           "at": 2.18,
           "visible": 15
-        }
-      ],
-      "alignment": "Whisper forced alignment on the original audio",
-      "audio_kind": "source_recording"
-    },
-    {
-      "id": "delta_guard",
-      "title": "不准放进来一只老鼠。",
-      "caption": "不准放进来一只老鼠。",
-      "events": [
-        "warded",
-        "combo"
-      ],
-      "group": "德穆兰原声",
-      "source": "https://www.bilibili.com/video/BV1hTnb6XEju/",
-      "source_start": 50.58,
-      "source_end": 52.2,
-      "file": "original_delta_guard.ogg",
-      "duration": 1.62,
-      "cues": [
-        {
-          "at": 0,
-          "visible": 1
-        },
-        {
-          "at": 0.34,
-          "visible": 2
-        },
-        {
-          "at": 0.48,
-          "visible": 3
-        },
-        {
-          "at": 0.7,
-          "visible": 4
-        },
-        {
-          "at": 0.84,
-          "visible": 5
-        },
-        {
-          "at": 0.94,
-          "visible": 6
-        },
-        {
-          "at": 1.14,
-          "visible": 7
-        },
-        {
-          "at": 1.26,
-          "visible": 8
-        },
-        {
-          "at": 1.42,
-          "visible": 9
-        },
-        {
-          "at": 1.42,
-          "visible": 10
         }
       ],
       "alignment": "Whisper forced alignment on the original audio",
@@ -937,148 +753,6 @@
       "image": "images/local_03.jpg"
     },
     {
-      "id": "local_04",
-      "title": "每天睡得跟猪头一样",
-      "caption": "每天睡得跟猪头一样。",
-      "events": [
-        "return"
-      ],
-      "group": "课堂原声",
-      "source": "https://www.bilibili.com/video/BV16iEFzYEm2/",
-      "source_start": 35.06,
-      "source_end": 36.6,
-      "file": "original_local_04.ogg",
-      "duration": 1.54,
-      "cues": [
-        {
-          "at": 0,
-          "visible": 1
-        },
-        {
-          "at": 0.36,
-          "visible": 2
-        },
-        {
-          "at": 0.48,
-          "visible": 3
-        },
-        {
-          "at": 0.6,
-          "visible": 4
-        },
-        {
-          "at": 0.66,
-          "visible": 5
-        },
-        {
-          "at": 0.74,
-          "visible": 6
-        },
-        {
-          "at": 0.94,
-          "visible": 7
-        },
-        {
-          "at": 1.08,
-          "visible": 8
-        },
-        {
-          "at": 1.28,
-          "visible": 9
-        },
-        {
-          "at": 1.28,
-          "visible": 10
-        }
-      ],
-      "alignment": "Whisper forced alignment on the original audio",
-      "audio_kind": "source_recording",
-      "image": "images/local_04.jpg"
-    },
-    {
-      "id": "local_05",
-      "title": "每天看手机",
-      "caption": "每天看手机，眼睛都刷出流血了吧。",
-      "events": [
-        "return"
-      ],
-      "group": "课堂原声",
-      "source": "https://www.bilibili.com/video/BV16iEFzYEm2/",
-      "source_start": 36.56,
-      "source_end": 38.72,
-      "file": "original_local_05.ogg",
-      "duration": 2.16,
-      "cues": [
-        {
-          "at": 0,
-          "visible": 1
-        },
-        {
-          "at": 0.42,
-          "visible": 2
-        },
-        {
-          "at": 0.52,
-          "visible": 3
-        },
-        {
-          "at": 0.62,
-          "visible": 4
-        },
-        {
-          "at": 0.76,
-          "visible": 5
-        },
-        {
-          "at": 0.76,
-          "visible": 6
-        },
-        {
-          "at": 1.1,
-          "visible": 7
-        },
-        {
-          "at": 1.22,
-          "visible": 8
-        },
-        {
-          "at": 1.34,
-          "visible": 9
-        },
-        {
-          "at": 1.42,
-          "visible": 10
-        },
-        {
-          "at": 1.56,
-          "visible": 11
-        },
-        {
-          "at": 1.68,
-          "visible": 12
-        },
-        {
-          "at": 1.78,
-          "visible": 13
-        },
-        {
-          "at": 1.96,
-          "visible": 14
-        },
-        {
-          "at": 2.03,
-          "visible": 15
-        },
-        {
-          "at": 2.03,
-          "visible": 16
-        }
-      ],
-      "alignment": "Whisper forced alignment on the original audio",
-      "audio_kind": "source_recording",
-      "image": "images/local_05.jpg"
-    },
-    {
       "id": "local_06",
       "title": "核心词汇背过吗",
       "caption": "那核心词汇背过吗？",
@@ -1133,61 +807,6 @@
       "alignment": "Whisper forced alignment on the original audio",
       "audio_kind": "source_recording",
       "image": "images/local_06.jpg"
-    },
-    {
-      "id": "local_07",
-      "title": "自己过得一地鸡毛",
-      "caption": "自己过得一地鸡毛。",
-      "events": [
-        "hurt"
-      ],
-      "group": "课堂原声",
-      "source": "https://www.bilibili.com/video/BV16iEFzYEm2/",
-      "source_start": 42.56,
-      "source_end": 43.84,
-      "file": "original_local_07.ogg",
-      "duration": 1.28,
-      "cues": [
-        {
-          "at": 0,
-          "visible": 1
-        },
-        {
-          "at": 0.2,
-          "visible": 2
-        },
-        {
-          "at": 0.4,
-          "visible": 3
-        },
-        {
-          "at": 0.56,
-          "visible": 4
-        },
-        {
-          "at": 0.66,
-          "visible": 5
-        },
-        {
-          "at": 0.8,
-          "visible": 6
-        },
-        {
-          "at": 0.88,
-          "visible": 7
-        },
-        {
-          "at": 1.04,
-          "visible": 8
-        },
-        {
-          "at": 1.04,
-          "visible": 9
-        }
-      ],
-      "alignment": "Whisper forced alignment on the original audio",
-      "audio_kind": "source_recording",
-      "image": "images/local_07.jpg"
     },
     {
       "id": "local_08",
@@ -1415,65 +1034,6 @@
       "image": "images/local_12.jpg"
     },
     {
-      "id": "local_13",
-      "title": "梦见自己变成一头猪",
-      "caption": "梦见自己变成一头猪。",
-      "events": [
-        "return"
-      ],
-      "group": "课堂原声",
-      "source": "https://www.bilibili.com/video/BV16iEFzYEm2/",
-      "source_start": 68.04,
-      "source_end": 69.42,
-      "file": "original_local_13.ogg",
-      "duration": 1.38,
-      "cues": [
-        {
-          "at": 0,
-          "visible": 1
-        },
-        {
-          "at": 0.34,
-          "visible": 2
-        },
-        {
-          "at": 0.48,
-          "visible": 3
-        },
-        {
-          "at": 0.56,
-          "visible": 4
-        },
-        {
-          "at": 0.64,
-          "visible": 5
-        },
-        {
-          "at": 0.84,
-          "visible": 6
-        },
-        {
-          "at": 0.92,
-          "visible": 7
-        },
-        {
-          "at": 0.98,
-          "visible": 8
-        },
-        {
-          "at": 1.1,
-          "visible": 9
-        },
-        {
-          "at": 1.1,
-          "visible": 10
-        }
-      ],
-      "alignment": "Whisper forced alignment on the original audio",
-      "audio_kind": "source_recording",
-      "image": "images/local_13.jpg"
-    },
-    {
       "id": "local_14",
       "title": "看到了也不是你的",
       "caption": "刘老师，看到了也不是你的。",
@@ -1545,81 +1105,6 @@
       "image": "images/local_14.jpg"
     },
     {
-      "id": "local_15",
-      "title": "上厕所也躺着",
-      "caption": "你就差一条，上厕所也躺着了。",
-      "events": [
-        "return"
-      ],
-      "group": "课堂原声",
-      "source": "https://www.bilibili.com/video/BV16iEFzYEm2/",
-      "source_start": 91.34,
-      "source_end": 93.42,
-      "file": "original_local_15.ogg",
-      "duration": 2.08,
-      "cues": [
-        {
-          "at": 0,
-          "visible": 1
-        },
-        {
-          "at": 0.2,
-          "visible": 2
-        },
-        {
-          "at": 0.4,
-          "visible": 3
-        },
-        {
-          "at": 0.72,
-          "visible": 4
-        },
-        {
-          "at": 0.9,
-          "visible": 5
-        },
-        {
-          "at": 0.9,
-          "visible": 6
-        },
-        {
-          "at": 1.2,
-          "visible": 7
-        },
-        {
-          "at": 1.24,
-          "visible": 8
-        },
-        {
-          "at": 1.4,
-          "visible": 9
-        },
-        {
-          "at": 1.52,
-          "visible": 10
-        },
-        {
-          "at": 1.62,
-          "visible": 11
-        },
-        {
-          "at": 1.84,
-          "visible": 12
-        },
-        {
-          "at": 1.94,
-          "visible": 13
-        },
-        {
-          "at": 1.94,
-          "visible": 14
-        }
-      ],
-      "alignment": "Whisper forced alignment on the original audio",
-      "audio_kind": "source_recording",
-      "image": "images/local_15.jpg"
-    },
-    {
       "id": "local_16",
       "title": "那都是别人的生活呀",
       "caption": "那都是别人的生活呀。",
@@ -1677,53 +1162,6 @@
       "alignment": "Whisper forced alignment on the original audio",
       "audio_kind": "source_recording",
       "image": "images/local_16.jpg"
-    },
-    {
-      "id": "local_17",
-      "title": "关你个狗屁事",
-      "caption": "关你个狗屁事。",
-      "events": [
-        "hurt"
-      ],
-      "group": "课堂原声",
-      "source": "https://www.bilibili.com/video/BV16iEFzYEm2/",
-      "source_start": 106.13,
-      "source_end": 107.22,
-      "file": "original_local_17.ogg",
-      "duration": 1.09,
-      "cues": [
-        {
-          "at": 0,
-          "visible": 1
-        },
-        {
-          "at": 0.32,
-          "visible": 2
-        },
-        {
-          "at": 0.46,
-          "visible": 3
-        },
-        {
-          "at": 0.54,
-          "visible": 4
-        },
-        {
-          "at": 0.68,
-          "visible": 5
-        },
-        {
-          "at": 0.86,
-          "visible": 6
-        },
-        {
-          "at": 0.86,
-          "visible": 7
-        }
-      ],
-      "alignment": "Whisper forced alignment on the original audio",
-      "audio_kind": "source_recording",
-      "image": "images/local_17.jpg"
     },
     {
       "id": "local_18",
@@ -1791,326 +1229,6 @@
       "image": "images/local_18.jpg"
     },
     {
-      "id": "local_19",
-      "title": "你比较适合做一摊狗屎",
-      "caption": "你比较适合做一摊狗屎。",
-      "events": [],
-      "group": "课堂原声",
-      "source": "https://www.bilibili.com/video/BV16iEFzYEm2/",
-      "source_start": 115.52,
-      "source_end": 117.3,
-      "file": "original_local_19.ogg",
-      "duration": 1.78,
-      "cues": [
-        {
-          "at": 0,
-          "visible": 1
-        },
-        {
-          "at": 0.16,
-          "visible": 2
-        },
-        {
-          "at": 0.24,
-          "visible": 3
-        },
-        {
-          "at": 0.4,
-          "visible": 4
-        },
-        {
-          "at": 0.58,
-          "visible": 5
-        },
-        {
-          "at": 0.7,
-          "visible": 6
-        },
-        {
-          "at": 0.86,
-          "visible": 7
-        },
-        {
-          "at": 1.18,
-          "visible": 8
-        },
-        {
-          "at": 1.36,
-          "visible": 9
-        },
-        {
-          "at": 1.56,
-          "visible": 10
-        },
-        {
-          "at": 1.56,
-          "visible": 11
-        }
-      ],
-      "alignment": "Whisper forced alignment on the original audio",
-      "audio_kind": "source_recording",
-      "image": "images/local_19.jpg"
-    },
-    {
-      "id": "local_20",
-      "title": "比较适合做一头猪",
-      "caption": "比较适合做一头猪。",
-      "events": [],
-      "group": "课堂原声",
-      "source": "https://www.bilibili.com/video/BV16iEFzYEm2/",
-      "source_start": 117.76,
-      "source_end": 119.14,
-      "file": "original_local_20.ogg",
-      "duration": 1.38,
-      "cues": [
-        {
-          "at": 0,
-          "visible": 1
-        },
-        {
-          "at": 0.36,
-          "visible": 2
-        },
-        {
-          "at": 0.5,
-          "visible": 3
-        },
-        {
-          "at": 0.64,
-          "visible": 4
-        },
-        {
-          "at": 0.74,
-          "visible": 5
-        },
-        {
-          "at": 0.86,
-          "visible": 6
-        },
-        {
-          "at": 0.96,
-          "visible": 7
-        },
-        {
-          "at": 1.1,
-          "visible": 8
-        },
-        {
-          "at": 1.1,
-          "visible": 9
-        }
-      ],
-      "alignment": "Whisper forced alignment on the original audio",
-      "audio_kind": "source_recording",
-      "image": "images/local_20.jpg"
-    },
-    {
-      "id": "local_21",
-      "title": "你会什么呀",
-      "caption": "就你会什么呀？",
-      "events": [
-        "miss"
-      ],
-      "group": "课堂原声",
-      "source": "https://www.bilibili.com/video/BV16iEFzYEm2/",
-      "source_start": 122.54,
-      "source_end": 123.97,
-      "file": "original_local_21.ogg",
-      "duration": 1.43,
-      "cues": [
-        {
-          "at": 0,
-          "visible": 1
-        },
-        {
-          "at": 0.36,
-          "visible": 2
-        },
-        {
-          "at": 0.58,
-          "visible": 3
-        },
-        {
-          "at": 0.82,
-          "visible": 4
-        },
-        {
-          "at": 1.01,
-          "visible": 5
-        },
-        {
-          "at": 1.2,
-          "visible": 6
-        },
-        {
-          "at": 1.2,
-          "visible": 7
-        }
-      ],
-      "alignment": "Whisper forced alignment on the original audio",
-      "audio_kind": "source_recording",
-      "image": "images/local_21.jpg"
-    },
-    {
-      "id": "local_22",
-      "title": "不要再假装学习了",
-      "caption": "你不要再假装学习了。",
-      "events": [
-        "books",
-        "hint"
-      ],
-      "group": "课堂原声",
-      "source": "https://www.bilibili.com/video/BV16iEFzYEm2/",
-      "source_start": 132.26,
-      "source_end": 133.9,
-      "file": "original_local_22.ogg",
-      "duration": 1.64,
-      "cues": [
-        {
-          "at": 0,
-          "visible": 1
-        },
-        {
-          "at": 0.38,
-          "visible": 2
-        },
-        {
-          "at": 0.48,
-          "visible": 3
-        },
-        {
-          "at": 0.58,
-          "visible": 4
-        },
-        {
-          "at": 0.74,
-          "visible": 5
-        },
-        {
-          "at": 0.96,
-          "visible": 6
-        },
-        {
-          "at": 1.14,
-          "visible": 7
-        },
-        {
-          "at": 1.3,
-          "visible": 8
-        },
-        {
-          "at": 1.5,
-          "visible": 9
-        },
-        {
-          "at": 1.5,
-          "visible": 10
-        }
-      ],
-      "alignment": "Whisper forced alignment on the original audio",
-      "audio_kind": "source_recording",
-      "image": "images/local_22.jpg"
-    },
-    {
-      "id": "local_23",
-      "title": "还骗自己有意思吗",
-      "caption": "还骗自己有意思吗？",
-      "events": [
-        "miss",
-        "hint"
-      ],
-      "group": "课堂原声",
-      "source": "https://www.bilibili.com/video/BV16iEFzYEm2/",
-      "source_start": 139.44,
-      "source_end": 140.62,
-      "file": "original_local_23.ogg",
-      "duration": 1.18,
-      "cues": [
-        {
-          "at": 0,
-          "visible": 1
-        },
-        {
-          "at": 0.1,
-          "visible": 2
-        },
-        {
-          "at": 0.32,
-          "visible": 3
-        },
-        {
-          "at": 0.42,
-          "visible": 4
-        },
-        {
-          "at": 0.52,
-          "visible": 5
-        },
-        {
-          "at": 0.7,
-          "visible": 6
-        },
-        {
-          "at": 0.8,
-          "visible": 7
-        },
-        {
-          "at": 0.9,
-          "visible": 8
-        },
-        {
-          "at": 0.9,
-          "visible": 9
-        }
-      ],
-      "alignment": "Whisper forced alignment on the original audio",
-      "audio_kind": "source_recording",
-      "image": "images/local_23.jpg"
-    },
-    {
-      "id": "local_24",
-      "title": "你恶不恶心",
-      "caption": "你恶不恶心？",
-      "events": [
-        "miss"
-      ],
-      "group": "课堂原声",
-      "source": "https://www.bilibili.com/video/BV16iEFzYEm2/",
-      "source_start": 141.12,
-      "source_end": 142.12,
-      "file": "original_local_24.ogg",
-      "duration": 1.0,
-      "cues": [
-        {
-          "at": 0,
-          "visible": 1
-        },
-        {
-          "at": 0.26,
-          "visible": 2
-        },
-        {
-          "at": 0.62,
-          "visible": 3
-        },
-        {
-          "at": 0.74,
-          "visible": 4
-        },
-        {
-          "at": 0.86,
-          "visible": 5
-        },
-        {
-          "at": 0.86,
-          "visible": 6
-        }
-      ],
-      "alignment": "Whisper forced alignment on the original audio",
-      "audio_kind": "source_recording",
-      "image": "images/local_24.jpg"
-    },
-    {
       "id": "local_25",
       "title": "你自己写呀",
       "caption": "你自己写呀！",
@@ -2153,73 +1271,6 @@
       "alignment": "Whisper forced alignment on the original audio",
       "audio_kind": "source_recording",
       "image": "images/local_25.jpg"
-    },
-    {
-      "id": "local_26",
-      "title": "不要狡辩",
-      "caption": "不要狡辩，一定不要狡辩！",
-      "events": [
-        "miss"
-      ],
-      "group": "课堂原声",
-      "source": "https://www.bilibili.com/video/BV16iEFzYEm2/",
-      "source_start": 192.96,
-      "source_end": 195.4,
-      "file": "original_local_26.ogg",
-      "duration": 2.44,
-      "cues": [
-        {
-          "at": 0,
-          "visible": 1
-        },
-        {
-          "at": 0.13,
-          "visible": 2
-        },
-        {
-          "at": 0.26,
-          "visible": 3
-        },
-        {
-          "at": 0.54,
-          "visible": 4
-        },
-        {
-          "at": 0.54,
-          "visible": 5
-        },
-        {
-          "at": 1.52,
-          "visible": 6
-        },
-        {
-          "at": 1.61,
-          "visible": 7
-        },
-        {
-          "at": 1.7,
-          "visible": 8
-        },
-        {
-          "at": 1.79,
-          "visible": 9
-        },
-        {
-          "at": 1.88,
-          "visible": 10
-        },
-        {
-          "at": 2.04,
-          "visible": 11
-        },
-        {
-          "at": 2.04,
-          "visible": 12
-        }
-      ],
-      "alignment": "Whisper forced alignment on the original audio",
-      "audio_kind": "source_recording",
-      "image": "images/local_26.jpg"
     },
     {
       "id": "local_27",
@@ -2362,91 +1413,6 @@
       "alignment": "Whisper forced alignment on the original audio",
       "audio_kind": "source_recording",
       "image": "images/local_29.jpg"
-    },
-    {
-      "id": "ky_welcome",
-      "events": [
-        "welcome"
-      ],
-      "caption": "臭老鼠们，考研英语由我全权接管。",
-      "title": "臭老鼠们，考研英语由我全权接管。",
-      "file": "ky_welcome.ogg",
-      "duration": 2.64,
-      "cues": [
-        {
-          "at": 0.08,
-          "visible": 1
-        },
-        {
-          "at": 0.24,
-          "visible": 2
-        },
-        {
-          "at": 0.4,
-          "visible": 3
-        },
-        {
-          "at": 0.48,
-          "visible": 4
-        },
-        {
-          "at": 0.88,
-          "visible": 5
-        },
-        {
-          "at": 0.88,
-          "visible": 6
-        },
-        {
-          "at": 1.04,
-          "visible": 7
-        },
-        {
-          "at": 1.2,
-          "visible": 8
-        },
-        {
-          "at": 1.36,
-          "visible": 9
-        },
-        {
-          "at": 1.52,
-          "visible": 10
-        },
-        {
-          "at": 1.6,
-          "visible": 11
-        },
-        {
-          "at": 1.76,
-          "visible": 12
-        },
-        {
-          "at": 1.92,
-          "visible": 13
-        },
-        {
-          "at": 2.16,
-          "visible": 14
-        },
-        {
-          "at": 2.24,
-          "visible": 15
-        },
-        {
-          "at": 2.24,
-          "visible": 16
-        }
-      ],
-      "group": "考研复刻",
-      "scope": "ky",
-      "audio_kind": "reference_synthesis",
-      "source": "https://www.bilibili.com/video/BV1hTnb6XEju/",
-      "source_start": 38.13,
-      "source_end": 54.22,
-      "model": "qwen-audio-3.1-tts-plus",
-      "alignment": "provider character timestamps",
-      "method": "Original game dialogue synthesized with the user-requested reference voice; not a source quote."
     },
     {
       "id": "ky_books",
@@ -2731,95 +1697,6 @@
         {
           "at": 2.72,
           "visible": 22
-        }
-      ],
-      "group": "考研复刻",
-      "scope": "ky",
-      "audio_kind": "reference_synthesis",
-      "source": "https://www.bilibili.com/video/BV1hTnb6XEju/",
-      "source_start": 38.13,
-      "source_end": 54.22,
-      "model": "qwen-audio-3.1-tts-plus",
-      "alignment": "provider character timestamps",
-      "method": "Original game dialogue synthesized with the user-requested reference voice; not a source quote."
-    },
-    {
-      "id": "ky_miss",
-      "events": [
-        "miss"
-      ],
-      "caption": "你怎么敢的？考研单词也敢少写字母？",
-      "title": "你怎么敢的？考研单词也敢少写字母？",
-      "file": "ky_miss.ogg",
-      "duration": 2.48,
-      "cues": [
-        {
-          "at": 0.08,
-          "visible": 1
-        },
-        {
-          "at": 0.16,
-          "visible": 2
-        },
-        {
-          "at": 0.24,
-          "visible": 3
-        },
-        {
-          "at": 0.4,
-          "visible": 4
-        },
-        {
-          "at": 0.56,
-          "visible": 5
-        },
-        {
-          "at": 0.72,
-          "visible": 6
-        },
-        {
-          "at": 0.72,
-          "visible": 7
-        },
-        {
-          "at": 0.96,
-          "visible": 8
-        },
-        {
-          "at": 1.12,
-          "visible": 9
-        },
-        {
-          "at": 1.28,
-          "visible": 10
-        },
-        {
-          "at": 1.44,
-          "visible": 11
-        },
-        {
-          "at": 1.6,
-          "visible": 12
-        },
-        {
-          "at": 1.76,
-          "visible": 13
-        },
-        {
-          "at": 1.84,
-          "visible": 14
-        },
-        {
-          "at": 2.0,
-          "visible": 15
-        },
-        {
-          "at": 2.16,
-          "visible": 16
-        },
-        {
-          "at": 2.16,
-          "visible": 17
         }
       ],
       "group": "考研复刻",
@@ -4723,7 +3600,9 @@
       "title": "旧词该回来报到了。先回忆，实在想不起来再看提示。",
       "caption": "旧词该回来报到了。先回忆，实在想不起来再看提示。",
       "events": [
-        "daily_due"
+        "daily_due",
+        "hurt",
+        "miss"
       ],
       "scope": "all",
       "group": "学习引导",
@@ -5314,17 +4193,17 @@
     "学习引导"
   ],
   "counts": {
-    "reference_video": 12,
-    "local_recordings": 30,
-    "kaoyan_synthesized": 18,
-    "paired_images": 30,
+    "reference_video": 9,
+    "local_recordings": 17,
+    "kaoyan_synthesized": 16,
+    "paired_images": 17,
     "user_upload": 1,
     "learning_guides": 10
   },
   "preferred_first": {
     "welcome": "uploaded_english",
     "start": "delta_command",
-    "miss": "delta_dare",
+    "miss": "guide_due_alt",
     "defeat": "local_30",
     "victory": "local_01",
     "combo": "local_01",
@@ -5339,7 +4218,6 @@
         "local_08"
       ],
       "ky": [
-        "ky_welcome",
         "ky_books",
         "ky_start_two",
         "local_08"
@@ -5355,7 +4233,6 @@
       "ky": [
         "ky_books",
         "ky_start_two",
-        "ky_welcome",
         "local_08"
       ]
     },
@@ -5390,7 +4267,6 @@
     "review": {
       "general": [
         "delta_practice",
-        "local_22",
         "local_25",
         "local_06"
       ],
@@ -5404,8 +4280,7 @@
     "saved": {
       "general": [
         "local_25",
-        "local_06",
-        "local_22"
+        "local_06"
       ],
       "ky": [
         "ky_hint",
@@ -5453,8 +4328,7 @@
       "general": [
         "local_25",
         "delta_practice",
-        "local_06",
-        "local_22"
+        "local_06"
       ],
       "ky": [
         "ky_miss_again",

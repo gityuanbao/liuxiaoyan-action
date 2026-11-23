@@ -7,6 +7,7 @@ export const CHARACTER_SKILLS = {
   scholar: { passive: '语境洞察', description: '普通句子攻击额外造成 4 伤害。', ultimate: '星文解构', effect: '造成 46 伤害，返还 20 能量。', damage: 46, chant: 'in sight', translation: '在视野之内' },
   bard: { passive: '潮声和弦', description: '每 3 次普通命中恢复 6 生命，最多恢复至 140。', ultimate: '潮汐回响', effect: '造成 40 伤害，恢复 24 生命。', damage: 40, chant: 'safe and sound', translation: '安然无恙' },
   alchemist: { passive: '纠错炼成', description: '错拼后下一次普通命中额外造成 6 伤害，不叠加。', ultimate: '炎星炼成', effect: '造成 52 伤害；接下来两次对手行动前，各灼烧 10 生命。', damage: 52, chant: 'set off', translation: '引爆；触发' },
+  wildfire: { passive: '机动防护', description: '每三次普通命中获得 4 护盾，进阶后为 6 或 8。', ultimate: '盾式破障器', effect: '造成 56 伤害。', damage: 56, chant: 'break the shield', translation: '击破护盾' },
 } satisfies Record<AvatarId, { passive: string; description: string; ultimate: string; effect: string; damage: number; chant: string; translation: string }>
 export const SPIRIT_SKILLS = {
   moon: { name: '月光充盈', description: '每 3 次普通命中补充 8 能量。', every: 3 },

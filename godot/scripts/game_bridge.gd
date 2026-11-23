@@ -91,7 +91,11 @@ func _response(result: int, _code: int, _headers: PackedStringArray, bytes: Pack
 			merged.merge(response,true)
 			response=merged
 		snapshot = response
-		updated.emit(snapshot, "daily_start" if action_pending=="mobile_plan_start" else action_pending)
+		var action=action_pending
+		if action=="mobile_plan_start":action="daily_start"
+		elif action=="favorite_review":action="study_start"
+		elif action=="mobile_boss_start":action="boss_start"
+		updated.emit(snapshot,action)
 	if not queued.is_empty():
 		var next = queued.pop_front()
 		request(next[0], next[1])

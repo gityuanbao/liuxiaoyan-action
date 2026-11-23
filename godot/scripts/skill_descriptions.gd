@@ -3,6 +3,7 @@ extends RefCounted
 static func tactic(id:String,rank:int=1,boss:bool=false) -> String:
 	var r=clampi(rank,1,3)-1
 	match id:
+		"wildfire":return "展开环形烟幕，获得 14 护甲，敌方下一次行动延后 2 秒。"
 		"mage":return "补充 40 能量，上限 100；满能量时不可用。"
 		"knight":return "获得 22 护甲，上限 40；敌袭延后 1.2 秒。"
 		"ranger":return "下一次拼写命中 +6 伤害；敌袭延后 4 秒。" if not boss else "标记下一次拼写，增强压制；敌袭延后 4 秒。"
@@ -13,9 +14,11 @@ static func tactic(id:String,rank:int=1,boss:bool=false) -> String:
 
 static func passive(id:String,rank:int=1) -> String:
 	var r=clampi(rank,1,3)-1
+	if id=="wildfire":return "愈战愈勇：每三次普通命中获得 %d 护甲，上限 40。" % (4+2*r)
 	return {"mage":"被动：每次普通命中额外 +%d 能量。" % (4+r*4),"knight":"被动：每次普通命中 +%d 护甲，上限 40。" % (3+r*2),"ranger":"被动：从三连击起，每次普通命中 +%d 伤害。" % (3+r*2),"scholar":"被动：普通句子命中 +%d 伤害，单词不触发。" % (4+r*4),"bard":"被动：每三次普通命中恢复 %d 生命，上限 140。" % (6+r*4),"alchemist":"被动：错拼后下一次普通命中 +%d 伤害，不叠加。" % (6+r*4)}.get(id,"")
 
 static func ultimate(id:String,rank:int=1,boss:bool=false) -> String:
+	if id=="wildfire":return "举盾冲刺，增强对总监的压制。" if boss else "举盾冲刺并击破目标，造成 56 伤害。"
 	if boss:
 		return {"mage":"延长压制；不扣词汇护甲，不替代必答单词。","knight":"延长压制，并获得 24 护甲，上限 40。","ranger":"延长压制，敌袭额外延后 5 秒。","scholar":"延长压制，返还 20 能量。","bard":"延长压制，恢复 24 生命，上限 140。","alchemist":"延长压制；接下来两次敌袭后的间隔各增加 0.5 秒。"}.get(id,"")
 	return {"mage":"造成 60 伤害。","knight":"造成 42 伤害，获得 24 护甲，上限 40。","ranger":"造成 48 伤害，敌袭延后 5 秒。","scholar":"造成 46 伤害，返还 20 能量。","bard":"造成 40 伤害，恢复 24 生命，上限 140。","alchemist":"造成 52 伤害；随后两次敌袭前各灼烧 %d。" % (10+(clampi(rank,1,3)-1)*3)}.get(id,"")

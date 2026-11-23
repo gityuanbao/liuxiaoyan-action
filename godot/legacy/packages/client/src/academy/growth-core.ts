@@ -1,4 +1,4 @@
-import { AVATAR_IDS, type AvatarId } from './character-data'
+import { ALL_OPERATOR_IDS, type AvatarId } from './character-data'
 import type { SpiritId } from './combat-skills'
 import type { LearningProfile, LearningRecord } from './learning-core'
 export interface Bond { rank: number; xp: number }
@@ -24,7 +24,7 @@ export function awardPractice(p: LearningProfile, r: LearningRecord): Growth {
 }
 export const nextUpgrade = (kind: 'hero' | 'spirit', rank: number) => rank >= 3 ? null : kind === 'hero' ? { cost: rank === 1 ? 30 : 70, xp: rank === 1 ? 20 : 60 } : { cost: rank === 1 ? 25 : 60, xp: rank === 1 ? 12 : 36 }
 export function upgradeBond(p: LearningProfile, kind: 'hero' | 'spirit', id: string): LearningProfile {
-  if (!(kind === 'hero' ? AVATAR_IDS.includes(id as AvatarId) : SPIRIT_IDS.includes(id as SpiritId))) throw new Error('找不到这位同行者。')
+  if (!(kind === 'hero' ? ALL_OPERATOR_IDS.includes(id as AvatarId) : SPIRIT_IDS.includes(id as SpiritId))) throw new Error('找不到这位同行者。')
   const g = p.growth ?? freshGrowth(p), key = kind === 'hero' ? 'heroes' : 'spirits'
   const bond = (g[key] as Record<string, Bond>)[id] ?? { rank: 1, xp: 0 }, next = nextUpgrade(kind, bond.rank)
   if (!next) throw new Error('已达到觉醒阶。')
@@ -35,5 +35,5 @@ export function upgradeBond(p: LearningProfile, kind: 'hero' | 'spirit', id: str
 export function validGrowth(value: unknown): value is Growth {
   const g = value as Growth, integer = (n: unknown) => Number.isSafeInteger(n) && Number(n) >= 0
   const bonds = (v: unknown, ids: string[]) => !!v && typeof v === 'object' && !Array.isArray(v) && Object.entries(v).every(([id, b]) => ids.includes(id) && b && integer(b.xp) && integer(b.rank) && b.rank >= 1 && b.rank <= 3)
-  return !!g && [g.coins, g.earned, g.spent].every(integer) && g.coins === g.earned - g.spent && Array.isArray(g.settled) && g.settled.length <= 50000 && g.settled.every(id => typeof id === 'string' && id.length > 0 && id.length <= 300) && new Set(g.settled).size === g.settled.length && bonds(g.heroes, AVATAR_IDS) && bonds(g.spirits, SPIRIT_IDS)
+  return !!g && [g.coins, g.earned, g.spent].every(integer) && g.coins === g.earned - g.spent && Array.isArray(g.settled) && g.settled.length <= 50000 && g.settled.every(id => typeof id === 'string' && id.length > 0 && id.length <= 300) && new Set(g.settled).size === g.settled.length && bonds(g.heroes, ALL_OPERATOR_IDS) && bonds(g.spirits, SPIRIT_IDS)
 }

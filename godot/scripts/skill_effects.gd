@@ -9,7 +9,7 @@ var fire_cued=false
 var casts=0
 var textures:Dictionary={}
 var receipt=""
-const FEEDBACK={"mage":"动力启动 · 能量补充","knight":"声波展开 · 装甲强化","ranger":"侦察完成 · 下一击标记","scholar":"解析完成 · 精准锁定","bard":"急救生效 · 生命恢复","alchemist":"爆破就绪 · 下一击强化"}
+const FEEDBACK={"mage":"动力启动 · 能量补充","knight":"声波展开 · 装甲强化","ranger":"侦察完成 · 下一击标记","scholar":"解析完成 · 精准锁定","bard":"急救生效 · 生命恢复","alchemist":"爆破就绪 · 下一击强化","wildfire":"烟幕展开 · 掩护就位"}
 
 func prepare() -> void:
 	for id in FEEDBACK:
@@ -33,6 +33,7 @@ func trigger(id:String,action:String,before:Dictionary={},after:Dictionary={},bo
 	elif actor=="scholar":gains.append("下一击已锁定")
 	elif actor=="alchemist":gains.append("下一击强化 · 两次持续压制" if boss else "下一击强化 · 两次灼烧")
 	elif actor=="knight":gains.append("敌袭 +1.2 秒")
+	elif actor=="wildfire":gains.append("敌袭 +2 秒")
 	elif actor=="bard" and gains.is_empty():gains.append("生命已满")
 	receipt=" · ".join(gains)
 
@@ -84,6 +85,24 @@ func effect_rect(h,offset:Vector2) -> Rect2:
 		"alchemist":return Rect2(target-Vector2(136,102),Vector2(272,204))
 	return Rect2()
 
+func draw_wildfire(h,offset:Vector2) -> void:
+	var ally:Rect2=h.battle_actor_rect(false,offset)
+	var t=clampf(age/duration,0.0,1.0)
+	if kind=="tactic":
+		var size=ally.size*Vector2(0.94,0.54)
+		var center=ally.position+ally.size*Vector2(0.50,0.71)
+		var frames:Array=textures.get("wildfire",[])
+		if not frames.is_empty():
+			h.draw_texture_rect(frames[mini(3,int(t*4))],Rect2(center-size/2,size),false,Color(1,1,1,sin(t*PI)))
+	elif t>=0.34 and t<=0.86:
+		var impact=(t-0.34)/0.52
+		var contact:Vector2=h.battle_target(true,offset)
+		var radius=ally.size.x*lerpf(0.03,0.18,impact)
+		h.draw_arc(contact,radius,-1.17,1.17,24,Color(T.ORANGE,1.0-impact),maxf(1.5,radius*0.085),true)
+		for i in 5:
+			var direction=Vector2.RIGHT.rotated(lerpf(-1.08,1.08,float(i)/4))
+			h.draw_line(contact+direction*radius,contact+direction*(radius+ally.size.x*0.06),Color(T.TEXT,1.0-impact),2,true)
+
 func draw(h,offset:Vector2) -> void:
 	draw_shield(h,offset)
 	if not active() or not textures.has(actor):return
@@ -93,7 +112,8 @@ func draw(h,offset:Vector2) -> void:
 	var rect=effect_rect(h,offset)
 	# Booster exhaust goes behind the ally. Defence/healing stay on the ally;
 	# scans/locks and explosions attach to the enemy, including the larger boss.
-	if actor=="mage":h.draw_flipped(textures[actor][f],rect,Color(1,1,1,alpha))
+	if actor=="wildfire":draw_wildfire(h,offset)
+	elif actor=="mage":h.draw_flipped(textures[actor][f],rect,Color(1,1,1,alpha))
 	elif actor=="knight":pass
 	elif actor!="alchemist" or kind=="ultimate" and age>=0.34:
 		h.draw_texture_rect(textures[actor][f],rect,false,Color(1,1,1,alpha))

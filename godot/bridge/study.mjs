@@ -38,6 +38,10 @@ export class StudyPlanner {
   configure(p){
     const s={...this.data.settings};
     if(p.answerMode!==undefined){if(!Object.hasOwn(ANSWER_MODES,p.answerMode))throw Error('请选择拼写、选词义或选单词。');s.answerMode=p.answerMode;}
+    if(p.mobileAnswerMode!==undefined){
+      if(!['choose_meaning','choose_word'].includes(p.mobileAnswerMode))throw Error('请选择看词选意或看意选词。');
+      s.mobileAnswerMode=p.mobileAnswerMode;
+    }
     if(p.planMode!==undefined){if(!['daily','custom'].includes(p.planMode))throw Error('请选择今日计划或自主练习。');s.planMode=p.planMode;}
     if(p.selectedBook!==undefined){requireBook(p.selectedBook);s.selectedBook=p.selectedBook;}
     if(p.source!==undefined){if(!Object.hasOwn(SOURCES,p.source))throw Error('未知学习范围。');s.source=p.source;s.chapter=0;}
