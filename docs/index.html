@@ -20,7 +20,7 @@
  try{new PerformanceObserver(list=>{for(const x of list.getEntries())trace.longTasks.push({at:x.startTime,duration:x.duration});}).observe({type:'longtask',buffered:true});}catch{}
  WordMark('navigation-shell');
 })();
-</script><script>window.WordAssetManifest={"index.wasm": {"file": "wasm.afc6a3d4c975b539.data", "bytes": 9237412, "rawBytes": 38034280, "mime": "application/wasm"}, "index.data": {"file": "data.99e574e5dbf3b0ff.data", "bytes": 46188235, "rawBytes": 47237488, "mime": "application/octet-stream"}};</script><script>/* Compressed Godot downloads; cache only immutable game assets, never saves. */
+</script><script>window.WordAssetManifest={"index.wasm": {"file": "wasm.afc6a3d4c975b539.data", "bytes": 9237412, "rawBytes": 38034280, "mime": "application/wasm"}, "index.data": {"file": "data.03c593d240fe1321.data", "bytes": 46207407, "rawBytes": 47261196, "mime": "application/octet-stream"}};</script><script>/* Compressed Godot downloads; cache only immutable game assets, never saves. */
 (()=>{
  const manifest=window.WordAssetManifest,cacheName='lxya-engine-assets-v1';
  const progress=new Map();
@@ -119,7 +119,7 @@
   window.WordOperatorArt = {request, cancel};
 })();
 </script><script>
-const config={"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":true,"fileSizes":{"index.pck":47237488,"index.wasm":38034280},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4};config.onProgress=()=>{};config.canvasResizePolicy=0;
+const config={"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":true,"fileSizes":{"index.pck":47261196,"index.wasm":38034280},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4};config.onProgress=()=>{};config.canvasResizePolicy=0;
 const canvas=document.querySelector('#canvas'),start=document.querySelector('#start'),statusEl=document.querySelector('#status'),bar=document.querySelector('#progress');
 const mobileDeviceHint=matchMedia('(pointer:coarse)').matches||/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1)||new URLSearchParams(location.search).get('mobile')==='1';
 function resizeStage(){
@@ -144,7 +144,7 @@ function backup(){document.querySelector('#backup-text').value=WordGame.backup()
 document.querySelector('#backup').onclick=backup;document.querySelector('#close-backup').onclick=()=>document.querySelector('#backup-dialog').close();
 document.querySelector('#download-backup').onclick=()=>{const a=document.createElement('a');a.download='刘晓艳行动_学习存档_'+new Date().toISOString().slice(0,10)+'.json';a.href=URL.createObjectURL(new Blob([document.querySelector('#backup-text').value],{type:'application/json'}));a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);};
 document.querySelector('#landscape').onclick=landscape;
-const learningFile='learning.js?v=8e92f57190276a47',engineFile='index.js?v=085e27ee7fdc036a';
+const learningFile='learning.js?v=d10624eaf2264a7f',engineFile='index.js?v=085e27ee7fdc036a';
 // Inlined into the published landing page so the first tap can arrive before either runtime.
 let engine, attemptActive=false, engineStarted=false, launchError=false, resourceError=false, saveConnected=false;
 const overlay=document.querySelector('#loading'),errorLine=document.querySelector('#error');

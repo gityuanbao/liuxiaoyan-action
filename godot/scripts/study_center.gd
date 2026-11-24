@@ -20,7 +20,8 @@ static func build(h) -> void:
 	option(h,"选择词书 / 修改计划",Rect2(608,142,212,38),func():h.BookLibrary.open(h),false,false,16).name="OpenBookLibrary"
 	option(h,"今日计划",Rect2(32,206,196,42),func():h.bridge.request("study_settings",{"planMode":"daily"}),daily(h),false,17).name="DailyPlan"
 	option(h,"自主练习",Rect2(240,206,196,42),func():h.bridge.request("study_settings",{"planMode":"custom"}),not daily(h),false,17).name="CustomPlan"
-	option(h,"记忆曲线 / 复习排期",Rect2(1024,80,224,36),func():h.go("memory"),false,false,15)
+	option(h,"复习排期",Rect2(1092,80,156,36),func():h.go("memory"),false,false,15)
+	option(h,"排行榜",Rect2(972,80,112,36),h.open_rank_board,false,false,15).name="OpenRankBoard"
 	for i in 3:
 		var mode=h.ChoiceUI.MODES[i]
 		option(h,["拼写单词","看词选义","看义选词"][i],Rect2(460+i*126,206,116,42),func():h.bridge.request("study_settings",{"answerMode":mode}),s.get("answerMode","spelling")==mode,false,15).name="AnswerMode_"+mode

@@ -1,5 +1,5 @@
 {
-  "version": "v57-pages",
+  "version": "v58-pages",
   "title": "刘晓艳行动",
   "engine": "Godot 4.5.1 Web single-thread",
   "layout": "landscape, animation above questions; letterbox fallback in portrait previews",
@@ -28,12 +28,18 @@
     "formats": [
       "txt",
       "csv",
-      "tsv"
+      "tsv",
+      "json"
     ]
   },
   "wordDifficulty": [
     "all",
     "basic",
     "skip_basic"
-  ]
+  ],
+  "trainingReview": true,
+  "toyLeaderboard": {
+    "entries": 10,
+    "score": "learning-xp"
+  }
 }

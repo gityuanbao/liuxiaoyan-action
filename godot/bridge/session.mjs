@@ -2,11 +2,11 @@ import './loader.mjs';
 import { readFileSync, writeFileSync, renameSync, existsSync, mkdirSync } from 'node:fs';
 import { dirname } from 'node:path';
 import { randomUUID } from 'node:crypto';
-import {BOOKS,requireBook,bookPool,bookCatalog,allBookWords,WORD_DIFFICULTIES,wordsAtDifficulty} from './wordbooks.mjs';
-import {activeCustomWords,attachCustomBook,customBookEditor,CUSTOM_BOOK_ID,editCustomBook,getCustomBook,hasCustomBook} from './custom-book.mjs';
+import {BOOKS,requireBook,bookPool,bookCatalog,allBookWords,lookupBuiltInMeaning,WORD_DIFFICULTIES,wordsAtDifficulty} from './wordbooks.mjs';
+import {activeCustomWords,attachCustomBook,customBookEditor,CUSTOM_BOOK_ID,editCustomBook,getCustomBook,hasCustomBook,previewCustomBook} from './custom-book.mjs';
 import {StudyPlanner} from './study.mjs';
 import {StudyMission} from './study-mission.mjs';
-import {migrateProgression,progressionSummary,claimLevels,setSupplyEnabled,applyLevelPerks,recordWallet,learningLevel} from './progression.mjs';
+import {migrateProgression,progressionSummary,claimLevels,setSupplyEnabled,applyLevelPerks,recordWallet,learningLevel,leaderboardWorshipStatus,claimLeaderboardWorship} from './progression.mjs';
 import {migrateRecruitment,recruitmentSummary,awardRecall,awardRecognition,isUnlocked,recruit,drawRecruit,buySupply,deploySupplies} from './recruitment.mjs';
 import {createChoice,publicChoice,isChoice} from './choice-questions.mjs';
 import {DIRECTOR_RULES,directorPool,createDirector,directorCast,advanceDirector,directorIntent,directorSnapshot} from './director-boss.mjs';
@@ -179,7 +179,19 @@ export class Session {
       // Word rewards are saved immediately; settlement records them without paying twice.
       this.save({...next,xp:before.xp,growth:{...before.growth,settled:next.growth.settled}});
     }else this.save(learning.recordResult(this.profile, record));
-    this.result = record;
+    // Keep the on-screen review out of the saved record and cloud payload.
+    const sourceWords=new Map(this.pool.map(word=>[word.id,word]));
+    const review=new Map();
+    for(const {id,correct} of this.attempts){
+      if(!review.has(id)){
+        const {word,meaning,example}=sourceWords.get(id);
+        review.set(id,{word,meaning,expected:sentence?example:'',mistakes:0,lastCorrect:false});
+      }
+      const row=review.get(id);
+      row.mistakes+=Number(!correct);
+      row.lastCorrect=correct;
+    }
+    this.result = {...record,review:[...review.values()]};
   }
   command(action, p = {}) {
     // The Toy host can report a mobile container after a mission has already started.
@@ -202,11 +214,24 @@ export class Session {
       choiceAnswer=selected;action='submit';p={text:selected.correct?this.expected:'__incorrect_choice__'};
     }else if(action==='submit'&&this.choiceMode&&!this.chanting)throw Error('当前为选择题，请点选答案。');
     if (action === 'start') this.start(p.id);
+    if (action === 'leaderboard_worship') {
+      if(!this.leaderboardWorshipEnabled)throw Error('请在已登录的 B 站 Toy 内领取膜拜奖励。');
+      this.save(claimLeaderboardWorship(this.profile,p.rank,this.study.now()),'排行榜膜拜');
+    }
     if (action === 'book_select') this.selectBook(p.id,p.recall??this.bookSettings.recall);
     if (action === 'book_plan_save') this.saveBookPlan(p);
+    if (action === 'custom_book_preview') {
+      let result;
+      try {
+        result = previewCustomBook(this.customBook,p.text,lookupBuiltInMeaning);
+      } catch (error) {
+        result = {error:error.message};
+      }
+      return {...this.snapshot(),customBookPreview:{...result,requestId:p.requestId}};
+    }
     if (action === 'custom_book_save') {
       if(this.state&&!this.state.outcome)throw Error('请先完成当前行动，再编辑自定义词书。');
-      const book=editCustomBook(this.customBook,p);
+      const book=editCustomBook(this.customBook,p,lookupBuiltInMeaning);
       if(this.customBookPath){
         mkdirSync(dirname(this.customBookPath),{recursive:true});
         const saved={name:book.name,rows:book.words.map(w=>w.example||w.translation?
@@ -387,6 +412,7 @@ export class Session {
     const finalFeedback=!!s?.outcome&&this.choiceMode&&this.choiceQuestion?.answered&&this.cooldownKind==='word'&&this.cooldown>0;
     return {...derived,profile:this.profile,state:finalFeedback?{...s,outcome:null}:s,stage:this.stage?{...this.stage,recall:this.recalling}:null,word:this.word??null,
       learningRewards:this.learningRewards,bookSettings:this.bookSettings,deployedSupplies:this.deployedSupplies,
+      leaderboardWorship:this.leaderboardWorshipEnabled?leaderboardWorshipStatus(this.profile,this.study.now()):null,
       study:this.study.summary(this.bookSettings.selected,this.profile),lesson:this.lesson,learningMission:this.mission?.summary(this.index)??null,
       memory:this.study.memorySummary(this.bookSettings.selected,this.profile,this.memoryWord,this.memoryPage),lastAnswer:this.lastAnswer,
       ...(this.drawOnly?{favorites:this.favorites(),wordSaved:(this.profile.notebook?.saved??[]).includes(this.word?.id)}:{}),

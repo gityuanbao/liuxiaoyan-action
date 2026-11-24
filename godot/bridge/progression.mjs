@@ -1,6 +1,7 @@
 // Account progression is separate from the equipped operator's R1–R3 skill rank.
 export const LEVEL_COINS=12;
 export const XP_MULTIPLIER=1.5;
+export const WORSHIP_REWARD=10;
 export function learningLevel(xp){
   let level=1,threshold=0,required=100;
   const total=Math.max(0,Math.floor(xp));
@@ -53,6 +54,20 @@ export function setSupplyEnabled(p,id,enabled){
   if(!['armor','battery'].includes(id)||typeof enabled!=='boolean')throw Error('请选择有效的补给使用设置。');
   const g=p.growth;
   return {...p,growth:{...g,progression:{...g.progression,autoSupply:{...g.progression.autoSupply,[id]:enabled}}}};
+}
+export function leaderboardWorshipStatus(profile, now=new Date()){
+  const day=new Date(now.getTime()+8*60*60*1000).toISOString().slice(0,10);
+  const previous=profile.growth.leaderboardWorship;
+  const claimed=typeof previous?.day==='string'&&/^\d{4}-\d{2}-\d{2}$/.test(previous.day)&&previous.day>=day;
+  return {available:!claimed,day,rank:claimed?previous.rank:null,reward:WORSHIP_REWARD};
+}
+export function claimLeaderboardWorship(profile, rank, now=new Date()){
+  if(!Number.isInteger(rank)||rank<1||rank>10)throw Error('请选择前十名中的一位玩家。');
+  const {available,day}=leaderboardWorshipStatus(profile,now);
+  if(!available)throw Error('今日已领取膜拜奖励，明天再来。');
+  const growth=profile.growth;
+  return {...profile,growth:{...growth,coins:growth.coins+WORSHIP_REWARD,earned:growth.earned+WORSHIP_REWARD,
+    leaderboardWorship:{day,rank}}};
 }
 export function applyLevelPerks(p,state){
   const perk=progressionSummary(p);

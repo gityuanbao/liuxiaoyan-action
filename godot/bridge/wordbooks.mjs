@@ -15,6 +15,17 @@ for(const pool of pools.values())for(const word of pool){
   WORDS.push({id,word:word.word,meaning,example,translation,pack});known.add(id);
 }
 const basicWords=new Set([...pools.values()].flatMap(rows=>rows.filter(w=>w.frequency>0&&w.frequency<=2000).map(w=>w.word.toLowerCase())));
+let builtInMeanings;
+export function lookupBuiltInMeaning(term) {
+  if (!builtInMeanings) {
+    builtInMeanings = new Map();
+    for (const word of WORDS) {
+      const key=word.word.toLowerCase();
+      if (word.meaning && !builtInMeanings.has(key)) builtInMeanings.set(key,word.meaning);
+    }
+  }
+  return builtInMeanings.get(term);
+}
 export const WORD_DIFFICULTIES=Object.freeze({all:'全部词汇',basic:'只练基础',skip_basic:'跳过基础'});
 export const matchesDifficulty=(word,difficulty)=>{
   if(difficulty==='all')return true;

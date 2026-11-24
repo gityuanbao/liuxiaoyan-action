@@ -102,6 +102,8 @@ func build(h) -> void:
 			var b=button(h,["学习中心","特战干员","干员成长"][i],Rect2(171+i*84,5,80,40),func():h.go(target),selected,false,"MobileNav_"+target)
 			var normal=T.style(Color.TRANSPARENT,T.GREEN if selected else Color.TRANSPARENT)
 			normal.set_border_width_all(0);normal.border_width_bottom=2;b.add_theme_stylebox_override("normal",normal)
+	if h.page != "battle":
+		button(h,"版本更新",Rect2(432,7,90,36),h.open_version_notes,false,false,"MobileVersionNotes")
 	button(h,"声音",Rect2(w-72,7,56,36),func():h.go("sound"),false,false,"MobileSound")
 	match h.page:
 		"battle":build_battle(h)
@@ -109,6 +111,7 @@ func build(h) -> void:
 			button(h,"查看干员卡池",Rect2(205,7,112,36),func():h.go("recruit"),false,false,"MobileResultRecruit")
 			button(h,"返回学习计划",Rect2(24,ht-62,(w-60)/2,44),func():h.go("books"),false,false,"MobileResultBack")
 			button(h,"再练本轮薄弱词" if h.data.get("learningMission") is Dictionary and h.data.learningMission.needsReview>0 else "继续今日计划",Rect2(36+(w-60)/2,ht-62,(w-60)/2,44),func():h.bridge.request("retry_study") if h.data.get("learningMission") is Dictionary and h.data.learningMission.needsReview>0 else h.go("books"),true,false,"MobileResultNext")
+			h.result_review.build(h,result_area(),true)
 		"spirits":build_operators(h)
 		"recruit":h.recruit_center.build(h)
 		"favorites":h.FavoritesCenter.build(h)
@@ -161,7 +164,11 @@ func build_plan(h) -> void:
 		button(h,str(amount),Rect2(x+half+24+i*(half+6)/4,278,(half-18)/4,40),func():draft_goal=amount;h.rebuild(),draft_goal==amount,start_pending,"MobileGoal_%d" % amount)
 	if not active:
 		button(h,"总监百词挑战" if available>=100 else "百词挑战需 100 词",Rect2(24,273,x-50,38),func():h.bridge.request("mobile_boss_start",{"id":draft_book,"answerMode":draft_mode,"difficulty":draft_difficulty}),false,start_pending or available<100,"MobileBoss")
-	button(h,"收藏单词",Rect2(24,272 if active else 315,x-50,39 if active else 33),func():h.go("favorites"),false,false,"MobileFavorites").add_theme_font_size_override("font_size",14)
+	var extra_y = 272 if active else 315
+	var extra_height = 39 if active else 33
+	var extra_width = (x-58)/2
+	button(h,"收藏单词",Rect2(24,extra_y,extra_width,extra_height),func():h.go("favorites"),false,false,"MobileFavorites").add_theme_font_size_override("font_size",14)
+	button(h,"排行榜",Rect2(32+extra_width,extra_y,extra_width,extra_height),h.open_rank_board,false,false,"OpenRankBoard").add_theme_font_size_override("font_size",14)
 	button(h,"正在准备行动…" if start_pending else "继续当前行动" if active else "当前难度没有词条" if available==0 else "保存计划并开始",Rect2(x,334,area,44),func():
 		if active:h.ActionFlow.run(h)
 		else:
@@ -264,12 +271,19 @@ func build_growth(h) -> void:
 		button(h,"购买 · %d 哈弗币" % item.cost,Rect2(x,166+i*138,(area-8)*0.56,40),func():h.bridge.request("buy_supply",{"id":item.id}),false,not item.affordable or item.owned>=item.max)
 		button(h,"下场使用" if p.autoSupply[item.id] else "暂不使用",Rect2(x+(area-8)*0.56+8,166+i*138,(area-8)*0.44,40),func():h.bridge.request("supply_enabled",{"id":item.id,"enabled":not p.autoSupply[item.id]}),p.autoSupply[item.id])
 
+func result_area() -> Rect2:
+	return Rect2(canvas.x*0.48,64,canvas.x*0.52-20,256)
+
 func arrange_media(h) -> void:
 	if not h.result_meme:return
 	var meme=h.result_meme
 	if h.page=="result":
+		if h.result_review.words_visible(h):return
 		meme.show()
-		var slot=Rect2(canvas.x*0.48,64,canvas.x*0.52-20,248)
+		var slot=result_area()
+		if h.result_review.has_words(h):
+			slot.position.y+=42
+			slot.size.y-=42
 		var width=minf(slot.size.x,slot.size.y*16.0/9.0)
 		var media_size=Vector2(width,width*9.0/16.0)
 		var rect=Rect2(slot.get_center()-media_size*0.5,media_size)
@@ -357,9 +371,9 @@ func draw_plan(h) -> void:
 	h.draw_rect(Rect2(16,211,3,57),MINT)
 	h.text_at("今日学习计划",28,238,25,T.TEXT)
 	h.text_at(op.name+"  /  "+op.role,29,260,15,MINT)
-	h.text_at("今日已学",28,346,15,T.MUTED)
-	h.text_at("%d / %d 词" % [h.data.study.today.count,draft_goal],x-120,346,17,T.TEXT)
-	h.bar(Rect2(28,360,x-58,5),h.data.study.today.count,draft_goal,MINT)
+	h.text_at("今日已学",28,366,15,T.MUTED)
+	h.text_at("%d / %d 词" % [h.data.study.today.count,draft_goal],x-120,366,17,T.TEXT)
+	h.bar(Rect2(28,372,x-58,3),h.data.study.today.count,draft_goal,MINT)
 	h.panel(Rect2(x-12,58,area+24,328),T.SURFACE,T.EDGE)
 	h.text_at("选择词书",x,77,17,T.TEXT)
 	for i in h.data.books.size():

@@ -13,9 +13,12 @@ const CombatFeedback=preload("res://scripts/combat_feedback.gd")
 const SkillDescriptions=preload("res://scripts/skill_descriptions.gd")
 const MusicDirector=preload("res://scripts/music_director.gd")
 const ResultPresentation=preload("res://scripts/result_presentation.gd")
+var result_review=preload("res://scripts/result_review.gd").new()
 const BookLibrary=preload("res://scripts/book_library.gd")
 const SupplyShop=preload("res://scripts/supply_shop.gd")
 const ChoiceUI=preload("res://scripts/choice_ui.gd")
+const VersionNotes=preload("res://scripts/version_notes.gd")
+var rank_board=preload("res://scripts/rank_board.gd").new()
 var mobile_ui=preload("res://scripts/mobile_ui.gd").new()
 var choice_controls_stamp=[]
 const ProgressionCenter=preload("res://scripts/progression_center.gd")
@@ -126,6 +129,7 @@ func _ready() -> void:
 	if ResourceLoader.exists("res://assets/generated/operators/sheet-transparent.png"):
 		load_atlas("res://assets/generated/operators/sheet-transparent.png", ["op_mage","op_knight","op_ranger","op_scholar","op_bard","op_alchemist"],3,2)
 	super._ready()
+	bridge.failed.connect(func(message):custom_book_ui.bridge_failed(self,message))
 	bridge.failed.connect(func(message):mobile_ui.start_pending=false;recruit_center.failed(message);rebuild.call_deferred())
 	mentor_voice=PlanVoice.new()
 	mentor_voice.caption_changed.connect(_on_voice_caption)
@@ -223,6 +227,12 @@ func handle_combat_keys(event: InputEvent) -> bool:
 
 func _input(event: InputEvent) -> void:
 	if startup_locked: return
+	var notes = get_node_or_null("VersionNotes")
+	if notes and notes.visible:
+		if event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE:
+			notes.close()
+			get_viewport().set_input_as_handled()
+		return
 	if custom_book_ui.opened:
 		if event is InputEventKey and event.pressed and event.keycode==KEY_ESCAPE:
 			custom_book_ui.close(self)
@@ -244,6 +254,13 @@ func _on_voice_caption(value: String) -> void:
 	super.say(value)
 
 func _unhandled_key_input(event: InputEvent) -> void:
+	if page == "rankings":
+		if event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE:
+			go("books")
+			get_viewport().set_input_as_handled()
+		return
+	var notes = get_node_or_null("VersionNotes")
+	if notes and notes.visible: return
 	if book_setup_open and event is InputEventKey and event.pressed and event.keycode==KEY_ESCAPE:
 		BookLibrary.close(self);get_viewport().set_input_as_handled();return
 	if not startup_locked and page=="modes" and event is InputEventKey and event.pressed and not event.echo:
@@ -318,6 +335,10 @@ func go(target: String) -> void:
 	routing_page_voice=false
 	_sync_page_voice()
 
+
+func open_rank_board() -> void:
+	rank_board.open(self)
+
 func _page_voice_key() -> String:
 	match page:
 		"modes":return "plan_select"
@@ -358,6 +379,9 @@ func _focus_gained() -> void:
 			mentor_voice.trigger("return",true)
 
 func _on_update(value: Dictionary, action: String) -> void:
+	if action=="custom_book_preview":
+		custom_book_ui.receive_preview(self,value.get("customBookPreview",{}))
+		return
 	if action=="custom_book_save":
 		custom_book_ui.dismiss()
 		if mobile_ui.enabled:mobile_ui.draft_book="custom"
@@ -373,6 +397,7 @@ func _on_update(value: Dictionary, action: String) -> void:
 	if action in ["start","start_book","study_start","daily_start","review_start","retry_study","boss_start"]: battle_draft=""
 	if action in ["start","start_book","study_start","daily_start","review_start","retry_study","boss_start"]:
 		skill_effects.clear();hit_feedback.clear();success_time=0
+		result_review.reset()
 		if value.get("stage") is Dictionary and value.get("state") is Dictionary:
 			character_gifs.queue_battle(str(value.state.avatar),str(value.stage.monster))
 	if result_meme and action in ["start","start_book","study_start","daily_start","review_start","retry_study","boss_start"]: result_meme.hide()
@@ -500,7 +525,8 @@ func _on_update(value: Dictionary, action: String) -> void:
 			elif current.get("botAttacks",0)>old.get("botAttacks",0): mentor_voice.trigger("hurt")
 			elif action=="hint": mentor_voice.trigger("hint")
 	if result_meme and page=="result" and state().get("outcome")!=null and old.get("outcome")==null:
-		result_meme.show_result(str(data.get("result",{}).get("id","")),state().outcome=="victory")
+		if result_review.has_words(self):result_meme.hide()
+		else:result_meme.show_result(str(data.get("result",{}).get("id","")),state().outcome=="victory")
 	elif result_meme and page=="battle" and int(state().get("mistakes",0))>int(old.get("mistakes",0)):
 		result_meme.show_miss()
 	elif result_meme and successful and result_meme.visible and not result_meme.modal:
@@ -591,6 +617,10 @@ func clear_ui() -> void:
 	if not keep_field:field = null
 
 func rebuild() -> void:
+	if page == "rankings":
+		clear_ui()
+		rank_board.build(self)
+		return
 	if custom_book_ui.opened:
 		clear_ui()
 		custom_book_ui.build(self)
@@ -726,11 +756,19 @@ func rebuild() -> void:
 	if page=="battle" and ChoiceUI.active(self):ChoiceUI.build(self)
 	if bridge.ready_to_play and page in ["home","spirits","books","arsenal","supplies"] and not book_setup_open:
 		var pending=int(data.get("progression",{}).get("pending",0))
-		var growth_rect=Rect2(32,588,248,24) if page=="home" else Rect2(32,580,288,28) if page=="arsenal" else Rect2(888,548,336,36) if page=="supplies" else Rect2(698,82,208,34) if page=="spirits" else Rect2(852,80,160,36)
-		var growth_button=button("成长与钱包"+(" · 可领 %d" % pending if pending>0 else ""),growth_rect,func():go("progression"),pending>0)
+		var growth_rect=Rect2(32,588,248,24) if page=="home" else Rect2(32,580,288,28) if page=="arsenal" else Rect2(888,548,336,36) if page=="supplies" else Rect2(698,82,208,34) if page=="spirits" else Rect2(852,80,112,36)
+		var growth_label="成长与钱包"+(" · 可领 %d" % pending if pending>0 and page!="books" else "")
+		var growth_button=button(growth_label,growth_rect,func():go("progression"),pending>0)
 		growth_button.name="OpenProgression";growth_button.add_theme_font_size_override("font_size",13)
+		if page=="books":
+			growth_button.size=growth_rect.size
+			if pending>0:growth_button.tooltip_text="可领取 %d 项成长奖励" % pending
 	add_navigation()
 	_sync_page_voice()
+
+func open_version_notes() -> void:
+	if not has_node("VersionNotes"):
+		VersionNotes.new().show_for(self)
 
 func add_navigation() -> void:
 	var mode_button=button("",Rect2(32,10,178,44),func(): go("modes"))
@@ -757,6 +795,9 @@ func add_navigation() -> void:
 			line.size=Vector2(NAV_WIDTH-6,3)
 			line.mouse_filter=Control.MOUSE_FILTER_IGNORE
 			ui.add_child(line)
+	var release_button = button("版本更新",Rect2(712,16,96,32),open_version_notes)
+	release_button.name = "OpenVersionNotes"
+	release_button.add_theme_font_size_override("font_size",14)
 	button("语音库",Rect2(820,16,112,32),func(): go("voices")).add_theme_font_size_override("font_size",14)
 	button("声音设置  ▾" if not sound_menu_open else "声音设置  ▴",Rect2(944,16,140,32),func(): sound_menu_open=not sound_menu_open;rebuild(),sound_menu_open).add_theme_font_size_override("font_size",14)
 	button("动效：标准" if not slow_motion else "动效：减弱",Rect2(1096,16,152,32),func(): slow_motion=not slow_motion;rebuild()).add_theme_font_size_override("font_size",14)
@@ -938,6 +979,9 @@ func character_action(enemy: bool=false) -> String:
 	return "idle"
 
 func _draw() -> void:
+	if page == "rankings":
+		rank_board.draw(self)
+		return
 	if custom_book_ui.opened:
 		custom_book_ui.draw(self)
 		return
@@ -1824,6 +1868,7 @@ func _run_study_qa() -> void:
 	get_tree().quit(0)
 
 func _run_meme_qa() -> void:
+	if DisplayServer.get_name()=="headless":get_window().size=Vector2i(1280,720)
 	for i in 100:
 		if bridge.ready_to_play:break
 		await get_tree().create_timer(0.1).timeout
@@ -1840,6 +1885,15 @@ func _run_meme_qa() -> void:
 		await qa_command("submit",{"text":str(data.word.word)})
 		await qa_command("tick",{"delta":500})
 	assert(page=="result" and state().outcome=="victory")
+	var review:Array=data.result.review
+	assert(review.size()>1 and review[0].mistakes==1 and review[0].lastCorrect)
+	assert(ui.has_node("ResultWordList"),"Result list missing at %s (mobile: %s)" % [str(get_window().size),str(mobile_ui.enabled)])
+	assert(ui.get_node("ResultWordList").get_child(0).get_child_count()==review.size())
+	ui.get_node("ResultWrongWords").pressed.emit()
+	assert(ui.get_node("ResultWordList").get_child(0).get_child_count()==1)
+	ui.get_node("ResultAllWords").pressed.emit()
+	assert(ui.get_node("ResultWordList").get_child(0).get_child_count()==review.size())
+	ui.get_node("ResultVideoTab").pressed.emit()
 	await get_tree().create_timer(0.8).timeout
 	assert(result_meme.visible and result_meme.video.is_playing() and not result_meme.modal)
 	var shown=result_meme.shown_count
@@ -1858,7 +1912,7 @@ func _run_meme_qa() -> void:
 	assert(result_meme.visible and result_meme.active_clip.outcome=="defeat" and result_meme.video.is_playing())
 	await get_tree().create_timer(float(result_meme.active_clip.duration)+0.35).timeout
 	assert(result_meme.visible and result_meme.play_finished)
-	var result={"right_video":true,"victory_and_defeat":true,"miss_image_preserved":true,"once_per_result":true,"non_modal":true,"stops_after_clip":true}
+	var result={"right_video":true,"victory_and_defeat":true,"miss_image_preserved":true,"once_per_result":true,"non_modal":true,"stops_after_clip":true,"all_words_and_corrected_mistakes":true}
 	var report=FileAccess.open("res://qa/meme-v28-verification.json",FileAccess.WRITE)
 	report.store_string(JSON.stringify(result,"  "));report.close()
 	print("MEME_QA_OK ",JSON.stringify(result))

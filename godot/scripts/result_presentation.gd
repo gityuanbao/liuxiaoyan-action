@@ -14,6 +14,7 @@ static func arrange_controls(h) -> void:
 	if h.data.get("result",{}).has("rewards") and not h.ui.has_node("ResultRecruit"):
 		var recruit=h.button("查看卡池  ›",T.RESULT_RECRUIT,func():h.go("recruit"))
 		recruit.name="ResultRecruit";recruit.add_theme_font_size_override("font_size",12)
+	h.result_review.build(h,Rect2(728,151,496,427))
 
 static func draw(h) -> void:
 	var s:Dictionary=h.state()
@@ -70,7 +71,8 @@ static func draw(h) -> void:
 		h.text_at("独立回忆 %d 词  ·  打断攻击 %d 次" % [h.data.boss.independent,h.data.boss.interrupts] if boss else "命中 %d 次  ·  总伤害 %d  ·  大招 %d 次" % [s.hits,s.dealt,s.ultimateUses],x,469,14,T.MUTED,T.RESULT_TEXT_WIDTH)
 		var answer=h.data.get("lastAnswer")
 		if answer is Dictionary and answer.get("correct",false):h.text_at("末词  "+str(answer.word),x,495,14,T.GREEN,T.RESULT_TEXT_WIDTH)
-	h.text_at("英语总监",728,181,16,T.TEXT)
+	if h.result_review.words_visible(h):return
+	if not h.result_review.has_words(h):h.text_at("英语总监",728,181,16,T.TEXT)
 	h.text_at("胜利回电" if won else "战后提醒",1130,181,13,accent,94)
 	h.draw_rect(T.RESULT_VIDEO,Color.BLACK)
 	h.draw_rect(T.RESULT_VIDEO,T.EDGE,false,1)

@@ -15,7 +15,8 @@ const server=createServer(async(req,res)=>{
     let bytes=0;
     for await(const part of req){
       bytes+=part.length;
-      if(bytes>3_500_000)throw Error('词书文件过大，请导入不超过 2 MB 的词表。');
+      // Tabs, line breaks, and quotation marks grow when encoded in the request JSON.
+      if(bytes>4_100_000)throw Error('词书文件过大，请导入不超过 2 MB 的词表。');
       chunks.push(part);
     }
     const body=Buffer.concat(chunks).toString('utf8');

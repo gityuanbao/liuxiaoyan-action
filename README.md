@@ -4,20 +4,29 @@
 
 **[在线试玩](https://gityuanbao.github.io/liuxiaoyan-action/)** · [B 站视频教程](https://www.bilibili.com/video/BV1bNsb6fENp/) · [版本记录](https://github.com/gityuanbao/liuxiaoyan-action/releases) · [反馈问题](https://github.com/gityuanbao/liuxiaoyan-action/issues)
 
-## 下载最新版 v57
+## 下载最新版 v58
 
 | 版本 | 下载或打开 | 怎么开始 |
 | --- | --- | --- |
-| Windows 10 / 11（64 位） | [下载 Windows EXE](https://github.com/gityuanbao/liuxiaoyan-action/releases/download/v57/LiuxiaoyanAction-v57-Windows.exe) | 双击运行。首次启动会解压并校验游戏文件。 |
-| macOS 11 及以上（Apple 芯片 / Intel） | [下载 Mac 通用版 ZIP](https://github.com/gityuanbao/liuxiaoyan-action/releases/download/v57/LiuxiaoyanAction-v57-macOS-Universal.zip) | 解压后，把「刘晓艳行动.app」拖到「应用程序」并打开。 |
+| Windows 10 / 11（64 位） | [下载 Windows EXE](https://github.com/gityuanbao/liuxiaoyan-action/releases/download/v58/LiuxiaoyanAction-v58-Windows.exe) | 双击运行。首次启动会解压并校验游戏文件。 |
+| macOS 11 及以上（Apple 芯片 / Intel） | [下载 Mac 通用版 ZIP](https://github.com/gityuanbao/liuxiaoyan-action/releases/download/v58/LiuxiaoyanAction-v58-macOS-Universal.zip) | 解压后，把「刘晓艳行动.app」拖到「应用程序」并打开。 |
 | 电脑和手机浏览器 | [直接试玩](https://gityuanbao.github.io/liuxiaoyan-action/) | 加载完点击「开始行动」。手机请横屏。 |
-| 完整项目源码 | [下载 v57 源码 ZIP](https://github.com/gityuanbao/liuxiaoyan-action/archive/refs/tags/v57.zip) | 包含 Godot 工程、素材、词库及已构建的网页。 |
+| B 站 Toy 发布包 | [下载 Toy ZIP](https://github.com/gityuanbao/liuxiaoyan-action/releases/download/v58/liuxiaoyan-action-toy-v58-140mb.zip) | 供创作者更新 Toy。排行榜在支持该能力的 B 站 Toy 正式环境使用。 |
+| 完整项目源码 | [下载 v58 源码 ZIP](https://github.com/gityuanbao/liuxiaoyan-action/archive/refs/tags/v58.zip) | 包含 Godot 工程、素材、词库及已构建的网页。 |
 
-桌面包自带运行环境和离线词音，可以离线玩。如果 Mac 首次启动提示开发者无法验证，当前构建尚未经过 Apple 公证，请参考 [Apple 的首次打开说明](https://support.apple.com/zh-cn/102445)。[v57 发布页及校验文件](https://github.com/gityuanbao/liuxiaoyan-action/releases/tag/v57)
+桌面包自带运行环境和离线词音，可以离线玩。如果 Mac 首次启动提示开发者无法验证，当前构建尚未经过 Apple 公证，可参考 [Apple 的首次打开说明](https://support.apple.com/zh-cn/102445)。[v58 发布页及校验文件](https://github.com/gityuanbao/liuxiaoyan-action/releases/tag/v58)
+
+## v58 更新
+
+- **词书导入。** 支持 TXT、CSV、TSV 和 JSON。保存前可核对识别到的词条、重复项和释义。
+- **学习排行榜。** B 站 Toy 展示累计学习 XP 前十名。每天可膜拜一位榜上玩家，领取 10 哈弗币。
+- **训练复盘。** 训练结束后可翻看本轮答过的全部单词和释义。错过的词会标记出来，即使后来答对也能回顾。
+
+在游戏顶栏打开「版本更新」可查看本版说明。
 
 ## 自定义词书和难度
 
-进入「学习中心」的词书设置，打开「自定义词书」。可粘贴词条或直接导入整份 UTF-8 的 TXT、CSV、TSV 词表，例如手头的考研词汇清单。文件上限 2 MB，每本最多 12,000 个词条。每行填写英文词或短语和释义。重复词条会合并，大词表只预览开头，保存时会导入整本。
+进入「学习中心」的词书设置，打开「自定义词书」。可粘贴词条或导入整份词表，例如手头的考研词汇清单。文件上限 2 MB，每本最多 12,000 个词条。建议保存为 UTF-8，带释义的表格可用 `word,meaning` 或 `单词,释义` 作表头。大词表只预览前几项，保存时会导入整本有效词表。
 
 ```csv
 word,meaning
@@ -26,6 +35,8 @@ learn,"学习，得知"
 mitigate,缓解
 account for,解释
 ```
+
+JSON 可用词条数组，例如 `[{"word":"apple","meaning":"苹果"}]`。只有英文的词表可用内置词库补释义，无法匹配的词会提示具体位置，补上后即可导入。
 
 选好词书后，可以练「全部词汇」「只练基础」或「跳过基础」。基础词依据内置词库中常用词频前 2000 名识别。筛选适用于今日计划、自主练习和总监挑战。百词挑战需要当前范围内至少有 100 个不同单词。
 
@@ -79,6 +90,12 @@ account for,解释
 
 - **桌面版**使用本机存档，升级后会读取同一系统用户下的原桌面版进度。
 - **网页版**按浏览器和站点保存进度。可以在顶栏点击「导出进度」下载 JSON 备份。更换浏览器、设备或试玩站点时，学习进度需要重新开始。
+
+## B 站 Toy 排行榜
+
+在「学习中心」打开「排行榜」，可查看累计学习 XP 前十名并手动提交自己的成绩。每天按北京时间结算，可膜拜一位其他上榜玩家，领取 10 哈弗币。排行榜依赖 B 站 Toy SDK。
+
+被膜拜者的 3 币奖励需要给其他玩家写入数据，Toy 公开接口目前只允许写入当前玩家存档。[B 站 Toy 官方 FAQ](https://www.bilibili.com/opus/1241171666570051585)
 
 ## 源码与开发
 
